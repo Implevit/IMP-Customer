@@ -1,40 +1,28 @@
 {
-  "id": "a44c9154-bfae-410c-8d20-684c6368b2af",
-  "name": "IMP-COSTUMER",
+  "id": "1aaca9e3-9b35-4018-9d28-e4f65255d899",
+  "name": "IMP-Costumer",
   "publisher": "Implevit",
-  "version": "15.2.0.1",
+  "version": "18.1.0.0",
   "brief": "",
-  "description": "Implevit customer",
+  "description": "Implevit Projekt",
   "privacyStatement": "",
   "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
-  "dependencies": [
-    {
-      "appId": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
-      "publisher": "Microsoft",
-      "name": "System Application",
-      "version": "1.0.0.0"
-    },
-    {
-      "appId": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "publisher": "Microsoft",
-      "name": "Base Application",
-      "version": "15.0.0.0"
-    }
-  ],
+  "help": "http://www.implevit.ch/support/",
+  "url": "http://www.implevit.ch",
+  "logo": "./src/Images/IMP_Customer.png",
+  "dependencies": [],
   "screenshots": [],
-  "platform": "15.0.0.0",
+  "platform": "18.0.0.0",
+  "application": "18.0.0.0",
   "idRanges": [
     {
-      "from": 50000,
-      "to": 59999
+      "from": 70000,
+      "to": 79999
     }
   ],
-  "contextSensitiveHelpUrl": "https://ALGo.com/help/",
+  "contextSensitiveHelpUrl": "https://IMP-Customer.com/help/",
   "showMyCode": true,
-  "runtime": "4.2",
-  "features": ["TranslationFile"],
-  "target": "OnPrem"  
+  "runtime": "7.0",  
+  "target": "OnPrem",
+  "features": ["TranslationFile"]
 }

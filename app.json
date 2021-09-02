@@ -1,0 +1,46 @@
+{
+  "id": "91c8bdad-fb52-4ba1-b873-a75664439e08",
+  "name": "IMP-Customer",
+  "publisher": "Implevit",
+  "version": "18.1.0.0",
+  "brief": "",
+  "description": "Implevit Customer App for Microsoft Business Central.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "http://www.implevit.ch/support/",
+  "url": "http://www.implevit.ch",  
+  "dependencies": [
+    {
+      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "publisher": "Microsoft",
+      "name": "System Application",
+      "version": "18.0.0.0"
+    },
+    {
+      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "publisher": "Microsoft",
+      "name": "Base Application",
+      "version": "18.0.0.0"
+    },
+    {
+      "id": "07c2d9d3-8381-487c-b998-b889440193bf",
+      "publisher": "Implevit",
+      "name": "IMP-Basic",
+      "version": "18.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "18.0.0.0",
+  "application": "18.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 59999
+    }
+  ],
+  "contextSensitiveHelpUrl": "http://www.implevit.ch/support/",
+  "showMyCode": true,
+  "runtime": "7.0",
+  "features": ["TranslationFile"],
+  "target": "OnPrem"  
+}

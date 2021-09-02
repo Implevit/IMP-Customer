@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="IMP-Customer">
+    <body>
+      <group id="body">
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 612857849" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select file</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Txt0_Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you really want to start the translation of the file "%1"?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Conf_Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 2380322690" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No more characters available for translation at DeepL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Msg0_Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 590770473" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There was nothing to translate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Msg1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 333401232" size-unit="char" translate="yes" xml:space="preserve">
+          <source>In the file "%1" there were %2 texts to translate from "%3" to "%4"</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Msg2_Txt</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3892229950 - Action 3646353974 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3469146285">
+          <source>Customer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1-Ext50000 - Action ActImplCustomer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3892229950 - Action 495497779 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3469146285">
+          <source>DeepL translate xlf-file</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1-Ext50000 - Action DoImplCustomerDeeplTranslate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3892229950 - Action 2288733091 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3469146285">
+          <source>DeepL show usage</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1-Ext50000 - Action DoImplCustomerDeeplUsageShow - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

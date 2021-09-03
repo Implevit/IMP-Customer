@@ -35,7 +35,7 @@
         </trans-unit>
         <trans-unit id="PageExtension 3892229950 - Action 3646353974 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3469146285">
           <source>Customer</source>
-          <target>Debitor</target>
+          <target>Customer</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1-Ext50000 - Action ActImplCustomer - Property Caption</note>
         </trans-unit>

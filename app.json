@@ -27,6 +27,12 @@
       "publisher": "Implevit",
       "name": "IMP-Basic",
       "version": "18.0.0.0"
+    },
+    {
+      "id": "a39def4b-22ec-451d-b754-096a6b4c4ac3",
+      "name": "IMP-Data",
+      "publisher": "Implevit",
+      "version": "18.0.0.0"
     }
   ],
   "screenshots": [],
@@ -42,5 +48,5 @@
   "showMyCode": true,
   "runtime": "7.0",
   "features": ["TranslationFile"],
-  "target": "OnPrem"  
+  "target": "OnPrem" 
 }

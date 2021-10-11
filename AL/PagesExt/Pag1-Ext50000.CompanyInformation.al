@@ -1,5 +1,21 @@
 pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
 {
+    layout
+    {
+        addafter(GrpImplBasicGeneral)
+        {
+            group(GrpImplBasicCustomer)
+            {
+                Caption = 'Customer';
+
+                field("IMP Connection Nos."; Rec."IMP Connection Nos.")
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+
     actions
     {
         addafter(ActImplBasic)

@@ -83,68 +83,14 @@ codeunit 50001 "IMP Administration"
             lc_FileMgmt.DeleteServerFile(lc_FullFileName);
     end;
 
-    procedure LoadServerInstacesOld()
-    var
-        lc_AS: Record "Active Session";
-        //lc_TempBlob: Codeunit "Temp Blob";
-        lc_FileMgmt: Codeunit "File Management";
-        lc_PSR: DotNet PowerShellRunner;
-        lc_Arr: DotNet StringArray;
-        lc_Str: DotNet String;
-        lc_Msg: Text;
-        lc_Dia: Dialog;
-        lc_FullFileName: Text;
-        lc_Txt2_Txt: Label 'Processing......';
+    procedure AddFileNameToPowerShellPath(_FileName: Text) RetValue: Text
     begin
-        // Get current session
-        lc_AS.Get(ServiceInstanceId(), SessionId());
+        RetValue := '\\impfps01\Daten\04_Entwicklung\Kunden\IMP\PS\' + _FileName;
+    end;
 
-        // Create filename
-        lc_FullFileName := TemporaryPath + Format(SessionId()) + '.txt';
-
-        // Remove current file
-        if lc_FileMgmt.ServerFileExists(lc_FullFileName) then
-            lc_FileMgmt.DeleteServerFile(lc_FullFileName);
-
-        // Create powershell connection
-        lc_PSR := lc_PSR.CreateInSandbox();
-        lc_PSR.WriteEventOnError := true;
-        // Import nav admin tool in powershell
-        lc_PSR.ImportModule(ApplicationPath.Replace('180', '170') + 'NAVAdminTool.ps1');
-        lc_PSR.ImportModule('\\impent01\Tools\PowerShell\Library\Functions-Misc.psm1');
-        lc_PSR.ImportModule('\\impent01\Tools\PowerShell\Library\Functions-BC.psm1');
-        // Create powershell command
-        lc_PSR.AddCommand('F-BC-LoadServerList');
-        // Extecute powershell command
-        lc_PSR.BeginInvoke();
-
-        // Show Processing
-        if GuiAllowed then
-            lc_Dia.Open(lc_Txt2_Txt);
-
-        // Wait until complition
-        repeat
-            Sleep(1000);
-        until lc_PSR.IsCompleted;
-
-        lc_Arr := lc_PSR.GetLogMessageList();
-
-        lc_Msg := '';
-        foreach lc_Str in lc_Arr do
-            lc_Msg += lc_Str;
-
-        if (GuiAllowed()) then begin
-            lc_Dia.Close();
-            // Show Message
-            if lc_Msg <> '' then
-                if (lc_Msg.Contains('ERROR:')) then
-                    Error(lc_Msg)
-                else
-                    Message(lc_Msg);
-            // Show List
-            //lc_FileMgmt.BLOBImportFromServerFile(lc_TempBlob, lc_FullFileName);
-            //lc_FileMgmt.BLOBExport(lc_TempBlob, 'ServerList.txt', true);
-        end;
+    procedure AddFileNameToInfoPath(_FileName: Text) RetValue: Text
+    begin
+        RetValue := '\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Infos\' + _FileName;
     end;
 
     procedure LoadVersionList() RetValue: List of [Text]
@@ -508,33 +454,59 @@ codeunit 50001 "IMP Administration"
             lc_Dia.Close();
     end;
 
-    procedure CallServerList(_Version: Text);
-    var
-        lc_Int: Integer;
-    begin
-        if Evaluate(lc_Int, _Version.Replace('.', '')) then
-            CallServerList(lc_Int);
-    end;
-
-    procedure CallServerList(_Version: Integer);
+    /*
+    procedure LoadVersionList(_Server: Text)
     var
         lc_AS: Record "Active Session";
         lc_IC: Record "IMP Connection";
-        lc_List: List of [Text];
-        lc_PSR: DotNet PowerShellRunner;
-        lc_Dia: Dialog;
-        lc_Computer: Text;
-        lc_URL: Text;
-        lc_AdminTool: Text;
-        lc_Txt1_Txt: Label '#1###########################';
-        lc_Txt2_Txt: Label 'Start call for %1 services at %2';
-        lc_Txt3_Txt: Label 'Process call for %1 services at %2';
+        lc_IA: Record "IMP Authorisation";
+        lc_DatMgmt: Codeunit "IMP Data Management";
+        lc_Conv: Codeunit "Base64 Convert";
+        lc_Object: JsonObject;
+        lc_RequestText: Text;
+        lc_Url: Text;
     begin
-        // Admin Tool
-        if (_Version <= 110) then
-            lc_AdminTool := 'C:\Program Files\Microsoft Dynamics NAV\' + Format(_Version) + '\Service\NAVAdminTool.ps1'
-        else
-            lc_AdminTool := 'C:\Program Files\Microsoft Dynamics 365 Business Central\' + Format(_Version) + '\Service\NAVAdminTool.ps1';
+        // Get current session
+        lc_AS.Get(ServiceInstanceId(), SessionId());
+
+        // Get connection
+        lc_IC.Reset();
+        lc_IC.SetCurrentKey(Computer, "Service Name", "Company Name");
+        lc_IC.SetRange("Service Name", lc_AS."Server Instance Name");
+        lc_IC.SetRange(Computer, _Server);
+        lc_IC.FindFirst();
+
+        // Get authorisation
+        lc_IA.Get(lc_IC."Authorisation No.");
+
+        // Set url
+        lc_Url := lc_IC.GetUrlOdataService(CompanyName);
+
+        // Call Odata
+        clear(lc_Object);
+        lc_Object.Add('data', 'LoadVersions');
+        lc_Object.Add('companyName', CompanyName);
+        lc_Object.Add('computer', _Server);
+        lc_Object.WriteTo(lc_RequestText);
+        lc_RequestText := lc_Conv.ToBase64(lc_RequestText, TextEncoding::UTF16);
+        clear(lc_Object);
+        lc_Object.Add('json', lc_RequestText);
+        lc_Object.WriteTo(lc_RequestText);
+        lc_DatMgmt.APIPost(lc_Url, lc_RequestText, lc_Object, lc_IA.Name, 'Welcome2019$', lc_IA.Token, lc_IA."Client Id", lc_IA."Secret Id", true);
+    end;
+    */
+
+    procedure CallVersionList() RetValue: Boolean;
+    var
+        lc_AS: Record "Active Session";
+        lc_Request: JsonObject;
+        lc_Response: JsonObject;
+        lc_Token: JsonToken;
+        lc_List: List of [Text];
+        lc_Computer: Text;
+    begin
+        // Init
+        RetValue := false;
 
         // Get current session
         lc_AS.Get(ServiceInstanceId(), SessionId());
@@ -546,17 +518,191 @@ codeunit 50001 "IMP Administration"
         end else
             lc_Computer := lc_AS."Server Computer Name";
 
-        // Get connection
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey("List Name");
-        lc_IC.SetRange("List Name", lc_AS."Server Instance Name");
-        if lc_IC.FindFirst() then
-            lc_URL := lc_IC.GetUrlOdata().Replace('impent02', 'impent01')
+        // Create request
+        lc_Request.Add('data', 'LoadVersions');
+        lc_Request.Add('companyName', CompanyName);
+        lc_Request.Add('computer', lc_Computer);
+
+        // Call 
+        CallVersionList(lc_Request, lc_Response);
+
+        // Show error
+        if lc_Request.Get('error', lc_Token) then
+            Error(lc_Token.AsValue().AsText())
         else
-            lc_URL := 'http://impent01.imp.local:8348/IMP-BC180-PROD/';
-        if not lc_URL.EndsWith('/') then
-            lc_URL += '/';
-        lc_URL += 'ODataV4/IMPWebService_odata?Company=' + '''' + CompanyName + '''';
+            Message('Versionlist importet for the server %1', lc_Computer);
+
+        // Return
+        RetValue := true;
+    end;
+
+    procedure CallVersionList(_Request: JsonObject; var _Response: JsonObject)
+    var
+        lc_IC: Record "IMP Connection";
+        lc_AS: Record "Active Session";
+        //lc_User: Record User;
+        lc_Token: JsonToken;
+        lc_PSR: DotNet PowerShellRunner;
+        lc_Dia: Dialog;
+        lc_Computer: Text;
+        lc_URL: Text;
+        lc_File: Text;
+        lc_AdminTool: Text;
+        lc_CompanyName: Text;
+        lc_IsFile: Boolean;
+        lc_ResponseText: Text;
+        lc_Txt1_Txt: Label '#1###########################';
+        lc_Txt2_Txt: Label 'Start call for version list from %1';
+        lc_Txt3_Txt: Label 'Process call for version list form at %1';
+    begin
+        // Init
+        lc_IsFile := true;
+        lc_ResponseText := '';
+
+        // Check request companyname
+        if not _Request.Get('companyName', lc_Token) then begin
+            _Response.Add('error', 'Token companyName is mandatory');
+            exit;
+        end else
+            lc_CompanyName := lc_Token.AsValue().AsText();
+
+        // Check request companyname
+        if not _Request.Get('computer', lc_Token) then begin
+            _Response.Add('error', 'Token computer is mandatory');
+            exit;
+        end else
+            lc_Computer := lc_Token.AsValue().AsText();
+
+        // Admin Tool
+        lc_AdminTool := 'C:\Program Files\Microsoft Dynamics 365 Business Central\140\Service\NAVAdminTool.ps1';
+
+        // Get computer
+        lc_Computer := ImpAdmin.GetCurrentComputerName();
+
+        // Set url
+        lc_URL := lc_IC.GetUrlOdataIMPProd(CompanyName);
+
+        // Set file
+        lc_File := AddFileNameToInfoPath(lc_Computer + '_NAVVersionList.json');
+
+        // Get User
+        //lc_User.Get('IMPL');
+
+        // Open Dia
+        if (GuiAllowed()) then begin
+            lc_Dia.Open(lc_Txt1_Txt);
+            lc_Dia.Update(1, StrSubstNo(lc_Txt2_Txt, lc_Computer));
+        end;
+
+        Clear(lc_PSR);
+        // Create powershell connection
+        lc_Dia.Update(1, 'Create Powershell Sandbox');
+        lc_PSR := lc_PSR.CreateInSandbox();
+        lc_PSR.WriteEventOnError := true;
+        // Import nav admin tool in powershell
+        lc_Dia.Update(1, 'Add NAVAdminTool.ps1');
+        lc_PSR.ImportModule(lc_AdminTool);
+        lc_Dia.Update(1, 'Add AdminFunctions.ps1');
+        lc_PSR.ImportModule(AddFileNameToPowerShellPath('AdminFunctions.ps1'));
+        // Create powershell command
+        if (lc_IsFile) then begin
+            lc_Dia.Update(1, 'Load Function F-LoadNAVVersionsIntoFile');
+            lc_PSR.AddCommand('F-LoadNAVVersionsIntoFile');
+            lc_PSR.AddParameter('FullFileName', lc_File);
+        end else begin
+            lc_Dia.Update(1, 'Load Function F-LoadNAVVersionsAndSendToWebService');
+            lc_PSR.AddCommand('F-LoadNAVVersionsAndSendToWebService');
+            lc_PSR.AddParameter('CompanyName', lc_CompanyName);
+            lc_PSR.AddParameter('URL', lc_URL);
+            lc_PSR.AddParameter('Username', 'IMPL');
+            lc_PSR.AddParameter('Password', 'Welcome2019');
+        end;
+        // Extecute powershell command
+        lc_Dia.Update(1, 'Invoke Command');
+        lc_PSR.BeginInvoke();
+
+        // Show Dia
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, StrSubstNo(lc_Txt3_Txt, lc_Computer));
+
+        // Wait for complition
+        if not (lc_PSR.IsCompleted) then begin
+            lc_Dia.Update(1, 'Wait for completion');
+            repeat
+                Sleep(1000);
+            until lc_PSR.IsCompleted;
+        end;
+
+        // Read file
+        if (lc_IsFile) then begin
+            lc_Dia.Update(1, 'Import file');
+            // Import file
+            lc_ResponseText := ImpMgmt.ImportFile(lc_File, TextEncoding::UTF16, true);
+            // Transfer to json
+            if not _Request.ReadFrom(lc_ResponseText) then begin
+                _Response.Add('error', 'No json format:\\' + lc_ResponseText);
+                exit;
+            end;
+            // Process import
+            lc_Dia.Update(1, 'Import file content');
+            lc_IC.ImportServerVersions(_Request, _Response);
+            lc_Dia.Update(1, 'Content imported');
+        end;
+
+        // Close Dia
+        if (GuiAllowed()) then
+            lc_Dia.Close();
+    end;
+
+    procedure CallServerList(_Version: Text);
+    var
+        lc_Int: Integer;
+    begin
+        if Evaluate(lc_Int, _Version.Replace('.', '')) then
+            CallServerList(lc_Int);
+    end;
+
+    procedure CallServerList(_Version: Integer)
+    var
+        lc_IC: Record "IMP Connection";
+        lc_PSR: DotNet PowerShellRunner;
+        lc_Request: JsonObject;
+        lc_Response: JsonObject;
+        lc_Dia: Dialog;
+        lc_URL: Text;
+        lc_AdminTool: Text;
+        lc_IsFile: Boolean;
+        lc_Computer: Text;
+        lc_File: Text;
+        lc_ResponseText: Text;
+        lc_Version: Text;
+        lc_Txt1_Txt: Label '#1###########################';
+        lc_Txt2_Txt: Label 'Start call for %1 services from %2';
+        lc_Txt3_Txt: Label 'Process call for %1 services from %2';
+    begin
+        // Init 
+        lc_IsFile := true;
+
+        // Admin tool
+        if (_Version <= 110) then
+            lc_AdminTool := 'C:\Program Files\Microsoft Dynamics NAV\' + Format(_Version) + '\Service\NAVAdminTool.ps1'
+        else
+            lc_AdminTool := 'C:\Program Files\Microsoft Dynamics 365 Business Central\' + Format(_Version) + '\Service\NAVAdminTool.ps1';
+
+        // Set version
+        if (_Version < 100) then
+            lc_Version := CopyStr(Format(_Version), 1, 1) + '.' + CopyStr(Format(_Version), 2, 1)
+        else
+            lc_Version := CopyStr(Format(_Version), 1, 2) + '.' + CopyStr(Format(_Version), 3, 1);
+
+        // Get computer
+        lc_Computer := ImpAdmin.GetCurrentComputerName();
+
+        // Set url
+        lc_URL := lc_IC.GetUrlOdataIMPProd(CompanyName);
+
+        // Set file
+        lc_File := AddFileNameToInfoPath(lc_Computer + '_NAVServerList_' + Format(_Version) + '.json');
 
         // Open Dia
         if GuiAllowed then begin
@@ -566,28 +712,68 @@ codeunit 50001 "IMP Administration"
 
         Clear(lc_PSR);
         // Create powershell connection
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, lc_Version + ' Create Powershell Sandbox');
         lc_PSR := lc_PSR.CreateInSandbox();
         lc_PSR.WriteEventOnError := true;
         // Import nav admin tool in powershell
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, lc_Version + ' Add NAVAdminTool.ps1');
         lc_PSR.ImportModule(lc_AdminTool);
-        lc_PSR.ImportModule('\\impfps01\Daten\04_Entwicklung\Kunden\IMP\PS\AdminFunctions.ps1');
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, lc_Version + ' Add AdminFunctions.ps1');
+        lc_PSR.ImportModule(AddFileNameToPowerShellPath('AdminFunctions.ps1'));
         // Create powershell command
-        lc_PSR.AddCommand('F-LoadNAVServicesAndSendToWebService');
-        lc_PSR.AddParameter('Version', _Version);
-        lc_PSR.AddParameter('URL', lc_URL);
-        lc_PSR.AddParameter('Username', 'IMPL');
-        lc_PSR.AddParameter('Password', 'Welcome2019');
+        if (lc_IsFile) then begin
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_Version + ' Call Function F-LoadNAVVersionsIntoFile');
+            lc_PSR.AddCommand('F-LoadNAVServicesIntoFile');
+            lc_PSR.AddParameter('Version', _Version);
+            lc_PSR.AddParameter('FullFileName', lc_File);
+        end else begin
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_Version + ' Call Function F-LoadNAVVersionsIntoFile');
+            lc_PSR.AddCommand('F-LoadNAVServicesAndSendToWebService');
+            lc_PSR.AddParameter('Version', _Version);
+            lc_PSR.AddParameter('URL', lc_URL);
+            lc_PSR.AddParameter('Username', 'IMPL');
+            lc_PSR.AddParameter('Password', 'Welcome2019');
+        end;
         // Extecute powershell command
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, lc_Version + ' Invoke Command');
         lc_PSR.BeginInvoke();
 
         // Show Dia
-        if GuiAllowed then
+        if (GuiAllowed()) then
             lc_Dia.Update(1, StrSubstNo(lc_Txt3_Txt, _Version, lc_Computer));
 
-        // Wait until complition
-        repeat
-            Sleep(1000);
-        until lc_PSR.IsCompleted;
+        // Wait for complition
+        if not (lc_PSR.IsCompleted) then begin
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_Version + ' Wait for completion');
+            repeat
+                Sleep(1000);
+            until lc_PSR.IsCompleted;
+        end;
+
+        // Read file
+        if (lc_IsFile) then begin
+            lc_Dia.Update(1, lc_Version + ' Import file');
+            // Import file
+            lc_ResponseText := ImpMgmt.ImportFile(lc_File, TextEncoding::UTF16, true);
+            // Transfer to json
+            if not lc_Request.ReadFrom(lc_ResponseText) then begin
+                lc_Response.Add('error', 'No json format:\\' + lc_ResponseText);
+                exit;
+            end;
+            // Process import
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_Version + ' Import content');
+            lc_IC.ImportServerInstances(lc_Request, lc_Response);
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_Version + ' Content imported');
+        end;
 
         // Close Dia
         if (GuiAllowed()) then
@@ -596,4 +782,30 @@ codeunit 50001 "IMP Administration"
 
     //#endregion PowerShell
 
+    #region Misc
+
+    procedure GetCurrentComputerName() RetValue: Text
+    var
+        lc_AS: Record "Active Session";
+        lc_List: List of [Text];
+    begin
+        // Init
+        RetValue := '';
+
+        // Get current session
+        lc_AS.Get(ServiceInstanceId(), SessionId());
+
+        // Get Computer
+        if lc_AS."Server Computer Name".Contains('.') then begin
+            lc_List := lc_AS."Server Computer Name".Split('.');
+            RetValue := lc_List.Get(1);
+        end else
+            RetValue := lc_AS."Server Computer Name";
+    end;
+
+    #endregion Misc
+
+    var
+        ImpMgmt: Codeunit "IMP Management";
+        ImpAdmin: Codeunit "IMP Administration";
 }

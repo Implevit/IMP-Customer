@@ -63,6 +63,10 @@ page 50000 "IMP Connection List"
                 {
                     ApplicationArea = All;
                 }
+                field("Service NAV Version"; Rec."Service NAV Version")
+                {
+                    ApplicationArea = All;
+                }
                 field("Service Version"; Rec."Service Version")
                 {
                     ApplicationArea = All;
@@ -111,6 +115,10 @@ page 50000 "IMP Connection List"
                     ApplicationArea = All;
                 }
                 field(ODataServicesPort; Rec.ODataServicesPort)
+                {
+                    ApplicationArea = All;
+                }
+                field(DeveloperServiceServerPort; Rec.DeveloperServiceServerPort)
                 {
                     ApplicationArea = All;
                 }
@@ -262,71 +270,52 @@ page 50000 "IMP Connection List"
                 }
             }
 
-            action(ActLoadImpent02)
+            group(ActServer)
             {
-                Caption = 'Load IMPENT02';
-                ApplicationArea = All;
-                Image = Import;
+                Caption = 'Server';
 
-                trigger OnAction()
-                begin
-                    Rec.LoadFromServer('impent02');
-                    Rec.Reset();
-                end;
-            }
-            action(ActLoadServices)
-            {
-                Caption = 'Load services';
-                ApplicationArea = All;
-                Image = Import;
+                action(ActLoadVersions)
+                {
+                    Caption = 'Load versions';
+                    ApplicationArea = All;
+                    Image = Import;
 
-                trigger OnAction()
-                var
-                    lc_List: List of [Text];
-                    lc_Entry: Text;
-                    lc_Int: Integer;
-                //lc_Files: Record "Name/Value Buffer" temporary;
-                //lc_Conv: Codeunit "Base64 Convert";
-                //lc_ImpWeb: Codeunit "IMP WebService";
-                //lc_Instream: InStream;
-                //lc_Temptext: Text[1000];
-                //lc_JsonText: Text;
-                begin
-                    //Rec.LoadFromServer('impent02');
-                    /*
-                    lc_JsonText := '';
-                    lc_Files.Init();
-                    lc_Files."Value BLOB".Import('\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Admin\Log\NAV71List.json'); //NAV71List.json');
-                    lc_Files."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
-                    while not lc_Instream.EOS() do begin
-                        lc_Instream.Read(lc_Temptext, 1000);
-                        lc_JsonText += lc_Temptext;
+                    trigger OnAction()
+                    begin
+                        ImpAdmn.CallVersionList();
+                        CurrPage.Update(false);
                     end;
-                    if (lc_JsonText <> '') then begin
-                        lc_JsonText := lc_Conv.ToBase64(lc_JsonText, TextEncoding::UTF16);
-                        Message(lc_ImpWeb.odata(lc_JsonText));
+                }
+                action(ActLoadServices)
+                {
+                    Caption = 'Load services';
+                    ApplicationArea = All;
+                    Image = Import;
+
+                    trigger OnAction()
+                    var
+                        lc_List: List of [Text];
+                        lc_Entry: Text;
+                    begin
+                        // Call selection
+                        lc_List := Rec.SelectVersions(false);
+                        // Loop through selected versions
+                        foreach lc_Entry in lc_List do
+                            ImpAdmn.CallServerList(lc_Entry);
                     end;
-                    */
-                    lc_List := Rec.LoadVersionFromServer('impent02');
-                    foreach lc_Entry in lc_List do
-                        ImpAdmn.CallServerList(lc_Entry);
-                end;
+                }
             }
         }
     }
 
+    #region Triggers
+
     trigger OnOpenPage()
     begin
-        //ImpAdmn.CallServerList(71);
-        //ImpAdmn.CallServerList(80);
-        //ImpAdmn.CallServerList(90);
-        //ImpAdmn.CallServerList(100);
-        //ImpAdmn.CallServerList(110);
-        //ImpAdmn.CallServerList(160);
-        //ImpAdmn.CallServerList(170);
-        //ImpAdmn.CallServerList(180);
-        //Rec.LoadFromServer('impent02');
+        Rec.SetFilter(Environment, '<>%1', Rec.Environment::Versions);
     end;
+
+    #endregion Triggers
 
     var
         ImpAdmn: Codeunit "IMP Administration";

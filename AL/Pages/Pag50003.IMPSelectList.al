@@ -1,5 +1,6 @@
-page 50003 "IMP Select List"
+page 50003 "IMP Selection List"
 {
+    Caption = 'Selection';
     PageType = List;
     SourceTable = "Name/Value Buffer";
     SourceTableTemporary = true;
@@ -126,8 +127,15 @@ page 50003 "IMP Select List"
             _Rec.Init();
             _Rec.TransferFields(Rec);
             _Rec.Insert(true);
-        end else
-            CurrPage.SetSelectionFilter(_Rec);
+        end else begin
+            CurrPage.SetSelectionFilter(Rec);
+            if Rec.Find('-') then
+                repeat
+                    _Rec.Init();
+                    _Rec.TransferFields(Rec);
+                    _Rec.Insert(true);
+                until Rec.Next() = 0;
+        end;
     end;
 
     #endregion Methodes

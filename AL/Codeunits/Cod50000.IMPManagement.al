@@ -225,7 +225,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnDataSelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean);
     var
-        lc_Page: Page "IMP Select List";
+        lc_Page: Page "IMP Selection List";
     begin
         lc_Page.HideAllEntries();
         lc_Page.SetFields(_Fields, false, _SingleSelection);
@@ -239,17 +239,17 @@ codeunit 50000 "IMP Management"
     var
         lc_IC: Record "IMP Connection";
         lc_Token: JsonToken;
-        lc_Text: Text;
     begin
         if not _Request.Get('data', lc_Token) then
             exit;
 
         case BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() of
-            'serverinstance':
-                begin
-                    lc_IC.ImportServerInstances(lc_IC, _Request, lc_Text);
-                    _Response.ReadFrom(lc_Text);
-                end;
+            'serverversions':
+                lc_IC.ImportServerVersions(_Request, _Response);
+            'serverinstance', 'serverinstances':
+                lc_IC.ImportServerInstances(_Request, _Response);
+            'loadversions':
+                AdmMgmt.CallVersionList(_Request, _Response);
         end;
     end;
 
@@ -513,6 +513,51 @@ codeunit 50000 "IMP Management"
         RetValue := true;
     end;
 
+    procedure ImportFile(_FileName: Text; _TextEncoding: TextEncoding; _DeleteAfterImport: Boolean) RetValue: Text
+    var
+        lc_Buff: Record "Name/Value Buffer" temporary;
+        lc_FileMgmt: Codeunit "File Management";
+        lc_InStream: InStream;
+        lc_Temptext: Text[1000];
+    begin
+        // Init
+        RetValue := '';
+        lc_Buff.Init();
+
+        // Import            
+        if ImportFileFromBuffer(lc_Buff, _FileName) then begin
+            lc_Buff."Value BLOB".CreateInStream(lc_InStream, _TextEncoding);
+            while not lc_InStream.EOS() do begin
+                lc_InStream.Read(lc_Temptext, 1000);
+                RetValue += lc_Temptext;
+            end;
+        end;
+
+        // Remove file
+        if (_DeleteAfterImport) then
+            if lc_FileMgmt.DeleteServerFile(_FileName) then;
+    end;
+
+    procedure ImportFileFromBuffer(var _Buffer: Record "Name/Value Buffer"; _FileName: Text) RetValue: Boolean
+    begin
+        if (_Buffer."Value BLOB".Import(_FileName) <> '') then
+            RetValue := true
+        else
+            RetValue := false;
+    end;
+
+    procedure SelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean);
+    var
+        lc_Page: Page "IMP Selection List";
+    begin
+        lc_Page.HideAllEntries();
+        lc_Page.SetFields(_Fields, false, _SingleSelection);
+        lc_Page.SetData(_List);
+        lc_Page.LookupMode := true;
+        if lc_Page.RunModal() = Action::LookupOK then
+            lc_Page.GetSelection(_List);
+    end;
+
     #endregion Misc
 
     #region BC Administaion
@@ -623,4 +668,5 @@ codeunit 50000 "IMP Management"
 
     var
         BscMgmt: Codeunit "IMP Basic Management";
+        AdmMgmt: Codeunit "IMP Administration";
 }

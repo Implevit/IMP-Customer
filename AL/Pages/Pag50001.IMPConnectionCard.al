@@ -21,17 +21,20 @@ page 50001 "IMP Connection Card"
                 field(Computer; Rec.Computer)
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field(Dns; Rec.Dns)
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
-                }
-                field("List Name"; Rec."List Name")
-                {
-                    ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Customer No."; Rec."Customer No.")
+                {
+                    ApplicationArea = All;
+                    ShowMandatory = true;
+                }
+                field("List Name"; Rec."List Name")
                 {
                     ApplicationArea = All;
                 }
@@ -48,21 +51,6 @@ page 50001 "IMP Connection Card"
                         if (Rec.Url <> '') then
                             Hyperlink(Rec.Url);
                     end;
-                }
-            }
-            group(GrpCompany)
-            {
-                Caption = 'Company';
-
-                field("Company Name"; Rec."Company Name")
-                {
-                    ApplicationArea = All;
-                    Importance = Promoted;
-                }
-                field("Company Id"; Rec."Company Id")
-                {
-                    ApplicationArea = All;
-                    Importance = Promoted;
                 }
             }
             group(GrpEnvironment)
@@ -102,6 +90,10 @@ page 50001 "IMP Connection Card"
                 {
                     ApplicationArea = All;
                 }
+                field("Service NAV Version"; Rec."Service NAV Version")
+                {
+                    ApplicationArea = All;
+                }
                 field("Service Version"; Rec."Service Version")
                 {
                     ApplicationArea = All;
@@ -132,6 +124,10 @@ page 50001 "IMP Connection Card"
                     ApplicationArea = All;
                 }
                 field(ODataServicesPort; Rec.ODataServicesPort)
+                {
+                    ApplicationArea = All;
+                }
+                field(DeveloperServiceServerPort; Rec.DeveloperServiceServerPort)
                 {
                     ApplicationArea = All;
                 }
@@ -167,113 +163,31 @@ page 50001 "IMP Connection Card"
                 }
 
             }
-        }
-    }
-
-    actions
-    {
-        area(Processing)
-        {
-            /*
-            action(ActLoadSimpleServices)
+            group(GrpCompany)
             {
-                Caption = 'Load Simple Service List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
+                Caption = 'Company';
 
-                trigger OnAction()
-                begin
-                    ImpAdmn.LoadSimpleServerList();
-                    CurrPage.Update(true);
-                end;
-            }
-            action(ActLoadFullServices)
-            {
-                Caption = 'Load Full Service List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
-
-                trigger OnAction()
-                begin
-                    ImpAdmn.LoadFullServerList(true, true);
-                    CurrPage.Update(true);
-                end;
-            }
-            action(ActLoadVersionList)
-            {
-                Caption = 'Load Version List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
-
-                trigger OnAction()
-                var
-                    lc_List: list of [Text];
-                begin
-                    lc_List := ImpAdmn.LoadVersionList()
-                end;
-            }
-            */
-            action(ActLoadImpent02)
-            {
-                Caption = 'Load IMPENT02';
-                ApplicationArea = All;
-                Image = Import;
-
-                trigger OnAction()
-                begin
-                    Rec.LoadFromServer('impent02');
-                    Rec.Reset();
-                end;
-            }
-            action(ActLoadServices)
-            {
-                Caption = 'Load services';
-                ApplicationArea = All;
-                Image = Import;
-
-                trigger OnAction()
-                var
-                //lc_Files: Record "Name/Value Buffer" temporary;
-                //lc_Conv: Codeunit "Base64 Convert";
-                //lc_ImpWeb: Codeunit "IMP WebService";
-                //lc_Instream: InStream;
-                //lc_Temptext: Text[1000];
-                //lc_JsonText: Text;
-                begin
-                    //Rec.LoadFromServer('impent02');
-                    /*
-                    lc_JsonText := '';
-                    lc_Files.Init();
-                    lc_Files."Value BLOB".Import('\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Admin\Log\NAV71List.json'); //NAV71List.json');
-                    lc_Files."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
-                    while not lc_Instream.EOS() do begin
-                        lc_Instream.Read(lc_Temptext, 1000);
-                        lc_JsonText += lc_Temptext;
-                    end;
-                    if (lc_JsonText <> '') then begin
-                        lc_JsonText := lc_Conv.ToBase64(lc_JsonText, TextEncoding::UTF16);
-                        Message(lc_ImpWeb.odata(lc_JsonText));
-                    end;
-                    */
-                    ImpAdmn.CallServerList(71);
-                end;
+                field("Company Name"; Rec."Company Name")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                }
+                field("Company Id"; Rec."Company Id")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                }
             }
         }
     }
 
-    trigger OnOpenPage()
+    #region Triggers
+
+    trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        //ImpAdmn.CallServerList(71);
-        //ImpAdmn.CallServerList(80);
-        //ImpAdmn.CallServerList(90);
-        //ImpAdmn.CallServerList(100);
-        //ImpAdmn.CallServerList(110);
-        //ImpAdmn.CallServerList(160);
-        //ImpAdmn.CallServerList(170);
-        //ImpAdmn.CallServerList(180);
-        //Rec.LoadFromServer('impent02');
+        Rec.NewRecord(BelowxRec, '', Rec);
     end;
 
-    var
-        ImpAdmn: Codeunit "IMP Administration";
+    #endregion Triggers
+
 }

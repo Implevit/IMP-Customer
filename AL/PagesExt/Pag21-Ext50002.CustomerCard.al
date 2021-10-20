@@ -16,6 +16,10 @@ pageextension 50002 "IMP Pag21-Ext50002" extends "Customer Card"
                 {
                     ApplicationArea = All;
                 }
+                field("IMP Apps"; Rec."IMP Apps")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

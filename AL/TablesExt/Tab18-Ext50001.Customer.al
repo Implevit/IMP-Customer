@@ -87,5 +87,13 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                 end;
             end;
         }
+        field(50020; "IMP Apps"; Integer)
+        {
+            Caption = 'Apps';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP AL Object App" where("Customer No." = field("No.")));
+            TableRelation = "IMP AL Object App";
+            Editable = false;
+        }
     }
 }

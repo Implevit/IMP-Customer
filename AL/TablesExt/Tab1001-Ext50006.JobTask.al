@@ -94,6 +94,7 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
             Caption = 'Achieved %';
             DataClassification = CustomerContent;
 
+            /*            
             trigger OnValidate()
             var
                 //lc_JobSetup: Record "Jobs Setup";
@@ -101,7 +102,7 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
             begin
                 if (Rec."IMP Achieved Percent" <> xRec."IMP Achieved Percent") and (Rec."IMP Closed" = false) then begin
                     Rec.CalcFields("IMP Usage (Total hours)", "IMP Total Inv. In Journal", "IMP Schedule (Total hours)");
-                    /*
+
                     if (Rec."Achieved Percent" <> 0) then
                         if (Rec."Usage (Total hours)" + Rec."Total Inv. In Journal") <> 0 then
                             Rec."Calc Expected Quantity" := (Rec."Usage (Total hours)" + Rec."Total Inv. In Journal") * 100 / Rec."Achieved Percent"
@@ -109,7 +110,6 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
                             Rec."Calc Expected Quantity" := Rec."Schedule (Total hours)"
                     else
                         Rec."Calc Expected Quantity" := 0;
-                    */
 
                     //lc_JobSetup.Get();
                     //if (lc_JobSetup."IMP Transfer Achieved Percent to" <> lc_JobSetup."IMP Transfer Achieved Percent to"::job) then begin
@@ -121,7 +121,6 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
                     lc_Plan.SetFilter("Line Type", '%1|%2', lc_Plan."Line Type"::Budget, lc_Plan."Line Type"::"Both Budget and Billable");
                     if lc_Plan.Find('-') then
                         repeat
-                        /*
                         if (Rec."Schedule (Total hours)" <> 0) then
                             lc_Plan.Validate("Achieved Percent", Rec."Achieved Percent")
                         else
@@ -135,11 +134,11 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
                         lc_Plan."Expected Amount" := lc_Plan."Unit Price" * lc_Plan."Expected Quantity";
 
                         lc_Plan.Modify;
-                        */
                         until lc_Plan.Next() = 0;
                     //end;
                 end;
             end;
+            */
         }
         Field(50100; "IMP Sched. (Sales Amount LCY)"; Decimal)
         {

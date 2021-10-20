@@ -3,7 +3,7 @@ page 50000 "IMP Connection List"
     Caption = 'Connections';
     PageType = List;
     SourceTable = "IMP Connection";
-    SourceTableView = sorting("List Name");
+    SourceTableView = sorting("List Name") where(Environment = Filter(Server | Service | Docker | Cloud));
     CardPageId = "IMP Connection Card";
     UsageCategory = Lists;
     ApplicationArea = All;
@@ -193,12 +193,13 @@ page 50000 "IMP Connection List"
             group(ActConnections)
             {
                 Caption = 'Connections';
+                Image = Web;
 
                 action(ActConnectionsGetConnection)
                 {
                     Caption = 'Get connection';
                     ApplicationArea = All;
-                    Image = Web;
+                    Image = Export;
 
                     trigger OnAction()
                     var
@@ -212,7 +213,7 @@ page 50000 "IMP Connection List"
                 {
                     Caption = 'Show connection';
                     ApplicationArea = All;
-                    Image = Web;
+                    Image = Link;
 
                     trigger OnAction()
                     var
@@ -226,7 +227,7 @@ page 50000 "IMP Connection List"
                 {
                     Caption = 'Get Authorisation';
                     ApplicationArea = All;
-                    Image = UserCertificate;
+                    Image = Export;
 
                     trigger OnAction()
                     var
@@ -269,14 +270,14 @@ page 50000 "IMP Connection List"
                     end;
                 }
             }
-
             group(ActServer)
             {
                 Caption = 'Server';
+                Image = Setup;
 
                 action(ActLoadVersions)
                 {
-                    Caption = 'Load versions';
+                    Caption = 'Load setup';
                     ApplicationArea = All;
                     Image = Import;
 
@@ -307,15 +308,6 @@ page 50000 "IMP Connection List"
             }
         }
     }
-
-    #region Triggers
-
-    trigger OnOpenPage()
-    begin
-        Rec.SetFilter(Environment, '<>%1', Rec.Environment::Versions);
-    end;
-
-    #endregion Triggers
 
     var
         ImpAdmn: Codeunit "IMP Administration";

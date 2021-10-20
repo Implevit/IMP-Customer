@@ -15,24 +15,12 @@ codeunit 50000 "IMP Management"
         lc_FileName: Text;
         lc_Txt0_Txt: Label 'Select file';
     begin
-        if (_FullFileName = '') then begin
-            // Upload File
-            if UploadIntoStream(lc_Txt0_Txt, '', BscMgmt.GetFileFilterAll(), lc_FileName, lc_InStream) then
-                // Translate
-                TranslateXlfFile(lc_InStream, lc_FileName, true, _WithConfirm, _WithMessage);
-        end else begin
-            // Process
-            lc_TempSource.Init();
-            lc_TempSource.Name := CopyStr(_FullFileName, 1, MaxStrLen(lc_TempSource.Name));
-            lc_TempSource.CalcFields("Value BLOB");
-            lc_TempSource."Value BLOB".Import(_FullFileName);
-            if (lc_TempSource."Value BLOB".Length <> 0) then begin
-                // Import Source
-                lc_TempSource."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF8);
-                // Translate
+        if (_FullFileName <> '') then begin
+            if ImportFile(_FullFileName, lc_Instream, TextEncoding::UTF8, false) then
                 TranslateXlfFile(lc_InStream, lc_TempSource.Name, false, _WithConfirm, _WithMessage);
-            end;
-        end;
+        end else
+            if UploadIntoStream(lc_Txt0_Txt, '', BscMgmt.GetFileFilterAll(), lc_FileName, lc_InStream) then
+                TranslateXlfFile(lc_InStream, lc_FileName, true, _WithConfirm, _WithMessage);
     end;
 
     [Scope('OnPrem')]
@@ -245,7 +233,7 @@ codeunit 50000 "IMP Management"
 
         case BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() of
             'serverversions':
-                lc_IC.ImportServerVersions(_Request, _Response);
+                lc_IC.ImportVersions(_Request, _Response);
             'serverinstance', 'serverinstances':
                 lc_IC.ImportServerInstances(_Request, _Response);
             'loadversions':
@@ -513,6 +501,26 @@ codeunit 50000 "IMP Management"
         RetValue := true;
     end;
 
+    procedure ImportFile(_FileName: Text; var _InStream: InStream; _TextEncoding: TextEncoding; _DeleteAfterImport: Boolean) RetValue: Boolean
+    var
+        lc_Buff: Record "Name/Value Buffer" temporary;
+        lc_FileMgmt: Codeunit "File Management";
+    begin
+        // Init
+        RetValue := false;
+        lc_Buff.Init();
+
+        // Import            
+        if ImportFileFromBuffer(lc_Buff, _FileName) then begin
+            lc_Buff."Value BLOB".CreateInStream(_InStream, _TextEncoding);
+            RetValue := (lc_Buff."Value BLOB".Length <> 0);
+        end;
+
+        // Remove file
+        if (_DeleteAfterImport) then
+            if lc_FileMgmt.DeleteServerFile(_FileName) then;
+    end;
+
     procedure ImportFile(_FileName: Text; _TextEncoding: TextEncoding; _DeleteAfterImport: Boolean) RetValue: Text
     var
         lc_Buff: Record "Name/Value Buffer" temporary;
@@ -556,6 +564,85 @@ codeunit 50000 "IMP Management"
         lc_Page.LookupMode := true;
         if lc_Page.RunModal() = Action::LookupOK then
             lc_Page.GetSelection(_List);
+    end;
+
+    procedure LoadFolders(var _Rec: Record "Name/Value Buffer"; _Root: Text; _InclSubFolders: Boolean)
+    var
+        lc_FileMgmt: Codeunit "File Management";
+        lc_ServerDirectoryHelper: DotNet Directory;
+        lc_ArrayHelper: DotNet Array;
+        lc_FileSystemEntry: Text;
+        lc_Index: Integer;
+        lc_NextId: Integer;
+    begin
+        // Check Root
+        if not lc_FileMgmt.ServerDirectoryExists(_Root) then
+            exit;
+
+        // Clean Root
+        if not _Root.EndsWith('\') then
+            _Root += '\';
+
+        // Get Next Id
+        if _Rec.FindLast() then
+            lc_NextId := _Rec.ID;
+
+        // Load Folder
+        lc_ArrayHelper := lc_ServerDirectoryHelper.GetFileSystemEntries(_Root);
+        for lc_Index := 1 to lc_ArrayHelper.GetLength(0) do begin
+            Evaluate(lc_FileSystemEntry, lc_ArrayHelper.GetValue(lc_Index - 1));
+            if lc_FileMgmt.ServerDirectoryExists(lc_FileSystemEntry) then begin
+                lc_NextId += 1;
+                _Rec.Init();
+                _Rec.ID := lc_NextId;
+                _Rec.Name := CopyStr(CopyStr(lc_FileSystemEntry, StrLen(_Root) + 1), 1, MaxStrLen(_Rec.Name));
+                _Rec.Value := CopyStr(lc_FileSystemEntry, 1, MaxStrLen(_Rec.Value));
+                _Rec.Insert();
+                // Load Sub Folder
+                if (_InclSubFolders) then
+                    LoadFolders(_Rec, lc_FileSystemEntry, _InclSubFolders)
+            end;
+        end;
+    end;
+
+    procedure LoadFiles(var _Rec: Record "Name/Value Buffer"; _Root: Text; _InclSubFolders: Boolean)
+    var
+        lc_FileMgmt: Codeunit "File Management";
+        lc_ServerDirectoryHelper: DotNet Directory;
+        lc_ArrayHelper: DotNet Array;
+        lc_FileSystemEntry: Text;
+        lc_Index: Integer;
+        lc_NextId: Integer;
+    begin
+        // Check Root
+        if not lc_FileMgmt.ServerDirectoryExists(_Root) then
+            exit;
+
+        // Clean Root
+        if not _Root.EndsWith('\') then
+            _Root += '\';
+
+        // Get Next Id
+        if _Rec.FindLast() then
+            lc_NextId := _Rec.ID;
+
+        // Load Folder
+        lc_ArrayHelper := lc_ServerDirectoryHelper.GetFileSystemEntries(_Root);
+        for lc_Index := 1 to lc_ArrayHelper.GetLength(0) do begin
+            Evaluate(lc_FileSystemEntry, lc_ArrayHelper.GetValue(lc_Index - 1));
+            if lc_FileMgmt.ServerDirectoryExists(lc_FileSystemEntry) then
+                // Load Sub Folder
+                if (_InclSubFolders) then
+                    LoadFiles(_Rec, lc_FileSystemEntry, _InclSubFolders)
+                else begin
+                    lc_NextId += 1;
+                    _Rec.Init();
+                    _Rec.ID := lc_NextId;
+                    _Rec.Name := CopyStr(CopyStr(lc_FileSystemEntry, StrLen(_Root) + 1), 1, MaxStrLen(_Rec.Name));
+                    _Rec.Value := CopyStr(lc_FileSystemEntry, 1, MaxStrLen(_Rec.Value));
+                    _Rec.Insert();
+                end;
+        end;
     end;
 
     #endregion Misc

@@ -32,8 +32,8 @@ table 50000 "IMP Connection"
         field(20; "Environment"; Option)
         {
             Caption = 'Environment';
-            OptionMembers = " ",Server,Docker,Cloud,Versions;
-            OptionCaption = ',Server,Docker,Cloud,Versions';
+            OptionMembers = " ",Service,Docker,Cloud,Server,SQLServer,SQLInstance,SQLDatabase;
+            OptionCaption = ',Service,Docker,Cloud,Server,SQLServer,SQLInstance,SQLDatabase';
 
             trigger OnValidate()
             begin
@@ -131,16 +131,73 @@ table 50000 "IMP Connection"
         {
             Caption = 'SQL Server';
             DataClassification = CustomerContent;
+
+            trigger OnLookup()
+            var
+                lc_Rec: Record "IMP Connection";
+            begin
+                lc_Rec.Reset();
+                lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLServer);
+                if (Rec.DatabaseServer <> '') then
+                    lc_Rec.SetRange(DatabaseServer, Rec.DatabaseServer);
+                if lc_Rec.FindSet() then;
+                lc_Rec.SetRange(DatabaseServer);
+                if Page.RunModal(Page::"IMP Databases", lc_Rec) = Action::LookupOK then begin
+                    Rec.DatabaseServer := lc_Rec.DatabaseServer;
+                    Rec.DatabaseInstance := '';
+                    Rec.DatabaseName := '';
+                end;
+            end;
         }
         field(71; DatabaseInstance; Text[30])
         {
             Caption = 'SQL Instance';
             DataClassification = CustomerContent;
+
+            trigger OnLookup()
+            var
+                lc_Rec: Record "IMP Connection";
+            begin
+                lc_Rec.Reset();
+                lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLInstance);
+                if (Rec.DatabaseServer <> '') then
+                    lc_Rec.SetRange(DatabaseServer, Rec.DatabaseServer);
+                if (Rec.DatabaseInstance <> '') then
+                    lc_Rec.SetRange(DatabaseInstance, Rec.DatabaseInstance);
+                if lc_Rec.FindSet() then;
+                lc_Rec.SetRange(DatabaseInstance);
+                if Page.RunModal(Page::"IMP Databases", lc_Rec) = Action::LookupOK then begin
+                    Rec.DatabaseServer := lc_Rec.DatabaseServer;
+                    Rec.DatabaseInstance := lc_Rec.DatabaseInstance;
+                    Rec.DatabaseName := '';
+                end;
+            end;
         }
         field(72; DatabaseName; Text[30])
         {
             Caption = 'DB Name';
             DataClassification = CustomerContent;
+
+            trigger OnLookup()
+            var
+                lc_Rec: Record "IMP Connection";
+            begin
+                lc_Rec.Reset();
+                lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLDatabase);
+                if (Rec.DatabaseServer <> '') then
+                    lc_Rec.SetRange(DatabaseServer, Rec.DatabaseServer);
+                if (Rec.DatabaseInstance <> '') then
+                    lc_Rec.SetRange(DatabaseInstance, Rec.DatabaseInstance);
+                if (Rec.DatabaseName <> '') then
+                    lc_Rec.SetRange(DatabaseName, Rec.DatabaseName);
+                if lc_Rec.FindSet() then;
+                lc_Rec.SetRange(DatabaseName);
+                if Page.RunModal(Page::"IMP Databases", lc_Rec) = Action::LookupOK then begin
+                    Rec.DatabaseServer := lc_Rec.DatabaseServer;
+                    Rec.DatabaseInstance := lc_Rec.DatabaseInstance;
+                    Rec.DatabaseName := lc_Rec.DatabaseName;
+                end;
+            end;
         }
         field(80; ManagementServicesPort; Integer)
         {
@@ -282,6 +339,9 @@ table 50000 "IMP Connection"
         key(Key5; Computer, "Service Name", "Company Name")
         {
         }
+        key(Key6; Environment, "DatabaseServer", "DatabaseInstance", DatabaseName)
+        {
+        }
     }
 
     #region Triggers
@@ -343,7 +403,7 @@ table 50000 "IMP Connection"
     begin
         RetValue := '';
         case Rec.Environment of
-            Rec.Environment::Server:
+            Rec.Environment::Service:
                 RetValue := _BaseUrl + Rec.Computer + ':8080/' + Rec."Service Name";
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
@@ -361,7 +421,7 @@ table 50000 "IMP Connection"
     begin
         RetValue := '';
         case Rec.Environment of
-            Rec.Environment::Server:
+            Rec.Environment::Service:
                 RetValue := _BaseUrl + Rec.Computer + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/api';
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
@@ -379,7 +439,7 @@ table 50000 "IMP Connection"
     begin
         RetValue := '';
         case Rec.Environment of
-            Rec.Environment::Server:
+            Rec.Environment::Service:
                 RetValue := _BaseUrl + Rec.Dns + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/';
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
@@ -408,7 +468,7 @@ table 50000 "IMP Connection"
     begin
         RetValue := '';
         case Rec.Environment of
-            Rec.Environment::Server:
+            Rec.Environment::Service:
                 RetValue := _BaseUrl + Rec.Dns + ':' + Format(Rec.SOAPServicesPort) + '/' + Rec."Service Name" + '/WS';
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
@@ -457,14 +517,14 @@ table 50000 "IMP Connection"
     var
         lc_Cust: Record Customer;
     begin
-        if (Rec.Environment = Rec.Environment::Server) then
+        if (Rec.Environment = Rec.Environment::Service) then
             Rec."List Name" := Rec."Service Name";
         if (Rec.Environment = Rec.Environment::Docker) then
             Rec."List Name" := Rec."Environment Name";
         if (Rec.Environment = Rec.Environment::Cloud) then
             if lc_Cust.Get(Rec."Customer No.") then begin
                 lc_Cust.TestField("IMP Abbreviation");
-                Rec."List Name" := CopyStr(lc_Cust."IMP Abbreviation" + ' ' + Rec."Environment Name", 1, MaxStrLen(Rec."List Name"));
+                Rec."List Name" := CopyStr(lc_Cust."IMP Abbreviation" + '-' + Rec."Environment Name", 1, MaxStrLen(Rec."List Name"));
             end;
     end;
 
@@ -503,6 +563,189 @@ table 50000 "IMP Connection"
         _Object.Add('instances', lc_Array);
     end;
 
+    procedure ImportSQLServerFull(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
+    var
+        lc_IC: Record "IMP Connection";
+        lc_Instances: JsonArray;
+        lc_Instance: JsonToken;
+        lc_Databases: JsonArray;
+        lc_Database: JsonToken;
+        lc_Token: JsonToken;
+        lc_Server: Text;
+        lc_InstanceName: Text;
+        lc_InstanceVersion: Text;
+        lc_DBName: Text;
+        lc_DBRecoveryModel: Text;
+    begin
+
+        #region Json syntax
+
+        /*
+        {
+            "data":  "SqlServerFull",
+            "server":  "IMPSQL01",
+            "instances":  [
+                {
+                    "name" : "SQL2014",
+                    "version" :  "12.0.6164",
+                    "databases":  [
+                                    {
+                                        "name":  "XXX-XXXXXX-XXXX",
+                                        "recoveryModel":  "Simple"
+                                    }
+                    ]
+                }
+            ],
+        */
+
+        #endregion Json syntax
+
+        // Init
+        RetValue := false;
+
+        // Get server
+        if not _Root.Get('server', lc_Token) then begin
+            _Response.Add('error', 'Token server missing in json');
+            exit;
+        end else
+            lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
+
+        // Clear
+        lc_IC.Reset();
+        lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
+        lc_IC.SetRange(Computer, lc_Server);
+        lc_IC.SetFilter(Environment, '%1|%2|%3', lc_IC.Environment::SQLServer, lc_IC.Environment::SQLInstance, lc_IC.Environment::SQLDatabase);
+        if lc_IC.FindSet() then
+            lc_IC.DeleteAll(true);
+
+        // Save server
+        clear(lc_IC);
+        lc_IC.Init();
+        lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
+        lc_IC.Environment := lc_IC.Environment::SQLServer;
+        lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
+        lc_IC."List Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
+        lc_IC.DatabaseServer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.DatabaseServer));
+        if not lc_IC.Insert(true) then begin
+            _Response.Add('error', 'Couldn''t insert server in ' + lc_IC.TableName);
+            exit;
+        end;
+
+        // Get instances
+        if not _Root.Get('instances', lc_Token) then begin
+            _Response.Add('error', 'Token instances missing in json');
+            exit;
+        end;
+
+        // Check instances
+        if not (lc_Token.IsArray()) then begin
+            _Response.Add('error', 'Token instances has to be an array');
+            exit;
+        end;
+
+        // Read instances
+        lc_Instances := lc_Token.AsArray();
+        foreach lc_Instance in lc_Instances do begin
+            // Check name
+            if not lc_Instance.AsObject().Get('name', lc_Token) then begin
+                _Response.Add('error', 'Token instances.name missing in json');
+                exit;
+            end else
+                lc_InstanceName := BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText();
+
+            // Check version
+            if not lc_Instance.AsObject().Get('version', lc_Token) then begin
+                _Response.Add('error', 'Token instances.version missing in json');
+                exit;
+            end else
+                lc_InstanceVersion := BscMgmt.JsonGetTokenValue(lc_Token, 'version').AsText();
+
+            // Get or create instance
+            lc_IC.Reset();
+            lc_IC.SetCurrentKey(Environment, "DatabaseServer", "DatabaseInstance", DatabaseName);
+            lc_IC.SetRange(Environment, lc_IC.Environment::SQLInstance);
+            lc_IC.SetRange(DatabaseServer, lc_Server);
+            lc_IC.SetRange(DatabaseInstance, lc_InstanceName);
+            if not lc_IC.FindFirst() then begin
+                Clear(lc_IC);
+                lc_IC.Init();
+                lc_IC.Environment := lc_IC.Environment::SQLInstance;
+                lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen("Environment Name"));
+                lc_IC."Environment State" := CopyStr(lc_InstanceVersion, 1, MaxStrLen(lc_IC."Environment State"));
+                lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
+                lc_IC.DatabaseServer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.DatabaseServer));
+                lc_IC.DatabaseInstance := CopyStr(lc_InstanceName, 1, MaxStrLen(lc_IC.DatabaseInstance));
+                lc_IC."List Name" := CopyStr(lc_IC.DatabaseServer + '/' + lc_IC.DatabaseInstance, 1, MaxStrLen(lc_IC."List Name"));
+                if not lc_IC.Insert(true) then begin
+                    _Response.Add('error', 'Couldn''t insert instance in ' + lc_IC.TableName);
+                    exit;
+                end;
+            end;
+
+            // Get databases
+            if not lc_Instance.AsObject().Get('databases', lc_Token) then begin
+                _Response.Add('error', 'Token databases missing in json');
+                exit;
+            end;
+
+            // Check databases
+            if not (lc_Token.IsArray()) then begin
+                _Response.Add('error', 'Token databases has to be an array');
+                exit;
+            end;
+
+            // Read databases
+            lc_Databases := lc_Token.AsArray();
+            foreach lc_Database in lc_Databases do begin
+                // Check name
+                if not lc_Database.AsObject().Get('name', lc_Token) then begin
+                    _Response.Add('error', 'Token instances.databases.name missing in json');
+                    exit;
+                end else
+                    lc_DBName := BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText();
+
+                // Check version
+                if not lc_Database.AsObject().Get('recoveryModel', lc_Token) then begin
+                    _Response.Add('error', 'Token instances.databases.recoveryModel missing in json');
+                    exit;
+                end else
+                    lc_DBRecoveryModel := BscMgmt.JsonGetTokenValue(lc_Token, 'version').AsText();
+
+                // Get or create database
+                lc_IC.Reset();
+                lc_IC.SetCurrentKey(Environment, "DatabaseServer", "DatabaseInstance", DatabaseName);
+                lc_IC.SetRange(Environment, lc_IC.Environment::SQLDatabase);
+                lc_IC.SetRange(DatabaseServer, lc_Server);
+                lc_IC.SetRange(DatabaseInstance, lc_InstanceName);
+                lc_IC.SetRange(DatabaseName, lc_DBName);
+                if not lc_IC.FindFirst() then begin
+                    clear(lc_IC);
+                    lc_IC.Init();
+                    lc_IC.Environment := lc_IC.Environment::SQLDatabase;
+                    lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
+                    lc_IC.DatabaseServer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.DatabaseServer));
+                    lc_IC.DatabaseInstance := CopyStr(lc_InstanceName, 1, MaxStrLen(lc_IC.DatabaseInstance));
+                    lc_IC.DatabaseName := CopyStr(lc_DBName, 1, MaxStrLen(lc_IC.DatabaseName));
+                    lc_IC."Environment State" := CopyStr(lc_DBRecoveryModel, 1, MaxStrLen(lc_IC."Environment State"));
+                    lc_IC."List Name" := CopyStr(lc_IC.DatabaseInstance + '/' + lc_IC.DatabaseName, 1, MaxStrLen(lc_IC."List Name"));
+                    if not lc_IC.Insert(true) then begin
+                        _Response.Add('error', 'Couldn''t insert database in ' + lc_IC.TableName);
+                        exit;
+                    end;
+                end;
+            end;
+        end;
+
+        // Store data
+        Commit();
+
+        // Set response
+        _Response.Add('response', 'Thank you for sending full sql server list');
+
+        // Return
+        RetValue := true;
+    end;
+
     procedure SelectVersions(_SingleEntry: Boolean) RetValue: List of [Text];
     var
         lc_IC: Record "IMP Connection";
@@ -525,7 +768,7 @@ table 50000 "IMP Connection"
         lc_IC.Reset();
         lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
         lc_IC.SetRange(Computer, lc_Computer);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Versions);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
         if not lc_IC.FindFirst() then
             Error(lc_Txt1_Txt);
 
@@ -561,147 +804,7 @@ table 50000 "IMP Connection"
             until lc_List.Next() = 0;
     end;
 
-    procedure LoadVersionFromServer(_ServerName: Text) RetValue: List of [Text]
-    var
-        lc_HttpClient: HttpClient;
-        lc_HttpContent: HttpContent;
-        lc_HttpRequest: HttpRequestMessage;
-        lc_HttpResponse: HttpResponseMessage;
-        lc_ResponseJson: JsonObject;
-        lc_Token: JsonToken;
-        lc_Array: JsonArray;
-        lc_Request: Text;
-        lc_Response: Text;
-        lc_Command: Text;
-        lc_Method: Text;
-    begin
-        // Init
-        lc_Command := 'http://' + _ServerName + ':5000/NAVVersions';
-        lc_Method := 'GET';
-
-        // Clear Web Service
-        Clear(lc_HttpClient);
-
-        // Save Request In Content
-        lc_HttpContent.WriteFrom(lc_Request);
-
-        // Set Content To Control
-        lc_HttpRequest.Content(lc_HttpContent);
-
-        // Set Operation
-        lc_HttpRequest.Method(lc_Method);
-
-        // Set and send Command
-        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
-            Error(lc_HttpResponse.ReasonPhrase);
-
-        // Read Request
-        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
-            Error('No response');
-
-        // Read Json
-        if not lc_ResponseJson.ReadFrom(lc_Response) then
-            Error(('No json in request:\\' + lc_Response));
-
-        // Clear List
-        clear(RetValue);
-
-        // Get data
-        if not lc_ResponseJson.Get('data', lc_Token) then
-            Error('Data token missing in json');
-
-        // Check data
-        if not (BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() = 'serverversion') then
-            Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText());
-
-        // Get versions
-        if not lc_ResponseJson.Get('versions', lc_Token) then
-            Error('Token versions missing in json');
-
-        // Check array
-        if not lc_Token.IsArray() then
-            Error('Token versions as to be an array');
-
-        // Process array
-        lc_Array := lc_Token.AsArray();
-        foreach lc_Token in lc_Array do
-            RetValue.Add(lc_Token.AsValue().AsText().ToLower());
-    end;
-
-    /*
-    procedure LoadFromServer(_ServerName: Text)
-    var
-        lc_Temp: Record "IMP Connection" temporary;
-        lc_HttpClient: HttpClient;
-        lc_HttpContent: HttpContent;
-        lc_HttpRequest: HttpRequestMessage;
-        lc_HttpResponse: HttpResponseMessage;
-        lc_ResponseJson: JsonObject;
-        lc_Data: JsonToken;
-        lc_Request: Text;
-        lc_Response: Text;
-        lc_Command: Text;
-        lc_Method: Text;
-        lc_Message: Text;
-    begin
-        // Init
-        lc_Command := 'http://' + _ServerName + ':5000/NAVInstances';
-        lc_Method := 'GET';
-
-        // Clear Web Service
-        Clear(lc_HttpClient);
-
-        // Save Request In Content
-        lc_HttpContent.WriteFrom(lc_Request);
-
-        // Set Content To Control
-        lc_HttpRequest.Content(lc_HttpContent);
-
-        // Set Operation
-        lc_HttpRequest.Method(lc_Method);
-
-        // Set and send Command
-        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
-            Error(lc_HttpResponse.ReasonPhrase);
-
-        // Read Request
-        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
-            Error('No response');
-
-        // Read Json
-        if not lc_ResponseJson.ReadFrom(lc_Response) then
-            Error(('No json in request:\\' + lc_Response));
-
-        // Clear List
-        Rec.Reset();
-        Rec.SetRange(Computer, _ServerName);
-        if Rec.FindSet() then begin
-            repeat
-                lc_Temp.Init();
-                lc_Temp.TransferFields(Rec);
-                lc_Temp.Insert(true);
-            until rEC.Next() = 0;
-            if Confirm(format(lc_Temp.Count())) then;
-            Rec.DeleteAll();
-        end;
-
-        // Get data
-        if not lc_ResponseJson.Get('data', lc_Data) then
-            Error('Data token missing in json');
-
-        case BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText().ToLower() of
-            'serverinstances':
-                if ImportServerInstances(lc_Temp, lc_ResponseJson, lc_Message) then
-                    Commit()
-                else
-                    Error(lc_Message);
-            else
-                Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText());
-        end;
-    end;
-    */
-
-    procedure ImportServerVersions(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
+    procedure ImportVersions(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
     var
         lc_IC: Record "IMP Connection";
         lc_Array: JsonArray;
@@ -781,12 +884,14 @@ table 50000 "IMP Connection"
         lc_IC.Reset();
         lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
         lc_IC.SetRange(Computer, lc_Server);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Versions);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
         if not lc_IC.FindFirst() then begin
             lc_IC.Init();
             lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
-            lc_IC.Environment := lc_IC.Environment::Versions;
-            lc_IC."List Name" := CopyStr(lc_Server + ' Versionlist', 1, MaxStrLen(lc_IC."List Name"));
+            lc_IC.Environment := lc_IC.Environment::Server;
+            lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
+            lc_IC."List Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
+            lc_IC.Url := CopyStr('\\' + lc_Server, 1, MaxStrLen(lc_IC.Url));
             if not lc_IC.Insert(true) then begin
                 _Response.Add('error', 'Couldn''t insert versions in ' + lc_IC.TableName);
                 exit;
@@ -809,6 +914,146 @@ table 50000 "IMP Connection"
         // Return
         RetValue := true;
     end;
+
+    /*
+    procedure LoadVersionFromServer(_ServerName: Text) RetValue: List of [Text]
+    var
+        lc_HttpClient: HttpClient;
+        lc_HttpContent: HttpContent;
+        lc_HttpRequest: HttpRequestMessage;
+        lc_HttpResponse: HttpResponseMessage;
+        lc_ResponseJson: JsonObject;
+        lc_Token: JsonToken;
+        lc_Array: JsonArray;
+        lc_Request: Text;
+        lc_Response: Text;
+        lc_Command: Text;
+        lc_Method: Text;
+    begin
+        // Init
+        lc_Command := 'http://' + _ServerName + ':5000/NAVVersions';
+        lc_Method := 'GET';
+
+        // Clear Web Service
+        Clear(lc_HttpClient);
+
+        // Save Request In Content
+        lc_HttpContent.WriteFrom(lc_Request);
+
+        // Set Content To Control
+        lc_HttpRequest.Content(lc_HttpContent);
+
+        // Set Operation
+        lc_HttpRequest.Method(lc_Method);
+
+        // Set and send Command
+        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
+            Error(lc_HttpResponse.ReasonPhrase);
+
+        // Read Request
+        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
+            Error('No response');
+
+        // Read Json
+        if not lc_ResponseJson.ReadFrom(lc_Response) then
+            Error(('No json in request:\\' + lc_Response));
+
+        // Clear List
+        clear(RetValue);
+
+        // Get data
+        if not lc_ResponseJson.Get('data', lc_Token) then
+            Error('Data token missing in json');
+
+        // Check data
+        if not (BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() = 'serverversion') then
+            Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText());
+
+        // Get versions
+        if not lc_ResponseJson.Get('versions', lc_Token) then
+            Error('Token versions missing in json');
+
+        // Check array
+        if not lc_Token.IsArray() then
+            Error('Token versions as to be an array');
+
+        // Process array
+        lc_Array := lc_Token.AsArray();
+        foreach lc_Token in lc_Array do
+            RetValue.Add(lc_Token.AsValue().AsText().ToLower());
+    end;
+
+    procedure LoadServerInstancesFromServer(_ServerName: Text)
+    var
+        lc_Temp: Record "IMP Connection" temporary;
+        lc_HttpClient: HttpClient;
+        lc_HttpContent: HttpContent;
+        lc_HttpRequest: HttpRequestMessage;
+        lc_HttpResponse: HttpResponseMessage;
+        lc_ResponseJson: JsonObject;
+        lc_Data: JsonToken;
+        lc_Request: Text;
+        lc_Response: Text;
+        lc_Command: Text;
+        lc_Method: Text;
+        lc_Message: Text;
+    begin
+        // Init
+        lc_Command := 'http://' + _ServerName + ':5000/NAVInstances';
+        lc_Method := 'GET';
+
+        // Clear Web Service
+        Clear(lc_HttpClient);
+
+        // Save Request In Content
+        lc_HttpContent.WriteFrom(lc_Request);
+
+        // Set Content To Control
+        lc_HttpRequest.Content(lc_HttpContent);
+
+        // Set Operation
+        lc_HttpRequest.Method(lc_Method);
+
+        // Set and send Command
+        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
+            Error(lc_HttpResponse.ReasonPhrase);
+
+        // Read Request
+        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
+            Error('No response');
+
+        // Read Json
+        if not lc_ResponseJson.ReadFrom(lc_Response) then
+            Error(('No json in request:\\' + lc_Response));
+
+        // Clear List
+        Rec.Reset();
+        Rec.SetRange(Computer, _ServerName);
+        if Rec.FindSet() then begin
+            repeat
+                lc_Temp.Init();
+                lc_Temp.TransferFields(Rec);
+                lc_Temp.Insert(true);
+            until rEC.Next() = 0;
+            if Confirm(format(lc_Temp.Count())) then;
+            Rec.DeleteAll();
+        end;
+
+        // Get data
+        if not lc_ResponseJson.Get('data', lc_Data) then
+            Error('Data token missing in json');
+
+        case BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText().ToLower() of
+            'serverinstances':
+                if ImportServerInstances(lc_Temp, lc_ResponseJson, lc_Message) then
+                    Commit()
+                else
+                    Error(lc_Message);
+            else
+                Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText());
+        end;
+    end;
+    */
 
     procedure ImportServerInstances(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
     var
@@ -881,7 +1126,7 @@ table 50000 "IMP Connection"
         // Clear List
         lc_IC.Reset();
         // Only servers
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
         // Only this computer
         lc_IC.SetRange(Computer, lc_Server);
         // Only this version
@@ -1039,7 +1284,7 @@ table 50000 "IMP Connection"
         end else
             case BscMgmt.JsonGetTokenValue(lc_Token, 'environment').AsText().ToLower() of
                 'server':
-                    lc_ISI.Environment := lc_ISI.Environment::Server;
+                    lc_ISI.Environment := lc_ISI.Environment::Service;
                 'cloud':
                     lc_ISI.Environment := lc_ISI.Environment::Cloud;
                 'docker':
@@ -1159,7 +1404,7 @@ table 50000 "IMP Connection"
 
         // Reset stored data
         case lc_ISI.Environment of
-            lc_ISI.Environment::Server:
+            lc_ISI.Environment::Service:
                 begin
                     _Temp.SetRange("Service Name", lc_ISI."Service Name");
                     if _Temp.FindFirst() then begin
@@ -1279,7 +1524,7 @@ table 50000 "IMP Connection"
         lc_IC.SetCurrentKey(Computer, "Service Name", "Company Name");
         lc_IC.SetRange(Computer, Rec.Computer);
         lc_IC.SetFilter("Service Name", '%1*', Rec."Service Name");
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
         if not lc_IC.FindLast() then
             Rec."Service Name" += '1'
         else
@@ -1298,7 +1543,7 @@ table 50000 "IMP Connection"
         // Get current certificate thumbprint
         lc_IC.Reset();
         lc_IC.SetRange(Computer, Rec.Computer);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
         lc_IC.SetFilter(ServicesCertificateThumbprint, '<>%1', '');
         if lc_IC.FindLast() then
             lc_ServicesCertificateThumbprint := lc_IC.ServicesCertificateThumbprint
@@ -1330,7 +1575,7 @@ table 50000 "IMP Connection"
         RetValue := 7045;
         // Find last number
         lc_IC.Reset();
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
+        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
         lc_IC.SetRange(Computer, _Computer);
         if lc_IC.FindLast() then
             RetValue := lc_IC.ManagementServicesPort + 10;

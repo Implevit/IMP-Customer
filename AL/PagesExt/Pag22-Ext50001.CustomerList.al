@@ -8,6 +8,10 @@ pageextension 50001 "IMP Pag22-Ext50001" extends "Customer List"
             {
                 ApplicationArea = All;
             }
+            field("IMP Apps"; Rec."IMP Apps")
+            {
+                ApplicationArea = All;
+            }
         }
         addafter(City)
         {

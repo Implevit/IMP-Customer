@@ -29,6 +29,12 @@
       "version": "18.0.0.0"
     },
     {
+    "id": "99dd4337-4b34-40d6-9577-18b6fab83ae0",
+    "publisher": "Implevit",
+    "name": "IMP-BasicPrem",
+    "version": "18.0.0.0"
+    },
+    {
       "id": "a39def4b-22ec-451d-b754-096a6b4c4ac3",
       "name": "IMP-Data",
       "publisher": "Implevit",

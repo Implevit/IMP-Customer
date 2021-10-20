@@ -1,4 +1,4 @@
-page 50105 "IMP Job Consulting Inv. Lines"
+page 50005 "IMP Job Consulting Inv. Lines"
 {
     Caption = 'PProject settlement lines';
     PageType = List;

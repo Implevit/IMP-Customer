@@ -93,78 +93,7 @@ codeunit 50001 "IMP Administration"
         RetValue := '\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Infos\' + _FileName;
     end;
 
-    procedure LoadVersionList() RetValue: List of [Text]
-    var
-        lc_AS: Record "Active Session";
-        lc_File: Record "Name/Value Buffer" temporary;
-        lc_List: List of [Text];
-        lc_PSR: DotNet PowerShellRunner;
-        lc_Dia: Dialog;
-        lc_InStream: InStream;
-        lc_Computer: Text;
-        lc_FileName: Text;
-        lc_FullFileName: Text;
-        lc_Line: Text;
-        lc_Txt2_Txt: Label 'Processing......';
-    begin
-        // Init
-        Clear(RetValue);
-
-        // Get current session
-        lc_AS.Get(ServiceInstanceId(), SessionId());
-
-        // Get Computer
-        if lc_AS."Server Computer Name".Contains('.') then begin
-            lc_List := lc_AS."Server Computer Name".Split('.');
-            lc_Computer := lc_List.Get(1);
-        end else
-            lc_Computer := lc_AS."Server Computer Name";
-
-        // FileName
-        lc_FileName := 'NAVVersionList-' + lc_Computer + '.txt';
-        lc_FullFileName := '\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Infos\' + lc_FileName;
-
-        // Show Dia
-        if GuiAllowed then
-            lc_Dia.Open(lc_Txt2_Txt);
-
-        // Create powershell connection
-        lc_PSR := lc_PSR.CreateInSandbox();
-        lc_PSR.WriteEventOnError := true;
-        // Import nav admin tool in powershell
-        lc_PSR.ImportModule(ApplicationPath + 'NAVAdminTool.ps1');
-        lc_PSR.ImportModule('\\impent01\Tools\PowerShell\Library\Functions-Misc.psm1');
-        lc_PSR.ImportModule('\\impent01\Tools\PowerShell\Library\Functions-BC.psm1');
-        // Create powershell command
-        lc_PSR.AddCommand('F-BC-LoadVersionList');
-        lc_PSR.AddParameter('FullFileName', lc_FullFileName);
-        // Extecute powershell command
-        lc_PSR.BeginInvoke();
-
-        // Wait until complition
-        repeat
-            Sleep(1000);
-        until lc_PSR.IsCompleted;
-
-        // Load File
-        lc_File.Init();
-        lc_File.Name := CopyStr(lc_FullFileName, 1, MaxStrLen(lc_File.Name));
-        lc_File.CalcFields("Value BLOB");
-        lc_File."Value BLOB".Import(lc_FullFileName);
-        if (lc_File."Value BLOB".Length <> 0) then begin
-            // Import List
-            lc_File."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
-            while not lc_InStream.EOS() do begin
-                lc_InStream.ReadText(lc_Line);
-                RetValue.Add(lc_Line);
-            end;
-        end;
-
-        // Close Dia
-        if (GuiAllowed()) then
-            lc_Dia.Close();
-    end;
-
+    /*
     procedure LoadFullServerList(_WithConfirm: Boolean; _WithMessage: Boolean)
     var
         lc_List: List of [Text];
@@ -215,7 +144,6 @@ codeunit 50001 "IMP Administration"
     procedure LoadFullServerList(_Version: Integer; _WithConfirm: Boolean; _WithMessage: Boolean; _ShowDia: Boolean) RetValue: Integer
     var
         lc_AS: Record "Active Session";
-        lc_File: Record "Name/Value Buffer" temporary;
         lc_SI: Record "IMP Connection";
         lc_List: List of [Text];
         lc_PSR: DotNet PowerShellRunner;
@@ -290,11 +218,7 @@ codeunit 50001 "IMP Administration"
         until lc_PSR.IsCompleted;
 
         // Load File
-        lc_File.Init();
-        lc_File.Name := CopyStr(lc_FullFileName, 1, MaxStrLen(lc_File.Name));
-        lc_File.CalcFields("Value BLOB");
-        lc_File."Value BLOB".Import(lc_FullFileName);
-        if (lc_File."Value BLOB".Length <> 0) then begin
+        if ImpMgmt.ImportFile(lc_FullFileName, lc_InStream, TextEncoding::UTF16, true) then begin
             // Clear List
             lc_SI.Reset();
             lc_SI.SetRange(Computer, lc_Computer);
@@ -306,7 +230,6 @@ codeunit 50001 "IMP Administration"
                 lc_SI.DeleteAll(true);
 
             // Import List
-            lc_File."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
             while not lc_InStream.EOS() do begin
                 lc_InStream.ReadText(lc_Line);
                 Clear(lc_List);
@@ -344,7 +267,6 @@ codeunit 50001 "IMP Administration"
     procedure LoadSimpleServerList()
     var
         lc_AS: Record "Active Session";
-        lc_File: Record "Name/Value Buffer" temporary;
         lc_SI: Record "IMP Connection";
         lc_SITemp: Record "IMP Connection" temporary;
         lc_List: List of [Text];
@@ -400,11 +322,7 @@ codeunit 50001 "IMP Administration"
         until lc_PSR.IsCompleted;
 
         // Load File
-        lc_File.Init();
-        lc_File.Name := CopyStr(lc_FullFileName, 1, MaxStrLen(lc_File.Name));
-        lc_File.CalcFields("Value BLOB");
-        lc_File."Value BLOB".Import(lc_FullFileName);
-        if (lc_File."Value BLOB".Length <> 0) then begin
+        if ImpMgmt.ImportFile(lc_FullFileName, lc_InStream, TextEncoding::UTF16, true) then begin
             // Clear List
             lc_SITemp.DeleteAll(true);
             lc_SI.Reset();
@@ -413,7 +331,6 @@ codeunit 50001 "IMP Administration"
                 lc_SI.DeleteAll(true);
 
             // Import List
-            lc_File."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
             while not lc_InStream.EOS() do begin
                 lc_InStream.ReadText(lc_Line);
                 Clear(lc_List);
@@ -431,7 +348,7 @@ codeunit 50001 "IMP Administration"
                     lc_SITemp.Computer := lc_SI.Computer;
                     if lc_SI."Service Version".Contains('.') then begin
                         lc_List := lc_SI."Service Version".Split('.');
-                        lc_SITemp."Service Name" := CopyStr(lc_List.Get(1) + lc_List.Get(2), 1, MaxStrLen(lc_SI.Computer));
+                        lc_SITemp."Service Name" := CopyStr(lc_List.Get(1) + lc_List.Get(2), 1, MaxStrLen(lc_SI."Service Name"));
                     end else
                         lc_SITemp."Service Name" := lc_SI."Service Version";
                     if lc_SITemp.Insert(true) then;
@@ -454,7 +371,6 @@ codeunit 50001 "IMP Administration"
             lc_Dia.Close();
     end;
 
-    /*
     procedure LoadVersionList(_Server: Text)
     var
         lc_AS: Record "Active Session";
@@ -495,6 +411,108 @@ codeunit 50001 "IMP Administration"
         lc_DatMgmt.APIPost(lc_Url, lc_RequestText, lc_Object, lc_IA.Name, 'Welcome2019$', lc_IA.Token, lc_IA."Client Id", lc_IA."Secret Id", true);
     end;
     */
+
+    procedure CallSQLServerFullList()
+    var
+        lc_Response: JsonObject;
+    begin
+        CallSQLServerFullList('IMPSQL01', '', lc_Response);
+    end;
+
+    procedure CallSQLServerFullList(_Server: Text; _Instance: Text; var _Response: JsonObject)
+    var
+        lc_IC: Record "IMP Connection";
+        lc_PSR: DotNet PowerShellRunner;
+        lc_Response: JsonObject;
+        lc_Dia: Dialog;
+        lc_URL: Text;
+        lc_File: Text;
+        lc_IsFile: Boolean;
+        lc_ResponseText: Text;
+        lc_Txt1_Txt: Label '#1###########################';
+        lc_Txt2_Txt: Label 'Start call for sqlserver full list from %1';
+        lc_Txt3_Txt: Label 'Process call for sqlserver full list form %1';
+    begin
+        // Init
+        lc_IsFile := true;
+        lc_ResponseText := '';
+
+        // Check server
+        if (_Server = '') then begin
+            _Response.Add('error', 'Server is mandatory');
+            exit;
+        end;
+
+        // Set file
+        lc_File := AddFileNameToInfoPath(_Server + '_SQLServerFullList.json');
+
+        // Open Dia
+        if (GuiAllowed()) then begin
+            lc_Dia.Open(lc_Txt1_Txt);
+            lc_Dia.Update(1, StrSubstNo(lc_Txt2_Txt, _Server));
+        end;
+
+        Clear(lc_PSR);
+        // Create powershell connection
+        lc_Dia.Update(1, 'Create Powershell Sandbox');
+        lc_PSR := lc_PSR.CreateInSandbox();
+        lc_PSR.WriteEventOnError := true;
+        // Import nav admin tool in powershell
+        lc_Dia.Update(1, 'Add SQLServer');
+        lc_Dia.Update(1, 'Add AdminFunctions.ps1');
+        lc_PSR.ImportModule(AddFileNameToPowerShellPath('AdminFunctions.ps1'));
+        // Create powershell command
+        if (lc_IsFile) then begin
+            lc_Dia.Update(1, 'Load Function F-LoadSQLServerFullIntoFile');
+            lc_PSR.AddCommand('F-LoadSQLServerFullIntoFile');
+            lc_PSR.AddParameter('Server', _Server);
+            lc_PSR.AddParameter('Instance', _Instance);
+            lc_PSR.AddParameter('FullFileName', lc_File);
+        end else begin
+            lc_Dia.Update(1, 'Load Function F-LoadSQLServerFullSendToWebService');
+            lc_PSR.AddCommand('F-LoadSQLServerFullSendToWebService');
+            lc_PSR.AddParameter('Server', _Server);
+            lc_PSR.AddParameter('Instance', _Instance);
+            lc_PSR.AddParameter('URL', lc_URL);
+            lc_PSR.AddParameter('Username', 'IMPL');
+            lc_PSR.AddParameter('Password', 'Welcome2019');
+        end;
+        // Extecute powershell command
+        lc_Dia.Update(1, 'Invoke Command');
+        lc_PSR.BeginInvoke();
+
+        // Show Dia
+        if (GuiAllowed()) then
+            lc_Dia.Update(1, StrSubstNo(lc_Txt3_Txt, _Server));
+
+        // Wait for complition
+        if not (lc_PSR.IsCompleted) then begin
+            lc_Dia.Update(1, 'Wait for completion');
+            repeat
+                Sleep(1000);
+            until lc_PSR.IsCompleted;
+        end;
+
+        // Read file
+        if (lc_IsFile) then begin
+            lc_Dia.Update(1, 'Import file');
+            // Import file
+            lc_ResponseText := ImpMgmt.ImportFile(lc_File, TextEncoding::UTF16, false);
+            // Transfer to json
+            if not lc_Response.ReadFrom(lc_ResponseText) then begin
+                _Response.Add('error', 'No json format:\\' + lc_ResponseText);
+                exit;
+            end;
+            // Process import
+            lc_Dia.Update(1, 'Import file content');
+            lc_IC.ImportSQLServerFull(lc_Response, _Response);
+            lc_Dia.Update(1, 'Content imported');
+        end;
+
+        // Close Dia
+        if (GuiAllowed()) then
+            lc_Dia.Close();
+    end;
 
     procedure CallVersionList() RetValue: Boolean;
     var
@@ -539,7 +557,6 @@ codeunit 50001 "IMP Administration"
     procedure CallVersionList(_Request: JsonObject; var _Response: JsonObject)
     var
         lc_IC: Record "IMP Connection";
-        lc_AS: Record "Active Session";
         //lc_User: Record User;
         lc_Token: JsonToken;
         lc_PSR: DotNet PowerShellRunner;
@@ -553,7 +570,7 @@ codeunit 50001 "IMP Administration"
         lc_ResponseText: Text;
         lc_Txt1_Txt: Label '#1###########################';
         lc_Txt2_Txt: Label 'Start call for version list from %1';
-        lc_Txt3_Txt: Label 'Process call for version list form at %1';
+        lc_Txt3_Txt: Label 'Process call for version list form %1';
     begin
         // Init
         lc_IsFile := true;
@@ -645,7 +662,7 @@ codeunit 50001 "IMP Administration"
             end;
             // Process import
             lc_Dia.Update(1, 'Import file content');
-            lc_IC.ImportServerVersions(_Request, _Response);
+            lc_IC.ImportVersions(_Request, _Response);
             lc_Dia.Update(1, 'Content imported');
         end;
 

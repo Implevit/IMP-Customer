@@ -30,19 +30,22 @@ table 50005 "IMP AL Object Number"
         {
             Caption = 'Parent Object No.';
             DataClassification = CustomerContent;
-            TableRelation = Object.ID Where(Type = CONST(Table));
+            TableRelation = if ("Parent Object Type" = const(Table)) AllObjWithCaption."Object ID" Where("Object Type" = const(Table)) else
+            if ("Parent Object Type" = const(Page)) AllObjWithCaption."Object ID" Where("Object Type" = const(Page)) else
+            if ("Parent Object Type" = const(Enum)) AllObjWithCaption."Object ID" Where("Object Type" = const(Enum));
             ValidateTableRelation = false;
 
             trigger OnValidate()
             var
                 lc_Rec: Record "IMP AL Object Number";
+                lc_Obj: Record AllObjWithCaption;
                 lc_Txt1_Txt: Label '%1 for %2 %3 already exists as %4';
             begin
-                if (Rec."Parent Object No." = 0) then begin
-                    if Rec.Delete() then;
+                // Only with value
+                if (Rec."Parent Object No." = 0) then
                     exit;
-                end;
 
+                // Check already exists
                 lc_Rec.Reset();
                 lc_Rec.SetRange("Customer No.", Rec."Customer No.");
                 lc_Rec.SetRange("App No.", Rec."App No.");
@@ -53,8 +56,30 @@ table 50005 "IMP AL Object Number"
                 if lc_Rec.FindFirst() then begin
                     Message(lc_Txt1_Txt, Rec."Object Type", Rec."Parent Object Type", Rec."Parent Object No.", lc_Rec."Object No.");
                     Error('');
-                end else
-                    Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");
+                end;
+
+                // Find parent object name
+                if (Rec."Parent Object No." <> 0) then
+                    if ((lc_Obj."Object ID" < 50000) or (lc_Obj."Object ID" > 99999)) then begin
+                        // Find standard object
+                        lc_Obj.Reset();
+                        lc_Obj.SetRange("Object Type", Rec."Parent Object Type");
+                        lc_Obj.SetRange("Object ID", Rec."Parent Object No.");
+                        if lc_Obj.FindFirst() then
+                            Rec."Parent Object Name" := lc_Obj."Object Name";
+                    end else begin
+                        // Find customer object
+                        lc_Rec.Reset();
+                        lc_Rec.SetRange("Customer No.", Rec."Customer No.");
+                        lc_Rec.SetRange("Object Type", Rec."Parent Object Type");
+                        lc_Rec.SetRange("Object No.", Rec."Parent Object No.");
+                        if lc_Rec.FindFirst() then
+                            if (Rec."Parent Object Name" = '') then
+                                Rec."Parent Object Name" := lc_Rec."Object Name";
+                    end;
+
+                // Create new object no
+                Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");
             end;
         }
         field(5; "Object Type"; Option)
@@ -65,7 +90,7 @@ table 50005 "IMP AL Object Number"
         }
         field(6; "Object No."; Integer)
         {
-            Caption = 'Entry No.';
+            Caption = 'Object No.';
             DataClassification = CustomerContent;
         }
         field(10; "Last Entry No."; Integer)
@@ -103,13 +128,85 @@ table 50005 "IMP AL Object Number"
         }
         field(30; "Object Name"; Text[30])
         {
-            Caption = 'Entry Name';
+            Caption = 'Object Name';
             DataClassification = CustomerContent;
         }
         field(40; "Parent Object Name"; Text[30])
         {
             Caption = 'Parent Object Name';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            var
+                lc_Rec: Record "IMP AL Object Number";
+                lc_Obj: Record AllObjWithCaption;
+                lc_Text: Text;
+                lc_Selection: Integer;
+                lc_Counter: Integer;
+                lc_Txt1_Txt: Label 'The %1 for the %2 "%3" already exists as %4';
+                lc_Txt2_Txt: Label 'There are more then one entry with a name like "@*%1*"';
+            begin
+                // Only with value
+                if (Rec."Parent Object Name" = '') then
+                    exit;
+
+                // Clear 
+                Rec."Parent Object Name" := CopyStr(Rec."Parent Object Name".Replace('"', ''), 1, MaxStrLen(Rec."Parent Object Name"));
+
+                // Check already exists
+                lc_Rec.Reset();
+                lc_Rec.SetRange("Customer No.", Rec."Customer No.");
+                lc_Rec.SetRange("App No.", Rec."App No.");
+                lc_Rec.SetRange("Parent Object Type", Rec."Parent Object Type");
+                lc_Rec.SetRange("Parent Object Name", Rec."Parent Object Name");
+                lc_Rec.SetRange("Object Type", Rec."Object Type");
+                lc_Rec.SetFilter("Object No.", '<>%1', Rec."Object No.");
+                if lc_Rec.FindFirst() then begin
+                    Message(lc_Txt1_Txt, Rec."Object Type", Rec."Parent Object Type", Rec."Parent Object Name", lc_Rec."Object No.");
+                    Error('');
+                end;
+
+                // Find parent object
+                if (Rec."Parent Object No." = 0) then begin
+                    lc_Obj.Reset();
+                    lc_Obj.SetRange("Object Type", Rec."Parent Object Type");
+                    lc_Obj.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    if lc_Obj.FindSet() then
+                        if lc_Obj.Count() > 1 then begin
+                            // More then one entry 
+                            repeat
+                                if (lc_Text <> '') then
+                                    lc_Text += ',';
+                                lc_Text += lc_Obj."Object Name" + ' (' + Format(lc_Obj."Object ID") + ')';
+                            until lc_Obj.Next() = 0;
+                            // Select entry
+                            lc_Selection := StrMenu(lc_Text, 1, StrSubstNo(lc_Txt2_Txt, Rec."Parent Object Name"));
+                            if (lc_Selection = 0) then
+                                // No selection
+                                Error('')
+                            else
+                                // Find selection
+                                if lc_Obj.FindSet() then begin
+                                    lc_Counter := 0;
+                                    repeat
+                                        lc_Counter += 1;
+                                        if (lc_Counter = lc_Selection) then begin
+                                            // Set selection
+                                            Rec.Validate("Parent Object No.", lc_Obj."Object ID");
+                                            lc_Obj.Find('+');
+                                        end;
+                                    until lc_Obj.Next() = 0;
+                                end;
+                        end else
+                            if ((lc_Obj."Object ID" < 50000) or (lc_Obj."Object ID" > 99999)) then begin
+                                Rec."Parent Object No." := lc_Obj."Object ID";
+                                Rec."Parent Object Name" := lc_Obj."Object Name";
+                            end;
+                end;
+
+                // Create new object no
+                Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");
+            end;
         }
     }
 
@@ -118,7 +215,29 @@ table 50005 "IMP AL Object Number"
         key(Key1; "Customer No.", "App No.", "Parent Object Type", "Parent Object No.", "Object Type", "Object No.")
         {
         }
+        key(Key2; "Object No.", "Object Type", "Parent Object No.", "Parent Object Type", "App No.", "Customer No.")
+        {
+        }
     }
+
+
+    #region Triggers
+
+    trigger OnDelete()
+    var
+        lc_Rec: Record "IMP AL Object Number";
+    begin
+        // Delete all linked objects
+        lc_Rec.Reset();
+        lc_Rec.SetRange("Customer No.", Rec."Customer No.");
+        lc_Rec.SetRange("App No.", Rec."App No.");
+        lc_Rec.SetRange("Parent Object Type", Rec."Object Type");
+        lc_Rec.SetRange("Parent Object No.", Rec."Object No.");
+        if lc_Rec.FindSet() then
+            lc_Rec.DeleteAll(true);
+    end;
+
+    #endregion Triggers
 
     #region Methodes
 
@@ -165,8 +284,10 @@ table 50005 "IMP AL Object Number"
         // Find next entry
         lc_IAON.LockTable();
         lc_IAON.Reset();
+        lc_IAON.SetCurrentKey("Object No.", "Object Type", "Parent Object No.", "Parent Object Type", "App No.", "Customer No.");
         lc_IAON.SetRange("Customer No.", _CustomerNo);
-        lc_IAON.SetRange("App No.", _AppNo);
+        if (_ObjectType in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]) then
+            lc_IAON.SetRange("App No.", _AppNo);
         lc_IAON.SetRange("Object Type", _ObjectType);
         // Next field or enum entry
         if (_ObjectType = lc_IAON."Object Type"::FieldNumber) then begin
@@ -193,7 +314,7 @@ table 50005 "IMP AL Object Number"
             // Set first object
             RetValue := lc_IAOA."No. Range From";
             // Set filter 
-            lc_IAON.SetFilter("Object No.", '<>%1', 0);
+            lc_IAON.SetFilter("Object No.", '>=%1', RetValue);
             if lc_IAON.FindSet() then
                 repeat
                     if (RetValue < lc_IAON."Object No.") then

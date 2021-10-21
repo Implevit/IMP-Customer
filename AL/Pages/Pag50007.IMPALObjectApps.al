@@ -25,6 +25,10 @@ page 50007 "IMP AL Object Apps"
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
+                    trigger OnDrillDown()
+                    begin
+                        ShowObjects();
+                    end;
                 }
                 field("No. Range From"; Rec."No. Range From")
                 {
@@ -39,11 +43,8 @@ page 50007 "IMP AL Object Apps"
                     ApplicationArea = All;
 
                     trigger OnDrillDown()
-                    var
-                        lc_Page: Page "IMP AL Object Numbers";
                     begin
-                        lc_Page.SetLevel1(Rec."Customer No.", Rec."No.");
-                        lc_Page.Run();
+                        ShowObjects();
                     end;
                 }
             }
@@ -65,11 +66,15 @@ page 50007 "IMP AL Object Apps"
                 PromotedOnly = true;
 
                 trigger OnAction()
+                var
+                    lc_Txt1_Txt: Label 'Select customer first';
                 begin
-                    if (CurrCustomer <> '') then
-                        Rec.ImportApps(CurrCustomer, true, true)
-                    else
-                        Rec.ImportApps(true, true);
+                    if (CurrCustomer = '') then
+                        if (Rec."Customer No." = '') then
+                            Error(lc_Txt1_Txt)
+                        else
+                            CurrCustomer := Rec."Customer No.";
+                    Rec.ImportApps(CurrCustomer, true, true);
                     CurrPage.Update(false);
                 end;
             }
@@ -92,6 +97,18 @@ page 50007 "IMP AL Object Apps"
     end;
 
     #endregion Triggers
+
+    #region Methodes
+
+    procedure ShowObjects()
+    var
+        lc_Page: Page "IMP AL Object Numbers";
+    begin
+        lc_Page.SetLevel1(Rec."Customer No.", Rec."No.", 0);
+        lc_Page.Run();
+    end;
+
+    #endregion Methodes
 
     var
         ShowCustomer: Boolean;

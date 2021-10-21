@@ -8,6 +8,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2663520175 - Method 2453274966 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No object nuber found in filename:\\%1</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method GetObjectNo - NamedType lc_Txt1_Txt</note>
+        </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you really want to import your selected app?</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -27,11 +32,6 @@
           <source>Select your app folder</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt0_Txt</note>
-        </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>No customer with abbreviation %1 found!</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1654749265 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you really want to import your selected apps?</source>
@@ -59,42 +59,17 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method IsInRange - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Folder %1 notfound!</source>
+          <source>Wrong object number in "%1"</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Extension not found in "%1"</source>
+          <source>Unknown Object %1 in Line 1 of "%2"</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt2_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 2156638432" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Filename "%1" and Object "%2" are different</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt3_Txt</note>
-        </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 3651681693" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Extension-Number "%1" and Object-Number "%2" in %3 are different</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt4_Txt</note>
-        </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 3909050934" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Unknown Object %1 in Line 1 of "%2"</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt5_Txt</note>
-        </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 734365419" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Wrong object type in Line 1 of "%1"</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt6_Txt</note>
-        </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 1642825604" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Wrong object number in "%1"</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt7_Txt</note>
-        </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1571159068 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Folder %1 notfound!</source>
+          <source>No files in folder %1 found!</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObjects - NamedType lc_Txt1_Txt</note>
         </trans-unit>
@@ -179,12 +154,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Last Field No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 1418569422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Entry Name</source>
+          <source>Object Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Object Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 1618224966 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Entry No.</source>
+          <source>Object No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Object No. - Property Caption</note>
         </trans-unit>
@@ -202,6 +177,16 @@
           <source>Parent Object Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2346288409 - Field 941025898 - Method 2126772001 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The %1 for the %2 "%3" already exists as %4</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Table 2346288409 - Field 941025898 - Method 2126772001 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There are more then one entry with a name like "@*%1*"</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt2_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 2746278018 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parent Object No.</source>
@@ -943,10 +928,30 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActLoad - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3195317498 - Action 103495388 - Method 1377591017 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select customer first</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActLoad - Method OnAction - NamedType lc_Txt1_Txt</note>
+        </trans-unit>
         <trans-unit id="Page 2795356688 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>AL Object Numbers</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2795356688 - Method 3786859091 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 is no standard object so we need the object number!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Method NewObject - NamedType lc_Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 2795356688 - Method 3786859091 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New %1 %2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Method NewObject - NamedType lc_Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 2795356688 - Method 3388793719 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you really want to delete the selected entries?\\This will delete all linked objects as well!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Method OnDeleteRecord - NamedType lc_Conf_Txt</note>
         </trans-unit>
         <trans-unit id="Page 2795356688 - Action 2950791669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>New Field</source>
@@ -957,6 +962,11 @@
           <source>New Object</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Action ActNewObjectNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2795356688 - Action 4197040541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Action ActRefresh - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3636186504 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Authorisation List</source>

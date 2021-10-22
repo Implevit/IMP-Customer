@@ -8,30 +8,40 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2453274966 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>No object nuber found in filename:\\%1</source>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 4084200670" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App (%1) : %2</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method GetObjectNo - NamedType lc_Txt1_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Dia1_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Do you really want to import your selected app?</source>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App folder may not be empty</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Conf_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt1_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 2056626729" size-unit="char" translate="yes" xml:space="preserve">
-          <source>your app have been successfully imported</source>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No app.json found in folder "%1"</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Msg0a_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt2_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 1799257488" size-unit="char" translate="yes" xml:space="preserve">
-          <source>your app import has terminated with error</source>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 2156638432" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Token "%1" is mandatory in app.json</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Msg0b_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt3_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 612857849" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Select your app folder</source>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 3651681693" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Token "%1" has to be an array</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt0_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt4_Txt</note>
+        </trans-unit>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 3909050934" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import app %1 first!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt5_Txt</note>
+        </trans-unit>
+        <trans-unit id="Table 2663520175 - Method 1453651952 - NamedType 734365419" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select your id range</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApp - NamedType lc_Txt6_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1654749265 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you really want to import your selected apps?</source>
@@ -53,20 +63,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApps - NamedType lc_Txt0_Txt</note>
         </trans-unit>
+        <trans-unit id="Table 2663520175 - Method 1654749265 - NamedType 4164196781" size-unit="char" translate="yes" xml:space="preserve">
+          <source>#1####################################################\#2####################################################\#3####################################################</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method ImportApps - NamedType lc_Dia_Txt</note>
+        </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1019458886 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
           <source>Number %1 is not in range of %2 and %3</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method IsInRange - NamedType lc_Txt1_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Wrong object number in "%1"</source>
+        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 4084200670" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File : %1</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt1_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Dia1_Txt</note>
         </trans-unit>
-        <trans-unit id="Table 2663520175 - Method 2790602213 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Unknown Object %1 in Line 1 of "%2"</source>
+        <trans-unit id="Table 2663520175 - Method 1571159068 - NamedType 4084200670" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Object Type (%1) : %2</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObject - NamedType lc_Txt2_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObjects - NamedType lc_Dia1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Method 1571159068 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
           <source>No files in folder %1 found!</source>
@@ -79,7 +94,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Method LoadObjects - NamedType lc_Txt2_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Field 1171137197 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Objects</source>
+          <source>Customer Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Field Customer Name - Property Caption</note>
         </trans-unit>
@@ -94,7 +109,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Field Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2663520175 - Field 2961552353 - Method 2126772001 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Appname has to start with the customer abbreviation %1</source>
+          <source>Appname should start with the customer abbreviation "%1"!\\Do you still want to use the name "%2"?</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object App - Field Name - Method OnValidate - NamedType lc_Txt1_Txt</note>
         </trans-unit>
@@ -153,6 +168,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Last Field No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2346288409 - Field 918961944 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parent Object Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Object File Name - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2346288409 - Field 1418569422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Object Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -204,7 +224,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Type - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 71521027 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
-          <source>,Table,,,,,,,,,,,,,,Table Extension,Enum,Enum Extension,,</source>
+          <source>,Table,,,,,,,Page,,,,,,,Table Extension,Enum,Enum Extension,,</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Type - Property OptionCaption</note>
         </trans-unit>
@@ -923,15 +943,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3195317498 - Action 103495388 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Load</source>
+        <trans-unit id="Page 3195317498 - Action 4173989992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Git</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActLoad - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActGit - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3195317498 - Action 103495388 - Method 1377591017 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3195317498 - Action 3239180541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActImport - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3195317498 - Action 3239180541 - Method 1377591017 - NamedType 3092192274" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select customer first</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActLoad - Method OnAction - NamedType lc_Txt1_Txt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Apps - Action ActImport - Method OnAction - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Page 2795356688 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>AL Object Numbers</source>
@@ -952,6 +977,11 @@
           <source>Do you really want to delete the selected entries?\\This will delete all linked objects as well!</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Method OnDeleteRecord - NamedType lc_Conf_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 2795356688 - Action 4173989992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Git</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP AL Object Numbers - Action ActGit - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2795356688 - Action 2950791669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>New Field</source>
@@ -1647,6 +1677,11 @@
           <source>Server Instance Nos.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab79-Ext50000 - Field IMP Connection Nos. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2495845408 - Field 3729724902 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3469146285">
+          <source>Gitlab Url</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab79-Ext50000 - Field IMP Gitlab Url - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 1745355001 - Field 1188184810 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
           <source>Job Resource No.</source>

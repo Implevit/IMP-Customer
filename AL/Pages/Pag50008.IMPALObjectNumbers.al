@@ -76,6 +76,11 @@ page 50008 "IMP AL Object Numbers"
                     ApplicationArea = All;
                     Visible = ShowEntryNo;
                 }
+                field("Object File Name"; Rec."Object File Name")
+                {
+                    ApplicationArea = All;
+                    Visible = ShowFileName;
+                }
                 field("Last Field No."; Rec."Last Field No.")
                 {
                     ApplicationArea = All;
@@ -144,6 +149,22 @@ page 50008 "IMP AL Object Numbers"
                     NewField();
                 end;
             }
+            action(ActGit)
+            {
+                Caption = 'Git';
+                ApplicationArea = All;
+                Image = LaunchWeb;
+                Visible = not HideActionGitlab;
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                begin
+                    ShowGit()
+                end;
+            }
         }
     }
 
@@ -190,6 +211,25 @@ page 50008 "IMP AL Object Numbers"
             lc_IAOA.InitALNumbers();
             CurrPage.Update(false);
         end;
+    end;
+
+    local procedure ShowGit()
+    var
+        lc_CompInfo: Record "Company Information";
+        lc_IAOA: Record "IMP AL Object App";
+        lc_Url: Text;
+    begin
+        lc_CompInfo.Get();
+        lc_CompInfo.TestField("IMP Gitlab Url");
+        if not lc_CompInfo."IMP Gitlab Url".EndsWith('/') then
+            lc_CompInfo."IMP Gitlab Url" += '/';
+        lc_IAOA.Get(Rec."App No.");
+        lc_Url := lc_CompInfo."IMP Gitlab Url" + lc_IAOA.Name;
+        if (Rec."Object File Name" <> '') then
+            lc_Url += '/-/blob/master/' + Rec."Object File Name".Replace('\', '/')
+        else
+            lc_Url += '/-/tree/master/AL/' + lc_IAOA.GetALFolder(Rec."Object Type");
+        Hyperlink(lc_Url);
     end;
 
     local procedure ShowObjects()
@@ -327,7 +367,10 @@ page 50008 "IMP AL Object Numbers"
     var
         lc_NewEntry: Integer;
     begin
-        lc_NewEntry := Rec.GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Object Type", Rec."Object No.", Rec."Object Type"::FieldNumber);
+        if (Level = 3) then
+            lc_NewEntry := Rec.GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type"::FieldNumber)
+        else
+            lc_NewEntry := Rec.GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Object Type", Rec."Object No.", Rec."Object Type"::FieldNumber);
         CurrPage.Update(false);
         Message(Format(lc_NewEntry));
     end;
@@ -342,6 +385,7 @@ page 50008 "IMP AL Object Numbers"
         ShowParentObject := true;
         ShowEntryNo := true;
         ShowLastEntryNo := true;
+        ShowFileName := false;
         EnabledObjectType := true;
         EnabledParentObjectType := true;
         ShowLastFieldNo := true;
@@ -366,10 +410,12 @@ page 50008 "IMP AL Object Numbers"
         ShowApp := false;
         ShowParentObject := false;
         ShowEntryNo := false;
+        ShowFileName := false;
         ShowLastEntryNo := true;
         ShowLastFieldNo := false;
         HideActionNewObjectNumber := false;
         HideActionNewFieldNumber := true;
+        HideActionGitlab := false;
         Level := 1;
     end;
 
@@ -392,12 +438,14 @@ page 50008 "IMP AL Object Numbers"
         ShowApp := false;
         ShowParentObject := (_ParentObjectType <> 0); // (_ObjectType in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]);
         ShowEntryNo := true;
+        ShowFileName := false;
         ShowLastEntryNo := false;
         ShowLastFieldNo := (_ObjectType in [Rec."Object Type"::"Table", Rec."Object Type"::"TableExtension", Rec."Object Type"::"Enum", Rec."Object Type"::"EnumExtension"]);
         EnabledObjectType := false;
         EnabledParentObjectType := false;
         HideActionNewObjectNumber := false;
         HideActionNewFieldNumber := false;
+        HideActionGitlab := false;
         Level := 2;
     end;
 
@@ -414,10 +462,12 @@ page 50008 "IMP AL Object Numbers"
         ShowApp := false;
         ShowParentObject := false;
         ShowEntryNo := true;
+        ShowFileName := false;
         ShowLastEntryNo := false;
         ShowLastFieldNo := false;
         HideActionNewObjectNumber := true;
         HideActionNewFieldNumber := false;
+        HideActionGitlab := true;
         Level := 3;
     end;
 
@@ -428,7 +478,9 @@ page 50008 "IMP AL Object Numbers"
         EnableActionNewFieldNumber: Boolean;
         HideActionNewObjectNumber: Boolean;
         HideActionNewFieldNumber: Boolean;
+        HideActionGitlab: Boolean;
         ShowCustomer: Boolean;
+        ShowFileName: Boolean;
         ShowRefresh: Boolean;
         ShowApp: Boolean;
         ShowParentObject: Boolean;

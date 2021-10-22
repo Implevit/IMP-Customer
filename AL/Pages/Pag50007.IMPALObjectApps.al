@@ -25,6 +25,7 @@ page 50007 "IMP AL Object Apps"
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
+
                     trigger OnDrillDown()
                     begin
                         ShowObjects();
@@ -55,9 +56,9 @@ page 50007 "IMP AL Object Apps"
     {
         area(Processing)
         {
-            action(ActLoad)
+            action(ActImport)
             {
-                Caption = 'Load';
+                Caption = 'Import';
                 ApplicationArea = All;
                 Image = Import;
                 PromotedCategory = Process;
@@ -77,6 +78,28 @@ page 50007 "IMP AL Object Apps"
                     Rec.ImportApps(CurrCustomer, true, true);
                     CurrPage.Update(false);
                 end;
+            }
+            action(ActGit)
+            {
+                Caption = 'Git';
+                ApplicationArea = All;
+                Image = LaunchWeb;
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    lc_CompInfo: Record "Company Information";
+                begin
+                    lc_CompInfo.Get();
+                    lc_CompInfo.TestField("IMP Gitlab Url");
+                    if not lc_CompInfo."IMP Gitlab Url".EndsWith('/') then
+                        lc_CompInfo."IMP Gitlab Url" += '/';
+                    Hyperlink(lc_CompInfo."IMP Gitlab Url" + Rec.Name);
+                end;
+
             }
         }
     }

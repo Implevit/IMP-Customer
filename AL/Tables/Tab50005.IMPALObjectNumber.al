@@ -23,7 +23,7 @@ table 50005 "IMP AL Object Number"
         {
             Caption = 'Parent Object Type';
             DataClassification = CustomerContent;
-            OptionCaption = ',Table,,,,,,,,,,,,,,Table Extension,Enum,Enum Extension,,';
+            OptionCaption = ',Table,,,,,,,Page,,,,,,,Table Extension,Enum,Enum Extension,,';
             OptionMembers = "TableData","Table",,"Report",,"Codeunit","XMLport","MenuSuite","Page","Query","System","FieldNumber",,,"PageExtension","TableExtension","Enum","EnumExtension","Profile","ProfileExtension";
         }
         field(4; "Parent Object No."; Integer)
@@ -208,6 +208,11 @@ table 50005 "IMP AL Object Number"
                 Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");
             end;
         }
+        field(50; "Object File Name"; Text[100])
+        {
+            Caption = 'Parent Object Name';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
@@ -286,16 +291,18 @@ table 50005 "IMP AL Object Number"
         lc_IAON.Reset();
         lc_IAON.SetCurrentKey("Object No.", "Object Type", "Parent Object No.", "Parent Object Type", "App No.", "Customer No.");
         lc_IAON.SetRange("Customer No.", _CustomerNo);
-        if (_ObjectType in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]) then
+        if (_ObjectType in [Rec."Object Type"::FieldNumber, Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]) then
             lc_IAON.SetRange("App No.", _AppNo);
         lc_IAON.SetRange("Object Type", _ObjectType);
         // Next field or enum entry
         if (_ObjectType = lc_IAON."Object Type"::FieldNumber) then begin
             lc_IAON.SetRange("Parent Object No.", _ParentObjectNo);
             lc_IAON.SetRange("Parent Object Type", _ParentObjectType);
-            if lc_IAON.FindLast() then
-                RetValue := lc_IAON."Object No." + 10
-            else
+            if lc_IAON.FindLast() then begin
+                RetValue := lc_IAON."Object No." + 10;
+                if (CopyStr(Format(RetValue), 1, StrLen(Format(RetValue))) <> '0') then
+                    if Evaluate(RetValue, CopyStr(Format(RetValue), 1, StrLen(Format(RetValue)) - 1) + '0') then;
+            end else
                 if (_ParentObjectType in [Rec."Object Type"::Table, Rec."Object Type"::Enum]) then
                     RetValue := 10
                 else begin

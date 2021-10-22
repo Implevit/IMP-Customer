@@ -26,14 +26,15 @@ table 50004 "IMP AL Object App"
             trigger OnValidate()
             var
                 lc_Cust: Record Customer;
-                lc_Txt1_Txt: Label 'Appname has to start with the customer abbreviation %1';
+                lc_Txt1_Txt: Label 'Appname should start with the customer abbreviation "%1"!\\Do you still want to use the name "%2"?';
             begin
                 lc_Cust.Get("Customer No.");
                 lc_Cust.Testfield("IMP Abbreviation");
                 if not (Name.ToUpper().StartsWith(lc_Cust."IMP Abbreviation")) then
-                    Error(lc_Txt1_Txt, lc_Cust."IMP Abbreviation")
-                else
-                    Rec.Name := Rec.Name.ToLower();
+                    if not Confirm(StrSubstNo(lc_Txt1_Txt, lc_Cust."IMP Abbreviation", Rec.Name)) then
+                        Error('');
+                // Set name
+                Rec.Name := Rec.Name.ToLower();
             end;
         }
         field(30; "No. Range From"; Integer)
@@ -57,7 +58,7 @@ table 50004 "IMP AL Object App"
         }
         field(50; "Customer Name"; Text[100])
         {
-            Caption = 'Objects';
+            Caption = 'Customer Name';
             FieldClass = FlowField;
             CalcFormula = lookup(Customer.Name where("No." = field("Customer No.")));
             Editable = false;
@@ -96,7 +97,7 @@ table 50004 "IMP AL Object App"
 
     #endregion Triggers
 
-    #region Methodes
+    #region Methods Misc
 
     procedure GetNextEntryNo() RetValue: Integer
     var
@@ -210,6 +211,10 @@ table 50004 "IMP AL Object App"
         if lc_IAON.Insert(true) then;
     end;
 
+    #endregion Methods Misc
+
+    #region Methods Path and folders
+
     procedure GetCustomerRootPath() RetValue: Text
     begin
         RetValue := '\\impfps01\Daten\04_Entwicklung\Kunden\';
@@ -218,6 +223,36 @@ table 50004 "IMP AL Object App"
     procedure GetCustomerRootPath(_Abbreviation: Text) RetValue: Text
     begin
         RetValue := GetCustomerRootPath() + _Abbreviation.ToUpper() + '\Apps\';
+    end;
+
+    procedure GetALFolder(_ObjectType: Option) RetValue: Text;
+    var
+        lc_IAON: Record "IMP AL Object Number";
+    begin
+        case _ObjectType of
+            lc_IAON."Object Type"::Codeunit:
+                RetValue := GetALFolderCodeunits();
+            lc_IAON."Object Type"::Enum:
+                RetValue := GetALFolderEnums();
+            lc_IAON."Object Type"::EnumExtension:
+                RetValue := GetALFolderEnumsExt();
+            lc_IAON."Object Type"::Table:
+                RetValue := GetALFolderTables();
+            lc_IAON."Object Type"::"TableExtension":
+                RetValue := GetALFolderTablesExt();
+            lc_IAON."Object Type"::Page:
+                RetValue := GetALFolderPages();
+            lc_IAON."Object Type"::"PageExtension":
+                RetValue := GetALFolderPagesExt();
+            lc_IAON."Object Type"::Report:
+                RetValue := GetALFolderReports();
+            lc_IAON."Object Type"::Query:
+                RetValue := GetALFolderQueries();
+            lc_IAON."Object Type"::XMLport:
+                RetValue := GetALFolderXmlPorts();
+            else
+                RetValue := '';
+        end;
     end;
 
     procedure GetALFolderCodeunits() RetValue: Text
@@ -270,6 +305,10 @@ table 50004 "IMP AL Object App"
         RetValue := 'XmlPorts';
     end;
 
+    #endregion Methods Path and folders
+
+    #region Methods Import Apps
+
     procedure ImportApps(_CustomerNo: Code[20]; _WithConfirm: Boolean; _WithMessage: Boolean)
     var
         lc_Cust: Record Customer;
@@ -284,13 +323,16 @@ table 50004 "IMP AL Object App"
         lc_PrmMgmt: Codeunit "IMP Basic Prem Management";
         lc_Path: Text;
         lc_List: List of [Text];
+        lc_Counter: Integer;
         lc_Conf_Txt: Label 'Do you really want to import your selected apps?';
         lc_Msg0a_Txt: Label 'your apps have been successfully imported';
         lc_Msg0b_Txt: Label 'your apps import has terminated with error';
         lc_Txt0_Txt: Label 'Select your apps folders';
+        lc_Dia_Txt: Label '#1####################################################\#2####################################################\#3####################################################';
     begin
         // Init
         RetValue := false;
+        lc_Counter := 0;
 
         // Get folders
         lc_PrmMgmt.GetServerDirectories(lc_Txt0_Txt, _DefaultPath, false, true, lc_List);
@@ -304,52 +346,116 @@ table 50004 "IMP AL Object App"
             if not Confirm(lc_Conf_Txt) then
                 exit;
 
+        // Open dia
+        if (GuiAllowed()) then
+            ImportDia.Open(lc_Dia_Txt);
+
         // Read folders
         foreach lc_Path in lc_List do begin
-            // Import app
-            RetValue := ImportApp(_CustomerNo, lc_Path, false, false);
+            lc_Counter += 1;
+            RetValue := ImportApp(_CustomerNo, lc_Path, (lc_List.Count() + 1 - lc_Counter));
             // Exit at error
             if not RetValue then
                 exit;
         end;
+
+        // Close dia
+        if (GuiAllowed()) then
+            ImportDia.Close();
 
         // Show message
         if ((_WithMessage) and (GuiAllowed())) then
             if (RetValue) then
                 Message(lc_Msg0a_Txt)
             else
-                Message(lc_Msg0b_Txt)
+                Message(lc_Msg0b_Txt);
     end;
 
-    procedure ImportApp(_CustomerNo: Code[20]; _Path: Text; _WithConfirm: Boolean; _WithMessage: Boolean) RetValue: Boolean
+    local procedure ImportApp(_CustomerNo: Code[20]; _Path: Text; _Counter: Integer) RetValue: Boolean
     var
         lc_IAOA: Record "IMP AL Object App";
-        lc_PrmMgmt: Codeunit "IMP Basic Prem Management";
-        lc_FileMgmt: Codeunit "File Management";
+        lc_BscMgmt: Codeunit "IMP Basic Management";
+        lc_Json: JsonObject;
+        lc_Token: JsonToken;
+        lc_Entry: JsonToken;
+        lc_Dependencies: JsonArray;
         lc_AppName: Text;
-        lc_Conf_Txt: Label 'Do you really want to import your selected app?';
-        lc_Msg0a_Txt: Label 'your app have been successfully imported';
-        lc_Msg0b_Txt: Label 'your app import has terminated with error';
-        lc_Txt0_Txt: label 'Select your app folder';
+        lc_SubAppName: Text;
+        lc_SubPublisher: Text;
+        lc_idRanges: JsonArray;
+        lc_Text: Text;
+        lc_Select: Integer;
+        lc_Dia1_Txt: Label 'App (%1) : %2';
+        lc_Txt1_Txt: Label 'App folder may not be empty';
+        lc_Txt2_Txt: Label 'No app.json found in folder "%1"';
+        lc_Txt3_Txt: Label 'Token "%1" is mandatory in app.json';
+        lc_Txt4_Txt: Label 'Token "%1" has to be an array';
+        lc_Txt5_Txt: Label 'Import app %1 first!';
+        lc_Txt6_Txt: Label 'Select your id range';
     begin
         // Init 
         RetValue := false;
 
-        // Get path
-        if (_Path = '') then
-            _Path := lc_PrmMgmt.GetServerDirectory(lc_Txt0_Txt, GetCustomerRootPath(), false, true);
-
         // Exit with no path
         if (_Path = '') then
-            exit;
+            Error(lc_Txt1_Txt);
 
-        // Confirm
-        if ((_WithConfirm) and (GuiAllowed())) then
-            if not Confirm(lc_Conf_Txt) then
-                exit;
+        // Load app.json
+        if not ImportAppJson(_Path, lc_Json) then
+            Error(lc_Txt2_Txt, _Path);
 
-        // Stip path
-        lc_AppName := CopyStr(_Path, StrLen(lc_FileMgmt.GetDirectoryName(_Path).ToLower()) + 2);
+        // Read name
+        if not lc_Json.Get('name', lc_Token) then
+            Error(lc_Txt3_Txt, 'name')
+        else
+            lc_AppName := lc_Token.AsValue().AsText();
+
+        // Read dependencies
+        if not lc_Json.Get('dependencies', lc_Token) then
+            Error(lc_Txt3_Txt, 'dependencies');
+
+        // Get dependencies
+        if not lc_Token.IsArray() then
+            Error(lc_Txt4_Txt, 'dependencies')
+        else
+            lc_Dependencies := lc_Token.AsArray();
+
+        // Check dependencies
+        lc_IAOA.Reset();
+        lc_IAOA.SetRange("Customer No.", _CustomerNo);
+        foreach lc_Entry in lc_Dependencies do begin
+            // Get publisher
+            if not lc_Entry.AsObject().SelectToken('publisher', lc_Token) then
+                Error(lc_Txt3_Txt, 'dependencies.publisher')
+            else
+                lc_SubPublisher := lc_BscMgmt.JsonGetTokenValue(lc_Token, 'publisher').AsText();
+            // Check implevit dependencies
+            if (lc_SubPublisher.ToLower().Contains('implevit')) then begin
+                // Get name
+                if not lc_Entry.AsObject().SelectToken('name', lc_Token) then
+                    Error(lc_Txt3_Txt, 'dependencies.name')
+                else
+                    lc_SubAppName := lc_BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText().ToLower();
+                // Find alreday imported app
+                lc_IAOA.SetFilter(Name, '%1', '@' + lc_SubAppName);
+                if not lc_IAOA.FindSet() then
+                    Error(lc_Txt5_Txt, lc_SubAppName);
+            end;
+        end;
+
+        // Read idRanges
+        if not lc_Json.Get('idRanges', lc_Token) then
+            Error(lc_Txt3_Txt, 'idRanges');
+
+        // Get idRanges
+        if not lc_Token.IsArray() then
+            Error(lc_Txt4_Txt, 'idRanges')
+        else
+            lc_idRanges := lc_Token.AsArray();
+
+        // Show dia
+        if (GuiAllowed()) then
+            ImportDia.Update(1, StrSubstNo(lc_Dia1_Txt, _Counter, lc_AppName));
 
         // Find app
         lc_IAOA.Reset();
@@ -361,23 +467,58 @@ table 50004 "IMP AL Object App"
             lc_IAOA.Init();
             lc_IAOA.Validate("Customer No.", _CustomerNo);
             lc_IAOA.Validate(Name, lc_AppName);
-            if (lc_AppName.ToUpper().StartsWith('IMP')) then
-                if (lc_AppName.ToLower() <> 'imp-customer') then begin
-                    lc_IAOA."No. Range From" := 70000;
-                    lc_IAOA."No. Range To" := 79999;
+            // Select idRange
+            if lc_idRanges.Count() = 1 then
+                lc_Select := 1
+            else begin
+                foreach lc_Entry in lc_idRanges do begin
+                    if (lc_Text <> '') then
+                        lc_Text += ',';
+                    if lc_Entry.AsObject().SelectToken('from', lc_Token) then
+                        lc_Text += lc_Token.AsValue().AsText();
+                    if lc_Entry.AsObject().SelectToken('to', lc_Token) then
+                        lc_Text += ' - ' + lc_Token.AsValue().AsText();
                 end;
+                lc_Select := StrMenu(lc_Text, 1, lc_Txt6_Txt);
+            end;
+            // Load idRange
+            if (lc_Select <> 0) then begin
+                lc_idRanges.Get((lc_Select - 1), lc_Entry);
+                if lc_Entry.AsObject().SelectToken('from', lc_Token) then
+                    lc_IAOA."No. Range From" := lc_Token.AsValue().AsInteger();
+                if lc_Entry.AsObject().SelectToken('to', lc_Token) then
+                    lc_IAOA."No. Range To" := lc_Token.AsValue().AsInteger();
+            end;
+            // Save app
             lc_IAOA.Insert(true);
         end;
 
         // Load objects
         RetValue := LoadObjects(_CustomerNo, lc_IAOA."No.", _Path);
+    end;
 
-        // Show message
-        if ((_WithMessage) and (GuiAllowed())) then
-            if (RetValue) then
-                Message(lc_Msg0a_Txt)
-            else
-                Message(lc_Msg0b_Txt)
+    procedure ImportAppJson(_Path: Text; var _Json: JsonObject) RetValue: Boolean
+    var
+        lc_FileMgmt: Codeunit "File Management";
+        lc_ImpMgmt: Codeunit "IMP Management";
+        lc_Json: Text;
+    begin
+        // Init
+        RetValue := false;
+
+        // Check path
+        if not (_Path.EndsWith('\')) then
+            _Path += '\';
+
+        // Check file
+        if not lc_FileMgmt.ServerFileExists(_Path + 'app.json') then
+            exit;
+
+        // Import file
+        lc_Json := lc_ImpMgmt.ImportFile(_Path + 'app.json', TextEncoding::UTF8, false);
+
+        // Transfer to json
+        RetValue := _Json.ReadFrom(lc_Json);
     end;
 
     local procedure LoadObjects(_CustomerNo: Code[20]; _AppNo: Integer; _Path: Text) RetValue: Boolean
@@ -386,12 +527,19 @@ table 50004 "IMP AL Object App"
         lc_IAON: Record "IMP AL Object Number";
         lc_Files: Record "Name/Value Buffer" temporary;
         lc_FileMgmt: Codeunit "File Management";
+        lc_ObjectTypes: list of [Integer];
+        lc_ObjectTypesText: list of [Text];
+        lc_ObjectType: Integer;
+        lc_Counter: Integer;
+        lc_Dia1_Txt: Label 'Object Type (%1) : %2';
         lc_Txt1_Txt: Label 'No files in folder %1 found!';
         lc_Txt2_Txt: Label 'App "%1" missing in %2';
     begin
         // Init
         RetValue := false;
+        lc_Counter := 0;
 
+        // Get all files
         lc_FileMgmt.GetServerDirectoryFilesListInclSubDirs(lc_Files, _Path);
 
         // Check files
@@ -412,29 +560,56 @@ table 50004 "IMP AL Object App"
         // Create base enties
         lc_IAOA.InitALNumbers();
 
-        repeat
-            if (lc_FileMgmt.GetExtension(lc_Files.Name).ToLower() = 'al') then
-                LoadObject(_CustomerNo, _AppNo, lc_Files);
-        until lc_Files.Next() = 0;
+        // Create setup
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Enum);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Enum));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::EnumExtension);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::EnumExtension));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Table);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Table));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::TableExtension);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::TableExtension));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Page);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Page));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::PageExtension);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::PageExtension));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Codeunit);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Codeunit));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Query);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Query));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::XMLport);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::XMLport));
+
+        // Process obect types
+        foreach lc_ObjectType in lc_ObjectTypes do begin
+            lc_Counter += 1;
+            // Show dia
+            if (GuiAllowed()) then
+                ImportDia.Update(2, StrSubstNo(lc_Dia1_Txt, (lc_ObjectTypes.Count() + 1 - lc_Counter), lc_ObjectTypesText.Get(lc_Counter)));
+            // Read files
+            if lc_Files.Find('-') then
+                repeat
+                    if (lc_FileMgmt.GetExtension(lc_Files.Name).ToLower() = 'al') then
+                        LoadObject(_CustomerNo, _AppNo, lc_ObjectType, _Path, lc_Files);
+                until lc_Files.Next() = 0;
+        end;
 
         // Retrun
         RetValue := true;
     end;
 
-    local procedure LoadObject(_CustomerNo: Code[20]; _AppNo: Integer; var _File: Record "Name/Value Buffer") RetValue: Boolean
+    local procedure LoadObject(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option; _Path: Text; var _File: Record "Name/Value Buffer") RetValue: Boolean
     var
         lc_IAON: Record "IMP AL Object Number";
         lc_FileMgmt: Codeunit "File Management";
         lc_TempBlob: Codeunit "Temp Blob";
         lc_InStream: InStream;
         lc_Line: Text;
-        lc_Object: Text;
-        lc_No: Integer;
+        lc_ObjectType: Text;
+        lc_ObjectNo: Integer;
         lc_Name: Text;
         lc_Extends: Text;
-        lc_ObjectType: Integer;
-        lc_Txt1_Txt: Label 'Wrong object number in "%1"';
-        lc_Txt2_Txt: Label 'Unknown Object %1 in Line 1 of "%2"';
+        lc_Dia1_Txt: Label 'File : %1';
     begin
         // Init
         RetValue := false;
@@ -444,6 +619,7 @@ table 50004 "IMP AL Object App"
         lc_IAON.Init();
         lc_IAON."Customer No." := _CustomerNo;
         lc_IAON."App No." := _AppNo;
+        lc_IAON."Object File Name" := CopyStr(CopyStr(_File.Name, StrLen(_Path) + 1), 1, MaxStrLen(lc_IAON."Object File Name"));
 
         // Import file in stream
         lc_FileMgmt.BLOBImportFromServerFile(lc_TempBlob, _File.Name);
@@ -451,73 +627,72 @@ table 50004 "IMP AL Object App"
 
         // Read first line from stream
         lc_InStream.ReadText(lc_Line);
+
         // Split header
-        LoadObjectHeader(lc_Line, lc_Object, lc_No, lc_Name, lc_Extends);
-        // Check number
-        if (lc_No = 0) then
-            Error(lc_Txt1_Txt, _File.Name);
-        // Strip header
-        lc_ObjectType := -1;
-        case LowerCase(lc_Object) of
+        LoadObjectHeader(lc_Line, lc_ObjectType, lc_ObjectNo, lc_Name, lc_Extends);
+
+        // Check object type
+        case LowerCase(lc_ObjectType) of
             'codeunit':
-                lc_ObjectType := lc_IAON."Object Type"::Codeunit;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Codeunit;
             'table':
-                lc_ObjectType := lc_IAON."Object Type"::Table;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Table;
             'tableextension':
                 begin
-                    lc_ObjectType := lc_IAON."Object Type"::TableExtension;
+                    lc_IAON."Object Type" := lc_IAON."Object Type"::TableExtension;
                     lc_IAON."Parent Object Type" := lc_IAON."Parent Object Type"::Table;
-                    lc_IAON."Parent Object No." := GetObjectNo(_File.Name, true);
                     lc_IAON."Parent Object Name" := CopyStr(lc_Extends, 1, MaxStrLen(lc_IAON."Parent Object Name"));
                 end;
             'page':
-                lc_ObjectType := lc_IAON."Object Type"::Page;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Page;
             'pageextension':
                 begin
-                    lc_ObjectType := lc_IAON."Object Type"::PageExtension;
+                    lc_IAON."Object Type" := lc_IAON."Object Type"::PageExtension;
                     lc_IAON."Parent Object Type" := lc_IAON."Parent Object Type"::Page;
-                    lc_IAON."Parent Object No." := GetObjectNo(_File.Name, true);
                     lc_IAON."Parent Object Name" := CopyStr(lc_Extends, 1, MaxStrLen(lc_IAON."Parent Object Name"));
                 end;
             'enum':
-                lc_ObjectType := lc_IAON."Object Type"::Enum;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Enum;
             'enumextension':
                 begin
-                    lc_ObjectType := lc_IAON."Object Type"::EnumExtension;
+                    lc_IAON."Object Type" := lc_IAON."Object Type"::EnumExtension;
                     lc_IAON."Parent Object Type" := lc_IAON."Parent Object Type"::Enum;
-                    lc_IAON."Parent Object No." := GetObjectNo(_File.Name, true);
                     lc_IAON."Parent Object Name" := CopyStr(lc_Extends, 1, MaxStrLen(lc_IAON."Parent Object Name"));
                 end;
             'report':
-                lc_ObjectType := lc_IAON."Object Type"::Report;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Report;
             'query':
-                lc_ObjectType := lc_IAON."Object Type"::Query;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::Query;
             'xmlport':
-                lc_ObjectType := lc_IAON."Object Type"::XMLport;
+                lc_IAON."Object Type" := lc_IAON."Object Type"::XMLport;
+            else
+                lc_IAON."Object Type" := 0;
         end;
 
+        // Skip all other types
+        if (lc_IAON."Object Type" <> _ObjectType) then
+            exit;
+
         // Check object type
-        if lc_ObjectType < 0 then
-            Error(lc_Txt2_Txt, lc_Object, _File.Name);
+        if lc_IAON."Object Type" <= 0 then
+            exit;
+
+        // Show dia
+        if (GuiAllowed()) then
+            ImportDia.Update(3, StrSubstNo(lc_Dia1_Txt, lc_FileMgmt.GetFileName(_File.Name)));
+
+        // Setup extension
+        if (lc_IAON."Object Type" in [lc_IAON."Object Type"::TableExtension, lc_IAON."Object Type"::PageExtension, lc_IAON."Object Type"::EnumExtension]) then
+            GetParentObjectNo(_CustomerNo, _AppNo, lc_IAON."Parent Object Type", lc_IAON."Parent Object Name", lc_IAON."Parent Object No.");
 
         // Save object
-        // Set name
-        lc_IAON."Object Type" := lc_ObjectType;
-        lc_IAON."Object No." := lc_No;
+        lc_IAON."Object No." := lc_ObjectNo;
         lc_IAON."Object Name" := CopyStr(lc_Name, 1, MaxStrLen(lc_IAON."Object Name"));
         if lc_IAON.Insert(true) then;
 
         // Load field numbers
-        case lc_ObjectType of
-            lc_IAON."Object Type"::Table:
-                LoadObjectTable(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
-            lc_IAON."Object Type"::TableExtension:
-                LoadObjectTable(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
-            lc_IAON."Object Type"::Enum:
-                LoadObjectEnum(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
-            lc_IAON."Object Type"::EnumExtension:
-                LoadObjectEnum(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
-        end;
+        if (lc_IAON."Object Type" in [lc_IAON."Object Type"::Table, lc_IAON."Object Type"::TableExtension, lc_IAON."Object Type"::Enum, lc_IAON."Object Type"::EnumExtension]) then
+            LoadObjectEntries(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
 
         // Return
         RetValue := true;
@@ -587,49 +762,41 @@ table 50004 "IMP AL Object App"
         RetValue := Evaluate(_No, lc_No);
     end;
 
-    local procedure GetObjectNo(_FullFileName: Text; _WithError: Boolean) RetValue: Integer
+    local procedure GetParentObjectNo(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option; var _ObjectName: Text[30]; var _ObjectNo: Integer) RetValue: Boolean
     var
-        lc_FileMgmt: Codeunit "File Management";
-        lc_List: List of [Text];
-        lc_FileName: Text;
-        lc_Prefix: Text;
-        lc_Int: Integer;
-        lc_Check: Integer;
-        lc_RetValue: Text;
-        lc_Txt1_Txt: Label 'No object nuber found in filename:\\%1';
+        lc_Object: Record AllObj;
+        lc_IAON: Record "IMP AL Object Number";
     begin
         // Init
-        RetValue := 0;
-        lc_RetValue := '';
+        RetValue := false;
+        _ObjectNo := 0;
 
-        // Get file name
-        lc_FileName := lc_FileMgmt.GetFileName(_FullFileName);
+        // Find object
+        lc_Object.Reset();
+        lc_Object.SetRange("Object Type", _ObjectType);
+        lc_Object.SetFilter("Object Name", '%1', '@' + _ObjectName);
+        if lc_Object.FindSet() then
+            if (lc_Object.Count() = 1) then begin
+                _ObjectNo := lc_Object."Object ID";
+                _ObjectName := lc_Object."Object Name";
+                exit;
+            end;
 
-        // Exit with no separator
-        if not (lc_FileName.Contains('-')) then
-            exit;
-
-        // Strip filename
-        lc_List := lc_FileName.Split('-');
-
-        // Prefix
-        lc_Prefix := lc_List.Get(1);
-
-        // Find integer
-        for lc_Int := StrLen(lc_Prefix) downto 0 do
-            if Evaluate(lc_Check, CopyStr(lc_Prefix, lc_Int, 1)) then
-                lc_RetValue := Format(lc_Check) + lc_RetValue
-            else
-                lc_Int := 0;
-
-        // Convert
-        if not Evaluate(RetValue, lc_RetValue) then
-            // Show error
-            if ((_WithError) and (GuiAllowed())) then
-                Error(lc_Txt1_Txt, _FullFileName);
+        // Find number
+        lc_IAON.Reset();
+        lc_IAON.SetRange("Customer No.", _CustomerNo);
+        lc_IAON.SetRange("App No.", _AppNo);
+        lc_IAON.SetRange("Object Type", _ObjectType);
+        lc_IAON.SetFilter("Object Name", '%1', '@' + _ObjectName);
+        if lc_IAON.FindSet() then
+            if (lc_IAON.Count() = 1) then begin
+                _ObjectNo := lc_IAON."Object No.";
+                _ObjectName := lc_IAON."Object Name";
+                exit;
+            end;
     end;
 
-    local procedure LoadObjectTable(_CustomerNo: Code[20]; _AppNo: Integer; _InStream: InStream; _ParentObjectNo: Integer; _ParentObjectType: Option; _ParentObjectName: Text)
+    local procedure LoadObjectEntries(_CustomerNo: Code[20]; _AppNo: Integer; _InStream: InStream; _ParentObjectNo: Integer; _ParentObjectType: Option; _ParentObjectName: Text)
     var
         lc_IAON: Record "IMP AL Object Number";
         lc_Line: Text;
@@ -642,7 +809,11 @@ table 50004 "IMP AL Object App"
             // Read line
             _InStream.ReadText(lc_Line);
             // Load field
-            LoadObjectTableField(lc_Line, lc_No, lc_Name, lc_Size);
+            if (_ParentObjectType in [lc_IAON."Parent Object Type"::Table, lc_IAON."Parent Object Type"::"TableExtension"]) then
+                LoadObjectEntriesField(lc_Line, lc_No, lc_Name, lc_Size);
+            // Load enum
+            if (_ParentObjectType in [lc_IAON."Parent Object Type"::Enum, lc_IAON."Parent Object Type"::EnumExtension]) then
+                LoadObjectEntriesEnum(lc_Line, lc_No, lc_Name);
             // Save field
             if lc_No <> 0 then begin
                 lc_IAON.Init();
@@ -659,7 +830,7 @@ table 50004 "IMP AL Object App"
         end;
     end;
 
-    local procedure LoadObjectTableField(_Line: Text; var _No: Integer; var _Name: Text; var _Size: Text) RetValue: Boolean
+    local procedure LoadObjectEntriesField(_Line: Text; var _No: Integer; var _Name: Text; var _Size: Text) RetValue: Boolean
     var
         lc_No: Text;
         lc_List: List of [Text];
@@ -701,37 +872,7 @@ table 50004 "IMP AL Object App"
         RetValue := Evaluate(_No, lc_No);
     end;
 
-    local procedure LoadObjectEnum(_CustomerNo: Code[20]; _AppNo: Integer; _InStream: InStream; _ParentObjectNo: Integer; _ParentObjectType: Option; _ParentObjectName: Text)
-    var
-        lc_IAON: Record "IMP AL Object Number";
-        lc_Line: Text;
-        lc_No: Integer;
-        lc_Name: Text;
-    begin
-        // Read instream
-        while not _InStream.EOS do begin
-            // Read line
-            _InStream.ReadText(lc_Line);
-            // Load enum
-            LoadObjectEnumEntry(lc_Line, lc_No, lc_Name);
-            // Save enum
-            if lc_No <> 0 then begin
-                clear(lc_IAON);
-                lc_IAON.Init();
-                lc_IAON."Customer No." := _CustomerNo;
-                lc_IAON."App No." := _AppNo;
-                lc_IAON."Parent Object Type" := _ParentObjectType;
-                lc_IAON."Parent Object No." := _ParentObjectNo;
-                lc_IAON."Parent Object Name" := CopyStr(_ParentObjectName, 1, MaxStrLen(lc_IAON."Parent Object Name"));
-                lc_IAON."Object Type" := lc_IAON."Object Type"::FieldNumber;
-                lc_IAON."Object No." := lc_No;
-                lc_IAON."Object Name" := CopyStr(lc_Name, 1, MaxStrLen(lc_IAON."Object Name"));
-                lc_IAON.Insert(true);
-            end;
-        end;
-    end;
-
-    local procedure LoadObjectEnumEntry(_Line: Text; var _No: Integer; var _Name: Text) RetValue: Boolean
+    local procedure LoadObjectEntriesEnum(_Line: Text; var _No: Integer; var _Name: Text) RetValue: Boolean
     var
         lc_No: Text;
         lc_List: List of [Text];
@@ -771,247 +912,8 @@ table 50004 "IMP AL Object App"
         RetValue := Evaluate(_No, lc_No);
     end;
 
-    local procedure GetExtNumber(_Text: Text; _Type: Text) RetValue: Integer
+    #endregion Methods Import Apps
+
     var
-        lc_Length: Integer;
-        lc_Number: Text;
-    begin
-
-        //XXX Tab70028-Ext70065
-
-        // Init
-        RetValue := 0;
-
-        // Only with type in text
-        if StrPos(LowerCase(_Text), LowerCase(_Type)) = 0 then
-            exit;
-
-        // Get number
-        lc_Number := CopyStr(_Text, StrPos(LowerCase(_Text), LowerCase(_Type)) + StrLen(_Type));
-
-        // Strip number
-        if StrPos(lc_Number, '-') > 0 then begin
-            lc_Length := StrPos(lc_Number, '-') - 1;
-            lc_Number := CopyStr(lc_Number, 1, lc_Length);
-        end;
-
-        // Return number
-        if Evaluate(RetValue, lc_Number) then;
-    end;
-
-    local procedure GetExtNumber2(_Text: Text) RetValue: Integer
-    var
-        lc_Number: Text;
-    begin
-
-        //IMP Tab70028-Ext70065
-
-        // Init
-        RetValue := 0;
-
-        // Only with ext in text
-        if StrPos(LowerCase(_Text), 'ext') = 0 then
-            exit;
-
-        // Set number
-        lc_Number := CopyStr(_Text, StrPos(LowerCase(_Text), 'ext') + StrLen('ext'));
-
-        // Return number
-        if Evaluate(RetValue, lc_Number) then;
-    end;
-
-    /*
-    procedure ImportCustomerObjects()
-    var
-        lc_FileMgmt: Codeunit "File Management";
-        lc_Base: Text;
-        lc_Path: Text;
-        lc_ALPath: Text;
-        lc_Files: Record "Name/Value Buffer" temporary;
-        lc_TempBlob: Record TempBlob temporary;
-        lc_Abbreviation: Text;
-        lc_AppName: Text;
-        lc_App: Integer;
-        lc_IAON: Record "AL Object Numbers";
-        lc_ALImpObj: Record "AL IMP Object Numbers";
-        lc_InStream: InStream;
-        lc_Line: Text;
-        lc_Object: Text;
-        lc_No: Text;
-        lc_Name: Text;
-        lc_Extends: Text;
-        lc_ObjectType: Integer;
-        lc_ObjectNo: Integer;
-        lc_FileName: Text;
-        lc_ObjectName: Text;
-        lc_ExtNo: Text;
-        lc_Pref: Text;
-        lc_Subf: Text;
-        lc_TargetPath: Text;
-        lc_Counter: Integer;
-    begin
-        lc_Base := '\\impfps01\Daten\04_Entwicklung\Kunden\';
-        lc_Path := lc_FileMgmt.BrowseForFolderDialog('Select your app folder', lc_Base, false);
-
-        if CopyStr(lc_Path, StrLen(lc_Path), 1) <> '\' then begin
-            lc_Path += '\';
-        end;
-
-        if (lc_Path = '') or (lc_Path = lc_Base) then
-            exit;
-
-        lc_Abbreviation := CopyStr(lc_Path, StrLen(lc_Base) + 1, 3);
-        lc_AppName := GetAppName(CopyStr(lc_Path, 1, StrLen(lc_Path) - 1));
-
-        lc_ALPath := lc_Path + 'AL\';
-
-        if not lc_FileMgmt.ServerDirectoryExists(lc_ALPath) then begin
-            lc_FileMgmt.ServerCreateDirectory(lc_ALPath);
-            if not lc_FileMgmt.ServerDirectoryExists(lc_ALPath) then begin
-                Error('Folder %1 notfound!', lc_ALPath);
-            end;
-        end;
-
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Codeunits');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Tables');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\TablesExt');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Pages');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\PagesExt');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Enums');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\EnumsExt');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Reports');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\Queries');
-        lc_FileMgmt.ServerCreateDirectory(lc_ALPath + '\XmlPorts');
-
-        if lc_App < 0 then begin
-            lc_IAON.Reset;
-            lc_IAON.SetRange(Company, lc_Abbreviation);
-            if lc_IAON.FindSet then begin
-                lc_IAON.DeleteAll;
-            end;
-        end;
-
-        lc_Counter := 0;
-
-        lc_FileMgmt.GetServerDirectoryFilesList(lc_Files, lc_Path);
-        if lc_Files.Find('-') then begin
-            repeat
-                if LowerCase(CopyStr(lc_Files.Name, StrLen(lc_Files.Name) - 2)) = '.al' then begin
-                    lc_FileMgmt.BLOBImportFromServerFile(lc_TempBlob, lc_Files.Name);
-                    lc_TempBlob.Blob.CreateInStream(lc_InStream, TEXTENCODING::UTF8);
-
-                    lc_InStream.ReadText(lc_Line);
-                    LoadObjectHeader(lc_Line, lc_Object, lc_No, lc_Name, lc_Extends);
-
-                    lc_ObjectType := -1;
-                    case LowerCase(lc_Object) of
-                        'codeunit':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Codeunits\';
-                                lc_ObjectType := lc_IAON."Object Type"::Codeunit;
-                                lc_Pref := 'Cod';
-                                lc_Subf := '';
-                            end;
-                        'table':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Tables\';
-                                lc_ObjectType := lc_IAON."Object Type"::Table;
-                                                                             lc_Pref := 'Tab';
-                                                                             lc_Subf := '';
-                            end;
-                        'tableextension':
-                            begin
-                                lc_TargetPath := lc_ALPath + '\TablesExt\';
-                                lc_ObjectType := lc_IAON."Object Type"::TableExtension;
-                                                                             lc_Pref := 'Tab';
-                                                                             lc_Subf := '-Ext';
-                            end;
-                        'page':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Pages\';
-                                lc_ObjectType := lc_IAON."Object Type"::Page;
-                                                                             lc_Pref := 'Pag';
-                                                                             lc_Subf := '';
-                            end;
-                        'pageextension':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'PagesExt\';
-                                lc_ObjectType := lc_IAON."Object Type"::PageExtension;
-                                                                             lc_Pref := 'Pag';
-                                                                             lc_Subf := '-Ext';
-                            end;
-                        'enum':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Enums\';
-                                lc_ObjectType := lc_IAON."Object Type"::Enum;
-                                                                             lc_Pref := 'Enu';
-                                                                             lc_Subf := '';
-                            end;
-                        'enumextension':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'EnumsExt\';
-                                lc_ObjectType := lc_IAON."Object Type"::EnumExtension;
-                                                                             lc_Pref := 'Enu';
-                                                                             lc_Subf := '-Ext';
-                            end;
-                        'report':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Reports\';
-                                lc_ObjectType := lc_IAON."Object Type"::Report;
-                                                                             lc_Pref := 'Rep';
-                                                                             lc_Subf := '';
-                            end;
-                        'query':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'Queries\';
-                                lc_ObjectType := lc_IAON."Object Type"::Query;
-                                                                             lc_Pref := 'Qry';
-                                                                             lc_Subf := '';
-                            end;
-                        'xmlport':
-                            begin
-                                lc_TargetPath := lc_ALPath + 'XmlPorts\';
-                                lc_ObjectType := lc_IAON."Object Type"::XMLport;
-                                                                             lc_Pref := 'Xml';
-                                                                             lc_Subf := '';
-                            end;
-                    end;
-
-                    if lc_ObjectType < 0 then begin
-                        Error('Unknown Object %1 in Line 1 of "%2"', lc_Object, lc_Files.Name);
-                    end;
-
-                    // Save AL Object
-                    lc_IAON.Reset;
-                    lc_IAON.SetRange(Company, lc_Abbreviation);
-                    lc_IAON.SetRange("Object Type", lc_ObjectType);
-                    if lc_IAON.FindLast then begin
-                        if Format(lc_IAON."Object No.") < lc_No then begin
-                            Evaluate(lc_IAON."Object No.", lc_No);
-                            if lc_IAON.Modify(true) then;
-                        end;
-                    end else begin
-                        lc_IAON.Init;
-                        lc_IAON.Company := lc_Abbreviation;
-                        lc_IAON."Object Type" := lc_ObjectType;
-                        Evaluate(lc_IAON."Object No.", lc_No);
-                        if lc_IAON.Insert(true) then;
-                    end;
-
-                    lc_FileName := lc_Pref + lc_No + lc_Subf + '.' + lc_Files.Value + '.al';
-
-                    lc_FileMgmt.CopyServerFile(lc_Files.Name, lc_TargetPath + lc_FileName, true);
-                    if lc_FileMgmt.ServerFileExists(lc_TargetPath + lc_FileName) then begin
-                        lc_Counter += 1;
-                    end;
-                    //lc_FileMgmt.DeleteServerFile(lc_Files.Name);
-                end;
-            until lc_Files.Next = 0;
-        end;
-
-        Message('%1 Objects imported!', lc_Counter);
-    end;
-    */
-
-    #endregion Methodes
+        ImportDia: Dialog;
 }

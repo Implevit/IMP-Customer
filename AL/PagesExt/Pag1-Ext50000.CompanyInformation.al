@@ -12,6 +12,16 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                 {
                     ApplicationArea = All;
                 }
+                field("IMP Gitlab Url"; Rec."IMP Gitlab Url")
+                {
+                    ApplicationArea = All;
+
+                    trigger OnAssistEdit()
+                    begin
+                        if (Rec."IMP Gitlab Url" <> '') then
+                            Hyperlink(Rec."IMP Gitlab Url");
+                    end;
+                }
             }
         }
     }

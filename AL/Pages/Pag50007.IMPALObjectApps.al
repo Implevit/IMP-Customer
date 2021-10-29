@@ -48,6 +48,11 @@ page 50007 "IMP AL Object Apps"
                         ShowObjects();
                     end;
                 }
+                field(Dependencies; Rec.Dependencies)
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
             }
         }
     }
@@ -99,7 +104,23 @@ page 50007 "IMP AL Object Apps"
                         lc_CompInfo."IMP Gitlab Url" += '/';
                     Hyperlink(lc_CompInfo."IMP Gitlab Url" + Rec.Name);
                 end;
+            }
+            action(ActGetLicensePersmissions)
+            {
+                Caption = 'Get License Permission';
+                ApplicationArea = All;
+                Image = Permission;
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedOnly = true;
 
+                trigger OnAction()
+                var
+                    lc_IAOA: Record "IMP AL Object App";
+                begin
+                    lc_IAOA.CreateLicensePermissionCsv(Rec."Customer No.", Rec."No.", ',');
+                end;
             }
         }
     }

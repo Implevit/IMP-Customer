@@ -75,7 +75,7 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                         // Add entry
                         lc_ISI.Init();
                         lc_ISI."Customer No." := Rec."No.";
-                        lc_ISI.Computer := CopyStr(lc_BscMgmt.System_GetBaseUrlBC(), 1, MaxStrLen(lc_ISI.Computer));
+                        lc_ISI.Dns := CopyStr(lc_BscMgmt.System_GetBaseUrlBC(), 1, MaxStrLen(lc_ISI.Dns));
                         lc_ISI.Environment := lc_ISI.Environment::Cloud;
                         lc_ISI."Environment Type" := lc_ISI."Environment Type"::Production;
                         lc_ISI."Environment Id" := Rec."IMP Tenant Id";
@@ -93,6 +93,14 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
             FieldClass = FlowField;
             CalcFormula = count("IMP AL Object App" where("Customer No." = field("No.")));
             TableRelation = "IMP AL Object App";
+            Editable = false;
+        }
+        field(50030; "IMP Connections"; Integer)
+        {
+            Caption = 'Connections';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP Connection" where("Customer No." = field("No.")));
+            TableRelation = "IMP Connection";
             Editable = false;
         }
     }

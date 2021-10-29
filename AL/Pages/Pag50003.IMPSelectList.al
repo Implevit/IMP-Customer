@@ -8,7 +8,7 @@ page 50003 "IMP Selection List"
     ApplicationArea = All;
     InsertAllowed = false;
     DeleteAllowed = false;
-    ModifyAllowed = false;
+    //ModifyAllowed = false;
 
     layout
     {
@@ -38,12 +38,31 @@ page 50003 "IMP Selection List"
                 {
                     ApplicationArea = All;
                     Editable = ValueLongIsEditable;
+                    Enabled = ValueLongIsEditable;
                     Visible = ValueLongIsVisible;
                 }
             }
         }
     }
 
+
+    actions
+    {
+        area(Processing)
+        {
+            action(ActProcessSave)
+            {
+                Caption = 'Save changes';
+                ApplicationArea = All;
+                Image = Save;
+
+                trigger OnAction()
+                begin
+                    Message('Not available yet!');
+                end;
+            }
+        }
+    }
 
     #region Methodes
 
@@ -68,28 +87,33 @@ page 50003 "IMP Selection List"
 
         // Set fields
         foreach lc_Field in _Fields do
-            case lc_Field of
-                Rec.FieldNo(ID):
-                    begin
-                        IdIsEditable := _Editable;
-                        IdIsVisible := true;
-                    end;
-                Rec.FieldNo(Name):
-                    begin
-                        NameIsEditable := _Editable;
-                        NameIsVisible := true;
-                    end;
-                Rec.FieldNo(Value):
-                    begin
-                        ValueIsEditable := _Editable;
-                        ValueIsVisible := true;
-                    end;
-                Rec.FieldNo("Value Long"):
-                    begin
-                        ValueLongIsEditable := _Editable;
-                        ValueLongIsVisible := true;
-                    end;
-            end;
+            SetEditable(lc_Field, _Editable);
+    end;
+
+    procedure SetEditable(_FieldNo: Integer; _Editable: Boolean)
+    begin
+        case _FieldNo of
+            Rec.FieldNo(ID):
+                begin
+                    IdIsEditable := _Editable;
+                    IdIsVisible := true;
+                end;
+            Rec.FieldNo(Name):
+                begin
+                    NameIsEditable := _Editable;
+                    NameIsVisible := true;
+                end;
+            Rec.FieldNo(Value):
+                begin
+                    ValueIsEditable := _Editable;
+                    ValueIsVisible := true;
+                end;
+            Rec.FieldNo("Value Long"):
+                begin
+                    ValueLongIsEditable := _Editable;
+                    ValueLongIsVisible := true;
+                end;
+        end;
     end;
 
     procedure SetData(var _Rec: Record "Name/Value Buffer")
@@ -102,6 +126,7 @@ page 50003 "IMP Selection List"
                 Rec.TransferFields(_Rec);
                 Rec.Insert();
             until _Rec.Next() = 0;
+        if Rec.Find('-') then;
     end;
 
     procedure GetValue(_FieldNo: Integer) RetValue: Variant

@@ -20,6 +20,34 @@ pageextension 50002 "IMP Pag21-Ext50002" extends "Customer Card"
                 {
                     ApplicationArea = All;
                 }
+                field("IMP Connections"; Rec."IMP Connections")
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+
+    actions
+    {
+        addlast("F&unctions")
+        {
+            action(ActFunctionGetLicensePersmissions)
+            {
+                Caption = 'Get License Permission';
+                ApplicationArea = All;
+                Image = Permission;
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    lc_IAOA: Record "IMP AL Object App";
+                begin
+                    lc_IAOA.CreateLicensePermissionCsv(Rec."No.", 0, ',');
+                end;
             }
         }
     }

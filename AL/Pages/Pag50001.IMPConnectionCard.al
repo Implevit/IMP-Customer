@@ -18,11 +18,6 @@ page 50001 "IMP Connection Card"
                     Importance = Promoted;
                     Editable = false;
                 }
-                field(Computer; Rec.Computer)
-                {
-                    ApplicationArea = All;
-                    ShowMandatory = true;
-                }
                 field(Dns; Rec.Dns)
                 {
                     ApplicationArea = All;
@@ -35,10 +30,6 @@ page 50001 "IMP Connection Card"
                     ShowMandatory = true;
                 }
                 field("List Name"; Rec."List Name")
-                {
-                    ApplicationArea = All;
-                }
-                field("Authorisation No."; Rec."Authorisation No.")
                 {
                     ApplicationArea = All;
                 }
@@ -76,6 +67,7 @@ page 50001 "IMP Connection Card"
                 field("Environment State"; Rec."Environment State")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
             }
             group(GrpServerInstance)
@@ -89,6 +81,13 @@ page 50001 "IMP Connection Card"
                 field("Service State"; Rec."Service State")
                 {
                     ApplicationArea = All;
+                    Editable = false;
+                    Visible = false;
+                }
+                field("Service Status"; Rec."Service Status")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Service NAV Version"; Rec."Service NAV Version")
                 {
@@ -118,18 +117,22 @@ page 50001 "IMP Connection Card"
                 field(ClientServicesPort; Rec.ClientServicesPort)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(SOAPServicesPort; Rec.SOAPServicesPort)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(ODataServicesPort; Rec.ODataServicesPort)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(DeveloperServiceServerPort; Rec.DeveloperServiceServerPort)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
             }
             group(GrpDatabase)
@@ -163,9 +166,21 @@ page 50001 "IMP Connection Card"
                 }
 
             }
+            group(GrpAuthorisation)
+            {
+
+                Caption = 'Authorisation';
+                Visible = ShowAuthorisation;
+
+                field("Authorisation No."; Rec."Authorisation No.")
+                {
+                    ApplicationArea = All;
+                }
+            }
             group(GrpCompany)
             {
                 Caption = 'Company';
+                Visible = ShowCompany;
 
                 field("Company Name"; Rec."Company Name")
                 {
@@ -186,8 +201,32 @@ page 50001 "IMP Connection Card"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         Rec.NewRecord(BelowxRec, '', Rec);
+        ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
+        ShowAuthorisation := (Rec.Environment = Rec.Environment::Cloud);
+    end;
+
+    trigger OnDeleteRecord(): Boolean
+    begin
+        Rec."Service State" := CopyStr(Rec.GetStatusToRemove(), 1, MaxStrLen(Rec."Service State"));
+        Rec."Service Status" := Rec."Service Status"::ToRemove;
+    end;
+
+    trigger OnClosePage()
+    var
+        lc_AdmMgmt: Codeunit "IMP Administration";
+    begin
+        if (Rec.Environment = Rec.Environment::Service) then
+            case Rec."Service Status" of
+                Rec."Service Status"::ToCreate:
+                    lc_AdmMgmt.CallServiceCreate(Rec, true, true);
+                Rec."Service Status"::ToRemove:
+                    lc_AdmMgmt.CallServiceAction(Rec, IMPServiceStatus::ToRemove, true, true);
+            end;
     end;
 
     #endregion Triggers
 
+    var
+        ShowCompany: Boolean;
+        ShowAuthorisation: Boolean;
 }

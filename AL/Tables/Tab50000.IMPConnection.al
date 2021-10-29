@@ -12,17 +12,11 @@ table 50000 "IMP Connection"
             Caption = 'No.';
             DataClassification = CustomerContent;
         }
-        field(10; Computer; Text[100])
+        field(10; Server; Code[30])
         {
-            Caption = 'Computer';
+            Caption = 'Server';
             DataClassification = CustomerContent;
-
-            trigger OnValidate()
-            begin
-                if (Rec.Computer <> xRec.Computer) then
-                    AlreadyExists(true);
-                SetUrl();
-            end;
+            TableRelation = "IMP Server".Name;
         }
         field(11; Dns; Text[100])
         {
@@ -61,14 +55,34 @@ table 50000 "IMP Connection"
             DataClassification = CustomerContent;
 
             trigger OnValidate()
+            var
+                lc_IC: Record "IMP Connection";
             begin
+                // Set to upper
+                Rec."Service Name" := Rec."Service Name".ToUpper();
+
+                // Check name
+                lc_IC.Reset();
+                lc_IC.SetCurrentKey("Environment Name", "Service Name", "Company Name");
+                lc_IC.SetRange("Environment Name", Rec."Environment Name");
+                lc_IC.SetFilter("Service Name", '%1*', Rec."Service Name");
+                lc_IC.SetRange(Environment, lc_IC.Environment::Service);
+                if not lc_IC.FindLast() then
+                    Rec."Service Name" += '1'
+                else
+                    Rec."Service Name" := IncStr(lc_IC."Service Name");
+
+                // Set listname
                 SetListName();
+
+                // Set url
                 SetUrl();
             end;
         }
         field(50; "Environment Type"; Option)
         {
             Caption = 'Environment Type';
+            DataClassification = CustomerContent;
             OptionMembers = " ",OnPrem,Sandbox,Production;
             OptionCaption = ',OnPrem,Sandbox,Production';
 
@@ -99,13 +113,25 @@ table 50000 "IMP Connection"
         }
         field(52; "Environment State"; Text[30])
         {
-            Caption = 'Environment State"';
+            Caption = 'Environment State';
             DataClassification = CustomerContent;
         }
         field(60; "Service State"; Text[50])
         {
-            Caption = 'Service Status';
+            Caption = 'Service State';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                case Rec."Service State".ToLower().Replace(' ', '') of
+                    'running':
+                        Rec."Service Status" := Rec."Service Status"::Running;
+                    'Stopped':
+                        Rec."Service Status" := Rec."Service Status"::Stopped;
+                    else
+                        Rec."Service Status" := Rec."Service Status"::None;
+                end;
+            end;
         }
         field(61; "Service Account"; Text[80])
         {
@@ -125,6 +151,11 @@ table 50000 "IMP Connection"
         field(64; "Service NAV Version"; Text[20])
         {
             Caption = 'Nav Version';
+            DataClassification = CustomerContent;
+        }
+        field(65; "Service Status"; Enum IMPServiceStatus)
+        {
+            Caption = 'Service Status';
             DataClassification = CustomerContent;
         }
         field(70; DatabaseServer; Text[30])
@@ -203,6 +234,24 @@ table 50000 "IMP Connection"
         {
             Caption = 'Mgmt.';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if (Rec.ManagementServicesPort = 0) then begin
+                    Rec.ClientServicesPort := 0;
+                    Rec.SOAPServicesPort := 0;
+                    Rec.ODataServicesPort := 0;
+                    Rec.DeveloperServiceServerPort := 0;
+                end else
+                    if (Rec.ManagementServicesPort <> xRec.ManagementServicesPort) then begin
+                        if not Format((Rec.ManagementServicesPort)).EndsWith('5') then
+                            Evaluate(Rec.ManagementServicesPort, CopyStr(Format(Rec.ManagementServicesPort), 1, StrLen(Format(Rec.ManagementServicesPort)) - 1) + '5');
+                        Rec.ClientServicesPort := Rec.ManagementServicesPort + 1;
+                        Rec.SOAPServicesPort := Rec.ManagementServicesPort + 2;
+                        Rec.ODataServicesPort := Rec.ManagementServicesPort + 3;
+                        Rec.DeveloperServiceServerPort := Rec.ManagementServicesPort + 4;
+                    end;
+            end;
         }
         field(81; ClientServicesPort; Integer)
         {
@@ -330,16 +379,19 @@ table 50000 "IMP Connection"
         key(Key2; "List Name")
         {
         }
-        key(Key3; Computer, Environment, "Environment Name", "Environment Id")
+        key(Key3; Environment, "Environment Name", "Environment Id")
         {
         }
         key(Key4; "Customer No.")
         {
         }
-        key(Key5; Computer, "Service Name", "Company Name")
+        key(Key5; "Environment Name", "Service Name", "Company Name")
         {
         }
         key(Key6; Environment, "DatabaseServer", "DatabaseInstance", DatabaseName)
+        {
+        }
+        key(Key7; Environment, ManagementServicesPort, "Environment Name")
         {
         }
     }
@@ -358,40 +410,20 @@ table 50000 "IMP Connection"
 
     #endregion Triggers
 
-    #region Methodes
-
-    procedure AlreadyExists(_WithError: Boolean) RetValue: Boolean
-    var
-        lc_Rec: Record "IMP Connection";
-        lc_Txt1_Txt: Label 'Entry %1 has already this setting';
-    begin
-        // Find
-        lc_Rec.Reset();
-        lc_Rec.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
-        lc_Rec.SetRange(Computer, Rec.Computer);
-        lc_Rec.SetRange(Environment, Rec.Environment);
-        lc_Rec.SetRange("Environment Type", Rec."Environment Type");
-        lc_Rec.SetRange("Environment Name", Rec."Environment Name");
-        lc_Rec.SetRange("Environment Id", Rec."Environment Id");
-        lc_Rec.SetRange("Service Name", Rec."Service Name");
-        lc_Rec.SetFilter("No.", '<>%1', Rec."No.");
-        RetValue := lc_Rec.FindFirst();
-        // Show message
-        if ((RetValue) and (_WithError) and (GuiAllowed())) then
-            Error(lc_Txt1_Txt, lc_Rec."No.");
-    end;
+    #region Methods Urls
 
     procedure SetUrl()
+    var
     begin
         Rec.Url := CopyStr(GetUrlClient(), 1, MaxStrLen(Rec.Url));
     end;
 
     procedure GetUrlBase() RetValue: Text
+    var
+        lc_IS: Record "IMP Server";
     begin
-        if (Rec.Environment = Rec.Environment::Cloud) then
-            RetValue := 'https://'
-        else
-            RetValue := 'http://';
+        lc_IS.Get(Rec.Server);
+        RetValue := lc_IS.GetBaseUrl();
     end;
 
     procedure GetUrlClient() RetValue: Text
@@ -404,7 +436,7 @@ table 50000 "IMP Connection"
         RetValue := '';
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec.Computer + ':8080/' + Rec."Service Name";
+                RetValue := _BaseUrl + Rec."Environment Name" + ':8080/' + Rec."Service Name";
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
@@ -422,7 +454,7 @@ table 50000 "IMP Connection"
         RetValue := '';
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec.Computer + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/api';
+                RetValue := _BaseUrl + Rec."Environment Name" + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/api';
             Rec.Environment::Docker:
                 RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
@@ -501,7 +533,7 @@ table 50000 "IMP Connection"
         lc_IC.Reset();
         lc_IC.SetCurrentKey("Service Name");
         lc_IC.SetRange("Service Name", lc_AS."Server Instance Name");
-        lc_IC.SetRange(Computer, lc_Computer);
+        lc_IC.SetRange("Environment Name", "Environment Name");
         if lc_IC.FindFirst() then
             RetValue := lc_IC.GetUrlOdata();
 
@@ -511,6 +543,30 @@ table 50000 "IMP Connection"
 
         // Add odata and company
         RetValue += 'ODataV4/IMPWebService_odata?Company=' + '''' + CompanyName + '''';
+    end;
+
+    #endregion Methods Urls
+
+    #region Methods Misc
+
+    procedure AlreadyExists(_WithError: Boolean) RetValue: Boolean
+    var
+        lc_Rec: Record "IMP Connection";
+        lc_Txt1_Txt: Label 'Entry %1 has already this setting';
+    begin
+        // Find
+        lc_Rec.Reset();
+        lc_Rec.SetCurrentKey(Environment, "Environment Name", "Environment Id");
+        lc_Rec.SetRange(Environment, Rec.Environment);
+        lc_Rec.SetRange("Environment Type", Rec."Environment Type");
+        lc_Rec.SetRange("Environment Name", Rec."Environment Name");
+        lc_Rec.SetRange("Environment Id", Rec."Environment Id");
+        lc_Rec.SetRange("Service Name", Rec."Service Name");
+        lc_Rec.SetFilter("No.", '<>%1', Rec."No.");
+        RetValue := lc_Rec.FindFirst();
+        // Show message
+        if ((RetValue) and (_WithError) and (GuiAllowed())) then
+            Error(lc_Txt1_Txt, lc_Rec."No.");
     end;
 
     procedure SetListName()
@@ -548,7 +604,7 @@ table 50000 "IMP Connection"
                 clear(lc_Entry);
                 lc_Entry.Add('no', _Rec."No.");
                 lc_Entry.Add('listName', _Rec."List Name");
-                lc_Entry.Add('computer', _Rec.Computer);
+                //lc_Entry.Add('computer', _Rec.Computer);
                 lc_Entry.Add('environment', _Rec.Environment);
                 lc_Entry.Add('environmentType', _Rec."Environment Type");
                 lc_Entry.Add('environmentId', _Rec."Environment Id");
@@ -612,16 +668,15 @@ table 50000 "IMP Connection"
 
         // Clear
         lc_IC.Reset();
-        lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
-        lc_IC.SetRange(Computer, lc_Server);
+        lc_IC.SetCurrentKey(Environment, "Environment Name", "Environment Id");
         lc_IC.SetFilter(Environment, '%1|%2|%3', lc_IC.Environment::SQLServer, lc_IC.Environment::SQLInstance, lc_IC.Environment::SQLDatabase);
+        lc_IC.SetRange("Environment Name", lc_Server);
         if lc_IC.FindSet() then
             lc_IC.DeleteAll(true);
 
         // Save server
         clear(lc_IC);
         lc_IC.Init();
-        lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
         lc_IC.Environment := lc_IC.Environment::SQLServer;
         lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
         lc_IC."List Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
@@ -672,7 +727,6 @@ table 50000 "IMP Connection"
                 lc_IC.Environment := lc_IC.Environment::SQLInstance;
                 lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen("Environment Name"));
                 lc_IC."Environment State" := CopyStr(lc_InstanceVersion, 1, MaxStrLen(lc_IC."Environment State"));
-                lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
                 lc_IC.DatabaseServer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.DatabaseServer));
                 lc_IC.DatabaseInstance := CopyStr(lc_InstanceName, 1, MaxStrLen(lc_IC.DatabaseInstance));
                 lc_IC."List Name" := CopyStr(lc_IC.DatabaseServer + '/' + lc_IC.DatabaseInstance, 1, MaxStrLen(lc_IC."List Name"));
@@ -722,7 +776,7 @@ table 50000 "IMP Connection"
                     clear(lc_IC);
                     lc_IC.Init();
                     lc_IC.Environment := lc_IC.Environment::SQLDatabase;
-                    lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
+                    lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
                     lc_IC.DatabaseServer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.DatabaseServer));
                     lc_IC.DatabaseInstance := CopyStr(lc_InstanceName, 1, MaxStrLen(lc_IC.DatabaseInstance));
                     lc_IC.DatabaseName := CopyStr(lc_DBName, 1, MaxStrLen(lc_IC.DatabaseName));
@@ -741,175 +795,6 @@ table 50000 "IMP Connection"
 
         // Set response
         _Response.Add('response', 'Thank you for sending full sql server list');
-
-        // Return
-        RetValue := true;
-    end;
-
-    procedure SelectVersions(_SingleEntry: Boolean) RetValue: List of [Text];
-    var
-        lc_IC: Record "IMP Connection";
-        lc_List: Record "Name/Value Buffer" temporary;
-        lc_Version: List of [Text];
-        lc_Fields: List of [Integer];
-        lc_Text: Text;
-        lc_Int: Integer;
-        lc_Computer: Text;
-        lc_Txt1_Txt: Label 'Load first version list from server';
-    begin
-        // Init
-        lc_Int := 0;
-        Clear(RetValue);
-
-        // Get computer
-        lc_Computer := ImpAdmn.GetCurrentComputerName();
-
-        // Find version list
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
-        lc_IC.SetRange(Computer, lc_Computer);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
-        if not lc_IC.FindFirst() then
-            Error(lc_Txt1_Txt);
-
-        // Check entry
-        if (lc_IC."Environment Id" = '') then
-            Error(lc_Txt1_Txt);
-
-        // Clear list
-        lc_List.Reset();
-        lc_List.DeleteAll(true);
-
-        // Load selection
-        lc_Version := lc_IC."Environment Id".Split(',');
-        foreach lc_Text in lc_Version do begin
-            lc_Int += 1;
-            lc_List.Init();
-            lc_List.ID := lc_Int;
-            lc_List.Name := CopyStr(lc_Text, 1, MaxStrLen(lc_List.Name));
-            if lc_List.Insert(true) then;
-        end;
-
-        // Set fields to visible
-        lc_Fields.Add(lc_List.FieldNo(Name));
-        //lc_Fields.Add(lc_List.FieldNo(Value));
-
-        // Raise selection event
-        ImpMgmt.SelectEntry(lc_List, lc_Fields, _SingleEntry);
-
-        // Set return
-        if lc_List.Find('-') then
-            repeat
-                RetValue.Add(lc_List.Name);
-            until lc_List.Next() = 0;
-    end;
-
-    procedure ImportVersions(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
-    var
-        lc_IC: Record "IMP Connection";
-        lc_Array: JsonArray;
-        lc_Token: JsonToken;
-        lc_Server: Text;
-        lc_Dns: Text;
-        lc_TList: list of [Text];
-        lc_VList: array[1000] of Text;
-        lc_Min: Integer;
-        lc_Max: Integer;
-        lc_Int: Integer;
-        lc_Versions: Text;
-    begin
-
-        #region Json syntax
-
-        /*
-        {
-            "data":  "ServerVersions",
-            "server":  "IMPENT01",
-            "dns" : "IMPENT01.imp.local",
-            "versions":  [],
-        */
-
-        #endregion Json syntax
-
-        // Init
-        RetValue := false;
-        lc_Versions := '';
-        clear(lc_VList);
-
-        // Server
-        if not _Root.Get('server', lc_Token) then begin
-            _Response.Add('error', 'Token server missing in json');
-            exit;
-        end else
-            lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
-
-        // Dns
-        if not _Root.SelectToken('dns', lc_Token) then begin
-            _Response.Add('error', 'Token dns missing in json');
-            exit;
-        end else
-            lc_Dns := BscMgmt.JsonGetTokenValue(lc_Token, 'dns').AsText();
-
-        // Check versions
-        if not (_Root.Get('versions', lc_Token)) then begin
-            _Response.Add('error', 'Token versions missing in json');
-            exit;
-        end;
-
-        // Versions
-        if _Root.Get('versions', lc_Token) then begin
-            lc_Min := 1000;
-            lc_Max := 0;
-            lc_Array := lc_Token.AsArray();
-            // Loop throught array
-            foreach lc_Token in lc_Array do begin
-                lc_TList := lc_Token.AsValue().AsText().Split('.');
-                Evaluate(lc_Int, lc_TList.Get(1));
-                lc_VList[lc_Int] := lc_Token.AsValue().AsText();
-                if (lc_Max < lc_Int) then
-                    lc_Max := lc_Int;
-                if (lc_Min > lc_Int) then
-                    lc_Min := lc_Int;
-            end;
-            // Create list
-            for lc_Int := lc_Min to lc_Max do
-                if (lc_VList[lc_Int] <> '') then begin
-                    if (lc_Versions <> '') then
-                        lc_Versions += ',';
-                    lc_Versions += lc_VList[lc_Int];
-                end;
-        end;
-
-        // Save data
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey(Computer, Environment, "Environment Name", "Environment Id");
-        lc_IC.SetRange(Computer, lc_Server);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
-        if not lc_IC.FindFirst() then begin
-            lc_IC.Init();
-            lc_IC.Computer := CopyStr(lc_Server, 1, MaxStrLen(lc_IC.Computer));
-            lc_IC.Environment := lc_IC.Environment::Server;
-            lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
-            lc_IC."List Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
-            lc_IC.Url := CopyStr('\\' + lc_Server, 1, MaxStrLen(lc_IC.Url));
-            if not lc_IC.Insert(true) then begin
-                _Response.Add('error', 'Couldn''t insert versions in ' + lc_IC.TableName);
-                exit;
-            end;
-        end;
-        // Save versions
-        lc_IC."Environment Id" := CopyStr(lc_Versions, 1, MaxStrLen(lc_IC."Environment Id"));
-        // Modify entry
-        if not lc_IC.Modify(true) then begin
-            _Response.Add('error', 'Couldn''t modify versions in ' + lc_IC.TableName);
-            exit;
-        end;
-
-        // Store data
-        Commit();
-
-        // Set response
-        _Response.Add('response', 'Thank you for sending version list');
 
         // Return
         RetValue := true;
@@ -1077,7 +962,6 @@ table 50000 "IMP Connection"
             "version": "14.0",
             "dns" : "IMPENT01.imp.local",
             "services":  [],
-            "dockers":  []
         */
 
         #endregion Json syntax
@@ -1128,7 +1012,7 @@ table 50000 "IMP Connection"
         // Only servers
         lc_IC.SetRange(Environment, lc_IC.Environment::Service);
         // Only this computer
-        lc_IC.SetRange(Computer, lc_Server);
+        lc_IC.SetRange("Environment Name", lc_Server);
         // Only this version
         if (lc_Version <> '') then
             lc_IC.SetRange("Service Version", lc_Version);
@@ -1159,103 +1043,6 @@ table 50000 "IMP Connection"
         RetValue := true;
     end;
 
-    procedure ImportDockers(_Root: JsonObject; var _Response: Text) RetValue: Boolean
-    var
-        lc_IC: Record "IMP Connection";
-        lc_ICTemp: Record "IMP Connection" temporary;
-        lc_Token: JsonToken;
-        lc_Array: JsonArray;
-        lc_Server: Text;
-        lc_Dns: Text;
-        lc_Version: Text;
-    begin
-
-        #region Json syntax
-
-        /*
-        {
-            "data":  "ServerInstance",
-            "server":  "IMPENT01",
-            "version": "14.0",
-            "dns" : "IMPENT01.imp.local",
-            "services":  [],
-            "dockers":  []
-        */
-
-        #endregion Json syntax
-
-        // Init
-        RetValue := false;
-
-        // Server
-        if not _Root.Get('server', lc_Token) then begin
-            _Response := 'Token server missing in json';
-            exit;
-        end else
-            lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
-
-        // Version
-        if not _Root.Get('version', lc_Token) then
-            lc_Version := ''
-        else
-            lc_Version := BscMgmt.JsonGetTokenValue(lc_Token, 'version').AsText();
-
-        // Dns
-        if not _Root.SelectToken('dns', lc_Token) then begin
-            _Response := 'Token dns missing in json';
-            exit;
-        end else
-            lc_Dns := BscMgmt.JsonGetTokenValue(lc_Token, 'dns').AsText();
-
-        // Check services or dockers
-        if not ((_Root.Get('services', lc_Token) or (_Root.Get('dockers', lc_Token)))) then begin
-            _Response := 'Token services or dockers missing in json';
-            exit;
-        end;
-
-        // Check array
-        if not lc_Token.IsArray() then begin
-            _Response := 'Token services or dockers has to an array';
-            exit;
-        end;
-
-        // Clear List
-        lc_IC.Reset();
-        lc_IC.SetRange(Computer, lc_Server);
-        if (lc_Version <> '') then
-            lc_IC.SetRange("Service Version", lc_Version);
-        if lc_IC.FindSet() then begin
-            repeat
-                lc_ICTemp.Init();
-                lc_ICTemp.TransferFields(Rec);
-                lc_ICTemp.Insert(true);
-            until rEC.Next() = 0;
-            lc_IC.DeleteAll();
-        end;
-
-        // Services
-        if _Root.Get('services', lc_Token) then begin
-            lc_Array := lc_Token.AsArray();
-            foreach lc_Token in lc_Array do
-                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
-                    exit;
-        end;
-
-        // Dockers
-        if _Root.Get('dockers', lc_Token) then begin
-            lc_Array := lc_Token.AsArray();
-            foreach lc_Token in lc_Array do
-                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
-                    exit;
-        end;
-
-        // Store data
-        Commit();
-
-        // Return
-        RetValue := true;
-    end;
-
     procedure ImportServerInstance(var _Temp: Record "IMP Connection"; _Server: Text; _Dns: Text; _Root: JsonToken; var _Message: Text) RetValue: Boolean
     var
         lc_ISI: Record "IMP Connection";
@@ -1272,7 +1059,7 @@ table 50000 "IMP Connection"
         lc_ISI.Init();
 
         // Computer
-        lc_ISI.Computer := CopyStr(_Server, 1, MaxStrLen(lc_ISI.Computer));
+        //lc_ISI.Computer := CopyStr(_Server, 1, MaxStrLen(lc_ISI.Computer));
 
         // Dns
         lc_ISI.Dns := CopyStr(_Dns, 1, MaxStrLen(lc_ISI.Dns));
@@ -1331,14 +1118,18 @@ table 50000 "IMP Connection"
             _Message := 'Name missing as token in services';
             exit;
         end else
-            lc_ISI.Validate("Service Name", CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText(), 1, MaxStrLen(lc_ISI."Service Name")));
+            lc_ISI."Service Name" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText(), 1, MaxStrLen(lc_ISI."Service Name"));
 
         // State
         if not _Root.SelectToken('state', lc_Token) then begin
             _Message := 'State missing as token in services';
             exit;
         end else
-            lc_ISI."Service State" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'state').AsText(), 1, MaxStrLen(lc_ISI."Service State"));
+            lc_ISI.Validate("Service State", BscMgmt.JsonGetTokenValue(lc_Token, 'state').AsText());
+
+        // Status
+        if lc_ISI."Service Status" = lc_ISI."Service Status"::None then
+            lc_ISI."Service Status" := lc_ISI."Service Status"::Stopped;
 
         // Navision
         if not _Root.SelectToken('navision', lc_Token) then begin
@@ -1426,6 +1217,10 @@ table 50000 "IMP Connection"
                 end;
         end;
 
+        // Set listname
+        lc_ISI.SetListName();
+        lc_ISI.SetUrl();
+
         // Insert
         lc_ISI.Insert(true);
 
@@ -1433,10 +1228,109 @@ table 50000 "IMP Connection"
         RetValue := true;
     end;
 
+    procedure ImportDockers(_Root: JsonObject; var _Response: Text) RetValue: Boolean
+    var
+        lc_IC: Record "IMP Connection";
+        lc_ICTemp: Record "IMP Connection" temporary;
+        lc_Token: JsonToken;
+        lc_Array: JsonArray;
+        lc_Server: Text;
+        lc_Dns: Text;
+        lc_Version: Text;
+    begin
+
+        #region Json syntax
+
+        /*
+        {
+            "data":  "ServerInstance",
+            "server":  "IMPENT01",
+            "version": "14.0",
+            "dns" : "IMPENT01.imp.local",
+            "dockers":  []
+        */
+
+        #endregion Json syntax
+
+        // Init
+        RetValue := false;
+
+        // Server
+        if not _Root.Get('server', lc_Token) then begin
+            _Response := 'Token server missing in json';
+            exit;
+        end else
+            lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
+
+        // Version
+        if not _Root.Get('version', lc_Token) then
+            lc_Version := ''
+        else
+            lc_Version := BscMgmt.JsonGetTokenValue(lc_Token, 'version').AsText();
+
+        // Dns
+        if not _Root.SelectToken('dns', lc_Token) then begin
+            _Response := 'Token dns missing in json';
+            exit;
+        end else
+            lc_Dns := BscMgmt.JsonGetTokenValue(lc_Token, 'dns').AsText();
+
+        // Check services or dockers
+        if not ((_Root.Get('services', lc_Token) or (_Root.Get('dockers', lc_Token)))) then begin
+            _Response := 'Token services or dockers missing in json';
+            exit;
+        end;
+
+        // Check array
+        if not lc_Token.IsArray() then begin
+            _Response := 'Token services or dockers has to an array';
+            exit;
+        end;
+
+        // Clear List
+        lc_IC.Reset();
+        lc_IC.SetRange(Environment, lc_IC.Environment::Docker);
+        lc_IC.SetRange("Environment Name", lc_Server);
+        if (lc_Version <> '') then
+            lc_IC.SetRange("Service Version", lc_Version);
+        if lc_IC.FindSet() then begin
+            repeat
+                lc_ICTemp.Init();
+                lc_ICTemp.TransferFields(Rec);
+                lc_ICTemp.Insert(true);
+            until rEC.Next() = 0;
+            lc_IC.DeleteAll();
+        end;
+
+        // Services
+        if _Root.Get('services', lc_Token) then begin
+            lc_Array := lc_Token.AsArray();
+            foreach lc_Token in lc_Array do
+                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
+                    exit;
+        end;
+
+        // Dockers
+        if _Root.Get('dockers', lc_Token) then begin
+            lc_Array := lc_Token.AsArray();
+            foreach lc_Token in lc_Array do
+                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
+                    exit;
+        end;
+
+        // Store data
+        Commit();
+
+        // Return
+        RetValue := true;
+    end;
+
     procedure NewRecord(var _BelowxRec: Boolean; _CustomerNo: Text; var _Rec: Record "IMP Connection") RetValue: Boolean
     var
+        lc_CompInfo: Record "Company Information";
         lc_Cust: Record Customer;
         lc_IC: Record "IMP Connection";
+        lc_IS: Record "IMP Server";
         lc_List: List of [Text];
         lc_Type: Integer;
         lc_Login: Integer;
@@ -1448,22 +1342,43 @@ table 50000 "IMP Connection"
         // Init
         RetValue := false;
 
+        // Get company info
+        lc_CompInfo.Get();
+        lc_CompInfo.TestField("IMP Basic Dns");
+
+        // Get server
+        lc_IS.Get(_Rec.Server);
+
+        // Set computer 
+        //Rec.Computer := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec.Computer));
+
         // Select type
         lc_Type := StrMenu('Service,Docker', 0, 'Select your type of service');
         if (lc_Type = 0) then
             exit;
 
+        // Service
+        if (lc_Type = 1) then begin
+            Rec.Environment := Rec.Environment::Service;
+            Rec."Environment Type" := Rec."Environment Type"::OnPrem;
+            Rec."Environment State" := CopyStr(GetStatusToCreate(), 1, MaxStrLen(Rec."Environment State"));
+            Rec."Environment Name" := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec."Environment Name"));
+            Rec."Service State" := Rec."Environment State";
+        end;
+
+        // Set dns
+        Rec.Dns := CopyStr(Rec."Environment Name" + '.' + lc_CompInfo."IMP Basic Dns".ToLower(), 1, MaxStrLen(Rec.Dns));
+
         // Dockers 
-        if (lc_Type = 2) then
+        if (lc_Type = 2) then begin
+            Rec.Environment := Rec.Environment::Docker;
+            Rec."Environment State" := CopyStr(GetStatusToCreate(), 1, MaxStrLen(Rec."Environment State"));
             Error('Docker not possible yet!');
+        end;
 
         // Select version
-        if (lc_Type = 1) then begin
-            lc_List := Rec.SelectVersions(true);
-            if lc_List.Count() = 0 then
-                exit;
-            lc_TVersion := lc_List.Get(1);
-        end;
+        if (lc_Type = 1) then
+            lc_TVersion := lc_IS.NAVVersionSelect();
 
         // Set version
         lc_List := lc_TVersion.Split('.');
@@ -1498,43 +1413,43 @@ table 50000 "IMP Connection"
                     lc_NVersion := 'BC' + Format(lc_IVersion);
                 end;
         end;
+        Rec."Service Version" := CopyStr(lc_TVersion, 1, MaxStrLen(Rec."Service Version"));
+
+        // set service account
+        Rec."Service Account" := CopyStr(Rec.GetServiceAc(), 1, MaxStrLen(Rec."Service Account"));
+
+        // set nav version
+        if (Rec.Environment = Rec.Environment::Service) then
+            if (lc_IVersion < 140) then
+                Rec."Service NAV Version" := CopyStr('NAV' + lc_NVersion, 1, MaxStrLen(Rec."Service NAV Version"))
+            else
+                Rec."Service NAV Version" := CopyStr(lc_NVersion, 1, MaxStrLen(Rec."Service NAV Version"));
 
         // Select customer
         if not lc_Cust.Get(_CustomerNo) then
             if Page.RunModal(0, lc_Cust) <> Action::LookupOK then
                 exit;
 
+        // Check customer
+        lc_Cust.TestField("IMP Abbreviation");
+
+        // Set customer
+        Rec."Customer No." := lc_Cust."No.";
+
         // Select login
         lc_Login := StrMenu('Windows,UserName,NavUserPassword', 3, 'Select your access type'); // AccessControlService
         if (lc_Login = 0) then
             exit;
 
-        // Check customer
-        lc_Cust.TestField("IMP Abbreviation");
-
-        // Set computer 
-        Rec.Computer := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec.Computer));
-
-        // Set dns
-        Rec.Dns := CopyStr(Rec.Computer + 'imp.local', 1, MaxStrLen(Rec.Dns));
-
         // Set name
-        Rec."Service Name" := lc_Cust."IMP Abbreviation" + '-' + lc_NVersion + '-DEV';
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey(Computer, "Service Name", "Company Name");
-        lc_IC.SetRange(Computer, Rec.Computer);
-        lc_IC.SetFilter("Service Name", '%1*', Rec."Service Name");
-        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
-        if not lc_IC.FindLast() then
-            Rec."Service Name" += '1'
-        else
-            Rec."Service Name" := IncStr(lc_IC."Service Name");
+        if (Rec.Environment = Rec.Environment::Service) then
+            Rec."Service Name" := lc_Cust."IMP Abbreviation" + '-' + lc_NVersion + '-DEV';
 
-        // Set version
-        Rec."Service Version" := CopyStr(lc_TVersion, 1, MaxStrLen(Rec."Service Version"));
+        // Validate name
+        Rec.Validate("Service Name");
 
         // Set ports
-        Rec.ManagementServicesPort := GetNextPortNo(Rec.Computer);
+        Rec.ManagementServicesPort := GetNextManagementServicesPort(Rec."Environment Name");
         Rec.ClientServicesPort := Rec.ManagementServicesPort + 1;
         Rec.SOAPServicesPort := Rec.ManagementServicesPort + 2;
         Rec.ODataServicesPort := Rec.ManagementServicesPort + 3;
@@ -1542,10 +1457,9 @@ table 50000 "IMP Connection"
 
         // Get current certificate thumbprint
         lc_IC.Reset();
-        lc_IC.SetRange(Computer, Rec.Computer);
-        lc_IC.SetRange(Environment, lc_IC.Environment::Service);
-        lc_IC.SetFilter(ServicesCertificateThumbprint, '<>%1', '');
-        if lc_IC.FindLast() then
+        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
+        lc_IC.SetFilter("Environment Name", '%1', '@' + Rec."Environment Name");
+        if lc_IC.FindFirst() then
             lc_ServicesCertificateThumbprint := lc_IC.ServicesCertificateThumbprint
         else
             lc_ServicesCertificateThumbprint := '';
@@ -1564,29 +1478,142 @@ table 50000 "IMP Connection"
             4:
                 Rec.ClientServicesCredentialType := 'AccessControlService';
         end;
+
+        // Select Database Server
+        if (Rec.DatabaseServer = '') then begin
+            lc_IC.Reset();
+            lc_IC.SetCurrentKey(Environment, "DatabaseServer", "DatabaseInstance", DatabaseName);
+            lc_IC.SetRange(Environment, lc_IC.Environment::SQLServer);
+            if lc_IC.FindSet() then
+                if lc_IC.Count() > 1 then begin
+                    if Page.RunModal(Page::"IMP Databases", lc_IC) = Action::LookupOK then
+                        Rec.DatabaseServer := lc_IC.DatabaseServer;
+                end else
+                    Rec.DatabaseServer := lc_IC.DatabaseServer;
+        end;
+
+        // Select Database Instance
+        if (Rec.DatabaseInstance = '') then begin
+            lc_IC.Reset();
+            lc_IC.SetCurrentKey(Environment, "DatabaseServer", "DatabaseInstance", DatabaseName);
+            lc_IC.SetRange(Environment, lc_IC.Environment::SQLInstance);
+            if (Rec.DatabaseServer <> '') then
+                lc_IC.SetRange(DatabaseServer, Rec.DatabaseServer);
+            if lc_IC.FindSet() then
+                if lc_IC.Count() > 1 then begin
+                    if Page.RunModal(Page::"IMP Databases", lc_IC) = Action::LookupOK then
+                        Rec.DatabaseInstance := lc_IC.DatabaseInstance;
+                end else
+                    Rec.DatabaseInstance := lc_IC.DatabaseInstance;
+        end;
+
+        // Select Database Name
+        if (Rec.DatabaseName = '') then begin
+            lc_IC.Reset();
+            lc_IC.SetCurrentKey(Environment, "DatabaseServer", "DatabaseInstance", DatabaseName);
+            lc_IC.SetRange(Environment, lc_IC.Environment::SQLDatabase);
+            if (Rec.DatabaseServer <> '') then
+                lc_IC.SetRange(DatabaseServer, Rec.DatabaseServer);
+            if (Rec.DatabaseInstance <> '') then
+                lc_IC.SetRange(DatabaseInstance, Rec.DatabaseInstance);
+            if lc_IC.FindSet() then
+                if lc_IC.Count() > 1 then begin
+                    if Page.RunModal(Page::"IMP Databases", lc_IC) = Action::LookupOK then
+                        Rec.DatabaseName := lc_IC.DatabaseName;
+                end else
+                    Rec.DatabaseName := lc_IC.DatabaseName;
+        end;
     end;
 
-    procedure GetNextPortNo(_Computer: Text) RetValue:
+    procedure GetNextManagementServicesPort(_Computer: Text) RetValue:
                                                  Integer
     var
         lc_IC: Record "IMP Connection";
+        lc_Int: Integer;
     begin
         // Init 
-        RetValue := 7045;
+        RetValue := 0;
+        lc_Int := 7145;
         // Find last number
         lc_IC.Reset();
+        lc_IC.SetCurrentKey(Environment, ManagementServicesPort, "Environment Name");
         lc_IC.SetRange(Environment, lc_IC.Environment::Service);
-        lc_IC.SetRange(Computer, _Computer);
-        if lc_IC.FindLast() then
-            RetValue := lc_IC.ManagementServicesPort + 10;
+        lc_IC.SetRange("Environment Name", _Computer.Replace('impent02', 'impent01'));
+        repeat
+            lc_IC.SetRange(ManagementServicesPort, lc_Int);
+            if lc_IC.IsEmpty() then
+                RetValue := lc_Int
+            else
+                lc_Int += 10;
+        until RetValue <> 0;
     end;
 
+    procedure GetStatusToCreate() RetValue: Text
+    begin
+        RetValue := 'To create';
+    end;
 
-    #endregion Methodes
+    procedure GetStatusToRemove() RetValue: Text
+    begin
+        RetValue := 'To remove';
+    end;
+
+    procedure GetServiceUs() RetValue: Text
+    begin
+        RetValue := 'admin';
+    end;
+
+    procedure GetServiceAc() RetValue: Text
+    begin
+        RetValue := 'IMP\admin';
+    end;
+
+    procedure GetServicePs() RetValue: Text
+    begin
+        RetValue := 'C0nsultAdm1n$';
+    end;
+
+    procedure GetPS(var _IC: Record "IMP Connection"; var _IntVersion: Integer; var _Version: Text; var _AdminTool: Text; var _Computer: Text; var _Url: Text)
+    var
+        lc_ImpAdmin: Codeunit "IMP Administration";
+        lc_List: List of [Text];
+    begin
+        // Set version
+        lc_List := _IC."Service Version".Split('.');
+        Evaluate(_IntVersion, (lc_List.Get(1) + lc_List.Get(2)));
+
+        // Admin tool
+        if (_IntVersion <= 110) then
+            _AdminTool := 'C:\Program Files\Microsoft Dynamics NAV\' + Format(_IntVersion) + '\Service\NAVAdminTool.ps1'
+        else
+            _AdminTool := 'C:\Program Files\Microsoft Dynamics 365 Business Central\' + Format(_IntVersion) + '\Service\NAVAdminTool.ps1';
+
+        // Set version
+        if (_IntVersion < 100) then
+            _Version := CopyStr(Format(_IntVersion), 1, 1) + '.' + CopyStr(Format(_IntVersion), 2, 1)
+        else
+            _Version := CopyStr(Format(_IntVersion), 1, 2) + '.' + CopyStr(Format(_IntVersion), 3, 1);
+
+        // Get computer
+        _Computer := lc_ImpAdmin.GetCurrentComputerName();
+
+        // Set url
+        _URL := _IC.GetUrlOdataIMPProd(CompanyName);
+    end;
+
+    procedure RefreshCloud()
+    var
+    Begin
+        if (Rec."Environment Type" <> Rec."Environment Type"::Production) then
+            exit;
+
+
+    End;
+
+    #endregion Methods Misc
 
     var
         BscMgmt: Codeunit "IMP Basic Management";
         DatMgmt: Codeunit "IMP Data Management";
-        ImpMgmt: Codeunit "IMP Management";
         ImpAdmn: Codeunit "IMP Administration";
 }

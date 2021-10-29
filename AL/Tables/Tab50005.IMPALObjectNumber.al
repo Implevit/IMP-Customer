@@ -138,11 +138,12 @@ table 50005 "IMP AL Object Number"
 
             trigger OnValidate()
             var
+                lc_IAOA: Record "IMP AL Object App";
                 lc_Rec: Record "IMP AL Object Number";
                 lc_Obj: Record AllObjWithCaption;
+                lc_List: List of [Integer];
                 lc_Text: Text;
                 lc_Selection: Integer;
-                lc_Counter: Integer;
                 lc_Txt1_Txt: Label 'The %1 for the %2 "%3" already exists as %4';
                 lc_Txt2_Txt: Label 'There are more then one entry with a name like "@*%1*"';
             begin
@@ -151,6 +152,7 @@ table 50005 "IMP AL Object Number"
                     exit;
 
                 // Clear 
+                clear(lc_List);
                 Rec."Parent Object Name" := CopyStr(Rec."Parent Object Name".Replace('"', ''), 1, MaxStrLen(Rec."Parent Object Name"));
 
                 // Check already exists
@@ -171,38 +173,54 @@ table 50005 "IMP AL Object Number"
                     lc_Obj.Reset();
                     lc_Obj.SetRange("Object Type", Rec."Parent Object Type");
                     lc_Obj.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    lc_Obj.SetFilter("Object ID", '<%1|>%2', 50000, 99999);
                     if lc_Obj.FindSet() then
-                        if lc_Obj.Count() > 1 then begin
+                        if lc_Obj.Count() = 1 then begin
+                            // Parent object found
+                            Rec."Parent Object No." := lc_Obj."Object ID";
+                            Rec."Parent Object Name" := lc_Obj."Object Name";
+                        end else
                             // More then one entry 
                             repeat
                                 if (lc_Text <> '') then
                                     lc_Text += ',';
                                 lc_Text += lc_Obj."Object Name" + ' (' + Format(lc_Obj."Object ID") + ')';
+                                lc_List.Add(lc_Obj."Object ID");
                             until lc_Obj.Next() = 0;
-                            // Select entry
-                            lc_Selection := StrMenu(lc_Text, 1, StrSubstNo(lc_Txt2_Txt, Rec."Parent Object Name"));
-                            if (lc_Selection = 0) then
-                                // No selection
-                                Error('')
-                            else
-                                // Find selection
-                                if lc_Obj.FindSet() then begin
-                                    lc_Counter := 0;
-                                    repeat
-                                        lc_Counter += 1;
-                                        if (lc_Counter = lc_Selection) then begin
-                                            // Set selection
-                                            Rec.Validate("Parent Object No.", lc_Obj."Object ID");
-                                            lc_Obj.Find('+');
-                                        end;
-                                    until lc_Obj.Next() = 0;
-                                end;
-                        end else
-                            if ((lc_Obj."Object ID" < 50000) or (lc_Obj."Object ID" > 99999)) then begin
-                                Rec."Parent Object No." := lc_Obj."Object ID";
-                                Rec."Parent Object Name" := lc_Obj."Object Name";
-                            end;
                 end;
+
+                // Find parent object in other apps
+                if (Rec."Parent Object No." = 0) then begin
+                    lc_Rec.Reset();
+                    lc_Rec.SetRange("Object Type", Rec."Parent Object Type");
+                    lc_Rec.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    if lc_Rec.FindSet() then
+                        if lc_Rec.Count() = 1 then begin
+                            // Parent object found
+                            Rec."Parent Object No." := lc_Rec."Object No.";
+                            Rec."Parent Object Name" := lc_Rec."Object Name";
+                        end else begin
+                            // More then one entry 
+                            lc_IAOA.Get(Rec."App No.");
+                            repeat
+                                lc_Rec.CalcFields("App Name");
+                                if lc_IAOA.IsDependentOf(lc_Rec."App Name") then begin
+                                    if (lc_Text <> '') then
+                                        lc_Text += ',';
+                                    lc_Text += lc_Rec."Object Name" + ' (' + lc_Rec."App Name".ToUpper() + ' - ' + Format(lc_Rec."Object No.") + ')';
+                                    lc_List.Add(lc_Rec."Object No.");
+                                end;
+                            until lc_Rec.Next() = 0;
+                        end;
+                end;
+                // Select entry
+                lc_Selection := StrMenu(lc_Text, 1, StrSubstNo(lc_Txt2_Txt, Rec."Parent Object Name"));
+                if (lc_Selection = 0) then
+                    // No selection
+                    Error('')
+                else
+                    // Set selection
+                    Rec.Validate("Parent Object No.", lc_List.Get(lc_Selection));
 
                 // Create new object no
                 Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");
@@ -253,6 +271,7 @@ table 50005 "IMP AL Object Number"
         lc_IAON: Record "IMP AL Object Number";
         lc_IAONParent: Record "IMP AL Object Number";
         lc_MenuObject_Txt: Label ',Table,,Report,,Codeunit,XML port,,Page,Query,,Field Number,,,Page Extension,Table Extension,Enum,Enum Extension,,';
+        lc_Txt1_Txt: Label 'The next number %1 is out of range!';
     begin
         // Init
         RetValue := 0;
@@ -291,11 +310,10 @@ table 50005 "IMP AL Object Number"
         lc_IAON.Reset();
         lc_IAON.SetCurrentKey("Object No.", "Object Type", "Parent Object No.", "Parent Object Type", "App No.", "Customer No.");
         lc_IAON.SetRange("Customer No.", _CustomerNo);
-        if (_ObjectType in [Rec."Object Type"::FieldNumber, Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]) then
-            lc_IAON.SetRange("App No.", _AppNo);
         lc_IAON.SetRange("Object Type", _ObjectType);
         // Next field or enum entry
         if (_ObjectType = lc_IAON."Object Type"::FieldNumber) then begin
+            lc_IAON.SetRange("App No.", _AppNo);
             lc_IAON.SetRange("Parent Object No.", _ParentObjectNo);
             lc_IAON.SetRange("Parent Object Type", _ParentObjectType);
             if lc_IAON.FindLast() then begin
@@ -322,7 +340,7 @@ table 50005 "IMP AL Object Number"
             RetValue := lc_IAOA."No. Range From";
             // Set filter 
             lc_IAON.SetFilter("Object No.", '>=%1', RetValue);
-            if lc_IAON.FindSet() then
+            if lc_IAON.FindSet() then begin
                 repeat
                     if (RetValue < lc_IAON."Object No.") then
                         // Free number found get last for exit loop
@@ -331,6 +349,10 @@ table 50005 "IMP AL Object Number"
                         // Show for next number
                         RetValue := lc_IAON."Object No." + 1;
                 until lc_IAON.Next() = 0;
+
+                if (RetValue > lc_IAOA."No. Range To") then
+                    Error(lc_Txt1_Txt, RetValue);
+            end;
         end;
         // Save entry
         if not (_ObjectType in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]) then begin

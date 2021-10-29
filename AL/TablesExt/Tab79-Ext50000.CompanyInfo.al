@@ -13,5 +13,10 @@ tableextension 50000 "IMP Tab79-Ext50000" extends "Company Information"
             Caption = 'Gitlab Url';
             DataClassification = CustomerContent;
         }
+        field(50020; "IMP Basic Dns"; Text[30])
+        {
+            Caption = 'Basic Dns';
+            DataClassification = CustomerContent;
+        }
     }
 }

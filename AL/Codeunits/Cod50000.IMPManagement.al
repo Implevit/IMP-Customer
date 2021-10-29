@@ -225,6 +225,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70026_OnODataBeforeProcess(_Request: JsonObject; var _Response: JsonObject; var _Skip: Boolean)
     var
+        lc_IS: Record "IMP Server";
         lc_IC: Record "IMP Connection";
         lc_Token: JsonToken;
     begin
@@ -232,8 +233,8 @@ codeunit 50000 "IMP Management"
             exit;
 
         case BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() of
-            'serverversions':
-                lc_IC.ImportVersions(_Request, _Response);
+            //'serverversions':
+            //    lc_IS.NAVVersionsImport(_Request, _Response);
             'serverinstance', 'serverinstances':
                 lc_IC.ImportServerInstances(_Request, _Response);
             'loadversions':
@@ -262,7 +263,7 @@ codeunit 50000 "IMP Management"
             _Url := lc_ISI.Url;
             _Tenant := lc_ISI."Environment Id";
             if (lc_ISI.Environment <> lc_ISI.Environment::Cloud) then begin
-                _Url := 'http://' + lc_ISI.Computer.ToLower().Replace('impent02', 'impent01') + ':' + Format(lc_ISI.ODataServicesPort) + '/' + lc_ISI."Service Name";
+                _Url := 'http://' + lc_ISI."Environment Name".ToLower().Replace('impent02', 'impent01') + ':' + Format(lc_ISI.ODataServicesPort) + '/' + lc_ISI."Service Name";
                 _Tenant := 'default';
             end;
         end;
@@ -554,16 +555,19 @@ codeunit 50000 "IMP Management"
             RetValue := false;
     end;
 
-    procedure SelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean);
+    procedure SelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean) RetValue: Boolean
     var
         lc_Page: Page "IMP Selection List";
     begin
+        RetValue := false;
         lc_Page.HideAllEntries();
         lc_Page.SetFields(_Fields, false, _SingleSelection);
         lc_Page.SetData(_List);
         lc_Page.LookupMode := true;
-        if lc_Page.RunModal() = Action::LookupOK then
+        if lc_Page.RunModal() = Action::LookupOK then begin
             lc_Page.GetSelection(_List);
+            RetValue := true;
+        end;
     end;
 
     procedure LoadFolders(var _Rec: Record "Name/Value Buffer"; _Root: Text; _InclSubFolders: Boolean)

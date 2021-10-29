@@ -12,6 +12,10 @@ pageextension 50001 "IMP Pag22-Ext50001" extends "Customer List"
             {
                 ApplicationArea = All;
             }
+            field("IMP Connections"; Rec."IMP Connections")
+            {
+                ApplicationArea = All;
+            }
         }
         addafter(City)
         {

@@ -27,11 +27,6 @@ page 50006 "IMP Databases"
                     Editable = false;
                     Visible = false;
                 }
-                field(Computer; Rec.Computer)
-                {
-                    ApplicationArea = All;
-                    Visible = false;
-                }
                 field(Environment; Rec.Environment)
                 {
                     ApplicationArea = All;
@@ -93,8 +88,12 @@ page 50006 "IMP Databases"
 
                 trigger OnAction()
                 begin
-                    ImpAdmn.CallSQLServerFullList();
-                    CurrPage.Update(false);
+                    if ImpAdmn.GetCurrentComputerName().ToLower() <> 'impent02' then
+                        Message('Only on impent02 possible!')
+                    else begin
+                        ImpAdmn.CallSQLServerFullList();
+                        CurrPage.Update(false);
+                    end;
                 end;
             }
         }
@@ -102,7 +101,7 @@ page 50006 "IMP Databases"
 
     trigger OnOpenPage()
     begin
-        ShowAction := (ImpAdmn.GetCurrentComputerName().ToLower() = 'impent02');
+        ShowAction := true;
 
         ShowEnvironment := true;
         ShowServer := true;

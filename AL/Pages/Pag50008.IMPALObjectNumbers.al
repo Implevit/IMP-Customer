@@ -50,6 +50,30 @@ page 50008 "IMP AL Object Numbers"
                 {
                     ApplicationArea = All;
                     Visible = ShowParentObject;
+
+                    trigger OnDrillDown()
+                    var
+                        lc_Rec: Record "IMP AL Object Number";
+                        lc_Obj: Record AllObjWithCaption;
+                        lc_Page: Page "IMP AL Object Numbers";
+                    begin
+                        if ((Rec."Parent Object No." < 50000) or (Rec."Parent Object No." > 99999)) then begin
+                            lc_Obj.Reset();
+                            lc_Obj.SetRange("Object Type", Rec."Parent Object Type");
+                            lc_Obj.SetRange("Object ID", Rec."Parent Object No.");
+                            if lc_Obj.FindSet() then
+                                lc_Obj.SetRange("Object ID");
+                            Page.Run(Page::"All Objects with Caption", lc_Obj);
+                        end else begin
+                            lc_Rec.Reset();
+                            lc_Rec.SetRange("Object Type", Rec."Parent Object Type");
+                            lc_Rec.SetRange("Object No.", Rec."Parent Object No.");
+                            if lc_Rec.FindSet() then;
+                            lc_Rec.SetRange("Object No.");
+                            lc_Page.SetData(2, lc_Rec);
+                            lc_Page.Run();
+                        end;
+                    end;
                 }
                 field("Parent Object Name"; Rec."Parent Object Name")
                 {
@@ -307,17 +331,17 @@ page 50008 "IMP AL Object Numbers"
                 lc_Rec."Object Type"::"TableExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
                 lc_Rec."Object Type"::"PageExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
                 lc_Rec."Object Type"::"EnumExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
             end;
             lc_Text := Format(lc_Rec."Parent Object Type") + ' ' + Format(lc_Rec."Parent Object No.") + ' "' + lc_Rec."Parent Object Name" + '",';
@@ -373,6 +397,20 @@ page 50008 "IMP AL Object Numbers"
             lc_NewEntry := Rec.GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Object Type", Rec."Object No.", Rec."Object Type"::FieldNumber);
         CurrPage.Update(false);
         Message(Format(lc_NewEntry));
+    end;
+
+    procedure SetData(_Level: Integer; var _Rec: Record "IMP AL Object Number")
+    begin
+        ShowApp := true;
+        case _Level of
+            0:
+                SetLevel0();
+            1:
+                SetLevel1(_Rec."Customer No.", _Rec."App No.", _Rec."Object Type");
+            2:
+                SetLevel2(_Rec."Customer No.", _Rec."App No.", _Rec."Object Type", 0);
+        end;
+        Rec := _Rec;
     end;
 
     procedure SetLevel0()

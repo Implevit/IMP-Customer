@@ -22,6 +22,10 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                             Hyperlink(Rec."IMP Gitlab Url");
                     end;
                 }
+                field("IMP Basic Dns"; Rec."IMP Basic Dns")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

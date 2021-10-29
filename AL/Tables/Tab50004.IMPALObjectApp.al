@@ -63,6 +63,11 @@ table 50004 "IMP AL Object App"
             CalcFormula = lookup(Customer.Name where("No." = field("Customer No.")));
             Editable = false;
         }
+        field(60; Dependencies; Text[1024])
+        {
+            Caption = 'Dependencies';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
@@ -209,6 +214,88 @@ table 50004 "IMP AL Object App"
         lc_IAON."Object Type" := lc_IAON."Object Type"::EnumExtension;
         lc_IAON."Object No." := 0;
         if lc_IAON.Insert(true) then;
+    end;
+
+    procedure CreateLicensePermissionCsv(_CustomerNo: Code[20]; _AppNo: Integer; _Separator: Text[1]) RetValue: Boolean
+    var
+        lc_Temp: Record "CSV Buffer" temporary;
+        lc_IAON: Record "IMP AL Object Number";
+        lc_TempBlob: Codeunit "Temp Blob";
+        lc_InStream: InStream;
+        lc_LineNo: Integer;
+        lc_FileName: Text;
+    begin
+        // Init
+        RetValue := false;
+        lc_LineNo := 0;
+        lc_FileName := 'ObjectPermissionsExport.csv';
+
+        // Get numbers
+        lc_IAON.Reset();
+        lc_IAON.SetRange("Customer No.", _CustomerNo);
+        if (_AppNo <> 0) then
+            lc_IAON.SetRange("App No.", _AppNo);
+        lc_IAON.SetFilter("Object Type", '<>%1', lc_IAON."Object Type"::FieldNumber);
+        lc_IAON.SetFilter("Object No.", '<>%1', 0);
+        lc_IAON.FindSet();
+
+        // Clear
+        lc_Temp.Reset();
+        lc_Temp.DeleteAll(true);
+
+        // Create header
+        lc_LineNo += 1;
+        lc_Temp.InsertEntry(lc_LineNo, 1, 'ObjectType');
+        lc_Temp.InsertEntry(lc_LineNo, 2, 'FromObjectID');
+        lc_Temp.InsertEntry(lc_LineNo, 3, 'ToObjectID');
+        lc_Temp.InsertEntry(lc_LineNo, 4, 'Read');
+        lc_Temp.InsertEntry(lc_LineNo, 5, 'Insert');
+        lc_Temp.InsertEntry(lc_LineNo, 6, 'Modify');
+        lc_Temp.InsertEntry(lc_LineNo, 7, 'Delete');
+        lc_Temp.InsertEntry(lc_LineNo, 8, 'Execute');
+        lc_Temp.InsertEntry(lc_LineNo, 9, 'AvailableRange');
+        lc_Temp.InsertEntry(lc_LineNo, 10, 'Used');
+        lc_Temp.InsertEntry(lc_LineNo, 11, 'ObjectTypeRemaining');
+        lc_Temp.InsertEntry(lc_LineNo, 12, 'CompanyObjectPermissionID');
+
+        // Create lines
+        repeat
+            lc_LineNo += 1;
+            if (lc_IAON."Object Type" = lc_IAON."Object Type"::Table) then
+                lc_Temp.InsertEntry(lc_LineNo, 1, Format(lc_IAON."Object Type"::TableData))
+            else
+                lc_Temp.InsertEntry(lc_LineNo, 1, Format(lc_IAON."Object Type"));
+            lc_Temp.InsertEntry(lc_LineNo, 2, Format(lc_IAON."Object No."));
+            lc_Temp.InsertEntry(lc_LineNo, 3, Format(lc_IAON."Object No."));
+            lc_Temp.InsertEntry(lc_LineNo, 4, 'Direct');
+            lc_Temp.InsertEntry(lc_LineNo, 5, 'Direct');
+            lc_Temp.InsertEntry(lc_LineNo, 6, 'Direct');
+            lc_Temp.InsertEntry(lc_LineNo, 7, 'Direct');
+            lc_Temp.InsertEntry(lc_LineNo, 8, 'Direct');
+            lc_Temp.InsertEntry(lc_LineNo, 9, ''); //50000 - 99999');
+            lc_Temp.InsertEntry(lc_LineNo, 10, ''); //1');
+            lc_Temp.InsertEntry(lc_LineNo, 11, ''); //29');
+            lc_Temp.InsertEntry(lc_LineNo, 12, ''); //3770342');
+        until lc_IAON.Next() = 0;
+
+        // Export file
+        lc_Temp.SaveDataToBlob(lc_TempBlob, _Separator);
+        lc_TempBlob.CreateInStream(lc_InStream, TextEncoding::UTF8);
+        DownloadFromStream(lc_Instream, '', '', '', lc_FileName);
+    end;
+
+    procedure IsDependentOf(_Name: Text) RetValue: Boolean
+    var
+        lc_List: List of [Text];
+        lc_Entry: Text;
+    begin
+        RetValue := false;
+        lc_List := Rec.Dependencies.Split(',');
+        foreach lc_Entry in lc_List do
+            if (lc_Entry.ToLower() = _Name.ToLower()) then begin
+                RetValue := true;
+                exit;
+            end;
     end;
 
     #endregion Methods Misc
@@ -385,6 +472,7 @@ table 50004 "IMP AL Object App"
         lc_idRanges: JsonArray;
         lc_Text: Text;
         lc_Select: Integer;
+        lc_DependenciesText: Text;
         lc_Dia1_Txt: Label 'App (%1) : %2';
         lc_Txt1_Txt: Label 'App folder may not be empty';
         lc_Txt2_Txt: Label 'No app.json found in folder "%1"';
@@ -421,6 +509,7 @@ table 50004 "IMP AL Object App"
             lc_Dependencies := lc_Token.AsArray();
 
         // Check dependencies
+        lc_DependenciesText := '';
         lc_IAOA.Reset();
         lc_IAOA.SetRange("Customer No.", _CustomerNo);
         foreach lc_Entry in lc_Dependencies do begin
@@ -440,6 +529,10 @@ table 50004 "IMP AL Object App"
                 lc_IAOA.SetFilter(Name, '%1', '@' + lc_SubAppName);
                 if not lc_IAOA.FindSet() then
                     Error(lc_Txt5_Txt, lc_SubAppName);
+                // Add
+                if (lc_DependenciesText <> '') then
+                    lc_DependenciesText += ',';
+                lc_DependenciesText += lc_SubAppName;
             end;
         end;
 
@@ -492,6 +585,12 @@ table 50004 "IMP AL Object App"
             // Save app
             lc_IAOA.Insert(true);
         end;
+
+        // Set dependencies
+        lc_IAOA.Dependencies := CopyStr(lc_DependenciesText, 1, MaxStrLen(lc_IAOA.Dependencies));
+
+        // Save app
+        lc_IAOA.Modify(true);
 
         // Load objects
         RetValue := LoadObjects(_CustomerNo, lc_IAOA."No.", _Path);

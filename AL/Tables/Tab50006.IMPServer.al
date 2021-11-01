@@ -16,6 +16,12 @@ table 50006 "IMP Server"
         {
             Caption = 'Type';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if (Rec.Type <> xRec.Type) then
+                    SetDsn();
+            end;
         }
         field(20; "NAV Versions"; Text[250])
         {
@@ -28,10 +34,29 @@ table 50006 "IMP Server"
             DataClassification = CustomerContent;
             OptionMembers = local,remote,cloud;
             OptionCaption = 'local,remote,cloud';
+
+            trigger OnValidate()
+            begin
+                if (Rec.Location <> xRec.Location) then
+                    SetDsn();
+            end;
         }
         field(40; "SSL"; Boolean)
         {
             Caption = 'SSL';
+            DataClassification = CustomerContent;
+        }
+        field(50; Connections; Integer)
+        {
+            Caption = 'Connections';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP Connection" where(Server = field(Name)));
+            TableRelation = "IMP Connection";
+            Editable = false;
+        }
+        field(60; Dns; Text[100])
+        {
+            Caption = 'Dns';
             DataClassification = CustomerContent;
         }
     }
@@ -44,6 +69,26 @@ table 50006 "IMP Server"
     }
 
     #region Methods
+
+    local procedure SetDsn()
+    var
+        lc_CompInfo: Record "Company Information";
+    begin
+        // Only if empty
+        if (Rec.Dns <> '') then
+            exit;
+
+        // Set local
+        if (Rec.Location = Rec.Location::local) then begin
+            lc_CompInfo.Get();
+            lc_CompInfo.TestField("IMP Basic Dns");
+            Rec.Dns := CopyStr(LowerCase(Rec.Name + '.' + lc_CompInfo."IMP Basic Dns"), 1, MaxStrLen(Rec.Dns));
+        end;
+
+        // Set cloud
+        if (Rec.Location = Rec.Location::cloud) then
+            Rec.Dns := CopyStr(BscMgmt.System_GetBaseUriBC(), 1, MaxStrLen(Rec.Dns));
+    end;
 
     procedure NAVVersionAdd(_Version: Text)
     begin
@@ -111,32 +156,19 @@ table 50006 "IMP Server"
 
     procedure NAVVersionsSelect(_SingleEntry: Boolean) RetValue: List of [Text];
     var
-        lc_IC: Record "IMP Connection";
         lc_List: Record "Name/Value Buffer" temporary;
         lc_Version: List of [Text];
         lc_Fields: List of [Integer];
         lc_Text: Text;
         lc_Int: Integer;
-        lc_Server: Text;
         lc_Txt1_Txt: Label 'Load first version list from server';
     begin
         // Init
         lc_Int := 0;
         Clear(RetValue);
 
-        // Get computer
-        lc_Server := ImpAdmn.GetCurrentComputerName();
-
-        // Find version list
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey(Environment, "Environment Name", "Environment Id");
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
-        lc_IC.SetRange("Environment Name", lc_Server);
-        if not lc_IC.FindFirst() then
-            Error(lc_Txt1_Txt);
-
         // Check entry
-        if (lc_IC."Environment Id" = '') then
+        if (Rec."NAV Versions" = '') then
             Error(lc_Txt1_Txt);
 
         // Clear list
@@ -144,18 +176,19 @@ table 50006 "IMP Server"
         lc_List.DeleteAll(true);
 
         // Load selection
-        lc_Version := lc_IC."Environment Id".Split(',');
+        lc_Version := Rec."NAV Versions".Split(Rec.NAVVersionSeparator());
         foreach lc_Text in lc_Version do begin
             lc_Int += 1;
             lc_List.Init();
             lc_List.ID := lc_Int;
             lc_List.Name := CopyStr(lc_Text, 1, MaxStrLen(lc_List.Name));
+            lc_List.Value := CopyStr(NAVVersionName(lc_Text), 1, MaxStrLen(lc_List.Value));
             if lc_List.Insert(true) then;
         end;
 
         // Set fields to visible
         lc_Fields.Add(lc_List.FieldNo(Name));
-        //lc_Fields.Add(lc_List.FieldNo(Value));
+        lc_Fields.Add(lc_List.FieldNo(Value));
 
         // Raise selection event
         if not ImpMgmt.SelectEntry(lc_List, lc_Fields, _SingleEntry) then
@@ -235,38 +268,13 @@ table 50006 "IMP Server"
                 if (lc_Min > lc_Int) then
                     lc_Min := lc_Int;
             end;
-            // Create list
+            // Import sorted result
             for lc_Int := lc_Min to lc_Max do
-                if (lc_VList[lc_Int] <> '') then begin
-                    if (lc_Versions <> '') then
-                        lc_Versions += ',';
-                    lc_Versions += lc_VList[lc_Int];
+                if (lc_VList[lc_Int] <> '') then
                     Rec.NAVVersionAdd(lc_VList[lc_Int]);
-                end;
         end;
 
         // Save data
-        /*
-        lc_IC.Reset();
-        lc_IC.SetCurrentKey(Environment, "Environment Name", "Environment Id");
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
-        lc_IC.SetRange("Environment Name", lc_Server);
-        if not lc_IC.FindFirst() then begin
-            lc_IC.Init();
-            lc_IC.Environment := lc_IC.Environment::Server;
-            lc_IC."Environment Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
-            lc_IC."List Name" := CopyStr(lc_Server, 1, MaxStrLen(lc_IC."Environment Name"));
-            lc_IC.Url := CopyStr('\\' + lc_Server, 1, MaxStrLen(lc_IC.Url));
-            if not lc_IC.Insert(true) then begin
-                _Response.Add('error', 'Couldn''t insert versions in ' + lc_IC.TableName);
-                exit;
-            end;
-        end;
-        // Save versions
-        lc_IC."Environment Id" := CopyStr(lc_Versions, 1, MaxStrLen(lc_IC."Environment Id"));
-        */
-        // Modify 
-        //Rec."NAV Versions" := CopyStr(lc_Versions, 1, MaxStrLen(Rec."NAV Versions"));
         if not Rec.Modify(true) then begin
             _Response.Add('error', 'Couldn''t save versions in ' + Rec.TableCaption());
             exit;
@@ -295,10 +303,37 @@ table 50006 "IMP Server"
             RetValue := 'http://';
     end;
 
+    procedure GetClientUrl() RetValue: Text
+    begin
+        RetValue := GetBaseUrl() + Rec.Name;
+    end;
+
+    procedure GetDnsUrl() RetValue: Text
+    begin
+        RetValue := GetBaseUrl() + Rec.Dns;
+    end;
+
+    procedure NAVVersionName(_Version: Text) RetValue: Text
+    begin
+        case _Version.ToLower() of
+            '7.1':
+                RetValue := 'NAV2013R2';
+            '8.0':
+                RetValue := 'NAV2015';
+            '9.0':
+                RetValue := 'NAV2016';
+            '10.0':
+                RetValue := 'NAV2017';
+            '11.0':
+                RetValue := 'NAV2018';
+            else
+                RetValue := 'BC' + _Version.Replace('.', '');
+        end;
+    end;
+
     #endregion Methods
 
     var
         BscMgmt: Codeunit "IMP Basic Management";
-        ImpAdmn: Codeunit "IMP Administration";
         ImpMgmt: Codeunit "IMP Management";
 }

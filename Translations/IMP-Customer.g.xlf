@@ -823,6 +823,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Server - Method NAVVersionsSelect - NamedType lc_Txt1_Txt</note>
         </trans-unit>
+        <trans-unit id="Table 2838444131 - Field 707810663 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Connections</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Server - Field Connections - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2838444131 - Field 3040027147 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Dns</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Server - Field Dns - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2838444131 - Field 3891454143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Location</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1228,10 +1238,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Control CustomerNo - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Control 1452782094 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Environment</source>
+        <trans-unit id="Page 1686976452 - Control 3015300335 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Server</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Control EnvironmentName - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Control ServerFilter - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1686976452 - Control 237762718 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Version</source>
@@ -1253,6 +1263,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActConnectionsGetConnection - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1686976452 - Action 2760112756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Load connections</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActConnectionsServiceLoad - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1686976452 - Action 3951980278 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Show Authorisation</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1263,60 +1278,45 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActConnectionsShowConnection - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 3251208157 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Server</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServer - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 849289786 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Load services</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActLoadServices - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 754764403 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Load versions</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActLoadVersions - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 1686976452 - Action 2615290973 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Service</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActService - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 2154733845 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1686976452 - Action 1262040265 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerCreate - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceCreate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 3957207567 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1686976452 - Action 2398867249 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Edit</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerDetails - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceEdit - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 1194699627 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1686976452 - Action 403547551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Remove</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerRemove - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceRemove - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 2641098404 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1686976452 - Action 3501634072 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Restart</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerReStart - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceRestart - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 2679752145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Start</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerStart - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 2338192425 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Stop</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActEditServerStop - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1686976452 - Action 769104062 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1686976452 - Action 985990228 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Show</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActShowServerDetails - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceShow - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1686976452 - Action 127788493 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Start</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1686976452 - Action 781391765 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stop</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceStop - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4284133494 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Databases</source>
@@ -1399,7 +1399,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Server List - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 861137549 - Action 754764403 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Load versions</source>
+          <source>Load Navision Versions</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Server List - Action ActLoadVersions - Property Caption</note>
         </trans-unit>

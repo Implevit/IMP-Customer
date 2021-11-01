@@ -20,6 +20,22 @@ page 50009 "IMP Server List"
                 {
                     ApplicationArea = All;
                 }
+                field(SSL; Rec.SSL)
+                {
+                    ApplicationArea = All;
+                }
+                field(Location; Rec.Location)
+                {
+                    ApplicationArea = All;
+                }
+                field(Dns; Rec.Dns)
+                {
+                    ApplicationArea = All;
+                }
+                field(Connections; Rec.Connections)
+                {
+                    ApplicationArea = All;
+                }
                 field("NAV Versions"; Rec."NAV Versions")
                 {
                     ApplicationArea = All;

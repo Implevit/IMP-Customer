@@ -15,25 +15,26 @@ page 50000 "IMP Connection List"
             group(GrpFilters)
             {
                 Caption = 'Filters';
+                Visible = ShowFilter;
 
                 grid(GrpFilterLine)
                 {
                     GridLayout = Rows;
 
-                    field(EnvironmentName; EnvironmentName)
+                    field(ServerFilter; ServerFilter)
                     {
-                        Caption = 'Environment';
+                        Caption = 'Server';
                         ApplicationArea = All;
                         Importance = Promoted;
 
                         trigger OnValidate()
                         begin
-                            ValidateEnvironmentName();
+                            ValidateSetFilter();
                         end;
 
                         trigger OnDrillDown()
                         begin
-                            SelectEnvironmentNameFilter();
+                            SelectServerFilter();
                         end;
                     }
                     field(CustomerNo; CustomerNo)
@@ -44,7 +45,7 @@ page 50000 "IMP Connection List"
 
                         trigger OnValidate()
                         begin
-                            ValidateCustomerNoFilter();
+                            ValidateSetFilter();
                         end;
 
                         trigger OnDrillDown()
@@ -60,7 +61,7 @@ page 50000 "IMP Connection List"
 
                         trigger OnValidate()
                         begin
-                            ValidateVersionFilter();
+                            ValidateSetFilter();
                         end;
 
                         trigger OnDrillDown()
@@ -73,11 +74,9 @@ page 50000 "IMP Connection List"
 
             repeater(Group)
             {
+                FreezeColumn = "List Name";
+
                 field("No."; Rec."No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Customer No."; Rec."Customer No.")
                 {
                     ApplicationArea = All;
                 }
@@ -85,6 +84,14 @@ page 50000 "IMP Connection List"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                }
+                field(Server; Rec.Server)
+                {
+                    ApplicationArea = All;
+                }
+                field("Customer No."; Rec."Customer No.")
+                {
+                    ApplicationArea = All;
                 }
                 field(Dns; Rec.Dns)
                 {
@@ -336,27 +343,9 @@ page 50000 "IMP Connection List"
                             DatMgmt.JsonExport(lc_IA.GetAsJsonFileName(), lc_Json);
                     end;
                 }
-            }
-            group(ActServer)
-            {
-                Caption = 'Server';
-                Image = Setup;
-
-                action(ActLoadVersions)
+                action(ActConnectionsServiceLoad)
                 {
-                    Caption = 'Load versions';
-                    ApplicationArea = All;
-                    Image = Import;
-
-                    trigger OnAction()
-                    begin
-                        ImpAdmn.CallVersionList();
-                        CurrPage.Update(false);
-                    end;
-                }
-                action(ActLoadServices)
-                {
-                    Caption = 'Load services';
+                    Caption = 'Load connections';
                     ApplicationArea = All;
                     Image = Import;
 
@@ -372,7 +361,7 @@ page 50000 "IMP Connection List"
                 Image = SetupLines;
                 Enabled = EnableService;
 
-                action(ActShowServerDetails)
+                action(ActServiceShow)
                 {
                     Caption = 'Show';
                     ApplicationArea = All;
@@ -383,7 +372,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServerDetail(Rec);
                     end;
                 }
-                action(ActEditServerDetails)
+                action(ActServiceEdit)
                 {
                     Caption = 'Edit';
                     ApplicationArea = All;
@@ -394,7 +383,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServerDetailEdit(Rec);
                     end;
                 }
-                action(ActEditServerStart)
+                action(ActServiceStart)
                 {
                     Caption = 'Start';
                     ApplicationArea = All;
@@ -405,7 +394,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServiceAction(Rec, IMPServiceStatus::ToStart, true, true);
                     end;
                 }
-                action(ActEditServerReStart)
+                action(ActServiceRestart)
                 {
                     Caption = 'Restart';
                     ApplicationArea = All;
@@ -416,7 +405,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServiceAction(Rec, IMPServiceStatus::ToRestart, true, true);
                     end;
                 }
-                action(ActEditServerStop)
+                action(ActServiceStop)
                 {
                     Caption = 'Stop';
                     ApplicationArea = All;
@@ -427,7 +416,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServiceAction(Rec, IMPServiceStatus::ToStop, true, true);
                     end;
                 }
-                action(ActEditServerCreate)
+                action(ActServiceCreate)
                 {
                     Caption = 'Create';
                     ApplicationArea = All;
@@ -438,7 +427,7 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServiceCreate(Rec, true, true);
                     end;
                 }
-                action(ActEditServerRemove)
+                action(ActServiceRemove)
                 {
                     Caption = 'Remove';
                     ApplicationArea = All;
@@ -457,15 +446,13 @@ page 50000 "IMP Connection List"
 
     trigger OnOpenPage()
     begin
-        LoadServerFilter();
-        EnvironmentName := Rec.GetFilter("Environment Name");
+        ServerFilter := Rec.GetFilter(Server);
         CustomerNo := Rec.GetFilter("Customer No.");
         Version := Rec.GetFilter("Service Version");
-        if (Rec.GetFilter("Environment Name") = '') then
-            EnvironmentName := ImpAdmn.GetCurrentComputerName().ToUpper();
-        ValidateEnvironmentName();
-        ValidateCustomerNoFilter();
-        ValidateVersionFilter();
+        ShowFilter := ((ServerFilter = '') and (CustomerNo = '') and (Version = ''));
+        if (ServerFilter = '') then
+            ServerFilter := ImpAdmn.GetCurrentComputerName();
+        ValidateSetFilter();
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -477,85 +464,21 @@ page 50000 "IMP Connection List"
 
     #region Methods
 
-    procedure LoadServerFilter()
+    procedure SelectServerFilter()
     var
-        lc_Rec: Record "IMP Connection";
+        lc_IS: Record "IMP Server";
     begin
-        ServerFilter := '';
-        // Servers
-        lc_Rec.Reset();
-        lc_Rec.SetRange(Environment, lc_Rec.Environment::Server);
-        if lc_Rec.FindSet() then
-            repeat
-                if (ServerFilter <> '') then
-                    ServerFilter += '&';
-                ServerFilter += '<>' + lc_Rec."Environment Name".ToUpper();
-            until lc_Rec.Next() = 0;
-    end;
-
-    procedure SelectEnvironmentNameFilter()
-    var
-        lc_Rec: Record "IMP Connection";
-        lc_Temp: Record "Name/Value Buffer" temporary;
-        lc_Page: Page "IMP Selection List";
-        lc_Fields: List of [Integer];
-        lc_Id: Integer;
-    begin
-        // Clear
-        lc_Id := 0;
-        lc_Temp.DeleteAll();
-        // All
-        lc_Id += 1;
-        lc_Temp.Init();
-        lc_Temp.ID := lc_Id;
-        lc_Temp.Name := 'All';
-        lc_Temp.Insert();
-        // Cloud
-        lc_Id += 1;
-        lc_Temp.Init();
-        lc_Temp.ID := lc_Id;
-        lc_Temp.Name := 'Cloud';
-        lc_Temp.Insert();
-        // Select
-        lc_Rec.Reset();
-        lc_Rec.SetRange(Environment, lc_Rec.Environment::Server);
-        if lc_Rec.FindSet() then
-            repeat
-                lc_Id += 1;
-                lc_Temp.Init();
-                lc_Temp.ID := lc_Id;
-                lc_Temp.Name := lc_Rec."Environment Name".ToUpper();
-                lc_Temp.Insert();
-            until lc_Rec.Next() = 0;
-        // Show data
-        lc_Fields.Add(lc_Temp.FieldNo(Name));
-        lc_Page.HideAllEntries();
-        lc_Page.SetFields(lc_Fields, false, true);
-        lc_Page.SetData(lc_Temp);
-        lc_Page.LookupMode := true;
-        if lc_Page.RunModal() = Action::LookupOK then begin
-            lc_Page.GetSelection(lc_Temp);
-            if lc_Temp.Name.ToLower().Contains('all') then
-                EnvironmentName := ''
-            else
-                if lc_Temp.Name.ToLower().Contains('cloud') then
-                    EnvironmentName := 'cloud'
-                else
-                    EnvironmentName := lc_Temp.Name;
-            ValidateEnvironmentName();
+        lc_IS.Reset();
+        if (ServerFilter <> '') then
+            lc_IS.SetFilter(Name, ServerFilter);
+        if lc_IS.FindSet() then;
+        lc_IS.SetRange(Name);
+        if Page.RunModal(Page::"IMP Server List", lc_IS) = Action::LookupOK then begin
+            if (ServerFilter <> '') then
+                ServerFilter += '|';
+            ServerFilter += lc_IS.Name;
         end;
-    end;
-
-    procedure ValidateEnvironmentName()
-    begin
-        if (EnvironmentName = '') then
-            Rec.SetRange("Environment Name")
-        else
-            if EnvironmentName.ToLower().Contains('cloud') then
-                Rec.SetFilter("Environment Name", ServerFilter)
-            else
-                Rec.SetFilter("Environment Name", '%1', '@' + EnvironmentName);
-        CurrPage.Update(false);
+        ValidateSetFilter();
     end;
 
     procedure SelectCustomerNoFilter();
@@ -570,17 +493,8 @@ page 50000 "IMP Connection List"
         lc_Cust.SetRange("No.");
         if Page.RunModal(0, lc_Cust) = Action::LookupOK then begin
             CustomerNo := lc_Cust."No.";
-            ValidateCustomerNoFilter();
+            ValidateSetFilter();
         end;
-    end;
-
-    procedure ValidateCustomerNoFilter()
-    begin
-        if (CustomerNo = '') then
-            Rec.SetRange("Customer No.")
-        else
-            Rec.SetFilter("Customer No.", CustomerNo);
-        CurrPage.Update(false);
     end;
 
     procedure SelectVersionFilter();
@@ -597,16 +511,26 @@ page 50000 "IMP Connection List"
                 Version += '|';
             Version += lc_Entry;
         end;
-        ValidateVersionFilter();
+        ValidateSetFilter();
     end;
 
-    procedure ValidateVersionFilter()
+    procedure ValidateSetFilter()
     begin
+        if (ServerFilter = '') then
+            Rec.SetRange(Server)
+        else
+            Rec.SetFilter(Server, ServerFilter);
+
+        if (CustomerNo = '') then
+            Rec.SetRange("Customer No.")
+        else
+            Rec.SetFilter("Customer No.", CustomerNo);
+
         if (Version = '') then
             Rec.SetRange("Service Version")
         else
             Rec.SetFilter("Service Version", Version);
-        CurrPage.Update(false);
+        CurrPage.Update(true);
     end;
 
     #endregion Methods
@@ -616,8 +540,8 @@ page 50000 "IMP Connection List"
         ImpMgmt: Codeunit "IMP Management";
         DatMgmt: Codeunit "IMP Data Management";
         EnableService: Boolean;
+        ShowFilter: Boolean;
         ServerFilter: Text;
-        EnvironmentName: Text;
         CustomerNo: Text;
         Version: Text;
 }

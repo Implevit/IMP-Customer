@@ -427,20 +427,17 @@ table 50000 "IMP Connection"
     end;
 
     procedure GetUrlClient() RetValue: Text
+    var
+        lc_IS: Record "IMP Server";
     begin
-        RetValue := GetUrlClient(GetUrlBase());
-    end;
-
-    procedure GetUrlClient(_BaseUrl: Text) RetValue: Text
-    begin
-        RetValue := '';
+        lc_IS.Get(Rec.Server);
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec."Environment Name" + ':8080/' + Rec."Service Name";
+                RetValue := lc_IS.GetClientUrl() + ':8080/' + Rec."Service Name";
             Rec.Environment::Docker:
-                RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
+                RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := _BaseUrl + 'businesscentral.dynamics.com/' + Rec."Environment Id" + '/' + Rec."Environment Name";
+                RetValue := lc_IS.GetDnsUrl() + '/' + Rec."Environment Id" + '/' + Rec."Environment Name";
         end;
     end;
 
@@ -450,15 +447,17 @@ table 50000 "IMP Connection"
     end;
 
     procedure GetUrlApi(_BaseUrl: Text; _Version: Text) RetValue: Text
+    var
+        lc_IS: Record "IMP Server";
     begin
-        RetValue := '';
+        lc_IS.Get(Rec.Server);
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec."Environment Name" + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/api';
+                RetValue := lc_IS.GetClientUrl() + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/api';
             Rec.Environment::Docker:
-                RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
+                RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := _BaseUrl + 'api.businesscentral.dynamics.com/' + _Version + '/' + Rec."Environment Id" + '/Production/api/' + _Version;
+                RetValue := lc_IS.GetDnsUrl() + _Version + '/' + Rec."Environment Id" + '/Production/api/' + _Version;
         end;
     end;
 
@@ -468,15 +467,17 @@ table 50000 "IMP Connection"
     end;
 
     procedure GetUrlOdata(_BaseUrl: Text) RetValue: Text
+    var
+        lc_IS: Record "IMP Server";
     begin
-        RetValue := '';
+        lc_IS.Get(Rec.Server);
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec.Dns + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/';
+                RetValue := lc_IS.GetDnsUrl() + ':' + Format(Rec.ODataServicesPort) + '/' + Rec."Service Name" + '/';
             Rec.Environment::Docker:
-                RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
+                RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := _BaseUrl + 'api.businesscentral.dynamics.com/v2.0/' + Rec."Environment Id" + '/' + Rec."Environment Name";
+                RetValue := lc_IS.GetDnsUrl() + '/v2.0/' + Rec."Environment Id" + '/' + Rec."Environment Name";
         end;
     end;
 
@@ -487,8 +488,7 @@ table 50000 "IMP Connection"
 
     procedure GetUrlOdataService(_CompanyName: Text) RetValue: Text
     begin
-        RetValue := GetUrlOdata(GetUrlBase());
-        RetValue += 'ODataV4/IMPWebService_odata?Company=' + '''' + _CompanyName + '''';
+        RetValue += GetUrlOdata() + 'ODataV4/IMPWebService_odata?Company=' + '''' + _CompanyName + '''';
     end;
 
     procedure GetUrlSOAP() RetValue: Text
@@ -497,15 +497,17 @@ table 50000 "IMP Connection"
     end;
 
     procedure GetUrlSOAP(_BaseUrl: Text) RetValue: Text
+    var
+        lc_IS: Record "IMP Server";
     begin
-        RetValue := '';
+        lc_IS.Get(Rec.Server);
         case Rec.Environment of
             Rec.Environment::Service:
-                RetValue := _BaseUrl + Rec.Dns + ':' + Format(Rec.SOAPServicesPort) + '/' + Rec."Service Name" + '/WS';
+                RetValue := lc_IS.GetDnsUrl() + ':' + Format(Rec.SOAPServicesPort) + '/' + Rec."Service Name" + '/WS';
             Rec.Environment::Docker:
-                RetValue := _BaseUrl + Rec."Environment Name" + '/' + Rec."Service Name" + '/';
+                RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := _BaseUrl + 'businesscentral.dynamics.com/' + Rec."Environment Id" + '/' + Rec."Environment Name";
+                RetValue := lc_IS.GetDnsUrl() + '/' + Rec."Environment Id" + '/' + Rec."Environment Name";
         end;
     end;
 
@@ -942,6 +944,7 @@ table 50000 "IMP Connection"
 
     procedure ImportServerInstances(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
     var
+        lc_IS: Record "IMP Server";
         lc_IC: Record "IMP Connection";
         lc_ICTemp: Record "IMP Connection" temporary;
         lc_Token: JsonToken;
@@ -974,8 +977,13 @@ table 50000 "IMP Connection"
         if not _Root.Get('server', lc_Token) then begin
             _Response.Add('error', 'Token server missing in json');
             exit;
-        end else
+        end else begin
             lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
+            if not lc_IS.Get(lc_Server) then begin
+                _Response.Add('error', 'Server "' + lc_Server + '" missing in table ' + lc_IS.TableName());
+                exit;
+            end;
+        end;
 
         // Version
         if not _Root.Get('version', lc_Token) then
@@ -987,8 +995,13 @@ table 50000 "IMP Connection"
         if not _Root.SelectToken('dns', lc_Token) then begin
             _Response.Add('error', 'Token dns missing in json');
             exit;
-        end else
+        end else begin
             lc_Dns := BscMgmt.JsonGetTokenValue(lc_Token, 'dns').AsText();
+            if (lc_IS.Dns.ToLower() <> lc_Dns.ToLower()) then begin
+                _Response.Add('error', 'The dns "' + lc_Dns + '" dosen''t match with the server dns "' + lc_IS.Dns + '"');
+                exit;
+            end;
+        end;
 
         // Check services
         if not (_Root.Get('services', lc_Token)) then begin
@@ -1033,7 +1046,7 @@ table 50000 "IMP Connection"
 
         // Services
         foreach lc_Token in lc_Array do
-            if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, lc_Message) then
+            if not ImportServerInstance(lc_ICTemp, lc_IS, lc_Token, lc_Message) then
                 exit;
 
         // Store data
@@ -1043,7 +1056,7 @@ table 50000 "IMP Connection"
         RetValue := true;
     end;
 
-    procedure ImportServerInstance(var _Temp: Record "IMP Connection"; _Server: Text; _Dns: Text; _Root: JsonToken; var _Message: Text) RetValue: Boolean
+    procedure ImportServerInstance(var _Temp: Record "IMP Connection"; _IS: Record "IMP Server"; _Root: JsonToken; var _Message: Text) RetValue: Boolean
     var
         lc_ISI: Record "IMP Connection";
         lc_Array: JsonArray;
@@ -1058,11 +1071,14 @@ table 50000 "IMP Connection"
         // Process
         lc_ISI.Init();
 
+        // Server
+        lc_ISI.Server := _IS.Name;
+
         // Computer
         //lc_ISI.Computer := CopyStr(_Server, 1, MaxStrLen(lc_ISI.Computer));
 
         // Dns
-        lc_ISI.Dns := CopyStr(_Dns, 1, MaxStrLen(lc_ISI.Dns));
+        //lc_ISI.Dns := CopyStr(_Dns, 1, MaxStrLen(lc_ISI.Dns));
 
         // Environment
         if not _Root.SelectToken('environment', lc_Token) then begin
@@ -1230,6 +1246,7 @@ table 50000 "IMP Connection"
 
     procedure ImportDockers(_Root: JsonObject; var _Response: Text) RetValue: Boolean
     var
+        lc_IS: Record "IMP Server";
         lc_IC: Record "IMP Connection";
         lc_ICTemp: Record "IMP Connection" temporary;
         lc_Token: JsonToken;
@@ -1259,8 +1276,13 @@ table 50000 "IMP Connection"
         if not _Root.Get('server', lc_Token) then begin
             _Response := 'Token server missing in json';
             exit;
-        end else
+        end else begin
             lc_Server := BscMgmt.JsonGetTokenValue(lc_Token, 'server').AsText();
+            if not lc_IS.Get(lc_Server) then begin
+                _Response := 'Server "' + lc_Server + '" missing in table ' + lc_IS.TableName();
+                exit;
+            end;
+        end;
 
         // Version
         if not _Root.Get('version', lc_Token) then
@@ -1272,8 +1294,13 @@ table 50000 "IMP Connection"
         if not _Root.SelectToken('dns', lc_Token) then begin
             _Response := 'Token dns missing in json';
             exit;
-        end else
+        end else begin
             lc_Dns := BscMgmt.JsonGetTokenValue(lc_Token, 'dns').AsText();
+            if (lc_IS.Dns.ToLower() <> lc_Dns.ToLower()) then begin
+                _Response := 'The dns "' + lc_Dns + '" dosen''t match with the server dns "' + lc_IS.Dns + '"';
+                exit;
+            end;
+        end;
 
         // Check services or dockers
         if not ((_Root.Get('services', lc_Token) or (_Root.Get('dockers', lc_Token)))) then begin
@@ -1306,7 +1333,7 @@ table 50000 "IMP Connection"
         if _Root.Get('services', lc_Token) then begin
             lc_Array := lc_Token.AsArray();
             foreach lc_Token in lc_Array do
-                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
+                if not ImportServerInstance(lc_ICTemp, lc_IS, lc_Token, _Response) then
                     exit;
         end;
 
@@ -1314,7 +1341,7 @@ table 50000 "IMP Connection"
         if _Root.Get('dockers', lc_Token) then begin
             lc_Array := lc_Token.AsArray();
             foreach lc_Token in lc_Array do
-                if not ImportServerInstance(lc_ICTemp, lc_Server, lc_Dns, lc_Token, _Response) then
+                if not ImportServerInstance(lc_ICTemp, lc_IS, lc_Token, _Response) then
                     exit;
         end;
 
@@ -1346,11 +1373,8 @@ table 50000 "IMP Connection"
         lc_CompInfo.Get();
         lc_CompInfo.TestField("IMP Basic Dns");
 
-        // Get server
-        lc_IS.Get(_Rec.Server);
-
-        // Set computer 
-        //Rec.Computer := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec.Computer));
+        // Set server
+        Rec.Server := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec.Server));
 
         // Select type
         lc_Type := StrMenu('Service,Docker', 0, 'Select your type of service');
@@ -1362,12 +1386,12 @@ table 50000 "IMP Connection"
             Rec.Environment := Rec.Environment::Service;
             Rec."Environment Type" := Rec."Environment Type"::OnPrem;
             Rec."Environment State" := CopyStr(GetStatusToCreate(), 1, MaxStrLen(Rec."Environment State"));
-            Rec."Environment Name" := CopyStr(ImpAdmn.GetCurrentComputerName(), 1, MaxStrLen(Rec."Environment Name"));
+            Rec."Environment Name" := CopyStr(Rec.Server, 1, MaxStrLen(Rec."Environment Name"));
             Rec."Service State" := Rec."Environment State";
         end;
 
         // Set dns
-        Rec.Dns := CopyStr(Rec."Environment Name" + '.' + lc_CompInfo."IMP Basic Dns".ToLower(), 1, MaxStrLen(Rec.Dns));
+        //Rec.Dns := CopyStr(Rec."Environment Name" + '.' + lc_CompInfo."IMP Basic Dns".ToLower(), 1, MaxStrLen(Rec.Dns));
 
         // Dockers 
         if (lc_Type = 2) then begin
@@ -1377,8 +1401,10 @@ table 50000 "IMP Connection"
         end;
 
         // Select version
-        if (lc_Type = 1) then
+        if (lc_Type = 1) then begin
+            lc_IS.Get(_Rec.Server);
             lc_TVersion := lc_IS.NAVVersionSelect();
+        end;
 
         // Set version
         lc_List := lc_TVersion.Split('.');

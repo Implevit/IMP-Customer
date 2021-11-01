@@ -685,7 +685,6 @@ codeunit 50001 "IMP Administration"
 
     procedure CallServerLists(_WithConfirm: Boolean; _WithMessage: Boolean);
     var
-        lc_IC: Record "IMP Connection";
         lc_IS: Record "IMP Server";
         lc_List: List of [Text];
         lc_Entry: Text;
@@ -703,11 +702,8 @@ codeunit 50001 "IMP Administration"
                 exit;
 
         // Get server
-        lc_IC.Reset();
-        lc_IC.SetRange(Environment, lc_IC.Environment::Server);
-        lc_IC.SetFilter("Environment Name", '%1', '@' + lc_Computer);
-        lc_IC.FindFirst();
-        lc_IC.TestField("Environment Id");
+        lc_IS.Get(lc_Computer);
+        lc_IS.TestField("NAV Versions");
 
         // Call selection
         lc_List := lc_IS.NAVVersionsSelect(false);

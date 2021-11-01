@@ -233,8 +233,8 @@ codeunit 50000 "IMP Management"
             exit;
 
         case BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() of
-            //'serverversions':
-            //    lc_IS.NAVVersionsImport(_Request, _Response);
+            'serverversions':
+                lc_IS.NAVVersionsImport(_Request, _Response);
             'serverinstance', 'serverinstances':
                 lc_IC.ImportServerInstances(_Request, _Response);
             'loadversions':

@@ -80,10 +80,10 @@ page 50008 "IMP AL Object Numbers"
                     ApplicationArea = All;
                     Visible = ShowParentObject;
                 }
-                field("Last Entry No."; Rec."Last Entry No.")
+                field("Last Object No."; Rec."Last Object No.")
                 {
                     ApplicationArea = All;
-                    Visible = ShowLastEntryNo;
+                    Visible = ShowLastObjectNo;
 
                     trigger OnDrillDown()
                     begin
@@ -114,6 +114,11 @@ page 50008 "IMP AL Object Numbers"
                     begin
                         ShowFields();
                     end;
+                }
+                field("Last Message No."; Rec."Last Message No.")
+                {
+                    ApplicationArea = All;
+                    Visible = ShowLastMessageNo;
                 }
             }
         }
@@ -173,6 +178,23 @@ page 50008 "IMP AL Object Numbers"
                     NewField();
                 end;
             }
+            action(ActNewMessageNumber)
+            {
+                Caption = 'New Message';
+                Image = CreateSerialNo;
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+                Enabled = EnableActionNewMessageNumber;
+                Visible = not HideActionNewMessageNumber;
+
+                trigger OnAction()
+                begin
+                    NewMessage();
+                end;
+            }
             action(ActGit)
             {
                 Caption = 'Git';
@@ -205,13 +227,17 @@ page 50008 "IMP AL Object Numbers"
     trigger OnOpenPage()
     begin
         if (Level = 0) then
-            SetLevel0();
+            if (Rec.GetFilter("App Name") <> '') then
+                SetLevel1(Rec."Customer No.", Rec."App No.", 0)
+            else
+                SetLevel0();
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
-        EnableActionNewObjectNumber := true; // not (Rec."Object Type" in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]);
+        EnableActionNewObjectNumber := true;
         EnableActionNewFieldNumber := ((Rec."Object No." <> 0) and (Rec."Object Type" in [Rec."Object Type"::FieldNumber, Rec."Object Type"::"Table", Rec."Object Type"::"TableExtension", Rec."Object Type"::"Enum", Rec."Object Type"::"EnumExtension"]));
+        EnableActionNewMessageNumber := ((Rec."Object No." <> 0) and (Rec."Object Type" in [Rec."Object Type"::"Codeunit", Rec."Object Type"::"Table", Rec."Object Type"::"Page"]));
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -399,6 +425,13 @@ page 50008 "IMP AL Object Numbers"
         Message(Format(lc_NewEntry));
     end;
 
+    local procedure NewMessage()
+    begin
+        Rec."Last Message No." := Rec."Last Message No." + 1;
+        CurrPage.Update(true);
+        Message(Format(Rec."Last Message No."));
+    end;
+
     procedure SetData(_Level: Integer; var _Rec: Record "IMP AL Object Number")
     begin
         ShowApp := true;
@@ -422,13 +455,15 @@ page 50008 "IMP AL Object Numbers"
         ShowApp := true;
         ShowParentObject := true;
         ShowEntryNo := true;
-        ShowLastEntryNo := true;
+        ShowLastObjectNo := true;
+        ShowLastFieldNo := false;
+        ShowLastMessageNo := true;
         ShowFileName := false;
         EnabledObjectType := true;
         EnabledParentObjectType := true;
-        ShowLastFieldNo := true;
         HideActionNewObjectNumber := false;
         HideActionNewFieldNumber := false;
+        HideActionNewMessageNumber := false;
     end;
 
     procedure SetLevel1(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option)
@@ -449,16 +484,21 @@ page 50008 "IMP AL Object Numbers"
         ShowParentObject := false;
         ShowEntryNo := false;
         ShowFileName := false;
-        ShowLastEntryNo := true;
+        ShowLastObjectNo := true;
         ShowLastFieldNo := false;
+        ShowLastMessageNo := false;
         HideActionNewObjectNumber := false;
         HideActionNewFieldNumber := true;
+        HideActionNewMessageNumber := true;
         HideActionGitlab := false;
         Level := 1;
     end;
 
     procedure SetLevel2(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option; _ParentObjectType: Option)
+    var
+        lc_IAOA: Record "IMP AL Object App";
     begin
+        lc_IAOA.Get(_AppNo);
         CurrCustomerNo := _CustomerNo;
         CurrAppNo := _AppNo;
         CurrObjectType := _ObjectType;
@@ -477,18 +517,27 @@ page 50008 "IMP AL Object Numbers"
         ShowParentObject := (_ParentObjectType <> 0); // (_ObjectType in [Rec."Object Type"::"TableExtension", Rec."Object Type"::"PageExtension", Rec."Object Type"::"EnumExtension"]);
         ShowEntryNo := true;
         ShowFileName := false;
-        ShowLastEntryNo := false;
+        ShowLastObjectNo := false;
         ShowLastFieldNo := (_ObjectType in [Rec."Object Type"::"Table", Rec."Object Type"::"TableExtension", Rec."Object Type"::"Enum", Rec."Object Type"::"EnumExtension"]);
+        ShowLastMessageNo := (_ObjectType in [Rec."Object Type"::"Codeunit", Rec."Object Type"::"Table", Rec."Object Type"::"Page"]);
         EnabledObjectType := false;
         EnabledParentObjectType := false;
         HideActionNewObjectNumber := false;
-        HideActionNewFieldNumber := false;
+        HideActionNewFieldNumber := not ShowLastFieldNo;
+        HideActionNewMessageNumber := not (_ObjectType in [Rec."Object Type"::"Codeunit", Rec."Object Type"::"Table", Rec."Object Type"::"Page"]);
+        if not (lc_IAOA.HasImplevitInterface()) then begin
+            HideActionNewMessageNumber := true;
+            ShowLastMessageNo := false;
+        end;
         HideActionGitlab := false;
         Level := 2;
     end;
 
     procedure SetLevel3(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option; _ParentObjectType: Option; _ParentObjectNo: Integer)
+    var
+        lc_IAOA: Record "IMP AL Object App";
     begin
+        lc_IAOA.Get(_AppNo);
         Rec.Reset();
         Rec.SetRange("Customer No.", _CustomerNo);
         Rec.SetRange("App No.", _AppNo);
@@ -501,10 +550,14 @@ page 50008 "IMP AL Object Numbers"
         ShowParentObject := false;
         ShowEntryNo := true;
         ShowFileName := false;
-        ShowLastEntryNo := false;
+        ShowLastObjectNo := false;
         ShowLastFieldNo := false;
+        ShowLastMessageNo := false;
         HideActionNewObjectNumber := true;
         HideActionNewFieldNumber := false;
+        HideActionNewMessageNumber := (_ObjectType in [Rec."Object Type"::Table, Rec."Object Type"::Page, Rec."Object Type"::Codeunit]);
+        if not (lc_IAOA.HasImplevitInterface()) then
+            HideActionNewMessageNumber := true;
         HideActionGitlab := true;
         Level := 3;
     end;
@@ -514,8 +567,10 @@ page 50008 "IMP AL Object Numbers"
     var
         EnableActionNewObjectNumber: Boolean;
         EnableActionNewFieldNumber: Boolean;
+        EnableActionNewMessageNumber: Boolean;
         HideActionNewObjectNumber: Boolean;
         HideActionNewFieldNumber: Boolean;
+        HideActionNewMessageNumber: Boolean;
         HideActionGitlab: Boolean;
         ShowCustomer: Boolean;
         ShowFileName: Boolean;
@@ -523,8 +578,9 @@ page 50008 "IMP AL Object Numbers"
         ShowApp: Boolean;
         ShowParentObject: Boolean;
         ShowEntryNo: Boolean;
-        ShowLastEntryNo: Boolean;
+        ShowLastObjectNo: Boolean;
         ShowLastFieldNo: Boolean;
+        ShowLastMessageNo: Boolean;
         EnabledParentObjectType: Boolean;
         EnabledObjectType: Boolean;
         Level: Integer;

@@ -126,7 +126,11 @@ table 50004 "IMP AL Object App"
             if (_WithError) then
                 Error(lc_Txt1_Txt);
         end;
+    end;
 
+    procedure HasImplevitInterface() RetValue: Boolean
+    begin
+        RetValue := (Rec.Name.ToLower().Contains('imp-interface')) or (Rec.Dependencies.ToLower().Contains('imp-interface'));
     end;
 
     procedure InitALNumbers()
@@ -176,6 +180,15 @@ table 50004 "IMP AL Object App"
         lc_IAON."Parent Object Type" := lc_IAON."Parent Object Type"::TableData;
         lc_IAON."Parent Object No." := 0;
         lc_IAON."Object Type" := lc_IAON."Object Type"::Query;
+        lc_IAON."Object No." := 0;
+        if lc_IAON.Insert(true) then;
+        // XMLPort
+        lc_IAON.Init();
+        lc_IAON."Customer No." := REC."Customer No.";
+        lc_IAON."App No." := Rec."No.";
+        lc_IAON."Parent Object Type" := lc_IAON."Parent Object Type"::TableData;
+        lc_IAON."Parent Object No." := 0;
+        lc_IAON."Object Type" := lc_IAON."Object Type"::XMLport;
         lc_IAON."Object No." := 0;
         if lc_IAON.Insert(true) then;
         // PageExtension
@@ -303,13 +316,25 @@ table 50004 "IMP AL Object App"
     #region Methods Path and folders
 
     procedure GetCustomerRootPath() RetValue: Text
+    var
+        lc_CompInfo: Record "Company Information";
     begin
-        RetValue := '\\impfps01\Daten\04_Entwicklung\Kunden\';
+        RetValue := '';
+        lc_CompInfo.Get();
+        lc_CompInfo.TestField("IMP Customers Path");
+        RetValue := lc_CompInfo."IMP Customers Path";
+        if not RetValue.EndsWith('\') then
+            RetValue += '\';
     end;
 
-    procedure GetCustomerRootPath(_Abbreviation: Text) RetValue: Text
+    procedure GetCustomerPath(_Abbreviation: Text) RetValue: Text
     begin
-        RetValue := GetCustomerRootPath() + _Abbreviation.ToUpper() + '\Apps\';
+        RetValue := GetCustomerRootPath() + _Abbreviation.ToUpper() + '\';
+    end;
+
+    procedure GetCustomerAppsPath(_Abbreviation: Text) RetValue: Text
+    begin
+        RetValue := GetCustomerPath(_Abbreviation) + 'Apps\';
     end;
 
     procedure GetALFolder(_ObjectType: Option) RetValue: Text;
@@ -402,7 +427,7 @@ table 50004 "IMP AL Object App"
     begin
         lc_Cust.Get(_CustomerNo);
         lc_Cust.TestField("IMP Abbreviation");
-        ImportApps(_CustomerNo, GetCustomerRootPath(lc_Cust."IMP Abbreviation"), _WithConfirm, _WithMessage);
+        ImportApps(_CustomerNo, GetCustomerAppsPath(lc_Cust."IMP Abbreviation"), _WithConfirm, _WithMessage);
     end;
 
     procedure ImportApps(_CustomerNo: Code[20]; _DefaultPath: Text; _WithConfirm: Boolean; _WithMessage: Boolean) RetValue: Boolean
@@ -511,7 +536,7 @@ table 50004 "IMP AL Object App"
         // Check dependencies
         lc_DependenciesText := '';
         lc_IAOA.Reset();
-        lc_IAOA.SetRange("Customer No.", _CustomerNo);
+        //lc_IAOA.SetRange("Customer No.", _CustomerNo);
         foreach lc_Entry in lc_Dependencies do begin
             // Get publisher
             if not lc_Entry.AsObject().SelectToken('publisher', lc_Token) then
@@ -674,6 +699,8 @@ table 50004 "IMP AL Object App"
         lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::PageExtension));
         lc_ObjectTypes.Add(lc_IAON."Object Type"::Codeunit);
         lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Codeunit));
+        lc_ObjectTypes.Add(lc_IAON."Object Type"::Report);
+        lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Report));
         lc_ObjectTypes.Add(lc_IAON."Object Type"::Query);
         lc_ObjectTypesText.Add(Format(lc_IAON."Object Type"::Query));
         lc_ObjectTypes.Add(lc_IAON."Object Type"::XMLport);
@@ -699,6 +726,7 @@ table 50004 "IMP AL Object App"
 
     local procedure LoadObject(_CustomerNo: Code[20]; _AppNo: Integer; _ObjectType: Option; _Path: Text; var _File: Record "Name/Value Buffer") RetValue: Boolean
     var
+        lc_IAOA: Record "IMP AL Object App";
         lc_IAON: Record "IMP AL Object Number";
         lc_FileMgmt: Codeunit "File Management";
         lc_TempBlob: Codeunit "Temp Blob";
@@ -792,6 +820,14 @@ table 50004 "IMP AL Object App"
         // Load field numbers
         if (lc_IAON."Object Type" in [lc_IAON."Object Type"::Table, lc_IAON."Object Type"::TableExtension, lc_IAON."Object Type"::Enum, lc_IAON."Object Type"::EnumExtension]) then
             LoadObjectEntries(_CustomerNo, _AppNo, lc_InStream, lc_IAON."Object No.", lc_IAON."Object Type", lc_IAON."Object Name");
+
+        // Load implevit interface messages
+        if lc_IAOA.Get(_AppNo) then
+            if (lc_IAOA.HasImplevitInterface()) then
+                if (lc_IAON."Object Type" in [lc_IAON."Object Type"::Codeunit, lc_IAON."Object Type"::Table, lc_IAON."Object Type"::Page]) then begin
+                    lc_TempBlob.CreateInStream(lc_InStream, TextEncoding::UTF8);
+                    LoadObjectMessges(lc_InStream, lc_IAON);
+                end;
 
         // Return
         RetValue := true;
@@ -1009,6 +1045,80 @@ table 50004 "IMP AL Object App"
 
         // Set number
         RetValue := Evaluate(_No, lc_No);
+    end;
+
+    local procedure LoadObjectMessges(_InStream: InStream; var _IAON: Record "IMP AL Object Number")
+    var
+        lc_Line: Text;
+        lc_Name: Text;
+        lc_Find: Text;
+        lc_List: List of [Text];
+        lc_List2: List of [Text];
+        lc_Entry: Text;
+        lc_Int: Integer;
+        lc_No1: Text;
+        lc_No2: Text;
+        lc_No: Integer;
+        lc_Prefix: Text;
+        lc_CrLf: Text;
+        lc_Zeros: Text;
+    begin
+        // Init
+        lc_CrLf[1] := 13;
+        lc_CrLf[2] := 10;
+
+        // Set prefix
+        case _IAON."Object Type" of
+            _IAON."Object Type"::Codeunit:
+                lc_Name := 'C';
+            _IAON."Object Type"::Page:
+                lc_Name := 'P';
+            _IAON."Object Type"::Table:
+                lc_Name := 'T';
+            else
+                exit;
+        end;
+
+        // Set name
+        lc_Name += Format(_IAON."Object No.") + '.';
+
+        // Set find
+        lc_Find := '''' + lc_Name;
+
+        // Read instream
+        while not _InStream.EOS do begin
+            // Read line
+            _InStream.ReadText(lc_Line);
+            // Load message
+            if lc_Line.Contains(lc_Find) then begin
+                // Split in parameters
+                lc_List := lc_Line.Split(',');
+                foreach lc_Entry in lc_List do
+                    if lc_Entry.Contains(lc_Find) then begin
+                        // Clear
+                        lc_Entry := lc_Entry.Trim().Replace('''', '');
+                        // Parameter message no found
+                        lc_List2 := lc_Entry.Split('.');
+                        // Split for number
+                        lc_No1 := lc_List2.Get(2);
+                        lc_No2 := '';
+                        lc_Prefix := '';
+                        lc_Zeros := '';
+                        for lc_Int := 1 to StrLen(lc_No1) do
+                            // Eleminate characters
+                            if (CopyStr(lc_No1, lc_Int, 1) in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']) then
+                                lc_No2 += CopyStr(lc_No1, lc_Int, 1)
+                            else
+                                lc_Prefix += CopyStr(lc_No1, lc_Int, 1);
+                        // Replase number
+                        if Evaluate(lc_No, lc_No2) then
+                            if (_IAON."Last Message No." < lc_No) then
+                                _IAON."Last Message No." := lc_No;
+                    end;
+            end;
+        end;
+
+        _IAON.Modify(true);
     end;
 
     #endregion Methods Import Apps

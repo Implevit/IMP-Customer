@@ -51,7 +51,6 @@ page 50007 "IMP AL Object Apps"
                 field(Dependencies; Rec.Dependencies)
                 {
                     ApplicationArea = All;
-                    Visible = false;
                 }
             }
         }

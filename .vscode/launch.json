@@ -1,0 +1,80 @@
+{
+    "version":  "0.2.0",
+    "configurations":  [
+                           {
+                               "type":  "al",
+                               "request":  "launch",
+                               "name":  "Microsoft cloud Sandbox_yma",
+                               "startupObjectType":  "Page",
+                               "startupObjectId":  379,
+                               "breakOnRecordWrite":  true,
+                               "launchBrowser":  true,
+                               "schemaUpdateMode":  "Synchronize",
+                               "environmentType":  "Sandbox",
+                               "environmentName":  "Sandbox_yma",
+                               "tenant":  "06e77f86-5e8f-4477-8004-535d939ff179",
+                               "dependencyPublishingOption":  "Ignore",
+                               "breakOnError":  true
+                           },
+                           {
+                               "type":  "al",
+                               "request":  "launch",
+                               "name":  "01 IMP BC180 PROD1",
+                               "server":  "http://IMPENT01",
+                               "authentication":  "UserPassword",
+                               "serverInstance":  "IMP-BC180-PROD1",
+                               "startupObjectType":  "Page",
+                               "startupObjectId":  9005,
+                               "launchBrowser":  true,
+                               "enableLongRunningSqlStatements":  true,
+                               "enableSqlInformationDebugger":  true,
+                               "schemaUpdateMode":  "ForceSync",
+                               "port":  7159,
+                               "breakOnError":  true
+                           },
+                           {
+                               "type":  "al",
+                               "request":  "launch",
+                               "name":  "02 IMP BC180 PROD1",
+                               "server":  "http://IMPENT02",
+                               "authentication":  "UserPassword",
+                               "serverInstance":  "IMP-BC180-PROD1",
+                               "startupObjectType":  "Page",
+                               "startupObjectId":  9005,
+                               "launchBrowser":  true,
+                               "enableLongRunningSqlStatements":  true,
+                               "enableSqlInformationDebugger":  true,
+                               "schemaUpdateMode":  "ForceSync",
+                               "port":  7159,
+                               "breakOnError":  true
+                           },
+                           {
+                               "type":  "al",
+                               "request":  "attach",
+                               "name":  "Debug WebserviceClient IMP BC180 PROD1",
+                               "server":  "http://IMPENT02",
+                               "authentication":  "UserPassword",
+                               "serverInstance":  "IMP-BC180-PROD1",
+                               "breakOnRecordWrite":  false,
+                               "breakOnNext":  "WebServiceClient",
+                               "port":  7159,
+                               "breakOnError":  true
+                           },
+                           {
+                               "type":  "al",
+                               "request":  "launch",
+                               "name":  "IMP BC180 PROD2",
+                               "server":  "http://IMPENT02",
+                               "authentication":  "UserPassword",
+                               "serverInstance":  "IMP-BC180-PROD2",
+                               "startupObjectType":  "Page",
+                               "startupObjectId":  9005,
+                               "launchBrowser":  true,
+                               "enableLongRunningSqlStatements":  true,
+                               "enableSqlInformationDebugger":  true,
+                               "schemaUpdateMode":  "ForceSync",
+                               "port":  8369,
+                               "breakOnError":  true
+                           }
+                       ]
+}

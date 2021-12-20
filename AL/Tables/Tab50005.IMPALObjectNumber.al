@@ -93,9 +93,9 @@ table 50005 "IMP AL Object Number"
             Caption = 'Object No.';
             DataClassification = CustomerContent;
         }
-        field(10; "Last Entry No."; Integer)
+        field(10; "Last Object No."; Integer)
         {
-            Caption = 'Last Entry No.';
+            Caption = 'Last Object No.';
             FieldClass = FlowField;
             CalcFormula = max("IMP AL Object Number"."Object No." where(
                                 "Customer No." = field("Customer No."),
@@ -117,6 +117,11 @@ table 50005 "IMP AL Object Number"
                                 "Parent Object No." = field("Object No.")
                                 ));
             Editable = false;
+        }
+        field(12; "Last Message No."; Integer)
+        {
+            Caption = 'Last Message No.';
+            DataClassification = CustomerContent;
         }
         field(20; "App Name"; Text[50])
         {
@@ -213,14 +218,17 @@ table 50005 "IMP AL Object Number"
                             until lc_Rec.Next() = 0;
                         end;
                 end;
+
                 // Select entry
-                lc_Selection := StrMenu(lc_Text, 1, StrSubstNo(lc_Txt2_Txt, Rec."Parent Object Name"));
-                if (lc_Selection = 0) then
-                    // No selection
-                    Error('')
-                else
-                    // Set selection
-                    Rec.Validate("Parent Object No.", lc_List.Get(lc_Selection));
+                if (Rec."Parent Object No." = 0) then begin
+                    lc_Selection := StrMenu(lc_Text, 1, StrSubstNo(lc_Txt2_Txt, Rec."Parent Object Name"));
+                    if (lc_Selection = 0) then
+                        // No selection
+                        Error('')
+                    else
+                        // Set selection
+                        Rec.Validate("Parent Object No.", lc_List.Get(lc_Selection));
+                end;
 
                 // Create new object no
                 Rec."Object No." := GetNextNo(Rec."Customer No.", Rec."App No.", Rec."Parent Object Type", Rec."Parent Object No.", Rec."Object Type");

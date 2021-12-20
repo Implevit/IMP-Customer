@@ -17,17 +17,18 @@ codeunit 50000 "IMP Management"
     begin
         if (_FullFileName <> '') then begin
             if ImportFile(_FullFileName, lc_Instream, TextEncoding::UTF8, false) then
-                TranslateXlfFile(lc_InStream, lc_TempSource.Name, false, _WithConfirm, _WithMessage);
+                TranslateXlfFile(lc_InStream, lc_TempSource.Name, _WithConfirm, _WithMessage);
         end else
             if UploadIntoStream(lc_Txt0_Txt, '', BscMgmt.GetFileFilterAll(), lc_FileName, lc_InStream) then
-                TranslateXlfFile(lc_InStream, lc_FileName, true, _WithConfirm, _WithMessage);
+                TranslateXlfFile(lc_InStream, lc_FileName, _WithConfirm, _WithMessage);
     end;
 
     [Scope('OnPrem')]
-    procedure TranslateXlfFile(var _InStream: InStream; _FullFileName: Text; _ShowFile: Boolean; _WithConfirm: Boolean; _WithMessage: Boolean)
+    procedure TranslateXlfFile(var _InStream: InStream; _FullFileName: Text; _WithConfirm: Boolean; _WithMessage: Boolean)
     var
-        lc_TempTarget: Record "Name/Value Buffer" temporary;
+        //lc_TempTarget: Record "Name/Value Buffer" temporary;
         lc_FielMgmt: Codeunit "File Management";
+        lc_TempBlob: Codeunit "Temp Blob";
         lc_InStream: InStream;
         lc_OutStream: OutStream;
         lc_FilePath: Text;
@@ -110,8 +111,9 @@ codeunit 50000 "IMP Management"
         lc_NewFullFileName := lc_FilePath + lc_FileName + '.new.' + lc_FileExtension;
 
         // Create Target
-        lc_TempTarget.Init();
-        lc_TempTarget."Value BLOB".CreateOutStream(lc_OutStream, TextEncoding::UTF8);
+        lc_TempBlob.CreateOutStream(lc_OutStream, TextEncoding::UTF8);
+        //lc_TempTarget.Init();
+        //lc_TempTarget."Value BLOB".CreateOutStream(lc_OutStream, TextEncoding::UTF8);
 
         // Read Source
         while not _InStream.EOS() do begin
@@ -167,11 +169,9 @@ codeunit 50000 "IMP Management"
         end;
 
         // Export Output
-        if (_ShowFile) then begin
-            lc_TempTarget."Value BLOB".CreateInStream(lc_InStream, TextEncoding::UTF8);
-            DownloadFromStream(lc_InStream, 'Export', '', '', lc_NewFullFileName);
-        end else
-            lc_TempTarget."Value BLOB".Export(lc_NewFullFileName);
+        //lc_TempTarget."Value BLOB".CreateInStream(lc_InStream, TextEncoding::UTF8);
+        lc_TempBlob.CreateInStream(lc_InStream, TextEncoding::UTF8);
+        DownloadFromStream(lc_InStream, 'Export', '', '', lc_NewFullFileName);
 
         // Show Message
         if ((_WithMessage) and (GuiAllowed())) then
@@ -217,7 +217,7 @@ codeunit 50000 "IMP Management"
     begin
         lc_Page.HideAllEntries();
         lc_Page.SetFields(_Fields, false, _SingleSelection);
-        lc_Page.SetData(_List);
+        lc_Page.SetData(0, _List);
         lc_Page.LookupMode := true;
         if lc_Page.RunModal() = Action::LookupOK then
             lc_Page.GetSelection(_List);
@@ -248,7 +248,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnGetConnection(var _Object: JsonObject; var _ConnectionNo: Code[20]; var _Url: Text; var _Tenant: Text; var _CustomerNo: Text; var _CompanyName: Text; var _CompanyId: Text; var _AuthNo: Integer; var _Username: Text; var _Password: Text; var _Token: Text; var _ClientId: Text; var _SecretId: Text; var _Found: Boolean)
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
     begin
         // Init
         _Found := false;
@@ -256,14 +256,14 @@ codeunit 50000 "IMP Management"
         _Url := '';
         _AuthNo := 0;
         // Get
-        _Found := lc_ISI.Get(_ConnectionNo);
+        _Found := lc_IC.Get(_ConnectionNo);
         // Found
         if (_Found) then begin
-            _AuthNo := lc_ISI."Authorisation No.";
-            _Url := lc_ISI.Url;
-            _Tenant := lc_ISI."Environment Id";
-            if (lc_ISI.Environment <> lc_ISI.Environment::Cloud) then begin
-                _Url := 'http://' + lc_ISI."Environment Name".ToLower().Replace('impent02', 'impent01') + ':' + Format(lc_ISI.ODataServicesPort) + '/' + lc_ISI."Service Name";
+            _AuthNo := lc_IC."Authorisation No.";
+            _Url := lc_IC.Url;
+            _Tenant := lc_IC."Environment Id";
+            if (lc_IC.Environment <> lc_IC.Environment::Cloud) then begin
+                _Url := 'http://' + lc_IC."Environment Name".ToLower() + ':' + Format(lc_IC.ODataServicesPort) + '/' + lc_IC."Service Name";
                 _Tenant := 'default';
             end;
         end;
@@ -271,7 +271,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnSelectConnection(var _Object: JsonObject; var _ConnectionNo: Code[20]; var _Url: Text; var _Tenant: Text; var _CustomerNo: Text; var _CompanyName: Text; var _CompanyId: Text; var _AuthNo: Integer; var _Username: Text; var _Password: Text; var _Token: Text; var _ClientId: Text; var _SecretId: Text; var _Selected: Boolean; var _Skip: Boolean)
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
         lc_ConnectionNo: Code[20];
         lc_Found: Boolean;
     begin
@@ -284,32 +284,32 @@ codeunit 50000 "IMP Management"
         _Url := '';
         _AuthNo := 0;
         // Select entry
-        lc_ISI.Reset();
+        lc_IC.Reset();
         if (lc_ConnectionNo <> '') then
-            lc_ISI.SetRange("No.", lc_ConnectionNo);
-        if lc_ISI.FindSet() then;
-        lc_ISI.SetRange("No.");
+            lc_IC.SetRange("No.", lc_ConnectionNo);
+        if lc_IC.FindSet() then;
+        lc_IC.SetRange("No.");
         // Lookup page
-        if not (Page.RunModal(Page::"IMP Connection List", lc_ISI) = Action::LookupOK) then
+        if not (Page.RunModal(Page::"IMP Connection List", lc_IC) = Action::LookupOK) then
             _Skip := true
         else begin
             _Selected := true;
             // Fill parameters
-            _ConnectionNo := lc_ISI."No.";
-            _CustomerNo := lc_ISI."Customer No.";
-            _CompanyName := lc_ISI."Company Name";
-            _CompanyId := lc_ISI."Company Id";
+            _ConnectionNo := lc_IC."No.";
+            _CustomerNo := lc_IC."Customer No.";
+            _CompanyName := lc_IC."Company Name";
+            _CompanyId := lc_IC."Company Id";
             // Set url
-            if (lc_ISI.Environment = lc_ISI.Environment::Cloud) then begin
-                _Url := lc_ISI.GetUrlOdata();
-                _Tenant := lc_ISI."Environment Id";
+            if (lc_IC.Environment = lc_IC.Environment::Cloud) then begin
+                _Url := lc_IC.GetUrlOdata();
+                _Tenant := lc_IC."Environment Id";
             end else begin
-                _Url := lc_ISI.GetUrlOdata();
-                _Url := _Url.ToLower().Replace('impent02', 'impent01');
+                _Url := lc_IC.GetUrlOdata();
+                _Url := _Url.ToLower();
                 _Tenant := 'default';
             end;
             // Load authorisation
-            _AuthNo := lc_ISI."Authorisation No.";
+            _AuthNo := lc_IC."Authorisation No.";
             C70025_OnGetAuthorisation(_AuthNo, _Username, _Password, _Token, _ClientId, _SecretId, lc_Found);
         end;
     end;
@@ -379,7 +379,7 @@ codeunit 50000 "IMP Management"
 
     procedure GetODataConnection(var _Result: JsonObject; _ConnectionNo: Code[20]; _CompanyName: Text; _CompanyId: Text; _Convert: Boolean) RetValue: Boolean
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
         //lc_CrpMgmt: Codeunit "Cryptography Management";
         lc_Base64: Codeunit "Base64 Convert";
         lc_Object: JsonObject;
@@ -393,7 +393,7 @@ codeunit 50000 "IMP Management"
         clear(_Result);
 
         // Get server
-        if not lc_ISI.Get(_ConnectionNo) then begin
+        if not lc_IC.Get(_ConnectionNo) then begin
             _Result.Add('error', 'Connection no. ' + _ConnectionNo + ' not found');
             if (GuiAllowed()) then
                 Message(lc_Txt0_Txt, _ConnectionNo);
@@ -401,7 +401,7 @@ codeunit 50000 "IMP Management"
         end;
 
         // Check company name
-        if (lc_ISI."Company Name" = '') then begin
+        if (lc_IC."Company Name" = '') then begin
             _Result.Add('error', 'Company name is mandantory');
             if (GuiAllowed()) then
                 Message(lc_Txt1_Txt);
@@ -409,7 +409,7 @@ codeunit 50000 "IMP Management"
         end;
 
         // Check customer no
-        if (lc_ISI."Customer No." = '') then begin
+        if (lc_IC."Customer No." = '') then begin
             _Result.Add('error', 'Customer no is mandantory');
             if (GuiAllowed()) then
                 Message(lc_Txt2_Txt);
@@ -418,13 +418,13 @@ codeunit 50000 "IMP Management"
 
         // Set server
         lc_Object.Add('data', 'ServerConnection');
-        lc_Object.Add('connectionNo', lc_ISI."No.");
-        if (lc_ISI.Environment = lc_ISI.Environment::Cloud) then
-            lc_Object.Add('tenant', lc_ISI."Environment Id")
+        lc_Object.Add('connectionNo', lc_IC."No.");
+        if (lc_IC.Environment = lc_IC.Environment::Cloud) then
+            lc_Object.Add('tenant', lc_IC."Environment Id")
         else
             lc_Object.Add('tenant', 'default');
-        lc_Object.Add('url', lc_ISI.GetUrlOdata());
-        lc_Object.Add('customerNo', lc_ISI."Customer No.");
+        lc_Object.Add('url', lc_IC.GetUrlOdata());
+        lc_Object.Add('customerNo', lc_IC."Customer No.");
         // Company
         lc_Object.Add('companyName', _CompanyName);
         _CompanyId := _CompanyId.Replace('{', '');
@@ -432,8 +432,8 @@ codeunit 50000 "IMP Management"
         lc_Object.Add('companyId', _CompanyId);
 
         // Set authorisation
-        if (lc_ISI."Authorisation No." <> 0) then
-            if not AddODataAuthorisation(lc_Object, lc_ISI."Authorisation No.") then
+        if (lc_IC."Authorisation No." <> 0) then
+            if not AddODataAuthorisation(lc_Object, lc_IC."Authorisation No.") then
                 exit;
 
         // Convert
@@ -562,7 +562,7 @@ codeunit 50000 "IMP Management"
         RetValue := false;
         lc_Page.HideAllEntries();
         lc_Page.SetFields(_Fields, false, _SingleSelection);
-        lc_Page.SetData(_List);
+        lc_Page.SetData(0, _List);
         lc_Page.LookupMode := true;
         if lc_Page.RunModal() = Action::LookupOK then begin
             lc_Page.GetSelection(_List);

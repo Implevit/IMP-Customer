@@ -18,7 +18,7 @@ page 50001 "IMP Connection Card"
                     Importance = Promoted;
                     Editable = false;
                 }
-                field(Dns; Rec.Dns)
+                field(Server; Rec.Server)
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
@@ -29,6 +29,10 @@ page 50001 "IMP Connection Card"
                     ApplicationArea = All;
                     ShowMandatory = true;
                 }
+                field("Customer Abbreviation"; Rec."Customer Abbreviation")
+                {
+                    ApplicationArea = All;
+                }
                 field("List Name"; Rec."List Name")
                 {
                     ApplicationArea = All;
@@ -36,12 +40,18 @@ page 50001 "IMP Connection Card"
                 field(Url; Rec.Url)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
 
                     trigger OnAssistEdit()
                     begin
                         if (Rec.Url <> '') then
                             Hyperlink(Rec.Url);
                     end;
+                }
+                field("WebService In Launch"; Rec."WebService In Launch")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpEnvironment)
@@ -51,32 +61,39 @@ page 50001 "IMP Connection Card"
                 field(Environment; Rec.Environment)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment Type"; Rec."Environment Type")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment Name"; Rec."Environment Name")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment Id"; Rec."Environment Id")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment State"; Rec."Environment State")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
             }
             group(GrpServerInstance)
             {
                 Caption = 'Service';
+                Visible = ShowService;
 
                 field("Service Name"; Rec."Service Name")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service State"; Rec."Service State")
                 {
@@ -87,15 +104,18 @@ page 50001 "IMP Connection Card"
                 field("Service Status"; Rec."Service Status")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
                 field("Service NAV Version"; Rec."Service NAV Version")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service Version"; Rec."Service Version")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service Full Version"; Rec."Service Full Version")
                 {
@@ -104,65 +124,79 @@ page 50001 "IMP Connection Card"
                 field("Service Account"; Rec."Service Account")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpPorts)
             {
                 Caption = 'Ports';
+                Visible = ShowPorts;
 
                 field(ManagementServicesPort; Rec.ManagementServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(ClientServicesPort; Rec.ClientServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
                 field(SOAPServicesPort; Rec.SOAPServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
                 field(ODataServicesPort; Rec.ODataServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
-                field(DeveloperServiceServerPort; Rec.DeveloperServiceServerPort)
+                field(DeveloperServicesPort; Rec.DeveloperServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                     Editable = false;
                 }
             }
             group(GrpDatabase)
             {
                 Caption = 'SQL Server';
+                Visible = ShowDatabase;
 
                 field(DatabaseServer; Rec.DatabaseServer)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(DatabaseInstance; Rec.DatabaseInstance)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(DatabaseName; Rec.DatabaseName)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpCredential)
             {
                 Caption = 'Credential';
+                Visible = ShowCredential;
 
                 field(ClientServicesCredentialType; Rec.ClientServicesCredentialType)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(ServicesCertificateThumbprint; Rec.ServicesCertificateThumbprint)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
 
             }
@@ -175,6 +209,7 @@ page 50001 "IMP Connection Card"
                 field("Authorisation No."; Rec."Authorisation No.")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpCompany)
@@ -200,9 +235,13 @@ page 50001 "IMP Connection Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Rec.NewRecord(BelowxRec, '', Rec);
+        Rec.NewRecord(BelowxRec, Rec.GetFilter("Customer No."), Rec);
+        ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowService := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
         ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
-        ShowAuthorisation := (Rec.Environment = Rec.Environment::Cloud);
+        ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -211,11 +250,21 @@ page 50001 "IMP Connection Card"
         Rec."Service Status" := Rec."Service Status"::ToRemove;
     end;
 
+    trigger OnOpenPage()
+    begin
+        ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowService := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
+        ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
+    end;
+
     trigger OnClosePage()
     var
         lc_AdmMgmt: Codeunit "IMP Administration";
     begin
-        if (Rec.Environment = Rec.Environment::Service) then
+        if ((Rec."No." <> '') and (Rec.Environment = Rec.Environment::Service)) then
             case Rec."Service Status" of
                 Rec."Service Status"::ToCreate:
                     lc_AdmMgmt.CallServiceCreate(Rec, true, true);
@@ -229,4 +278,8 @@ page 50001 "IMP Connection Card"
     var
         ShowCompany: Boolean;
         ShowAuthorisation: Boolean;
+        ShowPorts: Boolean;
+        ShowService: Boolean;
+        ShowDatabase: Boolean;
+        ShowCredential: Boolean;
 }

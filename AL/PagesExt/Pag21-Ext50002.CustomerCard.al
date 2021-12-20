@@ -23,6 +23,7 @@ pageextension 50002 "IMP Pag21-Ext50002" extends "Customer Card"
                 field("IMP Connections"; Rec."IMP Connections")
                 {
                     ApplicationArea = All;
+                    Visible = ShowConnections;
                 }
             }
         }
@@ -51,4 +52,16 @@ pageextension 50002 "IMP Pag21-Ext50002" extends "Customer Card"
             }
         }
     }
+
+    #region Triggers
+
+    trigger OnOpenPage()
+    begin
+        ShowConnections := ((UserId.ToLower() = 'impl')); // or (UserId.ToLower() = 'imp\r.meurer'));
+    end;
+
+    #endregion Triggers
+
+    var
+        ShowConnections: Boolean;
 }

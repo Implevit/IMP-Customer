@@ -32,6 +32,10 @@ page 50009 "IMP Server List"
                 {
                     ApplicationArea = All;
                 }
+                field("Certificate Thumbprint"; Rec."Certificate Thumbprint")
+                {
+                    ApplicationArea = All;
+                }
                 field(Connections; Rec.Connections)
                 {
                     ApplicationArea = All;
@@ -48,19 +52,22 @@ page 50009 "IMP Server List"
     {
         area(Processing)
         {
-            action(ActLoadVersions)
+            action(ActRefresh)
             {
-                Caption = 'Load Navision Versions';
+                Caption = 'Refresh';
                 ApplicationArea = All;
-                Image = Import;
+                Image = Refresh;
                 Enabled = EnableLoadVersion;
                 Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
-                    ImpAdmn.CallVersionList();
-                    CurrPage.Update(false);
+                    if ((Rec.Name = BscMgmt.System_GetCurrentComputerName().ToUpper())) then begin
+                        ImpAdmn.CallVersionList(true, true);
+                        CurrPage.Update(false);
+                    end else
+                        ShowOtherServerList(Rec);
                 end;
             }
         }
@@ -70,12 +77,38 @@ page 50009 "IMP Server List"
 
     trigger OnAfterGetCurrRecord()
     begin
-        EnableLoadVersion := (Rec.Name = ImpAdmn.GetCurrentComputerName().ToUpper());
+        EnableLoadVersion := (Rec.Type = Rec.Type::App);
     end;
 
     #endregion Triggers
 
+    #region Methodes
+
+    local procedure ShowOtherServerList(var _Rec: Record "IMP Server")
     var
+        lc_AS: Record "Active Session";
+        lc_Current: Text;
+        lc_Server: Text;
+        lc_Url: Text;
+    begin
+        // Get current server
+        lc_Current := BscMgmt.System_GetCurrentComputerName().ToLower();
+        lc_Server := _Rec.Name;
+        // Get sesssion
+        lc_AS.Get(ServiceInstanceId(), SessionId());
+        // Set url
+        lc_Url := 'http://' + lc_Server.ToLower() + ':8080/' + lc_AS."Server Instance Name";
+        lc_Url += '?Company=' + CompanyName + '&page=50009&mode=View';
+        lc_Url += '&filter=''Name'' IS ''' + _Rec.Name + '''';
+
+        // Call url
+        Hyperlink(lc_Url);
+    end;
+
+    #endregion Methodes
+
+    var
+        BscMgmt: Codeunit "IMP Basic Management";
         ImpAdmn: Codeunit "IMP Administration";
         EnableLoadVersion: Boolean;
 }

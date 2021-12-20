@@ -18,5 +18,15 @@ tableextension 50000 "IMP Tab79-Ext50000" extends "Company Information"
             Caption = 'Basic Dns';
             DataClassification = CustomerContent;
         }
+        field(50030; "IMP Customers Path"; Text[250])
+        {
+            Caption = 'Customers Path';
+            DataClassification = CustomerContent;
+        }
+        field(50040; "IMP Delete Info File"; Boolean)
+        {
+            Caption = 'Delete Info File';
+            DataClassification = CustomerContent;
+        }
     }
 }

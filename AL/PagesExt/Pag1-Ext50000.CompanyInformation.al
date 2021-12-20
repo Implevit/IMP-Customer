@@ -26,6 +26,29 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                 {
                     ApplicationArea = All;
                 }
+                field("IMP Customers Path"; Rec."IMP Customers Path")
+                {
+                    ApplicationArea = All;
+
+                    trigger OnAssistEdit()
+                    var
+                        lc_Path: Text;
+                    begin
+                        // Init
+                        if (Rec."IMP Customers Path" = '') then
+                            lc_Path := '\\impfps01\Daten\04_Entwicklung\Kunden\';
+                        // Select
+                        lc_Path := BscMgmt.GetFolder(lc_Path);
+                        // Set
+                        if (lc_Path <> '') then
+                            if (lc_Path.ToLower() <> Rec."IMP Customers Path".ToLower()) then
+                                Rec."IMP Customers Path" := CopyStr(lc_Path, 1, MaxStrLen(Rec."IMP Customers Path"));
+                    end;
+                }
+                field("IMP Delete Info File"; Rec."IMP Delete Info File")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

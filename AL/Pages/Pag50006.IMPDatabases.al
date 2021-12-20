@@ -3,7 +3,7 @@ page 50006 "IMP Databases"
     Caption = 'Databases';
     PageType = List;
     SourceTable = "IMP Connection";
-    SourceTableView = sorting("List Name") where(Environment = Filter(SQLServer | SQLInstance | SQLDatabase));
+    SourceTableView = sorting("List Name") where(Environment = Filter(SQLInstance | SQLDatabase));
     UsageCategory = Lists;
     ApplicationArea = All;
     InsertAllowed = false;
@@ -77,9 +77,9 @@ page 50006 "IMP Databases"
         {
             action(ActLoadSQLServer)
             {
-                Caption = 'Load';
+                Caption = 'Refresh';
                 ApplicationArea = All;
-                Image = ImportDatabase;
+                Image = Refresh;
                 PromotedCategory = Process;
                 Promoted = true;
                 PromotedIsBig = true;
@@ -87,11 +87,16 @@ page 50006 "IMP Databases"
                 visible = ShowAction;
 
                 trigger OnAction()
+                var
+                    lc_Response: JsonObject;
                 begin
-                    if ImpAdmn.GetCurrentComputerName().ToLower() <> 'impent02' then
+                    if BscMgmt.System_GetCurrentComputerName().ToLower() <> 'impent02' then
                         Message('Only on impent02 possible!')
                     else begin
-                        ImpAdmn.CallSQLServerFullList();
+                        if ((Rec.GetFilter(DatabaseServer) <> '')) and (Rec.GetFilter(DatabaseInstance) <> '') then
+                            ImpAdmn.CallSQLServerFullList(Rec.GetFilter(DatabaseServer), Rec.GetFilter(DatabaseInstance), lc_Response, true, true)
+                        else
+                            ImpAdmn.CallSQLServerFullList(true, true);
                         CurrPage.Update(false);
                     end;
                 end;
@@ -110,14 +115,6 @@ page 50006 "IMP Databases"
         ShowStatus := true;
 
         case Rec.GetFilter(Environment).ToLower() of
-            Format(Rec.Environment::SQLServer).ToLower():
-                begin
-                    ShowEnvironment := false;
-                    ShowServer := true;
-                    ShowInstance := false;
-                    ShowDatabase := false;
-                    ShowStatus := false;
-                end;
             Format(Rec.Environment::SQLInstance).ToLower():
                 begin
                     ShowEnvironment := false;
@@ -138,6 +135,7 @@ page 50006 "IMP Databases"
     end;
 
     var
+        BscMgmt: Codeunit "IMP Basic Management";
         ImpAdmn: Codeunit "IMP Administration";
         ShowAction: Boolean;
         ShowEnvironment: Boolean;

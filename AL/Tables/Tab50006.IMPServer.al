@@ -59,6 +59,16 @@ table 50006 "IMP Server"
             Caption = 'Dns';
             DataClassification = CustomerContent;
         }
+        field(70; "Certificate Thumbprint"; Text[50])
+        {
+            Caption = 'Certificate Thumbprint';
+            DataClassification = CustomerContent;
+        }
+        field(71; "Certificate Expiration Date"; Date)
+        {
+            Caption = 'Certificate Expiration Date';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
@@ -92,10 +102,11 @@ table 50006 "IMP Server"
 
     procedure NAVVersionAdd(_Version: Text)
     begin
-        if (Rec."NAV Versions" <> '') then
-            Rec."NAV Versions" += NAVVersionSeparator();
-        if not NAVVersionConatins(_Version) then
+        if not NAVVersionConatins(_Version) then begin
+            if (Rec."NAV Versions" <> '') then
+                Rec."NAV Versions" += NAVVersionSeparator();
             Rec."NAV Versions" += _Version;
+        end;
     end;
 
     procedure NAVVersionConatins(_Version: Text) RetValue: Boolean
@@ -269,6 +280,7 @@ table 50006 "IMP Server"
                     lc_Min := lc_Int;
             end;
             // Import sorted result
+            Rec."NAV Versions" := '';
             for lc_Int := lc_Min to lc_Max do
                 if (lc_VList[lc_Int] <> '') then
                     Rec.NAVVersionAdd(lc_VList[lc_Int]);
@@ -310,7 +322,7 @@ table 50006 "IMP Server"
 
     procedure GetDnsUrl() RetValue: Text
     begin
-        RetValue := GetBaseUrl() + Rec.Dns;
+        RetValue := GetBaseUrl() + 'api.' + Rec.Dns;
     end;
 
     procedure NAVVersionName(_Version: Text) RetValue: Text

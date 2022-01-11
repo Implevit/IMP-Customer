@@ -357,17 +357,17 @@ page 50008 "IMP AL Object Numbers"
                 lc_Rec."Object Type"::"TableExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Tab' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
                 lc_Rec."Object Type"::"PageExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Pag' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
                 lc_Rec."Object Type"::"EnumExtension":
                     begin
                         lc_ObjectName := lc_Cust."IMP Abbreviation" + ' Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.");
-                        lc_FileName := 'Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
+                        lc_FileName := 'Enu' + Format(lc_Rec."Parent Object No.") + '-Ext' + Format(lc_Rec."Object No.") + '.' + lc_Cust."IMP Abbreviation" + lc_Rec."Parent Object Name".Replace(' ', '').Replace('/', '') + '.al';
                     end;
             end;
             lc_Text := Format(lc_Rec."Parent Object Type") + ' ' + Format(lc_Rec."Parent Object No.") + ' "' + lc_Rec."Parent Object Name" + '",';

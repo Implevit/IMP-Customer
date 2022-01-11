@@ -32,7 +32,7 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                 lc_Rec: Record Customer;
                 lc_IS: Record "IMP Server";
                 lc_IC: Record "IMP Connection";
-                lc_BscMgmt: Codeunit "IMP Basic Management";
+                //lc_BscMgmt: Codeunit "IMP Basic Management";
                 lc_Txt1_Txt: Label 'this tenant id has already been used by customer %1';
                 lc_Txt2_Txt: Label 'It still has server instances that have to be deleted first.\\Should this be done now?';
                 lc_Txt3_Txt: Label '%1 cannot be deleted until the server instance entries are deleted.';

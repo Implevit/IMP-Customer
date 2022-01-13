@@ -200,7 +200,7 @@ table 50005 "IMP AL Object Number"
                     lc_Rec.SetRange("Object Type", Rec."Parent Object Type");
                     lc_Rec.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
                     if lc_Rec.FindSet() then
-                        if lc_Rec.Count() = 1 then begin
+                        if ((lc_Rec.Count() = 1) and (lc_Text = '')) then begin
                             // Parent object found
                             Rec."Parent Object No." := lc_Rec."Object No.";
                             Rec."Parent Object Name" := lc_Rec."Object Name";

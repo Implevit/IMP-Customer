@@ -801,14 +801,14 @@ table 50000 "IMP Connection"
         foreach lc_Entry in _Array do
             case _Rec.Environment of
                 _Rec.Environment::Service:
-                    if lc_Entry.AsObject().Get('serverInstance', lc_Token) then begin
+                    if lc_Entry.AsObject().Get('name', lc_Token) then begin
                         lc_Name := BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText();
                         if _Rec."List Name".ToLower() <> lc_Name.ToLower() then
                             lc_New.Add(lc_Entry);
                     end;
                 _Rec.Environment::Cloud:
-                    if lc_Entry.AsObject().Get('environmentName', lc_Token) then begin
-                        lc_Name := BscMgmt.JsonGetTokenValue(lc_Token, 'environmentName').AsText();
+                    if lc_Entry.AsObject().Get('name', lc_Token) then begin
+                        lc_Name := BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText();
                         if _Rec."List Name".ToLower() <> lc_Name.ToLower() then
                             lc_New.Add(lc_Entry);
                     end;

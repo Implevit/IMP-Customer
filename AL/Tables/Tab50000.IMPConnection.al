@@ -705,7 +705,7 @@ table 50000 "IMP Connection"
                         clear(lc_New);
                         lc_New.Add('type', 'al');
                         lc_New.Add('request', 'launch');
-                        lc_New.Add('name', _Rec."Service Name".Replace('-', ' '));
+                        lc_New.Add('name', _Rec."List Name");
                         lc_New.Add('server', 'http://' + _Rec.Server);
                         lc_New.Add('authentication', 'UserPassword');
                         lc_New.Add('serverInstance', _Rec."Service Name");
@@ -722,7 +722,7 @@ table 50000 "IMP Connection"
                             clear(lc_New);
                             lc_New.Add('type', 'al');
                             lc_New.Add('request', 'attach');
-                            lc_New.Add('name', 'Debug WebserviceClient ' + _Rec."Service Name".Replace('-', ' '));
+                            lc_New.Add('name', 'Debug WebserviceClient ' + _Rec."List Name");
                             lc_New.Add('server', 'http://' + _Rec.Server);
                             lc_New.Add('authentication', 'UserPassword');
                             lc_New.Add('serverInstance', _Rec."Service Name");
@@ -738,7 +738,7 @@ table 50000 "IMP Connection"
                         clear(lc_New);
                         lc_New.Add('type', 'al');
                         lc_New.Add('request', 'launch');
-                        lc_New.Add('name', 'Microsoft cloud ' + _Rec."Environment Name");
+                        lc_New.Add('name', _Rec."List Name");
                         lc_New.Add('startupObjectType', 'Page');
                         lc_New.Add('startupObjectId', 379);
                         lc_New.Add('environmentType', Format(_Rec."Environment Type"));
@@ -803,13 +803,13 @@ table 50000 "IMP Connection"
                 _Rec.Environment::Service:
                     if lc_Entry.AsObject().Get('serverInstance', lc_Token) then begin
                         lc_Name := BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText();
-                        if _Rec."Service Name".ToLower() <> lc_Name.ToLower() then
+                        if _Rec."List Name".ToLower() <> lc_Name.ToLower() then
                             lc_New.Add(lc_Entry);
                     end;
                 _Rec.Environment::Cloud:
                     if lc_Entry.AsObject().Get('environmentName', lc_Token) then begin
                         lc_Name := BscMgmt.JsonGetTokenValue(lc_Token, 'environmentName').AsText();
-                        if _Rec."Environment Name".ToLower() <> lc_Name.ToLower() then
+                        if _Rec."List Name".ToLower() <> lc_Name.ToLower() then
                             lc_New.Add(lc_Entry);
                     end;
             end;

@@ -49,6 +49,14 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                 {
                     ApplicationArea = All;
                 }
+                field("IMP DeepL URL"; Rec."IMP DeepL URL")
+                {
+                    ApplicationArea = All;
+                }
+                field("IMP DeepL Token"; Rec."IMP DeepL Token")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

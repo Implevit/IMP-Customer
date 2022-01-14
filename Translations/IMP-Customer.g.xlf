@@ -1899,7 +1899,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - NamedType Txt2_Txt</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve" al-object-target="TableExtension 938585830">
-          <source>Ungültige Zeit - Gültig z.B. 7.15, 12.30, 17.45</source>
+          <source>Wrong Time - Valid e.g. 7.15, 12.30, 17.45</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - NamedType Txt3_Txt</note>
         </trans-unit>

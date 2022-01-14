@@ -585,6 +585,6 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         ComesFromField: Integer;
         Txt1_Txt: Label 'No hourly allocation can be made when expenses are recorded.';
         Txt2_Txt: Label 'For internal projects, the from/to time or quantity must be changed';
-        Txt3_Txt: Label 'Ungültige Zeit - Gültig z.B. 7.15, 12.30, 17.45';
+        Txt3_Txt: Label 'Wrong Time - Valid e.g. 7.15, 12.30, 17.45';
 
 }

@@ -117,6 +117,7 @@ page 50000 "IMP Connection List"
                 field("Environment Id"; Rec."Environment Id")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Environment State"; Rec."Environment State")
                 {

@@ -25,6 +25,11 @@ pageextension 50002 "IMP Pag21-Ext50002" extends "Customer Card"
                     ApplicationArea = All;
                     Visible = ShowConnections;
                 }
+                field("IMP Authorisations"; Rec."IMP Authorisations")
+                {
+                    ApplicationArea = All;
+                    Visible = ShowConnections;
+                }
             }
         }
     }

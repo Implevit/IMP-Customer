@@ -1123,6 +1123,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Txt0_Txt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 4164196781" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To translate: #1######\#2################################</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Dia_Txt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you really want to start the translation of the file "%1"?</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1857,6 +1862,11 @@
           <source>Apps</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Apps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2367230766 - Field 3337180375 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1994964448">
+          <source>Authorisations</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Authorisations - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 2367230766 - Field 3046303251 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1994964448">
           <source>Connections</source>

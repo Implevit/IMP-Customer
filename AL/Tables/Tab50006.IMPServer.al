@@ -317,7 +317,12 @@ table 50006 "IMP Server"
 
     procedure GetClientUrl() RetValue: Text
     begin
-        RetValue := GetBaseUrl() + Rec.Name;
+        case Rec.Type of
+            Rec.Type::App:
+                RetValue := GetBaseUrl() + Rec.Name;
+            Rec.Type::cloud:
+                RetValue := GetBaseUrl() + Rec.Dns;
+        end;
     end;
 
     procedure GetDnsUrl() RetValue: Text

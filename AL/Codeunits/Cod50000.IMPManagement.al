@@ -29,8 +29,12 @@ codeunit 50000 "IMP Management"
         //lc_TempTarget: Record "Name/Value Buffer" temporary;
         lc_FielMgmt: Codeunit "File Management";
         lc_TempBlob: Codeunit "Temp Blob";
+        lc_TempBlob2: Codeunit "Temp Blob";
         lc_InStream: InStream;
         lc_OutStream: OutStream;
+        lc_InStream2: InStream;
+        lc_OutStream2: OutStream;
+        lc_InStream3: InStream;
         lc_FilePath: Text;
         lc_FileName: Text;
         lc_FileExtension: Text;
@@ -52,10 +56,13 @@ codeunit 50000 "IMP Management"
         lc_TagTransUnitStart: Text;
         lc_TagTransUnitEnd: Text;
         lc_Counter: Integer;
+        lc_ToTranslate: Integer;
         lc_SkipLine: Boolean;
         lc_TransUnit: Boolean;
         lc_TransUnitCounter: Integer;
         lc_Usage: Integer;
+        lc_Dia: Dialog;
+        lc_Dia_Txt: Label 'To translate: #1######\#2################################';
         lc_Conf_Txt: Label 'Do you really want to start the translation of the file "%1"?';
         lc_Msg0_Txt: Label 'No more characters available for translation at DeepL';
         lc_Msg1_Txt: Label 'There was nothing to translate';
@@ -89,6 +96,7 @@ codeunit 50000 "IMP Management"
 
         // Init
         lc_Counter := 0;
+        lc_ToTranslate := 0;
         lc_CrLf[1] := 13;
         lc_CrLf[2] := 10;
         lc_TransUnit := false;
@@ -110,15 +118,72 @@ codeunit 50000 "IMP Management"
         lc_FilePath := CopyStr(_FullFileName, 1, StrLen(_FullFileName) - StrLen(lc_FileName) - StrLen(lc_FileExtension) - 1);
         lc_NewFullFileName := lc_FilePath + lc_FileName + '.new.' + lc_FileExtension;
 
+        // Copy Source
+        lc_TempBlob2.CreateOutStream(lc_OutStream2, TextEncoding::UTF8);
+        CopyStream(lc_OutStream2, _InStream);
+        lc_TempBlob2.CreateInStream(lc_InStream2);
+        lc_TempBlob2.CreateInStream(lc_InStream3);
+
         // Create Target
         lc_TempBlob.CreateOutStream(lc_OutStream, TextEncoding::UTF8);
-        //lc_TempTarget.Init();
-        //lc_TempTarget."Value BLOB".CreateOutStream(lc_OutStream, TextEncoding::UTF8);
 
-        // Read Source
-        while not _InStream.EOS() do begin
+        // Open Dia
+        if (GuiAllowed()) then
+            lc_Dia.Open(lc_Dia_Txt);
+
+        // Count
+        while not lc_InStream3.EOS() do begin
             // Read Line
-            _InStream.ReadText(lc_Line);
+            lc_InStream3.ReadText(lc_Line);
+            lc_SkipLine := false;
+
+            // Langauges
+            if ((lc_Line.Contains(lc_TagSourceLang)) and (lc_Line.Contains(lc_TagTargetLang))) then begin
+                lc_SourceLang := CopyStr(lc_Line, StrPos(lc_Line, lc_TagSourceLang) + StrLen(lc_TagSourceLang), 2).ToUpper();
+                lc_TargetLang := CopyStr(lc_Line, StrPos(lc_Line, lc_TagTargetLang) + StrLen(lc_TagTargetLang), 2).ToUpper();
+            end;
+
+            // Trans-Unit
+            if lc_Line.Contains(lc_TagTransUnitStart) then begin
+                lc_TransUnit := true;
+                lc_TransUnitCounter := 0;
+            end else
+                if lc_Line.Contains(lc_TagTransUnitEnd) then
+                    lc_TransUnit := false;
+
+            // Source
+            if ((lc_Line.Contains(lc_TagSourceStart)) and (lc_Line.Contains(lc_TagSourceEnd))) then begin
+                lc_SourceText := CopyStr(lc_Line, StrPos(lc_Line, lc_TagSourceStart) + StrLen(lc_TagSourceStart));
+                lc_SourceText := CopyStr(lc_SourceText, 1, StrLen(lc_SourceText) - StrLen(lc_TagSourceEnd));
+                lc_TargetText := '';
+            end;
+
+            // Target
+            if (lc_TransUnit) then
+                if ((lc_Line.Contains(lc_TagTargetStart)) and (lc_Line.Contains(lc_TagTargetEnd))) then begin
+                    lc_TargetStart := CopyStr(lc_Line, 1, StrPos(lc_Line, lc_TagTargetStart) + StrLen(lc_TagTargetStart) - 1);
+                    lc_TargetText := CopyStr(lc_Line, StrPos(lc_Line, lc_TagTargetStart) + StrLen(lc_TagTargetStart));
+                    lc_TargetText := CopyStr(lc_TargetText, 1, StrLen(lc_TargetText) - StrLen(lc_TagTargetEnd));
+
+                    if lc_TargetText.StartsWith('[NAB:') then begin
+                        lc_TransUnitCounter += 1;
+                        if (lc_TransUnitCounter = 1) then
+                            lc_ToTranslate += 1;
+                    end;
+                end;
+
+            // Show Dia
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_ToTranslate);
+        end;
+
+        // Translate
+        lc_Counter := lc_ToTranslate;
+        lc_TransUnit := false;
+        lc_TransUnitCounter := 0;
+        while not lc_InStream2.EOS() do begin
+            // Read Line
+            lc_InStream2.ReadText(lc_Line);
             lc_SkipLine := false;
 
             // Langauges
@@ -154,12 +219,18 @@ codeunit 50000 "IMP Management"
                         if ((lc_Usage - StrLen(lc_SourceText)) >= 0) then
                             if (lc_TransUnitCounter > 1) then
                                 lc_SkipLine := true
-                            else
+                            else begin
+                                // Show Dia
+                                if (GuiAllowed()) then begin
+                                    lc_Dia.Update(1, (lc_Counter - 1));
+                                    lc_Dia.Update(2, lc_SourceText);
+                                end;
                                 if BscMgmt.DeepLTranslateGet(lc_SourceText, lc_Translation, lc_SourceLang, lc_TargetLang) then begin
                                     lc_Usage -= StrLen(lc_SourceText);
                                     lc_Line := lc_TargetStart + lc_Translation + lc_TagTargetEnd;
-                                    lc_Counter += 1;
+                                    lc_Counter -= 1;
                                 end;
+                            end;
                     end;
                 end;
 
@@ -168,17 +239,20 @@ codeunit 50000 "IMP Management"
                 lc_OutStream.WriteText(lc_Line + lc_CrLf)
         end;
 
+        // Close Dia
+        if (GuiAllowed()) then
+            lc_Dia.Close();
+
         // Export Output
-        //lc_TempTarget."Value BLOB".CreateInStream(lc_InStream, TextEncoding::UTF8);
         lc_TempBlob.CreateInStream(lc_InStream, TextEncoding::UTF8);
         DownloadFromStream(lc_InStream, 'Export', '', '', lc_NewFullFileName);
 
         // Show Message
         if ((_WithMessage) and (GuiAllowed())) then
-            if (lc_Counter = 0) then
+            if (lc_ToTranslate = 0) then
                 Message(lc_Msg1_Txt)
             else
-                Message(lc_Msg2_Txt, lc_FileName + '.' + lc_FileExtension, lc_Counter, lc_SourceLang, lc_TargetLang);
+                Message(lc_Msg2_Txt, lc_FileName + '.' + lc_FileExtension, lc_ToTranslate, lc_SourceLang, lc_TargetLang);
     end;
 
     #endregion Translations

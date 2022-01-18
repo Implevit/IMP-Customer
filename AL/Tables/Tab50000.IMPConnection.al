@@ -462,7 +462,7 @@ table 50000 "IMP Connection"
             Rec.Environment::Docker:
                 RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := lc_IS.GetDnsUrl() + '/' + Rec."Environment Id" + '/' + Rec."Environment Name";
+                RetValue := lc_IS.GetClientUrl() + '/' + Rec."Environment Id" + '/' + Rec."Environment Name";
         end;
     end;
 
@@ -1114,146 +1114,6 @@ table 50000 "IMP Connection"
         RetValue := true;
     end;
 
-    /*
-    procedure LoadVersionFromServer(_ServerName: Text) RetValue: List of [Text]
-    var
-        lc_HttpClient: HttpClient;
-        lc_HttpContent: HttpContent;
-        lc_HttpRequest: HttpRequestMessage;
-        lc_HttpResponse: HttpResponseMessage;
-        lc_ResponseJson: JsonObject;
-        lc_Token: JsonToken;
-        lc_Array: JsonArray;
-        lc_Request: Text;
-        lc_Response: Text;
-        lc_Command: Text;
-        lc_Method: Text;
-    begin
-        // Init
-        lc_Command := 'http://' + _ServerName + ':5000/NAVVersions';
-        lc_Method := 'GET';
-
-        // Clear Web Service
-        Clear(lc_HttpClient);
-
-        // Save Request In Content
-        lc_HttpContent.WriteFrom(lc_Request);
-
-        // Set Content To Control
-        lc_HttpRequest.Content(lc_HttpContent);
-
-        // Set Operation
-        lc_HttpRequest.Method(lc_Method);
-
-        // Set and send Command
-        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
-            Error(lc_HttpResponse.ReasonPhrase);
-
-        // Read Request
-        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
-            Error('No response');
-
-        // Read Json
-        if not lc_ResponseJson.ReadFrom(lc_Response) then
-            Error(('No json in request:\\' + lc_Response));
-
-        // Clear List
-        clear(RetValue);
-
-        // Get data
-        if not lc_ResponseJson.Get('data', lc_Token) then
-            Error('Data token missing in json');
-
-        // Check data
-        if not (BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() = 'serverversion') then
-            Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText());
-
-        // Get versions
-        if not lc_ResponseJson.Get('versions', lc_Token) then
-            Error('Token versions missing in json');
-
-        // Check array
-        if not lc_Token.IsArray() then
-            Error('Token versions as to be an array');
-
-        // Process array
-        lc_Array := lc_Token.AsArray();
-        foreach lc_Token in lc_Array do
-            RetValue.Add(lc_Token.AsValue().AsText().ToLower());
-    end;
-
-    procedure LoadServerInstancesFromServer(_ServerName: Text)
-    var
-        lc_Temp: Record "IMP Connection" temporary;
-        lc_HttpClient: HttpClient;
-        lc_HttpContent: HttpContent;
-        lc_HttpRequest: HttpRequestMessage;
-        lc_HttpResponse: HttpResponseMessage;
-        lc_ResponseJson: JsonObject;
-        lc_Data: JsonToken;
-        lc_Request: Text;
-        lc_Response: Text;
-        lc_Command: Text;
-        lc_Method: Text;
-        lc_Message: Text;
-    begin
-        // Init
-        lc_Command := 'http://' + _ServerName + ':5000/NAVInstances';
-        lc_Method := 'GET';
-
-        // Clear Web Service
-        Clear(lc_HttpClient);
-
-        // Save Request In Content
-        lc_HttpContent.WriteFrom(lc_Request);
-
-        // Set Content To Control
-        lc_HttpRequest.Content(lc_HttpContent);
-
-        // Set Operation
-        lc_HttpRequest.Method(lc_Method);
-
-        // Set and send Command
-        if not lc_HttpClient.Get(lc_Command, lc_HttpResponse) then
-            Error(lc_HttpResponse.ReasonPhrase);
-
-        // Read Request
-        if not lc_HttpResponse.Content.ReadAs(lc_Response) then
-            Error('No response');
-
-        // Read Json
-        if not lc_ResponseJson.ReadFrom(lc_Response) then
-            Error(('No json in request:\\' + lc_Response));
-
-        // Clear List
-        Rec.Reset();
-        Rec.SetRange(Computer, _ServerName);
-        if Rec.FindSet() then begin
-            repeat
-                lc_Temp.Init();
-                lc_Temp.TransferFields(Rec);
-                lc_Temp.Insert(true);
-            until rEC.Next() = 0;
-            if Confirm(format(lc_Temp.Count())) then;
-            Rec.DeleteAll();
-        end;
-
-        // Get data
-        if not lc_ResponseJson.Get('data', lc_Data) then
-            Error('Data token missing in json');
-
-        case BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText().ToLower() of
-            'serverinstances':
-                if ImportServerInstances(lc_Temp, lc_ResponseJson, lc_Message) then
-                    Commit()
-                else
-                    Error(lc_Message);
-            else
-                Error('Data "%1" is no valid entry', BscMgmt.JsonGetTokenValue(lc_Data, 'data').AsText());
-        end;
-    end;
-    */
-
     procedure ImportServerInstances(_Root: JsonObject; var _Response: JsonObject) RetValue: Boolean
     var
         lc_IS: Record "IMP Server";
@@ -1694,9 +1554,6 @@ table 50000 "IMP Connection"
         lc_CompInfo.Get();
         lc_CompInfo.TestField("IMP Basic Dns");
 
-        // Set server
-        Rec.Server := CopyStr(BscMgmt.System_GetCurrentComputerName(), 1, MaxStrLen(Rec.Server));
-
         // Select type
         lc_Type := StrMenu('Service,Docker,Cloud', 0, 'Select your type of service');
         if (lc_Type = 0) then
@@ -1710,6 +1567,8 @@ table 50000 "IMP Connection"
             //Rec."Environment Name" := CopyStr(Rec.Server, 1, MaxStrLen(Rec."Environment Name"));
             Rec."Service State" := Rec."Environment State";
             Rec."Service Status" := Rec."Service Status"::ToCreate;
+            Rec.Server := CopyStr(BscMgmt.System_GetCurrentComputerName(), 1, MaxStrLen(Rec.Server));
+            lc_IS.Get(_Rec.Server);
         end;
 
         // Dockers 
@@ -1723,11 +1582,14 @@ table 50000 "IMP Connection"
         if (lc_Type = 3) then begin
             Rec.Environment := Rec.Environment::Cloud;
             Rec."Environment Type" := Rec."Environment Type"::Sandbox;
+            lc_IS.Reset();
+            lc_IS.SetRange(Type, lc_IS.Type::cloud);
+            if lc_IS.FindFirst() then
+                Rec.Server := lc_IS.Name;
         end;
 
         // Select version
         if (lc_Type = 1) then begin
-            lc_IS.Get(_Rec.Server);
             lc_TVersion := lc_IS.NAVVersionSelect();
             lc_ServicesCertificateThumbprint := lc_IS."Certificate Thumbprint";
         end;
@@ -1933,7 +1795,6 @@ table 50000 "IMP Connection"
 
     procedure GetPS(var _IC: Record "IMP Connection"; var _IntVersion: Integer; var _Version: Text; var _AdminTool: Text; var _Computer: Text; var _Url: Text)
     var
-        lc_ImpAdmin: Codeunit "IMP Administration";
         lc_List: List of [Text];
     begin
         // Set version

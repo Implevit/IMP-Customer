@@ -72,17 +72,21 @@ page 50001 "IMP Connection Card"
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
+                    Visible = ShowEnvironment;
                 }
                 field("Environment Id"; Rec."Environment Id")
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
+                    Editable = false;
+                    Visible = ShowEnvironment;
                 }
                 field("Environment State"; Rec."Environment State")
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
                     Editable = false;
+                    Visible = ShowEnvironment;
                 }
             }
             group(GrpServerInstance)
@@ -210,6 +214,17 @@ page 50001 "IMP Connection Card"
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
+
+                    trigger OnValidate()
+                    begin
+                        GetDetail();
+                    end;
+                }
+                field(AuthorisationName; Authorisation.Name)
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
                 }
             }
             group(GrpCompany)
@@ -235,13 +250,20 @@ page 50001 "IMP Connection Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
+        // Set new
         Rec.NewRecord(BelowxRec, Rec.GetFilter("Customer No."), Rec);
+
+        // Set visibility
         ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
         ShowService := (Rec.Environment <> Rec.Environment::Cloud);
         ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
         ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
         ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
         ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
+        ShowEnvironment := (Rec.Environment <> Rec.Environment::Service);
+
+        // Show deatil
+        GetDetail();
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -252,12 +274,17 @@ page 50001 "IMP Connection Card"
 
     trigger OnOpenPage()
     begin
+        // Set visibility
         ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
         ShowService := (Rec.Environment <> Rec.Environment::Cloud);
         ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
         ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
         ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
         ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
+        ShowEnvironment := (Rec.Environment <> Rec.Environment::Service);
+
+        // Show deatil
+        GetDetail();
     end;
 
     trigger OnClosePage()
@@ -275,11 +302,23 @@ page 50001 "IMP Connection Card"
 
     #endregion Triggers
 
+    #region Methodes
+
+    local procedure GetDetail()
+    begin
+        if not Authorisation.Get(Rec."Authorisation No.") then
+            Authorisation.Init();
+    end;
+
+    #endregion Methodes
+
     var
+        Authorisation: Record "IMP Authorisation";
         ShowCompany: Boolean;
         ShowAuthorisation: Boolean;
         ShowPorts: Boolean;
         ShowService: Boolean;
         ShowDatabase: Boolean;
         ShowCredential: Boolean;
+        ShowEnvironment: Boolean;
 }

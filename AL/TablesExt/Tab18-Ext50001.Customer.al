@@ -115,5 +115,13 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
             TableRelation = "IMP Connection";
             Editable = false;
         }
+        field(50040; "IMP Authorisations"; Integer)
+        {
+            Caption = 'Authorisations';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP Authorisation" where("Customer No." = field("No.")));
+            TableRelation = "IMP Connection";
+            Editable = false;
+        }
     }
 }

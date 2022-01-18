@@ -219,7 +219,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 941025898 - Method 2126772001 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
-          <source>There are more then one entry with a name like "@*%1*"</source>
+          <source>There are more then one entry with a name like "@%1"</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt2_Txt</note>
         </trans-unit>

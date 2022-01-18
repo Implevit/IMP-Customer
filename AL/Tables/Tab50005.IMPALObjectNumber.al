@@ -150,7 +150,7 @@ table 50005 "IMP AL Object Number"
                 lc_Text: Text;
                 lc_Selection: Integer;
                 lc_Txt1_Txt: Label 'The %1 for the %2 "%3" already exists as %4';
-                lc_Txt2_Txt: Label 'There are more then one entry with a name like "@*%1*"';
+                lc_Txt2_Txt: Label 'There are more then one entry with a name like "@%1"';
             begin
                 // Only with value
                 if (Rec."Parent Object Name" = '') then
@@ -177,7 +177,8 @@ table 50005 "IMP AL Object Number"
                 if (Rec."Parent Object No." = 0) then begin
                     lc_Obj.Reset();
                     lc_Obj.SetRange("Object Type", Rec."Parent Object Type");
-                    lc_Obj.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    //lc_Obj.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    lc_Obj.SetFilter("Object Name", '%1', '@' + Rec."Parent Object Name");
                     lc_Obj.SetFilter("Object ID", '<%1|>%2', 50000, 99999);
                     if lc_Obj.FindSet() then
                         if lc_Obj.Count() = 1 then begin
@@ -198,7 +199,8 @@ table 50005 "IMP AL Object Number"
                 if (Rec."Parent Object No." = 0) then begin
                     lc_Rec.Reset();
                     lc_Rec.SetRange("Object Type", Rec."Parent Object Type");
-                    lc_Rec.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    //lc_Rec.SetFilter("Object Name", '%1', '@*' + Rec."Parent Object Name" + '*');
+                    lc_Rec.SetFilter("Object Name", '%1', '@' + Rec."Parent Object Name");
                     if lc_Rec.FindSet() then
                         if ((lc_Rec.Count() = 1) and (lc_Text = '')) then begin
                             // Parent object found
@@ -225,9 +227,22 @@ table 50005 "IMP AL Object Number"
                     if (lc_Selection = 0) then
                         // No selection
                         Error('')
-                    else
-                        // Set selection
-                        Rec.Validate("Parent Object No.", lc_List.Get(lc_Selection));
+                    else begin
+                        // Check again already exists
+                        lc_Rec.Reset();
+                        lc_Rec.SetRange("Customer No.", Rec."Customer No.");
+                        lc_Rec.SetRange("App No.", Rec."App No.");
+                        lc_Rec.SetRange("Parent Object Type", Rec."Parent Object Type");
+                        lc_Rec.SetRange("Parent Object No.", lc_List.Get(lc_Selection));
+                        lc_Rec.SetRange("Object Type", Rec."Object Type");
+                        lc_Rec.SetFilter("Object No.", '<>%1', Rec."Object No.");
+                        if lc_Rec.FindFirst() then begin
+                            Message(lc_Txt1_Txt, Rec."Object Type", Rec."Parent Object Type", Rec."Parent Object Name", lc_Rec."Object No.");
+                            Error('');
+                        end else
+                            // Set selection
+                            Rec.Validate("Parent Object No.", lc_List.Get(lc_Selection));
+                    end;
                 end;
 
                 // Create new object no

@@ -15,33 +15,26 @@ codeunit 50000 "IMP Management"
         lc_FileName: Text;
         lc_Txt0_Txt: Label 'Select file';
     begin
-        if (_FullFileName = '') then begin
-            // Upload File
+        if (_FullFileName <> '') then begin
+            if ImportFile(_FullFileName, lc_Instream, TextEncoding::UTF8, false) then
+                TranslateXlfFile(lc_InStream, lc_TempSource.Name, _WithConfirm, _WithMessage);
+        end else
             if UploadIntoStream(lc_Txt0_Txt, '', BscMgmt.GetFileFilterAll(), lc_FileName, lc_InStream) then
-                // Translate
-                TranslateXlfFile(lc_InStream, lc_FileName, true, _WithConfirm, _WithMessage);
-        end else begin
-            // Process
-            lc_TempSource.Init();
-            lc_TempSource.Name := CopyStr(_FullFileName, 1, MaxStrLen(lc_TempSource.Name));
-            lc_TempSource.CalcFields("Value BLOB");
-            lc_TempSource."Value BLOB".Import(_FullFileName);
-            if (lc_TempSource."Value BLOB".Length <> 0) then begin
-                // Import Source
-                lc_TempSource."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF8);
-                // Translate
-                TranslateXlfFile(lc_InStream, lc_TempSource.Name, false, _WithConfirm, _WithMessage);
-            end;
-        end;
+                TranslateXlfFile(lc_InStream, lc_FileName, _WithConfirm, _WithMessage);
     end;
 
     [Scope('OnPrem')]
-    procedure TranslateXlfFile(var _InStream: InStream; _FullFileName: Text; _ShowFile: Boolean; _WithConfirm: Boolean; _WithMessage: Boolean)
+    procedure TranslateXlfFile(var _InStream: InStream; _FullFileName: Text; _WithConfirm: Boolean; _WithMessage: Boolean)
     var
-        lc_TempTarget: Record "Name/Value Buffer" temporary;
+        //lc_TempTarget: Record "Name/Value Buffer" temporary;
         lc_FielMgmt: Codeunit "File Management";
+        lc_TempBlob: Codeunit "Temp Blob";
+        lc_TempBlob2: Codeunit "Temp Blob";
         lc_InStream: InStream;
         lc_OutStream: OutStream;
+        lc_InStream2: InStream;
+        lc_OutStream2: OutStream;
+        lc_InStream3: InStream;
         lc_FilePath: Text;
         lc_FileName: Text;
         lc_FileExtension: Text;
@@ -63,10 +56,13 @@ codeunit 50000 "IMP Management"
         lc_TagTransUnitStart: Text;
         lc_TagTransUnitEnd: Text;
         lc_Counter: Integer;
+        lc_ToTranslate: Integer;
         lc_SkipLine: Boolean;
         lc_TransUnit: Boolean;
         lc_TransUnitCounter: Integer;
         lc_Usage: Integer;
+        lc_Dia: Dialog;
+        lc_Dia_Txt: Label 'To translate: #1######\#2################################';
         lc_Conf_Txt: Label 'Do you really want to start the translation of the file "%1"?';
         lc_Msg0_Txt: Label 'No more characters available for translation at DeepL';
         lc_Msg1_Txt: Label 'There was nothing to translate';
@@ -100,6 +96,7 @@ codeunit 50000 "IMP Management"
 
         // Init
         lc_Counter := 0;
+        lc_ToTranslate := 0;
         lc_CrLf[1] := 13;
         lc_CrLf[2] := 10;
         lc_TransUnit := false;
@@ -121,14 +118,72 @@ codeunit 50000 "IMP Management"
         lc_FilePath := CopyStr(_FullFileName, 1, StrLen(_FullFileName) - StrLen(lc_FileName) - StrLen(lc_FileExtension) - 1);
         lc_NewFullFileName := lc_FilePath + lc_FileName + '.new.' + lc_FileExtension;
 
-        // Create Target
-        lc_TempTarget.Init();
-        lc_TempTarget."Value BLOB".CreateOutStream(lc_OutStream, TextEncoding::UTF8);
+        // Copy Source
+        lc_TempBlob2.CreateOutStream(lc_OutStream2, TextEncoding::UTF8);
+        CopyStream(lc_OutStream2, _InStream);
+        lc_TempBlob2.CreateInStream(lc_InStream2);
+        lc_TempBlob2.CreateInStream(lc_InStream3);
 
-        // Read Source
-        while not _InStream.EOS() do begin
+        // Create Target
+        lc_TempBlob.CreateOutStream(lc_OutStream, TextEncoding::UTF8);
+
+        // Open Dia
+        if (GuiAllowed()) then
+            lc_Dia.Open(lc_Dia_Txt);
+
+        // Count
+        while not lc_InStream3.EOS() do begin
             // Read Line
-            _InStream.ReadText(lc_Line);
+            lc_InStream3.ReadText(lc_Line);
+            lc_SkipLine := false;
+
+            // Langauges
+            if ((lc_Line.Contains(lc_TagSourceLang)) and (lc_Line.Contains(lc_TagTargetLang))) then begin
+                lc_SourceLang := CopyStr(lc_Line, StrPos(lc_Line, lc_TagSourceLang) + StrLen(lc_TagSourceLang), 2).ToUpper();
+                lc_TargetLang := CopyStr(lc_Line, StrPos(lc_Line, lc_TagTargetLang) + StrLen(lc_TagTargetLang), 2).ToUpper();
+            end;
+
+            // Trans-Unit
+            if lc_Line.Contains(lc_TagTransUnitStart) then begin
+                lc_TransUnit := true;
+                lc_TransUnitCounter := 0;
+            end else
+                if lc_Line.Contains(lc_TagTransUnitEnd) then
+                    lc_TransUnit := false;
+
+            // Source
+            if ((lc_Line.Contains(lc_TagSourceStart)) and (lc_Line.Contains(lc_TagSourceEnd))) then begin
+                lc_SourceText := CopyStr(lc_Line, StrPos(lc_Line, lc_TagSourceStart) + StrLen(lc_TagSourceStart));
+                lc_SourceText := CopyStr(lc_SourceText, 1, StrLen(lc_SourceText) - StrLen(lc_TagSourceEnd));
+                lc_TargetText := '';
+            end;
+
+            // Target
+            if (lc_TransUnit) then
+                if ((lc_Line.Contains(lc_TagTargetStart)) and (lc_Line.Contains(lc_TagTargetEnd))) then begin
+                    lc_TargetStart := CopyStr(lc_Line, 1, StrPos(lc_Line, lc_TagTargetStart) + StrLen(lc_TagTargetStart) - 1);
+                    lc_TargetText := CopyStr(lc_Line, StrPos(lc_Line, lc_TagTargetStart) + StrLen(lc_TagTargetStart));
+                    lc_TargetText := CopyStr(lc_TargetText, 1, StrLen(lc_TargetText) - StrLen(lc_TagTargetEnd));
+
+                    if lc_TargetText.StartsWith('[NAB:') then begin
+                        lc_TransUnitCounter += 1;
+                        if (lc_TransUnitCounter = 1) then
+                            lc_ToTranslate += 1;
+                    end;
+                end;
+
+            // Show Dia
+            if (GuiAllowed()) then
+                lc_Dia.Update(1, lc_ToTranslate);
+        end;
+
+        // Translate
+        lc_Counter := lc_ToTranslate;
+        lc_TransUnit := false;
+        lc_TransUnitCounter := 0;
+        while not lc_InStream2.EOS() do begin
+            // Read Line
+            lc_InStream2.ReadText(lc_Line);
             lc_SkipLine := false;
 
             // Langauges
@@ -164,12 +219,18 @@ codeunit 50000 "IMP Management"
                         if ((lc_Usage - StrLen(lc_SourceText)) >= 0) then
                             if (lc_TransUnitCounter > 1) then
                                 lc_SkipLine := true
-                            else
+                            else begin
+                                // Show Dia
+                                if (GuiAllowed()) then begin
+                                    lc_Dia.Update(1, (lc_Counter - 1));
+                                    lc_Dia.Update(2, lc_SourceText);
+                                end;
                                 if BscMgmt.DeepLTranslateGet(lc_SourceText, lc_Translation, lc_SourceLang, lc_TargetLang) then begin
                                     lc_Usage -= StrLen(lc_SourceText);
                                     lc_Line := lc_TargetStart + lc_Translation + lc_TagTargetEnd;
-                                    lc_Counter += 1;
+                                    lc_Counter -= 1;
                                 end;
+                            end;
                     end;
                 end;
 
@@ -178,19 +239,20 @@ codeunit 50000 "IMP Management"
                 lc_OutStream.WriteText(lc_Line + lc_CrLf)
         end;
 
+        // Close Dia
+        if (GuiAllowed()) then
+            lc_Dia.Close();
+
         // Export Output
-        if (_ShowFile) then begin
-            lc_TempTarget."Value BLOB".CreateInStream(lc_InStream, TextEncoding::UTF8);
-            DownloadFromStream(lc_InStream, 'Export', '', '', lc_NewFullFileName);
-        end else
-            lc_TempTarget."Value BLOB".Export(lc_NewFullFileName);
+        lc_TempBlob.CreateInStream(lc_InStream, TextEncoding::UTF8);
+        DownloadFromStream(lc_InStream, 'Export', '', '', lc_NewFullFileName);
 
         // Show Message
         if ((_WithMessage) and (GuiAllowed())) then
-            if (lc_Counter = 0) then
+            if (lc_ToTranslate = 0) then
                 Message(lc_Msg1_Txt)
             else
-                Message(lc_Msg2_Txt, lc_FileName + '.' + lc_FileExtension, lc_Counter, lc_SourceLang, lc_TargetLang);
+                Message(lc_Msg2_Txt, lc_FileName + '.' + lc_FileExtension, lc_ToTranslate, lc_SourceLang, lc_TargetLang);
     end;
 
     #endregion Translations
@@ -225,11 +287,11 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnDataSelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean);
     var
-        lc_Page: Page "IMP Select List";
+        lc_Page: Page "IMP Selection List";
     begin
         lc_Page.HideAllEntries();
         lc_Page.SetFields(_Fields, false, _SingleSelection);
-        lc_Page.SetData(_List);
+        lc_Page.SetData(0, _List);
         lc_Page.LookupMode := true;
         if lc_Page.RunModal() = Action::LookupOK then
             lc_Page.GetSelection(_List);
@@ -237,19 +299,20 @@ codeunit 50000 "IMP Management"
 
     procedure C70026_OnODataBeforeProcess(_Request: JsonObject; var _Response: JsonObject; var _Skip: Boolean)
     var
+        lc_IS: Record "IMP Server";
         lc_IC: Record "IMP Connection";
         lc_Token: JsonToken;
-        lc_Text: Text;
     begin
         if not _Request.Get('data', lc_Token) then
             exit;
 
         case BscMgmt.JsonGetTokenValue(lc_Token, 'data').AsText().ToLower() of
-            'serverinstance':
-                begin
-                    lc_IC.ImportServerInstances(lc_IC, _Request, lc_Text);
-                    _Response.ReadFrom(lc_Text);
-                end;
+            'serverversions':
+                lc_IS.NAVVersionsImport(_Request, _Response);
+            'serverinstance', 'serverinstances':
+                lc_IC.ImportServerInstances(_Request, _Response);
+            'loadversions':
+                AdmMgmt.CallVersionList(_Request, _Response);
         end;
     end;
 
@@ -259,7 +322,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnGetConnection(var _Object: JsonObject; var _ConnectionNo: Code[20]; var _Url: Text; var _Tenant: Text; var _CustomerNo: Text; var _CompanyName: Text; var _CompanyId: Text; var _AuthNo: Integer; var _Username: Text; var _Password: Text; var _Token: Text; var _ClientId: Text; var _SecretId: Text; var _Found: Boolean)
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
     begin
         // Init
         _Found := false;
@@ -267,14 +330,14 @@ codeunit 50000 "IMP Management"
         _Url := '';
         _AuthNo := 0;
         // Get
-        _Found := lc_ISI.Get(_ConnectionNo);
+        _Found := lc_IC.Get(_ConnectionNo);
         // Found
         if (_Found) then begin
-            _AuthNo := lc_ISI."Authorisation No.";
-            _Url := lc_ISI.Url;
-            _Tenant := lc_ISI."Environment Id";
-            if (lc_ISI.Environment <> lc_ISI.Environment::Cloud) then begin
-                _Url := 'http://' + lc_ISI.Computer.ToLower().Replace('impent02', 'impent01') + ':' + Format(lc_ISI.ODataServicesPort) + '/' + lc_ISI."Service Name";
+            _AuthNo := lc_IC."Authorisation No.";
+            _Url := lc_IC.Url;
+            _Tenant := lc_IC."Environment Id";
+            if (lc_IC.Environment <> lc_IC.Environment::Cloud) then begin
+                _Url := 'http://' + lc_IC."Environment Name".ToLower() + ':' + Format(lc_IC.ODataServicesPort) + '/' + lc_IC."Service Name";
                 _Tenant := 'default';
             end;
         end;
@@ -282,7 +345,7 @@ codeunit 50000 "IMP Management"
 
     procedure C70025_OnSelectConnection(var _Object: JsonObject; var _ConnectionNo: Code[20]; var _Url: Text; var _Tenant: Text; var _CustomerNo: Text; var _CompanyName: Text; var _CompanyId: Text; var _AuthNo: Integer; var _Username: Text; var _Password: Text; var _Token: Text; var _ClientId: Text; var _SecretId: Text; var _Selected: Boolean; var _Skip: Boolean)
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
         lc_ConnectionNo: Code[20];
         lc_Found: Boolean;
     begin
@@ -295,32 +358,32 @@ codeunit 50000 "IMP Management"
         _Url := '';
         _AuthNo := 0;
         // Select entry
-        lc_ISI.Reset();
+        lc_IC.Reset();
         if (lc_ConnectionNo <> '') then
-            lc_ISI.SetRange("No.", lc_ConnectionNo);
-        if lc_ISI.FindSet() then;
-        lc_ISI.SetRange("No.");
+            lc_IC.SetRange("No.", lc_ConnectionNo);
+        if lc_IC.FindSet() then;
+        lc_IC.SetRange("No.");
         // Lookup page
-        if not (Page.RunModal(Page::"IMP Connection List", lc_ISI) = Action::LookupOK) then
+        if not (Page.RunModal(Page::"IMP Connection List", lc_IC) = Action::LookupOK) then
             _Skip := true
         else begin
             _Selected := true;
             // Fill parameters
-            _ConnectionNo := lc_ISI."No.";
-            _CustomerNo := lc_ISI."Customer No.";
-            _CompanyName := lc_ISI."Company Name";
-            _CompanyId := lc_ISI."Company Id";
+            _ConnectionNo := lc_IC."No.";
+            _CustomerNo := lc_IC."Customer No.";
+            _CompanyName := lc_IC."Company Name";
+            _CompanyId := lc_IC."Company Id";
             // Set url
-            if (lc_ISI.Environment = lc_ISI.Environment::Cloud) then begin
-                _Url := lc_ISI.GetUrlOdata();
-                _Tenant := lc_ISI."Environment Id";
+            if (lc_IC.Environment = lc_IC.Environment::Cloud) then begin
+                _Url := lc_IC.GetUrlOdata();
+                _Tenant := lc_IC."Environment Id";
             end else begin
-                _Url := lc_ISI.GetUrlOdata();
-                _Url := _Url.ToLower().Replace('impent02', 'impent01');
+                _Url := lc_IC.GetUrlOdata();
+                _Url := _Url.ToLower();
                 _Tenant := 'default';
             end;
             // Load authorisation
-            _AuthNo := lc_ISI."Authorisation No.";
+            _AuthNo := lc_IC."Authorisation No.";
             C70025_OnGetAuthorisation(_AuthNo, _Username, _Password, _Token, _ClientId, _SecretId, lc_Found);
         end;
     end;
@@ -390,7 +453,7 @@ codeunit 50000 "IMP Management"
 
     procedure GetODataConnection(var _Result: JsonObject; _ConnectionNo: Code[20]; _CompanyName: Text; _CompanyId: Text; _Convert: Boolean) RetValue: Boolean
     var
-        lc_ISI: Record "IMP Connection";
+        lc_IC: Record "IMP Connection";
         //lc_CrpMgmt: Codeunit "Cryptography Management";
         lc_Base64: Codeunit "Base64 Convert";
         lc_Object: JsonObject;
@@ -404,7 +467,7 @@ codeunit 50000 "IMP Management"
         clear(_Result);
 
         // Get server
-        if not lc_ISI.Get(_ConnectionNo) then begin
+        if not lc_IC.Get(_ConnectionNo) then begin
             _Result.Add('error', 'Connection no. ' + _ConnectionNo + ' not found');
             if (GuiAllowed()) then
                 Message(lc_Txt0_Txt, _ConnectionNo);
@@ -412,7 +475,7 @@ codeunit 50000 "IMP Management"
         end;
 
         // Check company name
-        if (lc_ISI."Company Name" = '') then begin
+        if (lc_IC."Company Name" = '') then begin
             _Result.Add('error', 'Company name is mandantory');
             if (GuiAllowed()) then
                 Message(lc_Txt1_Txt);
@@ -420,7 +483,7 @@ codeunit 50000 "IMP Management"
         end;
 
         // Check customer no
-        if (lc_ISI."Customer No." = '') then begin
+        if (lc_IC."Customer No." = '') then begin
             _Result.Add('error', 'Customer no is mandantory');
             if (GuiAllowed()) then
                 Message(lc_Txt2_Txt);
@@ -429,13 +492,13 @@ codeunit 50000 "IMP Management"
 
         // Set server
         lc_Object.Add('data', 'ServerConnection');
-        lc_Object.Add('connectionNo', lc_ISI."No.");
-        if (lc_ISI.Environment = lc_ISI.Environment::Cloud) then
-            lc_Object.Add('tenant', lc_ISI."Environment Id")
+        lc_Object.Add('connectionNo', lc_IC."No.");
+        if (lc_IC.Environment = lc_IC.Environment::Cloud) then
+            lc_Object.Add('tenant', lc_IC."Environment Id")
         else
             lc_Object.Add('tenant', 'default');
-        lc_Object.Add('url', lc_ISI.GetUrlOdata());
-        lc_Object.Add('customerNo', lc_ISI."Customer No.");
+        lc_Object.Add('url', lc_IC.GetUrlOdata());
+        lc_Object.Add('customerNo', lc_IC."Customer No.");
         // Company
         lc_Object.Add('companyName', _CompanyName);
         _CompanyId := _CompanyId.Replace('{', '');
@@ -443,8 +506,8 @@ codeunit 50000 "IMP Management"
         lc_Object.Add('companyId', _CompanyId);
 
         // Set authorisation
-        if (lc_ISI."Authorisation No." <> 0) then
-            if not AddODataAuthorisation(lc_Object, lc_ISI."Authorisation No.") then
+        if (lc_IC."Authorisation No." <> 0) then
+            if not AddODataAuthorisation(lc_Object, lc_IC."Authorisation No.") then
                 exit;
 
         // Convert
@@ -511,6 +574,153 @@ codeunit 50000 "IMP Management"
 
         // Return
         RetValue := true;
+    end;
+
+    procedure ImportFile(_FileName: Text; var _InStream: InStream; _TextEncoding: TextEncoding; _DeleteAfterImport: Boolean) RetValue: Boolean
+    var
+        lc_Buff: Record "Name/Value Buffer" temporary;
+        lc_FileMgmt: Codeunit "File Management";
+    begin
+        // Init
+        RetValue := false;
+        lc_Buff.Init();
+
+        // Import            
+        if ImportFileFromBuffer(lc_Buff, _FileName) then begin
+            lc_Buff."Value BLOB".CreateInStream(_InStream, _TextEncoding);
+            RetValue := (lc_Buff."Value BLOB".Length <> 0);
+        end;
+
+        // Remove file
+        if (_DeleteAfterImport) then
+            if lc_FileMgmt.DeleteServerFile(_FileName) then;
+    end;
+
+    procedure ImportFile(_FileName: Text; _TextEncoding: TextEncoding; _DeleteAfterImport: Boolean) RetValue: Text
+    var
+        lc_Buff: Record "Name/Value Buffer" temporary;
+        lc_FileMgmt: Codeunit "File Management";
+        lc_InStream: InStream;
+        lc_Temptext: Text[1000];
+    begin
+        // Init
+        RetValue := '';
+        lc_Buff.Init();
+
+        // Import            
+        if ImportFileFromBuffer(lc_Buff, _FileName) then begin
+            lc_Buff."Value BLOB".CreateInStream(lc_InStream, _TextEncoding);
+            while not lc_InStream.EOS() do begin
+                lc_InStream.Read(lc_Temptext, 1000);
+                RetValue += lc_Temptext;
+            end;
+        end;
+
+        // Remove file
+        if (_DeleteAfterImport) then
+            if lc_FileMgmt.DeleteServerFile(_FileName) then;
+    end;
+
+    procedure ImportFileFromBuffer(var _Buffer: Record "Name/Value Buffer"; _FileName: Text) RetValue: Boolean
+    begin
+        if (_Buffer."Value BLOB".Import(_FileName) <> '') then
+            RetValue := true
+        else
+            RetValue := false;
+    end;
+
+    procedure SelectEntry(var _List: Record "Name/Value Buffer"; _Fields: List of [Integer]; _SingleSelection: Boolean) RetValue: Boolean
+    var
+        lc_Page: Page "IMP Selection List";
+    begin
+        RetValue := false;
+        lc_Page.HideAllEntries();
+        lc_Page.SetFields(_Fields, false, _SingleSelection);
+        lc_Page.SetData(0, _List);
+        lc_Page.LookupMode := true;
+        if lc_Page.RunModal() = Action::LookupOK then begin
+            lc_Page.GetSelection(_List);
+            RetValue := true;
+        end;
+    end;
+
+    procedure LoadFolders(var _Rec: Record "Name/Value Buffer"; _Root: Text; _InclSubFolders: Boolean)
+    var
+        lc_FileMgmt: Codeunit "File Management";
+        lc_ServerDirectoryHelper: DotNet Directory;
+        lc_ArrayHelper: DotNet Array;
+        lc_FileSystemEntry: Text;
+        lc_Index: Integer;
+        lc_NextId: Integer;
+    begin
+        // Check Root
+        if not lc_FileMgmt.ServerDirectoryExists(_Root) then
+            exit;
+
+        // Clean Root
+        if not _Root.EndsWith('\') then
+            _Root += '\';
+
+        // Get Next Id
+        if _Rec.FindLast() then
+            lc_NextId := _Rec.ID;
+
+        // Load Folder
+        lc_ArrayHelper := lc_ServerDirectoryHelper.GetFileSystemEntries(_Root);
+        for lc_Index := 1 to lc_ArrayHelper.GetLength(0) do begin
+            Evaluate(lc_FileSystemEntry, lc_ArrayHelper.GetValue(lc_Index - 1));
+            if lc_FileMgmt.ServerDirectoryExists(lc_FileSystemEntry) then begin
+                lc_NextId += 1;
+                _Rec.Init();
+                _Rec.ID := lc_NextId;
+                _Rec.Name := CopyStr(CopyStr(lc_FileSystemEntry, StrLen(_Root) + 1), 1, MaxStrLen(_Rec.Name));
+                _Rec.Value := CopyStr(lc_FileSystemEntry, 1, MaxStrLen(_Rec.Value));
+                _Rec.Insert();
+                // Load Sub Folder
+                if (_InclSubFolders) then
+                    LoadFolders(_Rec, lc_FileSystemEntry, _InclSubFolders)
+            end;
+        end;
+    end;
+
+    procedure LoadFiles(var _Rec: Record "Name/Value Buffer"; _Root: Text; _InclSubFolders: Boolean)
+    var
+        lc_FileMgmt: Codeunit "File Management";
+        lc_ServerDirectoryHelper: DotNet Directory;
+        lc_ArrayHelper: DotNet Array;
+        lc_FileSystemEntry: Text;
+        lc_Index: Integer;
+        lc_NextId: Integer;
+    begin
+        // Check Root
+        if not lc_FileMgmt.ServerDirectoryExists(_Root) then
+            exit;
+
+        // Clean Root
+        if not _Root.EndsWith('\') then
+            _Root += '\';
+
+        // Get Next Id
+        if _Rec.FindLast() then
+            lc_NextId := _Rec.ID;
+
+        // Load Folder
+        lc_ArrayHelper := lc_ServerDirectoryHelper.GetFileSystemEntries(_Root);
+        for lc_Index := 1 to lc_ArrayHelper.GetLength(0) do begin
+            Evaluate(lc_FileSystemEntry, lc_ArrayHelper.GetValue(lc_Index - 1));
+            if lc_FileMgmt.ServerDirectoryExists(lc_FileSystemEntry) then
+                // Load Sub Folder
+                if (_InclSubFolders) then
+                    LoadFiles(_Rec, lc_FileSystemEntry, _InclSubFolders)
+                else begin
+                    lc_NextId += 1;
+                    _Rec.Init();
+                    _Rec.ID := lc_NextId;
+                    _Rec.Name := CopyStr(CopyStr(lc_FileSystemEntry, StrLen(_Root) + 1), 1, MaxStrLen(_Rec.Name));
+                    _Rec.Value := CopyStr(lc_FileSystemEntry, 1, MaxStrLen(_Rec.Value));
+                    _Rec.Insert();
+                end;
+        end;
     end;
 
     #endregion Misc
@@ -623,4 +833,5 @@ codeunit 50000 "IMP Management"
 
     var
         BscMgmt: Codeunit "IMP Basic Management";
+        AdmMgmt: Codeunit "IMP Administration";
 }

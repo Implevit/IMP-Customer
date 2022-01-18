@@ -30,11 +30,13 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
             trigger OnValidate()
             var
                 lc_Rec: Record Customer;
-                lc_ISI: Record "IMP Connection";
-                lc_BscMgmt: Codeunit "IMP Basic Management";
+                lc_IS: Record "IMP Server";
+                lc_IC: Record "IMP Connection";
+                //lc_BscMgmt: Codeunit "IMP Basic Management";
                 lc_Txt1_Txt: Label 'this tenant id has already been used by customer %1';
                 lc_Txt2_Txt: Label 'It still has server instances that have to be deleted first.\\Should this be done now?';
                 lc_Txt3_Txt: Label '%1 cannot be deleted until the server instance entries are deleted.';
+                lc_Txt4_Txt: Label 'No cloud sever available in %1';
             begin
                 Rec."IMP Tenant Id" := LowerCase(Rec."IMP Tenant Id");
                 // Check duplicate
@@ -47,12 +49,12 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                 end;
                 // Remove server instance entry
                 if ((Rec."IMP Tenant Id" = '') and (Rec."IMP Tenant Id" <> xRec."IMP Tenant Id")) then begin
-                    lc_ISI.Reset();
-                    lc_ISI.SetRange(Environment, lc_ISI.Environment::Cloud);
-                    lc_ISI.SetRange("Environment Id", xRec."IMP Tenant Id");
-                    if lc_ISI.FindSet() then
+                    lc_IC.Reset();
+                    lc_IC.SetRange(Environment, lc_IC.Environment::Cloud);
+                    lc_IC.SetRange("Environment Id", xRec."IMP Tenant Id");
+                    if lc_IC.FindSet() then
                         if Confirm(lc_Txt2_Txt) then
-                            lc_ISI.DeleteAll(true)
+                            lc_IC.DeleteAll(true)
                         else
                             Error(lc_Txt3_Txt);
                 end;
@@ -61,31 +63,65 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                     // Check abbreviation first
                     Rec.TestField("IMP Abbreviation");
                     // Check entry
-                    lc_ISI.Reset();
-                    lc_ISI.SetRange(Environment, lc_ISI.Environment::Cloud);
-                    lc_ISI.SetRange("Environment Id", xRec."IMP Tenant Id");
-                    lc_ISI.SetRange("Customer No.", Rec."No.");
-                    if lc_ISI.FindSet() then
+                    lc_IC.Reset();
+                    lc_IC.SetRange(Environment, lc_IC.Environment::Cloud);
+                    lc_IC.SetRange("Environment Id", xRec."IMP Tenant Id");
+                    lc_IC.SetRange("Customer No.", Rec."No.");
+                    if lc_IC.FindSet() then
                         repeat
-                            lc_ISI."Environment Id" := Rec."IMP Tenant Id";
-                            lc_ISI.Modify(true);
-                            lc_ISI.SetUrl();
-                        until lc_ISI.Next() = 0
+                            lc_IC."Environment Id" := Rec."IMP Tenant Id";
+                            lc_IC.Modify(true);
+                            lc_IC.SetUrl();
+                        until lc_IC.Next() = 0
                     else begin
-                        // Add entry
-                        lc_ISI.Init();
-                        lc_ISI."Customer No." := Rec."No.";
-                        lc_ISI.Computer := CopyStr(lc_BscMgmt.System_GetBaseUrlBC(), 1, MaxStrLen(lc_ISI.Computer));
-                        lc_ISI.Environment := lc_ISI.Environment::Cloud;
-                        lc_ISI."Environment Type" := lc_ISI."Environment Type"::Production;
-                        lc_ISI."Environment Id" := Rec."IMP Tenant Id";
-                        lc_ISI."Environment Name" := 'Production';
-                        lc_ISI.SetListName();
-                        lc_ISI.SetUrl();
-                        lc_ISI.Insert(true);
+                        lc_IS.Reset();
+                        lc_IS.SetRange(Type, lc_IS.Type::cloud);
+                        if not lc_IS.FindSet() then
+                            Error(lc_Txt4_Txt, lc_IS.TableCaption())
+                        else
+                            if (lc_IS.Count() > 1) then
+                                if (Page.RunModal(Page::"IMP Server List", lc_IS)) <> Action::LookupOK then
+                                    exit;
+
+                        // Add entry                        
+                        lc_IC.Init();
+                        lc_IC."Customer No." := Rec."No.";
+                        //lc_IC.Dns := CopyStr(lc_BscMgmt.System_GetBaseUrlBC(), 1, MaxStrLen(lc_IC.Dns));
+                        lc_IC.Server := lc_IS.Name;
+                        lc_IC.Environment := lc_IC.Environment::Cloud;
+                        lc_IC."Environment Type" := lc_IC."Environment Type"::Production;
+                        lc_IC."Environment Id" := Rec."IMP Tenant Id";
+                        lc_IC."Environment Name" := 'Production';
+                        lc_IC.SetListName();
+                        lc_IC.SetUrl();
+                        lc_IC.Insert(true);
                     end;
                 end;
             end;
+        }
+        field(50020; "IMP Apps"; Integer)
+        {
+            Caption = 'Apps';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP AL Object App" where("Customer No." = field("No.")));
+            TableRelation = "IMP AL Object App";
+            Editable = false;
+        }
+        field(50030; "IMP Connections"; Integer)
+        {
+            Caption = 'Connections';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP Connection" where("Customer No." = field("No.")));
+            TableRelation = "IMP Connection";
+            Editable = false;
+        }
+        field(50040; "IMP Authorisations"; Integer)
+        {
+            Caption = 'Authorisations';
+            FieldClass = FlowField;
+            CalcFormula = count("IMP Authorisation" where("Customer No." = field("No.")));
+            TableRelation = "IMP Connection";
+            Editable = false;
         }
     }
 }

@@ -18,30 +18,29 @@ page 50001 "IMP Connection Card"
                     Importance = Promoted;
                     Editable = false;
                 }
-                field(Computer; Rec.Computer)
-                {
-                    ApplicationArea = All;
-                }
-                field(Dns; Rec.Dns)
+                field(Server; Rec.Server)
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
-                }
-                field("List Name"; Rec."List Name")
-                {
-                    ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Customer No."; Rec."Customer No.")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
-                field("Authorisation No."; Rec."Authorisation No.")
+                field("Customer Abbreviation"; Rec."Customer Abbreviation")
+                {
+                    ApplicationArea = All;
+                }
+                field("List Name"; Rec."List Name")
                 {
                     ApplicationArea = All;
                 }
                 field(Url; Rec.Url)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
 
                     trigger OnAssistEdit()
                     begin
@@ -49,17 +48,7 @@ page 50001 "IMP Connection Card"
                             Hyperlink(Rec.Url);
                     end;
                 }
-            }
-            group(GrpCompany)
-            {
-                Caption = 'Company';
-
-                field("Company Name"; Rec."Company Name")
-                {
-                    ApplicationArea = All;
-                    Importance = Promoted;
-                }
-                field("Company Id"; Rec."Company Id")
+                field("WebService In Launch"; Rec."WebService In Launch")
                 {
                     ApplicationArea = All;
                     Importance = Promoted;
@@ -72,39 +61,65 @@ page 50001 "IMP Connection Card"
                 field(Environment; Rec.Environment)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment Type"; Rec."Environment Type")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Environment Name"; Rec."Environment Name")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Visible = ShowEnvironment;
                 }
                 field("Environment Id"; Rec."Environment Id")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
+                    Visible = ShowEnvironment;
                 }
                 field("Environment State"; Rec."Environment State")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
+                    Visible = ShowEnvironment;
                 }
             }
             group(GrpServerInstance)
             {
                 Caption = 'Service';
+                Visible = ShowService;
 
                 field("Service Name"; Rec."Service Name")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service State"; Rec."Service State")
                 {
                     ApplicationArea = All;
+                    Editable = false;
+                    Visible = false;
+                }
+                field("Service Status"; Rec."Service Status")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
+                }
+                field("Service NAV Version"; Rec."Service NAV Version")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service Version"; Rec."Service Version")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field("Service Full Version"; Rec."Service Full Version")
                 {
@@ -113,167 +128,197 @@ page 50001 "IMP Connection Card"
                 field("Service Account"; Rec."Service Account")
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpPorts)
             {
                 Caption = 'Ports';
+                Visible = ShowPorts;
 
                 field(ManagementServicesPort; Rec.ManagementServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(ClientServicesPort; Rec.ClientServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
                 }
                 field(SOAPServicesPort; Rec.SOAPServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
                 }
                 field(ODataServicesPort; Rec.ODataServicesPort)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
+                }
+                field(DeveloperServicesPort; Rec.DeveloperServicesPort)
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
                 }
             }
             group(GrpDatabase)
             {
                 Caption = 'SQL Server';
+                Visible = ShowDatabase;
 
                 field(DatabaseServer; Rec.DatabaseServer)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(DatabaseInstance; Rec.DatabaseInstance)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(DatabaseName; Rec.DatabaseName)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
             }
             group(GrpCredential)
             {
                 Caption = 'Credential';
+                Visible = ShowCredential;
 
                 field(ClientServicesCredentialType; Rec.ClientServicesCredentialType)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
                 field(ServicesCertificateThumbprint; Rec.ServicesCertificateThumbprint)
                 {
                     ApplicationArea = All;
+                    Importance = Promoted;
                 }
 
             }
+            group(GrpAuthorisation)
+            {
+
+                Caption = 'Authorisation';
+                Visible = ShowAuthorisation;
+
+                field("Authorisation No."; Rec."Authorisation No.")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+
+                    trigger OnValidate()
+                    begin
+                        GetDetail();
+                    end;
+                }
+                field(AuthorisationName; Authorisation.Name)
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
+                }
+            }
+            group(GrpCompany)
+            {
+                Caption = 'Company';
+                Visible = ShowCompany;
+
+                field("Company Name"; Rec."Company Name")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                }
+                field("Company Id"; Rec."Company Id")
+                {
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                }
+            }
         }
     }
 
-    actions
-    {
-        area(Processing)
-        {
-            /*
-            action(ActLoadSimpleServices)
-            {
-                Caption = 'Load Simple Service List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
+    #region Triggers
 
-                trigger OnAction()
-                begin
-                    ImpAdmn.LoadSimpleServerList();
-                    CurrPage.Update(true);
-                end;
-            }
-            action(ActLoadFullServices)
-            {
-                Caption = 'Load Full Service List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        // Set new
+        Rec.NewRecord(BelowxRec, Rec.GetFilter("Customer No."), Rec);
 
-                trigger OnAction()
-                begin
-                    ImpAdmn.LoadFullServerList(true, true);
-                    CurrPage.Update(true);
-                end;
-            }
-            action(ActLoadVersionList)
-            {
-                Caption = 'Load Version List';
-                ApplicationArea = All;
-                Image = WorkCenterLoad;
+        // Set visibility
+        ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowService := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
+        ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
+        ShowEnvironment := (Rec.Environment <> Rec.Environment::Service);
 
-                trigger OnAction()
-                var
-                    lc_List: list of [Text];
-                begin
-                    lc_List := ImpAdmn.LoadVersionList()
-                end;
-            }
-            */
-            action(ActLoadImpent02)
-            {
-                Caption = 'Load IMPENT02';
-                ApplicationArea = All;
-                Image = Import;
+        // Show deatil
+        GetDetail();
+    end;
 
-                trigger OnAction()
-                begin
-                    Rec.LoadFromServer('impent02');
-                    Rec.Reset();
-                end;
-            }
-            action(ActLoadServices)
-            {
-                Caption = 'Load services';
-                ApplicationArea = All;
-                Image = Import;
-
-                trigger OnAction()
-                var
-                //lc_Files: Record "Name/Value Buffer" temporary;
-                //lc_Conv: Codeunit "Base64 Convert";
-                //lc_ImpWeb: Codeunit "IMP WebService";
-                //lc_Instream: InStream;
-                //lc_Temptext: Text[1000];
-                //lc_JsonText: Text;
-                begin
-                    //Rec.LoadFromServer('impent02');
-                    /*
-                    lc_JsonText := '';
-                    lc_Files.Init();
-                    lc_Files."Value BLOB".Import('\\impfps01\Daten\04_Entwicklung\Kunden\IMP\Admin\Log\NAV71List.json'); //NAV71List.json');
-                    lc_Files."Value BLOB".CreateInStream(lc_Instream, TextEncoding::UTF16);
-                    while not lc_Instream.EOS() do begin
-                        lc_Instream.Read(lc_Temptext, 1000);
-                        lc_JsonText += lc_Temptext;
-                    end;
-                    if (lc_JsonText <> '') then begin
-                        lc_JsonText := lc_Conv.ToBase64(lc_JsonText, TextEncoding::UTF16);
-                        Message(lc_ImpWeb.odata(lc_JsonText));
-                    end;
-                    */
-                    ImpAdmn.CallServerList(71);
-                end;
-            }
-        }
-    }
+    trigger OnDeleteRecord(): Boolean
+    begin
+        Rec."Service State" := CopyStr(Rec.GetStatusToRemove(), 1, MaxStrLen(Rec."Service State"));
+        Rec."Service Status" := Rec."Service Status"::ToRemove;
+    end;
 
     trigger OnOpenPage()
     begin
-        //ImpAdmn.CallServerList(71);
-        //ImpAdmn.CallServerList(80);
-        //ImpAdmn.CallServerList(90);
-        //ImpAdmn.CallServerList(100);
-        //ImpAdmn.CallServerList(110);
-        //ImpAdmn.CallServerList(160);
-        //ImpAdmn.CallServerList(170);
-        //ImpAdmn.CallServerList(180);
-        //Rec.LoadFromServer('impent02');
+        // Set visibility
+        ShowPorts := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowService := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowDatabase := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCredential := (Rec.Environment <> Rec.Environment::Cloud);
+        ShowCompany := (Rec.Environment = Rec.Environment::Cloud);
+        ShowAuthorisation := true; // (Rec.Environment = Rec.Environment::Cloud);
+        ShowEnvironment := (Rec.Environment <> Rec.Environment::Service);
+
+        // Show deatil
+        GetDetail();
     end;
 
+    trigger OnClosePage()
     var
-        ImpAdmn: Codeunit "IMP Administration";
+        lc_AdmMgmt: Codeunit "IMP Administration";
+    begin
+        if ((Rec."No." <> '') and (Rec.Environment = Rec.Environment::Service)) then
+            case Rec."Service Status" of
+                Rec."Service Status"::ToCreate:
+                    lc_AdmMgmt.CallServiceCreate(Rec, true, true);
+                Rec."Service Status"::ToRemove:
+                    lc_AdmMgmt.CallServiceAction(Rec, IMPServiceStatus::ToRemove, true, true);
+            end;
+    end;
+
+    #endregion Triggers
+
+    #region Methodes
+
+    local procedure GetDetail()
+    begin
+        if not Authorisation.Get(Rec."Authorisation No.") then
+            Authorisation.Init();
+    end;
+
+    #endregion Methodes
+
+    var
+        Authorisation: Record "IMP Authorisation";
+        ShowCompany: Boolean;
+        ShowAuthorisation: Boolean;
+        ShowPorts: Boolean;
+        ShowService: Boolean;
+        ShowDatabase: Boolean;
+        ShowCredential: Boolean;
+        ShowEnvironment: Boolean;
 }

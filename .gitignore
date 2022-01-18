@@ -1,5 +1,7 @@
 .alcache/
 .alpackages/
-.vscode/
+.vscode/.alcache/
+.vscode/.altemplates
+.vscode/rad.json
 .app
 

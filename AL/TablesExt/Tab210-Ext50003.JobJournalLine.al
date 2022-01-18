@@ -76,10 +76,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 1 from", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //if JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
                 TimeCalc(true); // JobSetup."Report 15 Minutes Unit");
             end;
         }
@@ -99,10 +100,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 1 to", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //if JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
                 TimeCalc(true); // lc_JobSetup."IMP Report 15 Minutes Unit");
             end;
         }
@@ -122,10 +124,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 2 from", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //IF JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
                 TimeCalc(true); // JobSetup."IMP Report 15 Minutes Unit");
             end;
         }
@@ -145,10 +148,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 2 to", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //if JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
                 TimeCalc(true); // JobSetup."IMP Report 15 Minutes Unit");
             end;
         }
@@ -168,10 +172,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 3 from", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //if JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
                 TimeCalc(true); // JobSetup."IMP Report 15 Minutes Unit");
             end;
         }
@@ -191,10 +196,12 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeCheck(Rec."IMP Time 3 to", lc_Test, lc_Rest);
                 //JobSetup.Get();
                 //if JobSetup."IMP Report 15 Minutes Unit" then
-                if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
-                    lc_Rest := lc_Rest
-                else
-                    Error(Txt3_Txt);
+                //if ((lc_Test < 1) and ((lc_Rest = 0) or (lc_Rest = 0.15) or (lc_Rest = 0.3) or (lc_Rest = 0.45))) then
+                //    lc_Rest := lc_Rest
+                //else
+                //    Error(Txt3_Txt);
+                RestCheck(lc_Test, lc_Rest);
+
                 TimeCalc(true); // JobSetup."IMP Report 15 Minutes Unit");
             end;
         }
@@ -311,6 +318,26 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             FieldClass = FlowField;
             CalcFormula = Exist("IMP Job Consulting Inv. Line" where("Job Journal Template" = Field("Journal Template Name"), "Job Journal Batch" = Field("Journal Batch Name"), "Job Journal Line No." = Field("Line No.")));
         }
+        field(50150; "IMP Travel km + Time integrate"; Boolean)
+        {
+            Caption = 'Travel km + time integrate';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if (Rec."IMP Travel km + Time integrate") then
+                    CreateNewTravelLine()
+                else
+                    DeleteTravelLine();
+                ComesFromField := Rec.FieldNo("IMP Travel km + Time integrate");
+                TimeCalc(true);
+            end;
+        }
+        field(50160; "IMP Belongs To Line No."; Integer)
+        {
+            Caption = 'Belongs to line no.';
+            DataClassification = CustomerContent;
+        }
     }
 
     #region Triggers
@@ -351,7 +378,6 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
     end;
 
     #endregion Triggers
-
 
     #region Methodes
 
@@ -479,6 +505,79 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         _Test := (_Rest / 60 * 100);
     end;
 
+    procedure RestCheck(_Test: Decimal; _Rest: Decimal)
+    begin
+        if not ((_Test < 1) and ((_Rest = 0) or (_Rest = 0.15) or (_Rest = 0.3) or (_Rest = 0.45))) then
+            Error(Txt3_Txt);
+    end;
+
+    procedure CreateNewTravelLine()
+    var
+        lc_JobSetup: Record "Jobs Setup";
+        lc_Job: Record Job;
+        lc_JJL: Record "Job Journal Line";
+        lc_WT: Record "Work Type";
+        lc_LineNo: Integer;
+    begin
+        // Get and check setup
+        lc_JobSetup.Get();
+        lc_JobSetup.TestField("IMP Job Travel Work Type Code");
+
+        // Get work type
+        lc_WT.Get(lc_JobSetup."IMP Job Travel Work Type Code");
+
+        // Get job
+        lc_Job.Get("Job No.");
+
+        // Create new line if not exists
+        if not lc_JJL.Get(Rec."Journal Template Name", Rec."Journal Batch Name", Rec."IMP Belongs to Line No.") then begin
+            // Find next line no.
+            lc_JJL.Reset();
+            lc_JJL.SetRange("Journal Template Name", "Journal Template Name");
+            lc_JJL.SetRange("Journal Batch Name", "Journal Batch Name");
+            lc_JJL.SetFilter("Line No.", '>%1', "Line No.");
+            if lc_JJL.Find('-') then
+                lc_LineNo := "Line No." + ((lc_JJL."Line No." - "Line No.") / 2)
+            else
+                lc_LineNo := "Line No." + 10000;
+            // Create new line
+            lc_JJL.Init();
+            lc_JJL.Validate("Journal Template Name", "Journal Template Name");
+            lc_JJL.Validate("Journal Batch Name", "Journal Batch Name");
+            lc_JJL.Validate("Line No.", lc_LineNo);
+            lc_JJL.Validate("Job No.", "Job No.");
+            lc_JJL.Validate("Job Task No.", "Job Task No.");
+            //lc_JJL.Validate("Job Planningline Line No.", "Job Planningline Line No.");
+            lc_JJL.Validate("Posting Date", "Posting Date");
+            lc_JJL.Validate("Document No.", "Document No.");
+            lc_JJL.Validate(Type, Type);
+            lc_JJL.Validate("No.", "No.");
+            lc_JJL.Validate(Description, lc_WT.Description);
+            lc_JJL.Validate("Work Type Code", lc_WT.Code);
+            lc_JJL.Validate("IMP Belongs to Line No.", "Line No.");
+            lc_JJL.Insert(true);
+        end;
+
+        // Update line
+        lc_JJL.Validate(Quantity, lc_Job."IMP Travel Time (100er units)");
+        lc_JJL.Validate("IMP Travel Time", lc_Job."IMP Travel Time (100er units)");
+        lc_JJL.Validate("IMP km", lc_Job."IMP Distance km");
+        lc_JJL.Modify(true);
+
+        // Store belongs to line no.
+        Rec."IMP Belongs to Line No." := lc_JJL."Line No.";
+    end;
+
+    procedure DeleteTravelLine()
+    var
+        lc_JJL: Record "Job Journal Line";
+    begin
+        if lc_JJL.Get(Rec."Journal Template Name", Rec."Journal Batch Name", Rec."IMP Belongs to Line No.") then begin
+            lc_JJL.Delete();
+            Rec."IMP Belongs to Line No." := 0;
+        end;
+    end;
+
     #endregion Methodes
 
     var
@@ -486,6 +585,6 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         ComesFromField: Integer;
         Txt1_Txt: Label 'No hourly allocation can be made when expenses are recorded.';
         Txt2_Txt: Label 'For internal projects, the from/to time or quantity must be changed';
-        Txt3_Txt: Label 'Ungültige Zeit - Gültig z.B. 7.15, 12.30, 17.45';
+        Txt3_Txt: Label 'Wrong Time - Valid e.g. 7.15, 12.30, 17.45';
 
 }

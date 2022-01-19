@@ -1626,7 +1626,7 @@
         </trans-unit>
         <trans-unit id="Page 1686976452 - Action 520829845 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Launch.json</source>
-          <target>Start.json</target>
+          <target>Launch.json</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActLaunch - Property Caption</note>
         </trans-unit>

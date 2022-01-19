@@ -393,6 +393,8 @@ page 50008 "IMP AL Object Numbers"
                     lc_FileName := 'Xml';
                 Rec."Object Type"::Query:
                     lc_FileName := 'Qry';
+                Rec."Object Type"::Codeunit:
+                    lc_FileName := 'Cod';
             end;
             lc_ObjectName := lc_Cust."IMP Abbreviation" + ' <objectname>';
             lc_FileName += Format(lc_NewEntry) + '.' + lc_Cust."IMP Abbreviation" + '<objectname>.al';

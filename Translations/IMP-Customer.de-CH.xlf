@@ -262,8 +262,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Table 2346288409 - Field 941025898 - Method 2126772001 - NamedType 2578849735" size-unit="char" translate="yes" xml:space="preserve">
-          <source>There are more then one entry with a name like "@*%1*"</source>
-          <target>Es gibt mehr als einen Eintrag mit einem Namen wie "@*%1*".</target>
+          <source>There are more then one entry with a name like "@%1"</source>
+          <target>Es gibt mehr als einen Eintrag mit einem Namen wie "@%1".</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP AL Object Number - Field Parent Object Name - Method OnValidate - NamedType lc_Txt2_Txt</note>
         </trans-unit>
@@ -365,7 +365,7 @@
         </trans-unit>
         <trans-unit id="Table 2348362374 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Connection</source>
-          <target>Verbindung</target>
+          <target>Connection</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Connection - Property Caption</note>
         </trans-unit>
@@ -1019,7 +1019,7 @@
         </trans-unit>
         <trans-unit id="Table 2838444131 - Field 707810663 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Connections</source>
-          <target>Verbindungen</target>
+          <target>Connections</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Server - Field Connections - Property Caption</note>
         </trans-unit>
@@ -1351,7 +1351,6 @@
           <source>To translate: #1######\#2################################</source>
           <target>Zu übersetzen: #1######\#2################################</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">The placeholder "#2####################################################" was found in target, but not in source.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit IMP Management - Method TranslateXlfFile - NamedType lc_Dia_Txt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3148976217 - Method 2108033686 - NamedType 1683707309" size-unit="char" translate="yes" xml:space="preserve">
@@ -1494,7 +1493,7 @@
         </trans-unit>
         <trans-unit id="Page 782262242 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Connection</source>
-          <target>Verbindung</target>
+          <target>Connection</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection Card - Property Caption</note>
         </trans-unit>
@@ -1548,7 +1547,7 @@
         </trans-unit>
         <trans-unit id="Page 1686976452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Connections</source>
-          <target>Verbindungen</target>
+          <target>Connections</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Property Caption</note>
         </trans-unit>
@@ -1608,7 +1607,7 @@
         </trans-unit>
         <trans-unit id="Page 1686976452 - Action 1782796700 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Connection</source>
-          <target>Verbindung</target>
+          <target>Connection</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActDataConnection - Property Caption</note>
         </trans-unit>
@@ -2240,12 +2239,11 @@
           <source>Authorisations</source>
           <target>Authorisations</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Authorisations - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 2367230766 - Field 3046303251 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1994964448">
           <source>Connections</source>
-          <target>Verbindungen</target>
+          <target>Connections</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Connections - Property Caption</note>
         </trans-unit>

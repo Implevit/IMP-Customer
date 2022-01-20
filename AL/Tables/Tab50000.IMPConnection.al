@@ -744,7 +744,7 @@ table 50000 "IMP Connection"
                         lc_New.Add('environmentType', Format(_Rec."Environment Type"));
                         lc_New.Add('environmentName', _Rec."Environment Name");
                         lc_New.Add('breakOnError', true);
-                        lc_New.Add('breakOnRecordWrite', true);
+                        lc_New.Add('breakOnRecordWrite', false);
                         lc_New.Add('launchBrowser', true);
                         lc_New.Add('tenant', _Rec."Environment Id");
                         lc_New.Add('schemaUpdateMode', 'Synchronize');

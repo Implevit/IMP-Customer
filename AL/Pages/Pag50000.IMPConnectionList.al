@@ -285,7 +285,7 @@ page 50000 "IMP Connection List"
 
                     trigger OnAction()
                     begin
-                        ImpAdmn.CallServerLists(true, true);
+                        ImpAdmn.CallServerLists(false, true);
                     end;
                 }
                 group(ActData)
@@ -566,7 +566,7 @@ page 50000 "IMP Connection List"
         CustomerNo := Rec.GetFilter("Customer No.");
         Version := Rec.GetFilter("Service Version");
         ShowFilter := ((ServerFilter = '') and (CustomerNo = '') and (Version = '') and (Rec.GetFilter("Customer Abbreviation") = ''));
-        ShowFunctions := ((UserId.ToLower() = 'impl')); // or (UserId.ToLower() = 'imp\r.meurer'));        
+        ShowFunctions := ((UserId.ToLower() = 'impl') or (UserId.ToLower() = 'imp\r.meurer'));
         ValidateSetFilter();
     end;
 

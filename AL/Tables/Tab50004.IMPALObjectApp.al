@@ -1062,7 +1062,12 @@ table 50004 "IMP AL Object App"
         lc_Prefix: Text;
         lc_CrLf: Text;
         lc_Zeros: Text;
+        lc_Found: Text;
+        lc_HasFound: Boolean;
+        lc_Splitter: Text;
     begin
+        // Search for x<Object-Number>.x<number> or x<Object-Number>-x<number>
+
         // Init
         lc_CrLf[1] := 13;
         lc_CrLf[2] := 10;
@@ -1080,7 +1085,7 @@ table 50004 "IMP AL Object App"
         end;
 
         // Set name
-        lc_Name += Format(_IAON."Object No.") + '.';
+        lc_Name += Format(_IAON."Object No.");
 
         // Set find
         lc_Find := '''' + lc_Name;
@@ -1089,8 +1094,20 @@ table 50004 "IMP AL Object App"
         while not _InStream.EOS do begin
             // Read line
             _InStream.ReadText(lc_Line);
-            // Load message
-            if lc_Line.Contains(lc_Find) then begin
+            // Set Found
+            lc_HasFound := false;
+            lc_Splitter := '.';
+            lc_Found := lc_Find + lc_Splitter;
+            if lc_Line.Contains(lc_Found) then
+                lc_HasFound := true
+            else begin
+                lc_Splitter := '-';
+                lc_Found := lc_Find + lc_Splitter;
+                if lc_Line.Contains(lc_Found) then
+                    lc_HasFound := true
+            end;
+            // Load message            
+            if lc_HasFound then begin
                 // Split in parameters
                 lc_List := lc_Line.Split(',');
                 foreach lc_Entry in lc_List do
@@ -1098,7 +1115,7 @@ table 50004 "IMP AL Object App"
                         // Clear
                         lc_Entry := lc_Entry.Trim().Replace('''', '');
                         // Parameter message no found
-                        lc_List2 := lc_Entry.Split('.');
+                        lc_List2 := lc_Entry.Split(lc_Splitter);
                         // Split for number
                         lc_No1 := lc_List2.Get(2);
                         lc_No2 := '';

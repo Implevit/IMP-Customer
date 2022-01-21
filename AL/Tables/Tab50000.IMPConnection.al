@@ -762,6 +762,7 @@ table 50000 "IMP Connection"
                         lc_New.Add('authentication', 'UserPassword');
                         lc_New.Add('startupObjectType', 'Page');
                         lc_New.Add('startupObjectId', 9005);
+                        lc_New.Add('tenant', 'default');
                         lc_New.Add('breakOnError', true);
                         lc_New.Add('launchBrowser', true);
                         lc_New.Add('breakOnRecordWrite', false);

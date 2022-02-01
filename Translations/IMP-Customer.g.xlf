@@ -1319,7 +1319,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActProcessing - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1686976452 - Action 2537996322 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Data App</source>
+          <source>IMP-Data</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActData - Property Caption</note>
         </trans-unit>

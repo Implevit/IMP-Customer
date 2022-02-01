@@ -290,7 +290,7 @@ page 50000 "IMP Connection List"
                 }
                 group(ActData)
                 {
-                    Caption = 'Data App';
+                    Caption = 'IMP-Data';
                     Image = Database;
                     Visible = ShowFunctions;
 

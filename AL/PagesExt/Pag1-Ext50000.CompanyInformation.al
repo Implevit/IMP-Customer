@@ -45,6 +45,10 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                                 Rec."IMP Customers Path" := CopyStr(lc_Path, 1, MaxStrLen(Rec."IMP Customers Path"));
                     end;
                 }
+                field("IMP BC Environments Url"; Rec."IMP BC Environments Url")
+                {
+                    ApplicationArea = All;
+                }
                 field("IMP Delete Info File"; Rec."IMP Delete Info File")
                 {
                     ApplicationArea = All;
@@ -91,7 +95,6 @@ pageextension 50000 "IMP Pag1-Ext50000" extends "Company Information"
                         ImpMgmt.TranslateXlfFile(true, true);
                     end;
                 }
-
             }
         }
     }

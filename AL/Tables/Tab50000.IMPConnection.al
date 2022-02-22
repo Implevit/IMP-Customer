@@ -303,6 +303,11 @@ table 50000 "IMP Connection"
             Caption = 'Url';
             DataClassification = CustomerContent;
         }
+        field(121; "Api"; Text[250])
+        {
+            Caption = 'Api';
+            DataClassification = CustomerContent;
+        }
         field(130; "Authorisation No."; Integer)
         {
             Caption = 'Authorisation No.';
@@ -366,7 +371,7 @@ table 50000 "IMP Connection"
                 end;
                 // Get webservice companies
                 lc_IA.Get(Rec."Authorisation No.");
-                if DatMgmt.SelectCompany(Rec.GetUrlOdata(), lc_CompName, lc_CompId, lc_IA.Name, lc_IA.Password, lc_IA.Token, lc_IA."Client Id", lc_IA."Secret Id") then begin
+                if DatMgmt.SelectCompany(Rec.GetUrlOdata(), lc_CompName, lc_CompId, lc_IA.Name, lc_IA.Password, lc_IA.Token, lc_IA."Client Id", lc_IA."Client Secret") then begin
                     Rec."Company Name" := CopyStr(lc_CompName, 1, MaxStrLen(Rec."Company Name"));
                     Rec."Company Id" := lc_CompId;
                 end;
@@ -441,6 +446,7 @@ table 50000 "IMP Connection"
     var
     begin
         Rec.Url := CopyStr(GetUrlClient(), 1, MaxStrLen(Rec.Url));
+        Rec.Api := CopyStr(GetUrlApi(), 1, MaxStrLen(Rec.Api));
     end;
 
     procedure GetUrlBase() RetValue: Text
@@ -482,7 +488,7 @@ table 50000 "IMP Connection"
             Rec.Environment::Docker:
                 RetValue := lc_IS.GetClientUrl() + '/' + Rec."Service Name" + '/';
             REc.Environment::Cloud:
-                RetValue := lc_IS.GetDnsUrl() + _Version + '/' + Rec."Environment Id" + '/Production/api/' + _Version;
+                RetValue := lc_IS.GetDnsUrl() + _Version + '/' + Rec."Environment Id" + '/' + Rec."Environment Name" + '/api/' + _Version;
         end;
     end;
 
@@ -740,7 +746,7 @@ table 50000 "IMP Connection"
                         lc_New.Add('request', 'launch');
                         lc_New.Add('name', _Rec."List Name");
                         lc_New.Add('startupObjectType', 'Page');
-                        lc_New.Add('startupObjectId', 379);
+                        lc_New.Add('startupObjectId', 9005);
                         lc_New.Add('environmentType', Format(_Rec."Environment Type"));
                         lc_New.Add('environmentName', _Rec."Environment Name");
                         lc_New.Add('breakOnError', true);

@@ -1463,7 +1463,7 @@
         </trans-unit>
         <trans-unit id="Page 3636186504 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Authorisation List</source>
-          <target>Authorisation List'</target>
+          <target>Authorisation List</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Authorisation List - Property Caption</note>
         </trans-unit>

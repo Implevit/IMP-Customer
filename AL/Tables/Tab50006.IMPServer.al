@@ -76,6 +76,9 @@ table 50006 "IMP Server"
         key(Key1; "Name")
         {
         }
+        key(Key2; Type)
+        {
+        }
     }
 
     #region Methods

@@ -1,12 +1,12 @@
 codeunit 50004 BCConnector
 {
     var
-        ClientIdTxt: Label 'ade320f7-954c-4a37-9363-17b1069e5edc'; // '3870c15c-5700-4704-8b1b-e020052cc860';
-        ClientSecretTxt: Label 'a56393cd-6963-4adf-a10b-491ca05fc090'; // '~FJRgS5q0YsAEefkW-_pA4ENJ_vIh-5RV9';
-        AadTenantIdTxt: Label '06e77f86-5e8f-4477-8004-535d939ff179'; // 'kauffmann.nl';
-        AuthorityTxt: Label 'https://login.microsoftonline.com/{AadTenantId}/oauth2/v2.0/token';
-        BCEnvironmentNameTxt: Label 'sandbox_yma'; // 'sandbox';
-        BCCompanyIdTxt: Label '0987d6a4-fb7c-eb11-b853-000d3abf1475';
+        ClientIdTxt: Label '087d0ed0-cfd9-4671-abfc-7e2b965019f7';
+        ClientSecretTxt: Label 'fva7Q~501hoDnImIUuGucpFXUBEsdt9O-~rEQ';
+        AadTenantIdTxt: Label '06e77f86-5e8f-4477-8004-535d939ff179';
+        AuthorityTxt: Label 'https://login.microsoftonline.com/{AadTenantId}/oauth2/v2.0/token?resource=https://api.businesscentral.dynamics.com';
+        BCEnvironmentNameTxt: Label 'dev1';
+        BCCompanyIdTxt: Label '3d6d6b75-6b50-eb11-bb51-000d3aa935c7';
         BCBaseUrlTxt: Label 'https://api.businesscentral.dynamics.com/v2.0/{BCEnvironmentName}/api/v2.0/companies({BCCompanyId})';
         AccessToken: Text;
         AccesTokenExpires: DateTime;
@@ -39,7 +39,7 @@ codeunit 50004 BCConnector
             if Response.IsBlockedByEnvironment then
                 Error('Request was blocked by environment')
             else
-                Error('Request to Business Central failed\%', GetLastErrorText());
+                Error('Request to Business Central failed\%1', GetLastErrorText());
 
         if not Response.IsSuccessStatusCode then
             Error('Request to Business Central failed\%1 %2', Response.HttpStatusCode, Response.ReasonPhrase);
@@ -54,7 +54,7 @@ codeunit 50004 BCConnector
     begin
         Scopes.Add('https://api.businesscentral.dynamics.com/.default');
         if not OAuth2.AcquireTokenWithClientCredentials(ClientIdTxt, ClientSecretTxt, GetAuthorityUrl(AadTenantId), '', Scopes, AccessToken) then
-            Error('Failed to retrieve access token\', GetLastErrorText());
+            Error('Failed to retrieve access token\%1', GetLastErrorText());
         AccesTokenExpires := CurrentDateTime + (3599 * 1000);
     end;
 

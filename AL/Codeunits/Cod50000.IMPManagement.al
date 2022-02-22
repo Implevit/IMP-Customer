@@ -406,7 +406,7 @@ codeunit 50000 "IMP Management"
             _Username := lc_IA.Name;
             _Password := lc_IA.Password;
             _ClientId := lc_IA."Client Id";
-            _SecretId := lc_IA."Secret Id";
+            _SecretId := lc_IA."Client Secret";
             _Token := lc_IA.Token;
         end;
     end;
@@ -426,7 +426,7 @@ codeunit 50000 "IMP Management"
         _Username := lc_IA.Name;
         _Password := lc_IA.Password;
         _ClientId := lc_IA."Client Id";
-        _SecretId := lc_IA."Secret Id";
+        _SecretId := lc_IA."Client Secret";
         _Token := lc_IA.Token;
         // Select entry
         lc_IA.Reset();
@@ -446,7 +446,7 @@ codeunit 50000 "IMP Management"
             _Username := lc_IA.Name;
             _Password := lc_IA.Password;
             _ClientId := lc_IA."Client Id";
-            _SecretId := lc_IA."Secret Id";
+            _SecretId := lc_IA."Client Secret";
             _Token := lc_IA.Token;
         end;
     end;
@@ -570,7 +570,7 @@ codeunit 50000 "IMP Management"
         _Result.Add('passowrd', lc_IA.Password);
         _Result.Add('token', lc_IA.Token);
         _Result.Add('clientId', lc_IA."Client Id");
-        _Result.Add('secretId', lc_IA."Secret Id");
+        _Result.Add('secretId', lc_IA."Client Secret");
 
         // Return
         RetValue := true;
@@ -784,8 +784,8 @@ codeunit 50000 "IMP Management"
         RequestUrl: Text;
         AccessToken: Text;
     begin
-        RequestUrl := 'https://api.businesscentral.dynamics.com/admin/v2.7/applications/businesscentral/environments/Sandbox_yma/apps';
-        AccessToken := 'VF36TjkVuR7CewrPu+xVF42ZKKg8bapThhBAILcs7vs=';
+        RequestUrl := 'https://api.businesscentral.dynamics.com/admin/v2.7/applications/businesscentral/environments/dev1/apps';
+        AccessToken := '';
 
         RequestMessage.GetHeaders(RequestHeaders);
         RequestHeaders.Clear();

@@ -60,8 +60,13 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
                 end;
                 // Create server instance for this tenant
                 if ((Rec."IMP Tenant Id" <> '') and (Rec."IMP Tenant Id" <> xRec."IMP Tenant Id")) then begin
+                    // Set authorisation
+                    if (Rec."IMP Authorisation" <> 0) then
+                        SetMicrosoftAuthorisation(Rec."IMP Authorisation", Rec."IMP Tenant Id");
+
                     // Check abbreviation first
                     Rec.TestField("IMP Abbreviation");
+
                     // Check entry
                     lc_IC.Reset();
                     lc_IC.SetRange(Environment, lc_IC.Environment::Cloud);
@@ -123,5 +128,37 @@ tableextension 50001 "IMP Tab18-Ext50001" extends Customer
             TableRelation = "IMP Connection";
             Editable = false;
         }
+        field(50050; "IMP Authorisation"; Integer)
+        {
+            Caption = 'BC Authorisation';
+            DataClassification = CustomerContent;
+            TableRelation = "IMP Authorisation"."Entry No." where("Customer No." = field("No."));
+
+            trigger OnValidate()
+            begin
+                if ((Rec."IMP Authorisation" <> 0) and (rec."IMP Authorisation" <> xRec."IMP Authorisation")) then
+                    SetMicrosoftAuthorisation(Rec."IMP Authorisation", Rec."IMP Tenant Id");
+            end;
+        }
     }
+
+    keys
+    {
+        key(IMP1; "IMP Tenant Id")
+        {
+        }
+    }
+
+    #region Methods
+
+    procedure SetMicrosoftAuthorisation(_Authoristaion: Integer; _TenantId: Text)
+    var
+        lc_IA: Record "IMP Authorisation";
+    begin
+        if lc_IA.Get(_Authoristaion) then
+            lc_IA.SetMicrosoftAuthorisation(_TenantId);
+    end;
+
+    #endregion Methods
+
 }

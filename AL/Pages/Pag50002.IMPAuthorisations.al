@@ -37,19 +37,27 @@ page 50002 "IMP Authorisation List"
                 {
                     ApplicationArea = All;
                 }
-                field(Token; Rec.Token)
-                {
-                    ApplicationArea = All;
-                }
                 field("Client Id"; Rec."Client Id")
                 {
                     ApplicationArea = All;
                 }
-                field("Secret Id"; Rec."Secret Id")
+                field("Client Secret"; Rec."Client Secret")
                 {
                     ApplicationArea = All;
                 }
-                field("Redirect Uri"; Rec."Redirect Uri")
+                field("Auth URL"; Rec."Auth URL")
+                {
+                    ApplicationArea = All;
+                }
+                field("Access Token URL"; Rec."Access Token URL")
+                {
+                    ApplicationArea = All;
+                }
+                field("Callback URL"; Rec."Callback URL")
+                {
+                    ApplicationArea = All;
+                }
+                field(Token; Rec.Token)
                 {
                     ApplicationArea = All;
                 }

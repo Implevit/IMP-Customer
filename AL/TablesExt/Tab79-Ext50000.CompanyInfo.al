@@ -28,5 +28,10 @@ tableextension 50000 "IMP Tab79-Ext50000" extends "Company Information"
             Caption = 'Delete Info File';
             DataClassification = CustomerContent;
         }
+        field(50050; "IMP BC Environments Url"; Text[250])
+        {
+            Caption = 'BC Environments Url';
+            DataClassification = CustomerContent;
+        }
     }
 }

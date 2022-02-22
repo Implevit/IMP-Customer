@@ -85,11 +85,21 @@ page 50100 "Test OAuth2 Flows"
                 {
                     ApplicationArea = All;
                     Caption = 'Access Token';
+
+                    trigger OnAssistEdit()
+                    begin
+                        Message(AccessToken);
+                    end;
                 }
                 field(TokenCache; TokenCache)
                 {
                     ApplicationArea = All;
                     Caption = 'Token Cache';
+
+                    trigger OnAssistEdit()
+                    begin
+                        Message(TokenCache);
+                    end;
                 }
                 field(ErrorMessage; ErrorMessage)
                 {
@@ -182,9 +192,21 @@ page 50100 "Test OAuth2 Flows"
                     end;
                 end;
             }
+            action(Run)
+            {
+                ApplicationArea = All;
+                Caption = 'Run Codeunit';
+                Image = Administration;
+
+                trigger OnAction()
+                var
+                    lc_Codeunit: Codeunit BCConnector;
+                begin
+                    lc_Codeunit.Run();
+                end;
+            }
         }
     }
-
 
     var
         OAuth2: Codeunit Oauth2;
@@ -311,7 +333,14 @@ page 50100 "Test OAuth2 Flows"
         // This function is coming up with 17.1
         // OAuth2.GetDefaultRedirectURL(RedirectURL);
         MicrosoftOAuth2Url := 'https://login.microsoftonline.com/common/oauth2/';
-        OAuthAdminConsentUrl := 'https://login.microsoftonline.com/common/adminconsent'
+        OAuthAdminConsentUrl := 'https://login.microsoftonline.com/common/adminconsent';
+
+        ClientId := '087d0ed0-cfd9-4671-abfc-7e2b965019f7';
+        ClientSecret := 'fva7Q~501hoDnImIUuGucpFXUBEsdt9O-~rEQ';
+        RedirectURL := 'https://api.businesscentral.dynamics.com';
+        AadTenantId := '06e77f86-5e8f-4477-8004-535d939ff179';
+        UserEmail := 'admin@imlevit.onmicrosoft.com';
+        MicrosoftOAuth2Url := 'https://login.microsoftonline.com/' + AadTenantId + '/oauth2/v2.0/token';
     end;
 
     local procedure SetResultStyle()

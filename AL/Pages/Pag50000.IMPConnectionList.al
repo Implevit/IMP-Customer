@@ -288,9 +288,24 @@ page 50000 "IMP Connection List"
                         ImpAdmn.CallServerLists(false, true);
                     end;
                 }
+                action(ActRefreshCloud)
+                {
+                    Caption = 'Refresh Cloud';
+                    ApplicationArea = All;
+                    Image = Cloud;
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    begin
+                        if ((Rec."Environment Type" = Rec."Environment Type"::Sandbox) or (Rec."Environment Type" = Rec."Environment Type"::Production)) then
+                            ImpAdmn.LoadBCEnvironemnt(Rec."Environment Id");
+                    end;
+                }
                 group(ActData)
                 {
-                    Caption = 'Data App';
+                    Caption = 'IMP-Data';
                     Image = Database;
                     Visible = ShowFunctions;
 

@@ -2038,6 +2038,315 @@ codeunit 50001 "IMP Administration"
 
     //#endregion PowerShell
 
+    #region Cloud
+
+    procedure LoadBCEnvironemnt(_TenantId: Text)
+    var
+        lc_Message: Text;
+    begin
+        if not LoadBCEnvironment(_TenantId, lc_Message) then
+            if ((lc_Message <> '') and (GuiAllowed())) then
+                Message(lc_Message);
+    end;
+
+    procedure LoadBCEnvironment(_TenantId: Text; var _Message: Text) RetValue: Boolean
+    var
+        lc_CompInfo: Record "Company Information";
+        lc_IS: Record "IMP Server";
+        lc_IC: Record "IMP Connection";
+        lc_IA: Record "IMP Authorisation";
+        lc_Cust: Record Customer;
+        lc_AccessToken: Text;
+        lc_ExpiryDate: DateTime;
+        lc_Url: Text;
+        lc_HttpClient: HttpClient;
+        lc_HttpResponse: HttpResponseMessage;
+        lc_WebResponseJson: JsonObject;
+        lc_Token: JsonToken;
+        lc_Array: JsonArray;
+        lc_Result: Text;
+    begin
+        // Response of enviroment request
+        //{
+        //    "value": [
+        //        {
+        //            "friendlyName": "imlevit-Dev1",
+        //            "type": "Sandbox",
+        //            "name": "Dev1",
+        //            "countryCode": "CH",
+        //            "applicationFamily": "BusinessCentral",
+        //            "aadTenantId": "06e77f86-5e8f-4477-8004-535d939ff179",
+        //            "applicationVersion": "19.3.34541.34662",
+        //            "status": "Active",
+        //            "webClientLoginUrl": "https://businesscentral.dynamics.com/06e77f86-5e8f-4477-8004-535d939ff179/Dev1",
+        //            "webServiceUrl": "https://api.businesscentral.dynamics.com/v2.0/06e77f86-5e8f-4477-8004-535d939ff179/Dev1",
+        //            "locationName": "Switzerland North",
+        //            "platformVersion": "19.3",
+        //            "databaseSize": {
+        //                "value": 1768947712.0,
+        //                "unit": "Byte"
+        //            },
+        //            "ringName": "Production",
+        //            "appInsightsKey": ""
+        //        }
+        //    ]
+        //}
+
+        // Init
+        RetValue := false;
+
+        // Get company info
+        lc_CompInfo.Get();
+        lc_CompInfo.TestField("IMP BC Environments Url");
+        lc_Url := lc_CompInfo."IMP BC Environments Url";
+        //lc_Url := 'https://api.businesscentral.dynamics.com/admin/v2.11/applications/businesscentral/environments';
+        //lc_Url := 'https://www.google.com';
+
+        // Get Customer
+        lc_Cust.Reset();
+        lc_Cust.SetCurrentKey("IMP Tenant Id");
+        lc_Cust.SetRange("IMP Tenant Id", _TenantId);
+        lc_Cust.FindFirst();
+        lc_Cust.TestField("IMP Authorisation");
+
+        // Get authorisation
+        lc_IA.Get(lc_Cust."IMP Authorisation");
+
+        // Remove server instance entry
+        lc_IC.Reset();
+        lc_IC.SetRange(Environment, lc_IC.Environment::Cloud);
+        lc_IC.SetRange("Environment Id", _TenantId);
+        if lc_IC.FindSet() then
+            lc_IC.DeleteAll(true);
+
+        // Get BC server
+        lc_IS.Reset();
+        lc_IS.SetRange(Type, lc_IS.Type::cloud);
+        lc_IS.FindFirst();
+
+        // Check token
+        //if not GetMicrosoftAccessToken(lc_IA."Access Token URL", lc_IA."Client Id", lc_IA."Client Secret", lc_AccessToken, lc_ExpiryDate, _Message) then
+        //if not GetMicrosoftAccessToken(lc_IA."Access Token URL", lc_IA."Client Id", lc_IA."Client Secret", lc_IA.Name, lc_IA.Password, lc_AccessToken, lc_ExpiryDate, _Message) then
+        //    exit;
+
+        //if not GetTokenNew(lc_IA."Auth URL", lc_ia."Access Token URL", lc_IA."Client Id", lc_IA."Client Secret", lc_IA."Callback URL", lc_AccessToken) then
+        //    exit;
+
+        lc_AccessToken := 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1yNS1BVWliZkJpaTdOZDFqQmViYXhib1hXMCIsImtpZCI6Ik1yNS1BVWliZkJpaTdOZDFqQmViYXhib1hXMCJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMDZlNzdmODYtNWU4Zi00NDc3LTgwMDQtNTM1ZDkzOWZmMTc5LyIsImlhdCI6MTY0Mzc5MzI3NiwibmJmIjoxNjQzNzkzMjc2LCJleHAiOjE2NDM3OTg1OTYsImFjciI6IjEiLCJhaW8iOiJFMlpnWUFqSWlMeVpWSzRWOEtSMTA3RkZmWEx5KzBPV3QzM1I3YXNzcTN4YXJKQzJyQXdBIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjA4N2QwZWQwLWNmZDktNDY3MS1hYmZjLTdlMmI5NjUwMTlmNyIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiTWFydGkiLCJnaXZlbl9uYW1lIjoiWXZlcyIsImlwYWRkciI6IjgzLjE1MC43LjExNSIsIm5hbWUiOiJZdmVzIE1hcnRpIiwib2lkIjoiN2YxMjRiOTMtZjhkZC00N2FkLThkYjQtNWExNDc0NzRmYzgwIiwicHVpZCI6IjEwMDMyMDAxMTE5MjQ4NzkiLCJyaCI6IjAuQVlJQWhuX25CbzllZDBTQUJGTmRrNV94ZVQzdmJabHNzMU5CaGdlbV9Ud0J1Si1DQUcwLiIsInNjcCI6IkZpbmFuY2lhbHMuUmVhZFdyaXRlLkFsbCB1c2VyX2ltcGVyc29uYXRpb24iLCJzdWIiOiJBUjlfT3I1MmtPSHlpU2lYX0x1Tmc3eURhM245TWpKcXZTUXhFVFA0MFpFIiwidGlkIjoiMDZlNzdmODYtNWU4Zi00NDc3LTgwMDQtNTM1ZDkzOWZmMTc5IiwidW5pcXVlX25hbWUiOiJhZG1pbkBpbWxldml0Lm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6ImFkbWluQGltbGV2aXQub25taWNyb3NvZnQuY29tIiwidXRpIjoiWm9aQzQyWS1mRTJncEdwUGVZYkpBQSIsInZlciI6IjEuMCIsIndpZHMiOlsiNjJlOTAzOTQtNjlmNS00MjM3LTkxOTAtMDEyMTc3MTQ1ZTEwIiwiYjc5ZmJmNGQtM2VmOS00Njg5LTgxNDMtNzZiMTk0ZTg1NTA5Il19.bAV5pDmqsC28zNvczaCzqhcke38jZc72hFrixy238pOZoQ5QmJm9lbNj6jpUVAg_cCq1M7n0ISPkP-7SQbmCCpMwZ3m-d1mrEUgqp9Z3hTCzpkcsUQa3XSnCbTEb7G1G813omK9b-5IHnc_RgRLTf97OVmLGzyF6drq0zWnc03C_fLUWafwsxUQmuklujHbSv3Ii9hlNa887ydRKngyTxuvc3zP1lZWjYHBXUa2NyOE0Z4TmRO699cXVzMoua2Fl2253-ePdxh_PnOdVa5Z38sSsPB7qV2r4cmzmMaUmQYDb1GRA5dhHv7WTUCNam3VZOIwuDPoQ97fibNbV54Z7Rw';
+        lc_AccessToken := 'eyJ0eXAiOiJKV1QiLCJub25jZSI6Il9vckxrMHdyVG93bk8tMTVOcTBrY1dGQ1pnaC04YWtWTWpDZ1hpNFM4ejQiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1yNS1BVWliZkJpaTdOZDFqQmViYXhib1hXMCIsImtpZCI6Ik1yNS1BVWliZkJpaTdOZDFqQmViYXhib1hXMCJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMDZlNzdmODYtNWU4Zi00NDc3LTgwMDQtNTM1ZDkzOWZmMTc5LyIsImlhdCI6MTY0Mzg4OTY5OSwibmJmIjoxNjQzODg5Njk5LCJleHAiOjE2NDM4OTM1OTksImFpbyI6IkUyWmdZREEyTG0wK0dhbk9WenpiOFAzcFBSUGVBUUE9IiwiYXBwX2Rpc3BsYXluYW1lIjoiQnVzaW5lc3MgQ2VudHJhbCBSTUUiLCJhcHBpZCI6IjA4N2QwZWQwLWNmZDktNDY3MS1hYmZjLTdlMmI5NjUwMTlmNyIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzA2ZTc3Zjg2LTVlOGYtNDQ3Ny04MDA0LTUzNWQ5MzlmZjE3OS8iLCJpZHR5cCI6ImFwcCIsIm9pZCI6IjQxMDMwZGQ2LTY2OWUtNGJlMy04YWU2LTAxMjQ5ODQ0YTI3YiIsInJoIjoiMC5BWUlBaG5fbkJvOWVkMFNBQkZOZGs1X3hlUU1BQUFBQUFBQUF3QUFBQUFBQUFBQ0NBQUEuIiwic3ViIjoiNDEwMzBkZDYtNjY5ZS00YmUzLThhZTYtMDEyNDk4NDRhMjdiIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiMDZlNzdmODYtNWU4Zi00NDc3LTgwMDQtNTM1ZDkzOWZmMTc5IiwidXRpIjoiOFRXLWpJa1pva3VmN3QyZ0FMaW1BQSIsInZlciI6IjEuMCIsIndpZHMiOlsiMDk5N2ExZDAtMGQxZC00YWNiLWI0MDgtZDVjYTczMTIxZTkwIl0sInhtc190Y2R0IjoxNjExOTE2OTcxfQ.L_raxXxQBUGL4hXzWCMIjjN5jaOMCW1Eb5kdp3p1HZrY0WD8Mgar97yifcsWVEkXKSXds4vmiTo5JNXn7SqDYtjVxdKZcw_Zp4ViZ6EqHBIe1P2PhjLdYfspgGtf2LgoU-UdHAsvNx76iqCphpN5KKz8hk5FBD4fCF168M5Z3i9uUlNOfdd66lL_1mUV908JVkID1vKppe4w0JuqMKQaRZsawdN7xdFj5HNqZX307PzQA1WjcoHU5gs6e1x0Vw2beHCdXzeC7fzh47pkppSODRQwg5psQzuwd3cPuef_OC71Ewm70SKbldgI5mmbfOGf8exVy9OoZ8INWn-Y4DdTZg';
+
+        // Check expiry date
+        //if (lc_ExpiryDate < CurrentDateTime()) then begin
+        //    _Message := 'Token has expired at ' + Format(lc_ExpiryDate, 0, '<Day,2>.<Month,2>.<Year4,4> <Hour,2>:<Minute,2>:<Second,2>');
+        //    exit;
+        //end;
+
+        // Set http client
+        Clear(lc_HttpClient);
+        lc_HttpClient.DefaultRequestHeaders().Add('Authorization', 'Bearer ' + lc_AccessToken);
+        lc_HttpClient.DefaultRequestHeaders().Add('Accept', 'application/json');
+
+        // Get http client
+        if not lc_HttpClient.Get(lc_Url, lc_HttpResponse) then begin
+            // Show failed request
+            if lc_HttpResponse.IsBlockedByEnvironment then
+                _Message := 'Request was blocked by environment'
+            else
+                _Message := 'Request failed with: ' + GetLastErrorText();
+            exit;
+        end;
+
+        if not lc_HttpResponse.IsSuccessStatusCode then begin
+            // Show unsuccess request
+            _Message := 'Request terminated with: ' + Format(lc_HttpResponse.HttpStatusCode) + ' ' + lc_HttpResponse.ReasonPhrase();
+            exit;
+        end;
+
+        // Read response
+        lc_HttpResponse.Content.ReadAs(lc_Result);
+
+        // Read json        
+        if not lc_WebResponseJson.ReadFrom(lc_Result) then begin
+            // No proper json
+            _Message := 'No proper json: ' + lc_Result;
+            exit;
+        end;
+
+        // Check value
+        if not lc_WebResponseJson.Get('value', lc_Token) then begin
+            _Message := 'Token "value" missing in response';
+            exit;
+        end;
+
+        // Check array
+        if not lc_Token.IsArray() then begin
+            _Message := 'Token "value" is no array in response';
+            exit;
+        end;
+
+        // Read array
+        lc_Array := lc_Token.AsArray();
+
+        foreach lc_Token in lc_Array do begin
+            lc_IC.Init();
+            lc_IC."No." := '';
+            lc_IC."Customer No." := lc_Cust."No.";
+            lc_IC.Server := lc_IS.Name;
+            lc_IC.Environment := lc_IC.Environment::Cloud;
+            lc_IC."Environment Id" := CopyStr(_TenantId, 1, MaxStrLen(lc_IC."Environment Id"));
+            // Set type
+            if BscMgmt.JsonGetTokenValue(lc_Token, 'type').AsText().ToLower() = 'sandbox' then
+                lc_IC."Environment Type" := lc_IC."Environment Type"::Sandbox
+            else
+                lc_IC."Environment Type" := lc_IC."Environment Type"::Production;
+            // Set name
+            lc_IC."Environment Name" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'name').AsText(), 1, MaxStrLen(lc_IC."Environment Name"));
+            // Set listname
+            lc_IC.SetListName();
+            // Set url
+            lc_IC.Url := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'webClientLoginUrl').AsText(), 1, MaxStrLen(lc_IC.Url));
+            // Set api
+            lc_IC.Api := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'webServiceUrl').AsText(), 1, MaxStrLen(lc_IC.Api));
+            // Set status
+            lc_IC."Environment State" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'status').AsText(), 1, MaxStrLen(lc_IC."Environment State"));
+            // Set service version
+            lc_IC."Service Version" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'platformVersion').AsText(), 1, MaxStrLen(lc_IC."Service Version"));
+            // Set full version
+            lc_IC."Service Full Version" := CopyStr(BscMgmt.JsonGetTokenValue(lc_Token, 'applicationVersion').AsText(), 1, MaxStrLen(lc_IC."Service Full Version"));
+            // Set authorisation
+            lc_IC."Authorisation No." := lc_Cust."IMP Authorisation";
+            // Insert entry
+            lc_IC.Insert(true);
+        end;
+
+        // Set return
+        RetValue := true;
+    end;
+
+    //[NonDebuggable]
+    procedure GetMicrosoftAccessToken(_Url: Text; _ClientId: Text; _ClientSecret: Text; var _AccessToken: Text; var _ExpiryDate: DateTime; var _Message: Text) RetValue: Boolean;
+    var
+        lc_OAuth2: Codeunit OAuth2;
+        lc_Scopes: List of [Text];
+    begin
+        // Init
+        RetValue := false;
+        _AccessToken := '';
+        _ExpiryDate := 0DT;
+        _Message := '';
+
+        // Set url
+        //_Url := 'https://login.microsoftonline.com/' + _TenantId + '/oauth2/v2.0/token';
+        //lc_Scopes.Add('https://api.businesscentral.dynamics.com/.default');
+        lc_Scopes.Add('.default');
+
+        // Call token
+        if not lc_OAuth2.AcquireTokenWithClientCredentials(_ClientId, _ClientSecret, _Url, '', lc_Scopes, _AccessToken) then
+            _Message := GetLastErrorText();
+
+        if (_AccessToken <> '') then begin
+            _ExpiryDate := CurrentDateTime + (3599 * 1000);
+            RetValue := true;
+        end else
+            if (_Message = '') then
+                _Message := 'No token for\id: ' + _ClientId + '\secred: ' + _ClientSecret;
+    end;
+
+    procedure GetMicrosoftAccessToken(_Url: Text; _ClientId: Text; _ClientSecret: Text; _UserName: Text; _Password: Text; var _AccessToken: Text; var _ExpiryDate: DateTime; var _Message: Text) RetValue: Boolean;
+    var
+        lc_OAuth2: Codeunit OAuth2;
+        lc_Scopes: List of [Text];
+        lc_RedirectUrl: Text;
+        lc_CashToken: Text;
+    begin
+        // Init
+        RetValue := false;
+        _AccessToken := '';
+        _ExpiryDate := 0DT;
+        _Message := '';
+
+        // Set url
+        //_Url := 'https://login.microsoftonline.com/' + _TenantId + '/oauth2/v2.0/token';
+        lc_OAuth2.GetDefaultRedirectURL(lc_RedirectUrl);
+        lc_Scopes.Add(lc_RedirectUrl + '.default');
+
+        // Call token
+        if not lc_OAuth2.AcquireTokensWithUserCredentials(_Url, _ClientId, lc_Scopes, _UserName, _Password, _AccessToken, lc_CashToken) then
+            _Message := GetLastErrorText();
+
+        if (_AccessToken <> '') then begin
+            _ExpiryDate := CurrentDateTime + (3599 * 1000);
+            RetValue := true;
+        end else
+            if (_Message = '') then
+                _Message := 'No token for\id: ' + _ClientId + '\username: ' + _UserName + '\Password: ' + _Password;
+    end;
+
+    procedure GetToken(Url: Text; client_id: Text; client_secret: Text) myToken: Text
+    var
+        MyHttpResponseMessage: HttpResponseMessage;
+        MyHttpClient: HttpClient;
+        myHttpHeaders: HttpHeaders;
+        myResponse: Text;
+    begin
+        Url += strsubstno('?client_id=%1&client_secret=%2&response_type=code&state=%3', client_id, client_secret, CreateGuid());
+
+        myHttpHeaders := MyHttpClient.DefaultRequestHeaders();
+        myHttpHeaders.Add('accept', 'application/json');
+        myHttpHeaders.Add('charset', 'UTF-8');
+        //if myHttpHeaders.Contains('Content-Type') then
+        //    myHttpHeaders.Remove('Content-Type');
+        //myHttpHeaders.Add('Content-Type', 'application/x-www-form-urlencoded');
+
+        MyHttpClient.Get(Url, MyHttpResponseMessage);
+        myHttpResponseMessage.Content().ReadAs(myResponse);
+        // you have to read myResponse as Json and obtain de token from it and save to myToken
+    end;
+
+    procedure GetTokenNew(_AuthUrl: Text; _TokenUrl: Text; _ClientId: Text; ClientSecret: Text; _CallBackUrl: Text; var _AccessToken: Text) RetValue: Boolean
+    var
+        lc_HttpClient: HttpClient;
+        lc_HttpHeaders: HttpHeaders;
+        lc_HttpContent: HttpContent;
+        lc_HttpResponse: HttpResponseMessage;
+        lc_HttpRequest: HttpRequestMessage;
+        lc_Response: Text;
+        lc_Request: Text;
+    begin
+        // Init
+        RetValue := false;
+        lc_Response := '';
+
+        // Set url
+        _AuthUrl += '&response_type=code&client_id=' + _ClientId + '&redirect_uri=' + _CallBackUrl;
+
+        // Set client
+        lc_HttpHeaders := lc_HttpClient.DefaultRequestHeaders();
+        lc_HttpHeaders.Add('accept', '*/*');
+
+        // Get client
+        if lc_HttpClient.Get(_AuthUrl, lc_HttpResponse) then
+            if lc_HttpResponse.IsSuccessStatusCode then begin
+                _AuthUrl := 'https://login.microsoftonline.com/06e77f86-5e8f-4477-8004-535d939ff179/oauth2/authorize?resource=https://api.businesscentral.dynamics.com&response_type=code&client_id=087d0ed0-cfd9-4671-abfc-7e2b965019f7&redirect_uri=' + _CallBackUrl;
+                if lc_HttpClient.Get(_AuthUrl, lc_HttpResponse) then
+                    if lc_HttpResponse.IsSuccessStatusCode then begin
+                        lc_Request := '';
+                        lc_HttpContent.WriteFrom(lc_Request);
+                        lc_HttpRequest.Content(lc_HttpContent);
+                        lc_HttpRequest.Method('POST');
+                        lc_HttpClient.SetBaseAddress(_TokenUrl);
+                        if lc_HttpClient.Send(lc_HttpRequest, lc_HttpResponse) then
+                            if lc_HttpResponse.IsSuccessStatusCode then
+                                lc_HttpResponse.Content.ReadAs(lc_Response);
+                    end;
+                // Read response
+                if (lc_Response <> '') then;
+            end;
+    end;
+
+    #endregion Cloud
+
+
     var
         BscMgmt: Codeunit "IMP Basic Management";
         ImpMgmt: Codeunit "IMP Management";

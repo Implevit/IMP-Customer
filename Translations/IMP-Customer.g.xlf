@@ -248,10 +248,30 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2469765994 - Field 1799079160 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Access Token URL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Access Token URL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2469765994 - Field 302760805 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Auth URL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Auth URL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2469765994 - Field 3412784070 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Callbarck URL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Callback URL - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2469765994 - Field 3879241928 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Client Id</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Client Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2469765994 - Field 2529110793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Client Secret</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Client Secret - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2469765994 - Field 4190130733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Customer No.</source>
@@ -272,16 +292,6 @@
           <source>Password</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Password - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 2469765994 - Field 4161998072 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Redirect Uri</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Redirect Uri - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 2469765994 - Field 1044010461 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Secret Id</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Secret Id - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2469765994 - Field 4146460525 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Token</source>
@@ -317,6 +327,11 @@
           <source>Entry %1 has already this setting</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Connection - Method AlreadyExists - NamedType lc_Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Table 2348362374 - Field 186108644 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Api</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Connection - Field Api - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2348362374 - Field 2176247943 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Authorisation No.</source>
@@ -894,7 +909,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType AadTenantIdTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 68067326 - NamedType 2286993507" size-unit="char" translate="yes" xml:space="preserve">
-          <source>https://login.microsoftonline.com/{AadTenantId}/oauth2/v2.0/token</source>
+          <source>https://login.microsoftonline.com/{AadTenantId}/oauth2/v2.0/token?resource=https://api.businesscentral.dynamics.com</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType AuthorityTxt</note>
         </trans-unit>
@@ -904,22 +919,22 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType BCBaseUrlTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 68067326 - NamedType 725083565" size-unit="char" translate="yes" xml:space="preserve">
-          <source>0987d6a4-fb7c-eb11-b853-000d3abf1475</source>
+          <source>3d6d6b75-6b50-eb11-bb51-000d3aa935c7</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType BCCompanyIdTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 68067326 - NamedType 572913109" size-unit="char" translate="yes" xml:space="preserve">
-          <source>sandbox_yma</source>
+          <source>dev1</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType BCEnvironmentNameTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 68067326 - NamedType 784362104" size-unit="char" translate="yes" xml:space="preserve">
-          <source>ade320f7-954c-4a37-9363-17b1069e5edc</source>
+          <source>087d0ed0-cfd9-4671-abfc-7e2b965019f7</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType ClientIdTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 68067326 - NamedType 874908385" size-unit="char" translate="yes" xml:space="preserve">
-          <source>a56393cd-6963-4adf-a10b-491ca05fc090</source>
+          <source>fva7Q~501hoDnImIUuGucpFXUBEsdt9O-~rEQ</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit BCConnector - NamedType ClientSecretTxt</note>
         </trans-unit>
@@ -1319,7 +1334,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActProcessing - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1686976452 - Action 2537996322 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Data App</source>
+          <source>IMP-Data</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActData - Property Caption</note>
         </trans-unit>
@@ -1372,6 +1387,11 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActRefresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1686976452 - Action 3366471854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh Cloud</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActRefreshCloud - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1686976452 - Action 2615290973 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Service</source>
@@ -1633,6 +1653,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Test OAuth2 Flows - Action GetToken - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1452350110 - Action 3851712227 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run Codeunit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Test OAuth2 Flows - Action Run - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3892229950 - Action 3646353974 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3469146285">
           <source>Customer</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1863,6 +1888,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Apps - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 2367230766 - Field 2469765994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1994964448">
+          <source>BC Authorisation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab18-Ext50001 - Field IMP Authorisation - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 2367230766 - Field 3337180375 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1994964448">
           <source>Authorisations</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2037,6 +2067,11 @@
           <source>Basic Dns</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab79-Ext50000 - Field IMP Basic Dns - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2495845408 - Field 872463652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3469146285">
+          <source>BC Environments Url</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab79-Ext50000 - Field IMP BC Environments Url - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 2495845408 - Field 3654774634 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3469146285">
           <source>Server Instance Nos.</source>

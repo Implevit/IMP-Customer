@@ -38,7 +38,7 @@ table 50001 "IMP Authorisation"
             Caption = 'Password';
             DataClassification = CustomerContent;
         }
-        field(40; Token; Text[100])
+        field(40; Token; Text[250])
         {
             Caption = 'Token';
             DataClassification = CustomerContent;
@@ -48,14 +48,24 @@ table 50001 "IMP Authorisation"
             Caption = 'Client Id';
             DataClassification = CustomerContent;
         }
-        field(60; "Secret Id"; Text[100])
+        field(60; "Client Secret"; Text[100])
         {
-            Caption = 'Secret Id';
+            Caption = 'Client Secret';
             DataClassification = CustomerContent;
         }
-        field(70; "Redirect Uri"; Text[250])
+        field(70; "Callback URL"; Text[250])
         {
-            Caption = 'Redirect Uri';
+            Caption = 'Callbarck URL';
+            DataClassification = CustomerContent;
+        }
+        field(80; "Auth URL"; Text[250])
+        {
+            Caption = 'Auth URL';
+            DataClassification = CustomerContent;
+        }
+        field(90; "Access Token URL"; Text[250])
+        {
+            Caption = 'Access Token URL';
             DataClassification = CustomerContent;
         }
     }
@@ -100,6 +110,17 @@ table 50001 "IMP Authorisation"
         RetValue := RetValue.Replace('\', '');
         RetValue := RetValue.Replace('@', 'à');
         RetValue += '.json';
+    end;
+
+    procedure SetMicrosoftAuthorisation(_TenantId: Text)
+    begin
+        if (_TenantId = '') then
+            exit;
+
+        Rec."Auth URL" := CopyStr('https://login.windows.net/' + _TenantId + '/oauth2/authorize?resource=https://api.businesscentral.dynamics.com', 1, MaxStrLen(Rec."Auth URL"));
+        Rec."Access Token URL" := CopyStr('https://login.windows.net/' + _TenantId + '/oauth2/token?resource=https://api.businesscentral.dynamics.com', 1, MaxStrLen(Rec."Access Token URL"));
+        Rec."Callback URL" := 'https://api.businesscentral.dynamics.com/.default';
+        Rec.Modify(true);
     end;
 
     #endregion Methodes

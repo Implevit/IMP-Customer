@@ -11,18 +11,6 @@
   "url": "http://www.implevit.ch",  
   "dependencies": [
     {
-      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
-      "publisher": "Microsoft",
-      "name": "System Application",
-      "version": "18.0.0.0"
-    },
-    {
-      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "publisher": "Microsoft",
-      "name": "Base Application",
-      "version": "18.0.0.0"
-    },
-    {
       "id": "07c2d9d3-8381-487c-b998-b889440193bf",
       "publisher": "Implevit",
       "name": "IMP-Basic",

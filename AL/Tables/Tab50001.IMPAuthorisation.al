@@ -55,7 +55,7 @@ table 50001 "IMP Authorisation"
         }
         field(70; "Callback URL"; Text[250])
         {
-            Caption = 'Callbarck URL';
+            Caption = 'Callback URL';
             DataClassification = CustomerContent;
         }
         field(80; "Auth URL"; Text[250])

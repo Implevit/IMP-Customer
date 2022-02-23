@@ -62,12 +62,40 @@ page 50009 "IMP Server List"
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    lc_Response: JsonObject;
                 begin
-                    if ((Rec.Name = BscMgmt.System_GetCurrentComputerName().ToUpper())) then begin
-                        ImpAdmn.CallVersionList(true, true);
-                        CurrPage.Update(false);
-                    end else
-                        ShowOtherServerList(Rec);
+                    case Rec.Type of
+                        Rec.Type::App:
+                            if ((Rec.Name = BscMgmt.System_GetCurrentComputerName().ToUpper())) then begin
+                                ImpAdmn.CallVersionList(true, true);
+                                CurrPage.Update(false);
+                            end else
+                                ShowOtherServerList(Rec);
+                        Rec.Type::Sql:
+                            ImpAdmn.CallSQLServerFullList(Rec.Name, '', lc_Response, true, true)
+                    end;
+                end;
+            }
+            action(ActShowInstances)
+            {
+                Caption = 'Instances';
+                ApplicationArea = All;
+                Image = Database;
+                Enabled = EnableShowInstances;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    lc_Rec: Record "IMP Connection";
+                begin
+                    lc_Rec.Reset();
+                    lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLInstance);
+                    lc_Rec.SetRange(DatabaseServer, Rec.Name);
+                    if lc_Rec.FindSet() then;
+                    lc_Rec.SetRange(DatabaseInstance);
+                    Page.RunModal(Page::"IMP Databases", lc_Rec);
                 end;
             }
         }
@@ -77,7 +105,8 @@ page 50009 "IMP Server List"
 
     trigger OnAfterGetCurrRecord()
     begin
-        EnableLoadVersion := (Rec.Type = Rec.Type::App);
+        EnableLoadVersion := (Rec.Type <> Rec.Type::cloud);
+        EnableShowInstances := (Rec.Type = Rec.Type::Sql);
     end;
 
     #endregion Triggers
@@ -111,4 +140,5 @@ page 50009 "IMP Server List"
         BscMgmt: Codeunit "IMP Basic Management";
         ImpAdmn: Codeunit "IMP Administration";
         EnableLoadVersion: Boolean;
+        EnableShowInstances: Boolean;
 }

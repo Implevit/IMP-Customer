@@ -172,7 +172,6 @@ page 50000 "IMP Connection List"
                 field("Company Name"; Rec."Company Name")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Company Id"; Rec."Company Id")
                 {
@@ -292,7 +291,7 @@ page 50000 "IMP Connection List"
                 {
                     Caption = 'Refresh Cloud';
                     ApplicationArea = All;
-                    Image = Cloud;
+                    Image = Refresh;
                     Promoted = true;
                     PromotedIsBig = true;
                     PromotedCategory = Process;
@@ -301,6 +300,21 @@ page 50000 "IMP Connection List"
                     begin
                         if ((Rec."Environment Type" = Rec."Environment Type"::Sandbox) or (Rec."Environment Type" = Rec."Environment Type"::Production)) then
                             ImpAdmn.LoadBCEnvironemnt(Rec."Environment Id");
+                    end;
+                }
+                action(ActStartClient)
+                {
+                    Caption = 'Start Client';
+                    ApplicationArea = All;
+                    Enabled = EnableStartClient;
+                    Image = Start;
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    begin
+                        Hyperlink(Rec.Url);
                     end;
                 }
                 group(ActData)
@@ -589,6 +603,7 @@ page 50000 "IMP Connection List"
     begin
         EnableService := (Rec.Environment = Rec.Environment::Service);
         EnableCreateService := (Rec."Service Status" = Rec."Service Status"::ToCreate);
+        EnableStartClient := (Rec.Url <> '');
     end;
 
     trigger OnAfterGetRecord()
@@ -705,6 +720,7 @@ page 50000 "IMP Connection List"
         DatMgmt: Codeunit "IMP Data Management";
         EnableService: Boolean;
         EnableCreateService: Boolean;
+        EnableStartClient: Boolean;
         ShowFilter: Boolean;
         ServerFilter: Text;
         CustomerNo: Text;

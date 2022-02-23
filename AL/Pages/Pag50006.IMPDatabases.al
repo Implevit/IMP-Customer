@@ -51,11 +51,40 @@ page 50006 "IMP Databases"
                 {
                     ApplicationArea = All;
                     Visible = ShowServer;
+
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        lc_Rec: Record "IMP Connection";
+                    begin
+                        lc_Rec.Reset();
+                        lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLDatabase);
+                        if (Rec.DatabaseServer <> '') then
+                            lc_Rec.SetRange(DatabaseServer, Rec.DatabaseServer);
+                        if lc_Rec.FindSet() then;
+                        lc_Rec.SetRange(DatabaseName);
+                        Page.RunModal(Page::"IMP Databases", lc_Rec);
+                    end;
                 }
                 field(DatabaseInstance; Rec.DatabaseInstance)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     Visible = ShowInstance;
+
+                    trigger OnDrillDown()
+                    var
+                        lc_Rec: Record "IMP Connection";
+                    begin
+                        lc_Rec.Reset();
+                        lc_Rec.SetRange(Environment, lc_Rec.Environment::SQLDatabase);
+                        if (Rec.DatabaseServer <> '') then
+                            lc_Rec.SetRange(DatabaseServer, Rec.DatabaseServer);
+                        if (Rec.DatabaseInstance <> '') then
+                            lc_Rec.SetRange(DatabaseInstance, Rec.DatabaseInstance);
+                        if lc_Rec.FindSet() then;
+                        lc_Rec.SetRange(DatabaseName);
+                        Page.RunModal(Page::"IMP Databases", lc_Rec);
+                    end;
                 }
                 field(DatabaseName; Rec.DatabaseName)
                 {

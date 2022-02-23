@@ -259,7 +259,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Auth URL - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2469765994 - Field 3412784070 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Callbarck URL</source>
+          <source>Callback URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Authorisation - Field Callback URL - Property Caption</note>
         </trans-unit>
@@ -1443,6 +1443,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActServiceStop - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1686976452 - Action 18331673 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Start Client</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Connection List - Action ActStartClient - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4284133494 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Databases</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1537,6 +1542,11 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Server List - Action ActRefresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 861137549 - Action 3757676569 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Instances</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Server List - Action ActShowInstances - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1452350110 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>E2E Authentication Flows</source>

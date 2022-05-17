@@ -13,6 +13,11 @@ codeunit 50003 "IMP Events"
         ImpMgmt.T210_OnBeforeValidateJobTaskNo(JobJournalLine, xJobJournalLine, IsHandled);
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Job Journal Line", 'OnAfterValidateEvent', 'Quantity', true, true)]
+    local procedure "T210-OnAfterValidateQuantity"(var Rec: Record "Job Journal Line"; var xRec: Record "Job Journal Line"; CurrFieldNo: Integer)
+    begin
+        ImpMgmt.T210_OnAfterValidateQuantity(Rec, xRec);
+    end;
 
     [EventSubscriber(ObjectType::Table, Database::"Job Journal Line", 'OnAfterSetUpNewLine', '', true, true)]
     local procedure "T210-OnAfterSetUpNewLine"(var JobJournalLine: Record "Job Journal Line"; LastJobJournalLine: Record "Job Journal Line"; JobJournalTemplate: Record "Job Journal Template"; JobJournalBatch: Record "Job Journal Batch")

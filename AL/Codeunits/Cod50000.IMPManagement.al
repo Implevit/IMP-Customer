@@ -28,5 +28,26 @@ codeunit 50000 "IMP Management"
         end;
     end;
 
+    procedure T210_OnAfterValidateQuantity(var _JobJournalLine: Record "Job Journal Line"; var _xJobJournalLine: Record "Job Journal Line")
+    var
+        lc_Job: Record Job;
+    begin
+        
+        _JobJournalLine."IMP Hours Not To Invoice" := 0;
+        _JobJournalLine."IMP Hours Not To Invoice" := 0;
+
+        if _JobJournalLine.Type = _JobJournalLine.Type::Resource then begin
+            _JobJournalLine."IMP Time on Job" := _JobJournalLine.Quantity;
+            if lc_Job.GET(_JobJournalLine."Job No.") then begin
+                if lc_Job."IMP Internal Job" <> lc_Job."IMP Internal Job"::" " THEN
+                    _JobJournalLine."IMP Hours not to invoice" := _JobJournalLine."IMP Time on Job"
+                else
+                    _JobJournalLine."IMP Hours to invoice" := _JobJournalLine."IMP Time on Job";
+                _JobJournalLine.TimeJob();
+            end;
+
+        end;
+    end;
+
     #endregion Tables
 }

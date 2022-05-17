@@ -2,8 +2,89 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 {
     layout
     {
+        modify("Line Type")
+        {
+            Visible = false;
+        }
+
+        modify("Document No.")
+        {
+            Visible = false;
+        }
+
+        modify("Location Code")
+        {
+            Visible = false;
+        }
+
+        modify("Bin Code")
+        {
+            Visible = false;
+        }
+
+        modify("Unit Cost")
+        {
+            Visible = false;
+        }
+
+        modify("Unit Cost (LCY)")
+        {
+            Visible = false;
+        }
+
+        modify("Unit Price")
+        {
+            Visible = false;
+        }
+
+        modify("Applies-to Entry")
+        {
+            Visible = false;
+        }
+
+        modify("Line Amount")
+        {
+            Visible = false;
+        }
+
+        modify("Line Discount %")
+        {
+            Visible = false;
+        }
+
+        modify("Line Discount Amount")
+        {
+            Visible = false;
+        }
+
+        modify("Direct Unit Cost (LCY)")
+        {
+            Visible = false;
+        }
+
+        modify("Total Cost (LCY)")
+        {
+            Visible = false;
+        }
+
+        modify("Total Cost")
+        {
+            Visible = false;
+        }
+
+
+
+        addbefore(Description)
+        {
+            field("IMP Job Task Description"; "IMP Job Task Description")
+            {
+                ApplicationArea = All;
+            }
+        }
+
         addlast(Control1)
         {
+
             field("IMP Time 1 from"; Rec."IMP Time 1 from")
             {
                 ApplicationArea = All;
@@ -64,25 +145,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             {
                 ApplicationArea = All;
             }
-            field("IMP Job Task Description"; Rec."IMP Job Task Description")
-            {
-                ApplicationArea = All;
-            }
-            field("IMP Time 0 from"; Rec."IMP Time 0 from")
-            {
-                Editable = false;
-                ApplicationArea = All;
-            }
-            field("IMP Time 0 to"; Rec."IMP Time 0 to")
-            {
-                Editable = false;
-                ApplicationArea = All;
-            }
-            field("IMP Total 0 from/to"; Rec."IMP Total 0 from/to")
-            {
-                Editable = false;
-                ApplicationArea = All;
-            }
+
         }
         addafter("Account Name")
         {
@@ -162,7 +225,26 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         }
     }
 
-    #region Triggers
+    #region Trigger
+
+    trigger OnOpenPage()
+    var
+        lc_userSetup: Record "User Setup";
+        lc_CurrentJnlBatchName: Code[10];
+        lc_JobJnlManagement: Codeunit JobJnlManagement;
+    begin
+
+        if not lc_userSetup.get(UserId) then begin
+            lc_userSetup.Init();
+        end else begin
+            if (lc_UserSetup."Journal Batch Name" <> '') and (lc_UserSetup."Journal Template Name" <> '') then begin
+                lc_CurrentJnlBatchName := lc_UserSetup."Journal Batch Name";
+                SetRange("Journal Template Name", lc_UserSetup."Journal Template Name");
+                lc_JobJnlManagement.OpenJnl(lc_CurrentJnlBatchName, Rec);
+            end;
+        end;
+    end;
+
 
     trigger OnAfterGetCurrRecord()
     begin
@@ -267,8 +349,13 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                     lc_Number := lc_JJLTemp."No.";
                     lc_Date := lc_JJLTemp."Posting Date";
                     lc_TimeTo := lc_JJLTemp."IMP Time 1 to";
-                    if not lc_First then
+                    if not lc_First then begin
                         lc_JJLTemp.Delete();
+                        //TODO Overloop Check
+                        _Rec.TransferFields(lc_JJLTemp);
+
+
+                    end;
                 end;
                 lc_First := false;
             until lc_JJLTemp.Next() = 0;

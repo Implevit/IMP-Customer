@@ -6,6 +6,7 @@ tableextension 50002 "IMP Tab167-Ext50002" extends Job
         {
             Caption = 'Implevit New Cust Short Mark';
             DataClassification = CustomerContent;
+            ObsoleteState = Pending;
 
             trigger OnValidate()
             var

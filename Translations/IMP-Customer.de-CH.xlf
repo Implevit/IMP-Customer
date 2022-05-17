@@ -245,13 +245,13 @@
         </trans-unit>
         <trans-unit id="Table 3594423314 - Field 1820563623 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>All inclusive</source>
-          <target>Alles inklusive</target>
+          <target>Pauschal</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field All inclusive - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3594423314 - Field 1344663656 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>All inclusive Original</source>
-          <target>Alles inklusive Original</target>
+          <target>Pauschal Original</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field All inclusive Original - Property Caption</note>
         </trans-unit>
@@ -471,6 +471,370 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Lines - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3813317288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Project Manager</source>
+          <target>IMP Projektmanager</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 3606140129 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customers</source>
+          <target>Debitoren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Customers - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1554554962 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Items</source>
+          <target>Artikel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Items - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 3661919152 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Jobs</source>
+          <target>Projekte</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Jobs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4108978755 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View all completed jobs.</source>
+          <target>Zeigt alle abgeschlossenen Projekte an.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsCompleted - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4108978755 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Completed</source>
+          <target>Abgeschlossen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsCompleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1679178565 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the card for the selected record.</source>
+          <target>Karte für den ausgewählten Datensatz öffnen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsOnOrder - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1679178565 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <target>Offen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsOnOrder - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4016075423 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View all planned and quoted jobs.</source>
+          <target>Zeigt alle geplanten und angebotenen Projekte an.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsPlannedAndQuoted - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4016075423 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned and Quoted</source>
+          <target>Geplant und offeriert</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsPlannedAndQuoted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4043229225 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View all unassigned jobs.</source>
+          <target>Zeigt alle nicht zugewiesenen Projekte an.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsUnassigned - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4043229225 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unassigned</source>
+          <target>Nicht zugewiesen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsUnassigned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 3504687331 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resources</source>
+          <target>Ressourcen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Resources - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 3527587360 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create, plan, and execute tasks in project management. </source>
+          <target>Aufgaben im Projektmanagement erstellen, planen und ausführen. </target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action2 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 3527587360 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Jobs</source>
+          <target>Projekte</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2889890743 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the list of ongoing job tasks. Job tasks represent the actual work that is performed in a job, and they enable you to set up job planning lines and to post consumption to the job.</source>
+          <target>Öffnet die Liste der laufenden Projektaufgaben. Projektaufgaben stellen aktuelle Arbeit dar, die in einem Auftrag ausgeführt werden soll, und ermöglichen es Ihnen, Projektplanungszeilen einzurichten und den Verbrauch für das Projekt zu buchen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action3 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2889890743 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Tasks</source>
+          <target>Projektaufgaben</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action3 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1235986369 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Define a project activity by creating a job card with integrated job tasks and job planning lines, structured in two layers. The job task enables you to set up job planning lines and to post consumption to the job. The job planning lines specify the detailed use of resources, items, and various general ledger expenses.</source>
+          <target>Eine Projektaktivität definieren, indem eine in zwei Ebenen strukturierte Projektkarte mit integrierten Projektaufgaben und Projektplanzeilen erstellt wird. Mit einer Projektaufgabe können Sie Projektplanungszeilen einrichten und den Verbrauch für das Projekt buchen. Die Projektplanzeilen geben den genauen Verbrauch von Ressourcen, Artikeln und verschiedenen Aufwandssachposten an.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action90 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1235986369 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Jobs</source>
+          <target>Projekte</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action90 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2097003905 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the list of ongoing job planning lines for the job. You use this window to plan what items, resources, and general ledger expenses that you expect to use on a job (budget) or you can specify what you actually agreed with your customer that he should pay for the job (billable).</source>
+          <target>Öffnet die Liste der laufenden Planungszeilen für das Projekt. In diesem Fenster planen Sie, welche Artikel, Ressourcen und Aufwands-Fibuposten für ein Projekt verwendet werden sollen (Budget). Sie können aber auch angeben, was tatsächlich mit dem Debitor als für das Projekt zahlbarer Preis vereinbart wurde (Fakturierbar).</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Job Planning Lines - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2097003905 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Planning Lines</source>
+          <target>Projektplanzeilen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Job Planning Lines - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1483504031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record job expenses or usage in the job ledger, either by reusing job planning lines or by manual entry.</source>
+          <target>Projektausgaben oder Verbrauch durch die Wiederverwendung von Projektplanzeilen oder manuelle Eingabe im Projektposten erfassen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobJournals - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1483504031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Journals</source>
+          <target>Projekt Erfassungsjournale</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobJournals - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4006613412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the list of all completed jobs.</source>
+          <target>Öffnet die Liste aller abgeschlossenen Projekte.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsComplet - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4006613412 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Completed</source>
+          <target>Abgeschlossen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsComplet - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2182005804 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the list of all planned and quoted jobs.</source>
+          <target>Öffnet die Liste aller geplanten und angebotenen Projekte.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsPlannedAndQuotd - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2182005804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned and Quoted</source>
+          <target>Geplant und offeriert</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsPlannedAndQuotd - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 849953322 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the list of all unassigned jobs.</source>
+          <target>Öffnet die Liste aller nicht zugewiesenen Projekte.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsUnassign - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 849953322 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unassigned</source>
+          <target>Nicht zugewiesen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsUnassign - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4259830144 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the card for the selected record.</source>
+          <target>Karte für den ausgewählten Datensatz öffnen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Open - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 4259830144 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <target>Offen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Open - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1873682986 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manage the people or machines that are used to perform job tasks. </source>
+          <target>Personen oder Maschinen verwalten, die zum Ausführen von Projektaufgaben verwendet werden. </target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action91 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1873682986 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resources</source>
+          <target>Ressourcen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action91 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 598289752 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manage your resources' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.</source>
+          <target>Projektaktivitäten Ihrer Ressourcen durch Einrichten von Kosten und Preisen verwalten. Die projektbezogenen Preise, Rabatte und Kostenfaktorregeln werden auf der entsprechenden Projektkarte eingerichtet. Die Kosten und Preise können für einzelne Ressourcen, für Ressourcengruppen oder für alle verfügbaren Ressourcen des Unternehmens angegeben werden. Wenn Ressourcen in einem Projekt verwendet oder verkauft werden, werden die festgelegten Preise und Kosten für das Projekt erfasst.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action93 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 598289752 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resources</source>
+          <target>]Ressourcen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action93 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2275139634 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Organize resources in groups, such as Consultants, for easier assignment of common values and to analyze financial figures by groups.</source>
+          <target>Organisation von Ressourcen in Gruppen, z. B. Berater, zur einfacheren Zuordnung gemeinsamer Werte und zur Analyse von Finanzdaten nach Gruppen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Resource Groups - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2275139634 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource Groups</source>
+          <target>Ressourcengruppen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Resource Groups - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1406942772 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sales</source>
+          <target>Verkauf</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Sales - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1994964448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer</source>
+          <target>Debitor</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Customer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 734185571 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sales Quotes</source>
+          <target>Verkaufsofferten</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Sales Quotes - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 57277866 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Overview and change system and application settings, and manage extensions and services</source>
+          <target>Übersicht über und Änderung von System- und Anwendungseinstellungen sowie Verwaltung von Erweiterungen und Diensten</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action SetupAndExtensions - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 57277866 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Setup &amp; Extensions</source>
+          <target>Einrichtung und Erweiterungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action SetupAndExtensions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 799089619 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set up core functionality such as sales tax, sending documents as email, and approval workflow by running through a few pages that guide you through the information.</source>
+          <target>Richtet wichtige Funktionen wie Salestax, Senden von Belegen als E-Mail und Genehmigungsworkflow mittels Durchlaufen einiger Seiten als Leitfaden zu den Informationen ein.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Assisted Setup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 799089619 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assisted Setup</source>
+          <target>Unterstützte Einrichtung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Assisted Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1663039630 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Install Extensions for greater functionality of the system.</source>
+          <target>Installiert Erweiterungen für Funktionen des Systems.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Extensions - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1663039630 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Extensions</source>
+          <target>Erweiterungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Extensions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1325297727 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Define your company policies for business departments and for general activities by filling setup windows manually.</source>
+          <target>Definieren Sie Ihre Unternehmensrichtlinien für Unternehmensabteilungen und für allgemeine Aktivitäten, indem Sie die Einrichtungsfenster manuell ausfüllen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Manual Setup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 1325297727 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Setup</source>
+          <target>Manuelle Einrichtung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Manual Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 892073532 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enable and configure external services, such as exchange rate updates, Microsoft Social Engagement, and electronic bank integration.</source>
+          <target>Aktiviert und konfiguriert externe Dienste, wie Wechselkursaktualisierungen, Microsoft Social Engagement und elektronische Bankintegration.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Service Connections - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 892073532 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service Connections</source>
+          <target>Dienstverbindungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Service Connections - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2098662804 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set up or enable workflows that connect business-process tasks performed by different users. System tasks, such as automatic posting, can be included as steps in workflows, preceded or followed by user tasks. Requesting and granting approval to create new records are typical workflow steps.</source>
+          <target>Workflows einrichten oder aktivieren, die Geschäftsprozessaufgaben verbinden, die von verschiedenen Benutzern durchgeführt werden. Systemaufgaben, wie etwa automatisches Buchen, können als Schritte entweder vor oder nach Benutzeraufgaben in Workflows eingefügt werden. Das Anfordern und Gewähren von Genehmigungen zum Erstellen neuer Datensätze sind typische Workflowschritte.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2098662804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Workflows</source>
+          <target>Workflows</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1722173463 - Control 725737015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2077750279">
           <source>Total Usage in journal</source>
           <target>Gesamtverwendung im Journal</target>
@@ -503,7 +867,7 @@
         </trans-unit>
         <trans-unit id="PageExtension 423844735 - Control 1362342722 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
           <source>Time on job</source>
-          <target>Zeit am Arbeitsplatz</target>
+          <target>Zeit auf Projekt</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Control GrpTimeOnJob - Property Caption</note>
         </trans-unit>
@@ -525,6 +889,13 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Control GrpTravelTime - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1655222170 - Control 2326831639 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2556642749">
+          <source>IMP-Customer</source>
+          <target>IMP-Customer</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control IMP-Customer - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3218178748 - Action 1826872365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Job Tasks Overview</source>
           <target>Überblick über die Arbeitsaufgaben</target>
@@ -539,7 +910,7 @@
         </trans-unit>
         <trans-unit id="TableExtension 425556472 - Field 1767470131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2014770230">
           <source>All inclusive</source>
-          <target>Alles inklusive</target>
+          <target>Pauschal</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab1001-Ext50006 - Field IMP All inclusive - Property Caption</note>
         </trans-unit>
@@ -713,7 +1084,7 @@
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2502242067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>All inclusive</source>
-          <target>Alles inklusive</target>
+          <target>Pauschal</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP All Inclusive - Property Caption</note>
         </trans-unit>
@@ -731,13 +1102,13 @@
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 1514693444 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Hours not to invoice</source>
-          <target>Nicht zu berechnende Stunden</target>
+          <target>Std. nicht fakturierbar</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Hours Not To Invoice - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2825259863 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Hours to invoice</source>
-          <target>Stunden bis zur Rechnung</target>
+          <target>Std. fakturierbar</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Hours To Invoice - Property Caption</note>
         </trans-unit>
@@ -815,7 +1186,7 @@
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 4159830169 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Time on job</source>
-          <target>Zeit am Arbeitsplatz</target>
+          <target>Zeit auf Projekt</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Time On Job - Property Caption</note>
         </trans-unit>
@@ -827,7 +1198,7 @@
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 3396236376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Total from/to</source>
-          <target>Gesamt von/bis</target>
+          <target>Total von/bis</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Total from/to - Property Caption</note>
         </trans-unit>
@@ -860,6 +1231,20 @@
           <target>Job Ressource Nr.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab91-Ext50005 - Field IMP Job Resource No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1745355001 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
+          <source>Journal Batch Name</source>
+          <target>Erf.-Journalname</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab91-Ext50005 - Field Journal Batch Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1745355001 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
+          <source>Journal Template Name</source>
+          <target>Erf.-Journalvorlagenname</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab91-Ext50005 - Field Journal Template Name - Property Caption</note>
         </trans-unit>
       </group>
     </body>

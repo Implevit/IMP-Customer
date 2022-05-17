@@ -2,6 +2,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
 {
     fields
     {
+
         field(50000; "IMP Travel Time"; Decimal)
         {
             Caption = 'Travel Time';
@@ -241,6 +242,8 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         {
             Caption = 'Total 0 from/to';
             DataClassification = CustomerContent;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'Wird nirgens verwendet';
 
             trigger OnValidate()
             begin
@@ -250,10 +253,6 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         {
             Caption = 'Time on job';
             DataClassification = CustomerContent;
-
-            trigger OnValidate()
-            begin
-            end;
         }
         field(50090; "IMP Total from/to"; Decimal)
         {
@@ -285,14 +284,12 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                     Validate(Quantity, 0);
             end;
         }
-        field(50110; "IMP Job Task Description"; Text[50])
+        field(50110; "IMP Job Task Description"; Text[100])
         {
             Caption = 'Job Task Description';
-            DataClassification = CustomerContent;
-
-            trigger OnValidate()
-            begin
-            end;
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = Lookup("Job Task".Description where("Job No." = field("Job No."), "Job Task No." = field("Job Task No.")));
         }
         field(50120; "IMP Ticket No."; Text[50])
         {

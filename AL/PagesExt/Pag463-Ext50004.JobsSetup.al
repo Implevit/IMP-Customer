@@ -4,10 +4,17 @@ pageextension 50004 "IMP Pag463-Ext50004" extends "Jobs Setup"
     {
         addlast(General)
         {
-            field("IMP Job Travel Work Type Code"; Rec."IMP Job Travel Work Type Code")
+
+            group("IMP-Customer")
             {
-                ApplicationArea = All;
+                Caption = 'IMP-Customer';
+
+                field("IMP Job Travel Work Type Code"; Rec."IMP Job Travel Work Type Code")
+                {
+                    ApplicationArea = All;
+                }
             }
+
         }
     }
 }

@@ -1,4 +1,4 @@
-table 50003 "IMP Job Consulting Inv. Line"
+table 50003 "IMP Job Invoice Line"
 {
     Caption = 'Job Accounting Line';
     DrillDownPageID = "IMP Job Consulting Inv. Lines";

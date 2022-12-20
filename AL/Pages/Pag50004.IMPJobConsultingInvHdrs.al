@@ -4,7 +4,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
     //CardPageID = "IMP Job Consulting Inv. Card";
     Editable = false;
     PageType = List;
-    SourceTable = "IMP Job Consulting Inv. Header";
+    SourceTable = "IMP Job Invoice Header";
 
     layout
     {
@@ -165,7 +165,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
                 trigger OnAction()
                 var
-                    lc_JobConsHeader: Record "IMP Job Consulting Inv. Header";
+                    lc_JobConsHeader: Record "IMP Job Invoice Header";
                     lc_rptCreateJobEval: Report "Create Contract Invoices"; //  Report "Create Job Eval.";
                 begin
 
@@ -187,7 +187,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
                 trigger OnAction()
                 var
-                    lc_JobConsInv: Record "IMP Job Consulting Inv. Header";
+                    lc_JobConsInv: Record "IMP Job Invoice Header";
                 begin
                     CurrPage.SetSelectionFilter(lc_JobConsInv);
                     lc_JobConsInv.SetRange("Modified after creation", true);
@@ -210,7 +210,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
                 trigger OnAction()
                 var
-                    lc_JobConsInv: Record "IMP Job Consulting Inv. Header";
+                    lc_JobConsInv: Record "IMP Job Invoice Header";
                 begin
                     CurrPage.SetSelectionFilter(lc_JobConsInv);
                     lc_JobConsInv.SetRange(Exported, false);
@@ -247,7 +247,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
                 trigger OnAction()
                 var
-                    lc_JobConsultingInvoiceHeader: Record "IMP Job Consulting Inv. Header";
+                    lc_JobConsultingInvoiceHeader: Record "IMP Job Invoice Header";
                     lc_ConsultingProofImplevit: Report "Create Contract Invoices"; //"Consulting proof IMPL New";
                 begin
                     lc_JobConsultingInvoiceHeader.SetRange("Job No.", Rec."Job No.");

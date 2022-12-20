@@ -313,7 +313,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         {
             Caption = 'IN Accounting';
             FieldClass = FlowField;
-            CalcFormula = Exist("IMP Job Consulting Inv. Line" where("Job Journal Template" = Field("Journal Template Name"), "Job Journal Batch" = Field("Journal Batch Name"), "Job Journal Line No." = Field("Line No.")));
+            CalcFormula = Exist("IMP Job Invoice Line" where("Job Journal Template" = Field("Journal Template Name"), "Job Journal Batch" = Field("Journal Batch Name"), "Job Journal Line No." = Field("Line No.")));
         }
         field(50150; "IMP Travel km + Time integrate"; Boolean)
         {
@@ -341,8 +341,8 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
 
     trigger OnAfterModify()
     var
-        lc_JobConsInvLine: Record "IMP Job Consulting Inv. Line";
-        lc_JobConsInvHead: Record "IMP Job Consulting Inv. Header";
+        lc_JobConsInvLine: Record "IMP Job Invoice Line";
+        lc_JobConsInvHead: Record "IMP Job Invoice Header";
     begin
         Rec.CalcFields("IMP In Accounting");
         if (Rec."IMP In Accounting") then begin

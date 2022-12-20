@@ -335,6 +335,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             Caption = 'Belongs to line no.';
             DataClassification = CustomerContent;
         }
+         field(50170; "IMP Overlap"; Boolean)
+        {
+            Caption = 'Overlap';
+            DataClassification = CustomerContent;
+        }
     }
 
     #region Triggers

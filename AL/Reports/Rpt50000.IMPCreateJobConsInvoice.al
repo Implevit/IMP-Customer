@@ -22,8 +22,8 @@ report 50000 "IMP Create Job Cons. Invoice"
 
                 trigger OnAfterGetRecord()
                 var
-                    l_JobInvLine: Record "IMP Job Invoice Line";
-                    l_JobInvHeader: Record "IMP Job Invoice Header";
+                    l_JobInvLine: Record "IMP Job Consulting Inv. Line";
+                    l_JobInvHeader: Record "IMP Job Consulting Inv. Header";
 
                 begin
                     IF NOT l_JobInvHeader.GET(Job."No.", g_Year, g_Month) THEN BEGIN

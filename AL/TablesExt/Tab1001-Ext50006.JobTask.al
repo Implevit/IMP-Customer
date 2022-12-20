@@ -8,7 +8,7 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
             Editable = false;
             FieldClass = FlowField;
             BlankZero = true;
-            CalcFormula = Sum("IMP Job Invoice Line"."Quantity to Invoice" Where("Job No." = Field("Job No."),
+            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Quantity to Invoice" Where("Job No." = Field("Job No."),
                                                                                          "Job Task No." = Field("Job Task No."),
                                                                                          "Posting Date" = Field("Posting Date Filter")));
         }
@@ -18,7 +18,7 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
             Editable = false;
             FieldClass = FlowField;
             BlankZero = true;
-            CalcFormula = Sum("IMP Job Invoice Line".Quantity Where("Job No." = Field("Job No."),
+            CalcFormula = Sum("IMP Job Consulting Inv. Line".Quantity Where("Job No." = Field("Job No."),
                                                                             "Job Task No." = Field("Job Task No."),
                                                                             "Posting Date" = Field("Posting Date Filter")));
         }
@@ -28,7 +28,7 @@ tableextension 50006 "IMP Tab1001-Ext50006" extends "Job Task"
             Editable = false;
             FieldClass = FlowField;
             BlankZero = true;
-            CalcFormula = Sum("IMP Job Invoice Line"."Quantity not to Invoice" Where("Job No." = Field("Job No."),
+            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Quantity not to Invoice" Where("Job No." = Field("Job No."),
                                                                                              "Job Task No." = Field("Job Task No."),
                                                                                              "Posting Date" = Field("Posting Date Filter")));
         }

@@ -2,7 +2,7 @@ page 50005 "IMP Job Consulting Inv. Lines"
 {
     Caption = 'PProject settlement lines';
     PageType = List;
-    SourceTable = "IMP Job Invoice Line";
+    SourceTable = "IMP Job Consulting Inv. Line";
 
     layout
     {

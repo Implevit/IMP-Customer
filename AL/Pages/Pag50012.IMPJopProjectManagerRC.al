@@ -54,9 +54,16 @@ page 50012 "IMP Job Project Manager RC"
     {
         area(embedding)
         {
+            action(JobSettlements)
+            {
+                ApplicationArea = All;
+                Caption = 'Job Settlements';
+                Image = Job;
+                RunObject = Page "IMP Job Consulting Inv. Hdrs";
+            }
             action(Jobs)
             {
-                ApplicationArea = Jobs;
+                ApplicationArea = All;
                 Caption = 'Jobs';
                 Image = Job;
                 RunObject = Page "Job List";

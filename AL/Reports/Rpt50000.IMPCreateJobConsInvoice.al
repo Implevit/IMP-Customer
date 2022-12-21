@@ -138,16 +138,33 @@ report 50000 "IMP Create Job Cons. Invoice"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Year';
+                        trigger OnValidate()
+                        begin
+                            ValidateReqPageInsert();
+                        end;
                     }
                     field(Month; g_Month)
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Month';
+                        trigger OnValidate()
+                        begin
+                            ValidateReqPageInsert();
+                        end;
                     }
                 }
 
             }
         }
+        trigger OnOpenPage()
+        var
+            l_Date: Date;
+        begin
+            IF g_Year = 0 THEN BEGIN
+                l_Date := CALCDATE('<-1M>', WORKDATE);
+                SetPeriod(DATE2DMY(l_Date, 2) - 1, DATE2DMY(l_Date, 3));
+            end;
+        end;
     }
     procedure SetPeriod(p_Month: Option January,February,March,April,May,June,July,August,September,October,November,December; p_Year: Integer);
     begin
@@ -224,6 +241,73 @@ report 50000 "IMP Create Job Cons. Invoice"
         END;
 
 
+    end;
+
+    procedure ValidateReqPageInsert();
+    begin
+        IF g_Month = g_Month::January THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 1, g_Year);
+            g_ValidTo := DMY2DATE(31, 1, g_Year);
+        END;
+
+        IF g_Month = g_Month::February THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 2, g_Year);
+            IF g_Year IN [2020, 2024, 2028, 2032] THEN
+                g_ValidTo := DMY2DATE(29, 2, g_Year)
+            ELSE
+                g_ValidTo := DMY2DATE(28, 2, g_Year)
+
+        END;
+
+        IF g_Month = g_Month::March THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 3, g_Year);
+            g_ValidTo := DMY2DATE(31, 3, g_Year);
+        END;
+
+        IF g_Month = g_Month::April THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 4, g_Year);
+            g_ValidTo := DMY2DATE(30, 4, g_Year);
+        END;
+
+        IF g_Month = g_Month::May THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 5, g_Year);
+            g_ValidTo := DMY2DATE(31, 5, g_Year);
+        END;
+
+        IF g_Month = g_Month::June THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 6, g_Year);
+            g_ValidTo := DMY2DATE(30, 6, g_Year);
+        END;
+
+        IF g_Month = g_Month::July THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 7, g_Year);
+            g_ValidTo := DMY2DATE(31, 7, g_Year);
+        END;
+
+        IF g_Month = g_Month::August THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 8, g_Year);
+            g_ValidTo := DMY2DATE(31, 8, g_Year);
+        END;
+
+        IF g_Month = g_Month::September THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 9, g_Year);
+            g_ValidTo := DMY2DATE(30, 9, g_Year);
+        END;
+
+        IF g_Month = g_Month::October THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 10, g_Year);
+            g_ValidTo := DMY2DATE(31, 10, g_Year);
+        END;
+
+        IF g_Month = g_Month::November THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 11, g_Year);
+            g_ValidTo := DMY2DATE(30, 11, g_Year);
+        END;
+
+        IF g_Month = g_Month::December THEN BEGIN
+            g_ValidFrom := DMY2DATE(1, 12, g_Year);
+            g_ValidTo := DMY2DATE(31, 12, g_Year);
+        END;
     end;
 
     var

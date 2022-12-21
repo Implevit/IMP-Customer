@@ -1,10 +1,11 @@
 page 50004 "IMP Job Consulting Inv. Hdrs"
 {
     Caption = 'Project settlements';
-    //CardPageID = "IMP Job Consulting Inv. Card";
+    CardPageID = "IMP Job Consulting Inv. Card";
     Editable = false;
     PageType = List;
     SourceTable = "IMP Job Consulting Inv. Header";
+    DeleteAllowed = true;    
 
     layout
     {

@@ -338,6 +338,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2047702192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Consulting Invoice Card</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4277491143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Project settlements</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -393,6 +398,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Lines - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 584668384 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Consultion Invoice Subform</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Subf. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3813317288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>IMP Project Manager</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -422,6 +432,11 @@
           <source>Completed</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobsCompleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2786668427 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Settlements</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action JobSettlements - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3813317288 - Action 1679178565 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the card for the selected record.</source>
@@ -652,6 +667,41 @@
           <source>Workflows</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Job Cons. Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Abbruch durch den Anwender!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr. %1 für %2 hat keinen gültigen Projektleiter. Bitte erfassen Sie einen gültigen Projektleiter.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3145547939 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1722173463 - Control 725737015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2077750279">
           <source>Total Usage in journal</source>

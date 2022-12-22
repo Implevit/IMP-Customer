@@ -166,7 +166,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             end;
         end;
     }
-    procedure SetPeriod(p_Month: Option January,February,March,April,May,June,July,August,September,October,November,December; p_Year: Integer);
+    procedure SetPeriod(p_Month: Option Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember; p_Year: Integer);
     begin
         IF p_Year = 0 THEN BEGIN
             g_Year := DATE2DMY(WORKDATE, 3);
@@ -176,12 +176,12 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_Year := p_Year;
         END;
 
-        IF g_Month = g_Month::January THEN BEGIN
+        IF g_Month = g_Month::Januar THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 1, g_Year);
             g_ValidTo := DMY2DATE(31, 1, g_Year);
         END;
 
-        IF g_Month = g_Month::February THEN BEGIN
+        IF g_Month = g_Month::Februar THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 2, g_Year);
             IF g_Year IN [2020, 2024, 2028, 2032, 2036] THEN
                 g_ValidTo := DMY2DATE(29, 2, g_Year)
@@ -190,7 +190,7 @@ report 50000 "IMP Create Job Cons. Invoice"
 
         END;
 
-        IF g_Month = g_Month::March THEN BEGIN
+        IF g_Month = g_Month::März THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 3, g_Year);
             g_ValidTo := DMY2DATE(31, 3, g_Year);
         END;
@@ -200,17 +200,17 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 4, g_Year);
         END;
 
-        IF g_Month = g_Month::May THEN BEGIN
+        IF g_Month = g_Month::Mai THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 5, g_Year);
             g_ValidTo := DMY2DATE(31, 5, g_Year);
         END;
 
-        IF g_Month = g_Month::June THEN BEGIN
+        IF g_Month = g_Month::Juni THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 6, g_Year);
             g_ValidTo := DMY2DATE(30, 6, g_Year);
         END;
 
-        IF g_Month = g_Month::July THEN BEGIN
+        IF g_Month = g_Month::Juli THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 7, g_Year);
             g_ValidTo := DMY2DATE(31, 7, g_Year);
         END;
@@ -225,7 +225,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 9, g_Year);
         END;
 
-        IF g_Month = g_Month::October THEN BEGIN
+        IF g_Month = g_Month::Oktober THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 10, g_Year);
             g_ValidTo := DMY2DATE(31, 10, g_Year);
         END;
@@ -235,7 +235,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 11, g_Year);
         END;
 
-        IF g_Month = g_Month::December THEN BEGIN
+        IF g_Month = g_Month::Dezember THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 12, g_Year);
             g_ValidTo := DMY2DATE(31, 12, g_Year);
         END;
@@ -245,21 +245,21 @@ report 50000 "IMP Create Job Cons. Invoice"
 
     procedure ValidateReqPageInsert();
     begin
-        IF g_Month = g_Month::January THEN BEGIN
+        IF g_Month = g_Month::Januar THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 1, g_Year);
             g_ValidTo := DMY2DATE(31, 1, g_Year);
         END;
 
-        IF g_Month = g_Month::February THEN BEGIN
+        IF g_Month = g_Month::Februar THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 2, g_Year);
-            IF g_Year IN [2020, 2024, 2028, 2032] THEN
+            IF g_Year IN [2020, 2024, 2028, 2032, 2036] THEN
                 g_ValidTo := DMY2DATE(29, 2, g_Year)
             ELSE
                 g_ValidTo := DMY2DATE(28, 2, g_Year)
 
         END;
 
-        IF g_Month = g_Month::March THEN BEGIN
+        IF g_Month = g_Month::"März" THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 3, g_Year);
             g_ValidTo := DMY2DATE(31, 3, g_Year);
         END;
@@ -269,17 +269,17 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 4, g_Year);
         END;
 
-        IF g_Month = g_Month::May THEN BEGIN
+        IF g_Month = g_Month::Mai THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 5, g_Year);
             g_ValidTo := DMY2DATE(31, 5, g_Year);
         END;
 
-        IF g_Month = g_Month::June THEN BEGIN
+        IF g_Month = g_Month::Juni THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 6, g_Year);
             g_ValidTo := DMY2DATE(30, 6, g_Year);
         END;
 
-        IF g_Month = g_Month::July THEN BEGIN
+        IF g_Month = g_Month::Juli THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 7, g_Year);
             g_ValidTo := DMY2DATE(31, 7, g_Year);
         END;
@@ -294,7 +294,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 9, g_Year);
         END;
 
-        IF g_Month = g_Month::October THEN BEGIN
+        IF g_Month = g_Month::Oktober THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 10, g_Year);
             g_ValidTo := DMY2DATE(31, 10, g_Year);
         END;
@@ -304,7 +304,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             g_ValidTo := DMY2DATE(30, 11, g_Year);
         END;
 
-        IF g_Month = g_Month::December THEN BEGIN
+        IF g_Month = g_Month::Dezember THEN BEGIN
             g_ValidFrom := DMY2DATE(1, 12, g_Year);
             g_ValidTo := DMY2DATE(31, 12, g_Year);
         END;
@@ -314,7 +314,7 @@ report 50000 "IMP Create Job Cons. Invoice"
         g_ValidTo: Date;
         g_ValidFrom: date;
         g_i: Integer;
-        g_Month: Option January,February,March,April,May,June,July,August,September,October,November,December;
+        g_Month: Option Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember;
         g_Year: Integer;
         Text50001: Label 'Abbruch durch den Anwender!';
         Text50000: Label 'Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?';

@@ -409,8 +409,63 @@
           <source>Job Consulting Invoice Card</source>
           <target>Projekt Abrechnung Karte</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Möchten Sie die %2 markierten Abrechnungen auf den Status %1 setzen?</source>
+          <target>Möchten Sie die %2 markierten Abrechnungen auf den Status %1 setzen?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Abrechnungen wurden verarbeitet</source>
+          <target>%1 Abrechnungen wurden verarbeitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach Erstellung vorgenommen. Die Abrechnung muss erneut erzeugt und geprüft werden.</source>
+          <target>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach Erstellung vorgenommen. Die Abrechnung muss erneut erzeugt und geprüft werden.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Accounting</source>
+          <target>Erstelle Abrechnung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action CreateAccounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 2208614754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Evaluation</source>
+          <target>Auswertung (Budget: Soll/Ist)</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action Evaluation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
+          <target>Abrechnungsnachweis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action ProofOfBilling - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Checked</source>
+          <target>Setze Status geprüft</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action SetStateChecked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Open</source>
+          <target>Setze Status erstellt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action SetStateOpen - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Project settlements</source>
@@ -436,40 +491,37 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - NamedType Txt3_Txt</note>
         </trans-unit>
-        <trans-unit id="Page 4277491143 - Action 3094316424 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Abrechnungsnachweis Implevit</source>
-          <target>Abrechnungsnachweis Implevit</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action Abrechnungsnachweis Implevit - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 4277491143 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Accounting</source>
-          <target>Buchhaltung erstellen</target>
+          <target>Erstelle Abrechnung</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action CreateAccounting - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Action 2208614754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Evaluation</source>
-          <target>Bewertung</target>
+          <target>Auswertung (Budget: Soll/Ist)</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action Evaluation - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4277491143 - Action 1000118571 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Filter akt. Abrechsperiode</source>
-          <target>Filter akt. Abrechsperiode</target>
+        <trans-unit id="Page 4277491143 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
+          <target>Abrechnungsnachweis</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetActualPeriod - Property Caption</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action ProofOfBilling - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set settlements to checked</source>
-          <target>Abrechnungen auf geprüft setzen</target>
+          <source>Set State to Checked</source>
+          <target>Setze Status geprüft</target>
           <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Source has been modified.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetStateChecked - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Setze Abrechnungen auf erstellt</source>
-          <target>Setze Abrechnungen auf erstellt</target>
+          <source>Set State to Open</source>
+          <target>Setze Status erstellt</target>
           <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Source has been modified.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 122508127 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -482,7 +534,6 @@
           <source>Job Consultion Invoice Subform</source>
           <target>Projekt Abrechnung Zeilen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Subf. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3813317288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">

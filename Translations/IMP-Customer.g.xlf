@@ -343,6 +343,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Möchten Sie die %2 markierten Abrechnungen auf den Status %1 setzen?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Abrechnungen wurden verarbeitet</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach Erstellung vorgenommen. Die Abrechnung muss erneut erzeugt und geprüft werden.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Accounting</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action CreateAccounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 2208614754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action Evaluation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action ProofOfBilling - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Checked</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action SetStateChecked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2047702192 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Card - Action SetStateOpen - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4277491143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Project settlements</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -363,11 +403,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - NamedType Txt3_Txt</note>
         </trans-unit>
-        <trans-unit id="Page 4277491143 - Action 3094316424 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Abrechnungsnachweis Implevit</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action Abrechnungsnachweis Implevit - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 4277491143 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Accounting</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -378,18 +413,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action Evaluation - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4277491143 - Action 1000118571 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Filter akt. Abrechsperiode</source>
+        <trans-unit id="Page 4277491143 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetActualPeriod - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action ProofOfBilling - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set settlements to checked</source>
+          <source>Set State to Checked</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetStateChecked - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4277491143 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Setze Abrechnungen auf erstellt</source>
+          <source>Set State to Open</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
         </trans-unit>

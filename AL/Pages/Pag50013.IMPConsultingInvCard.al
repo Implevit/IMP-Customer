@@ -268,15 +268,17 @@ page 50013 "IMP Job Consulting Inv. Card"
                 trigger OnAction()
                 var
                     l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
+                    l_ConsultingProofImplevit: Report "IMP Job Consulting Proof";
+
                 begin
                     l_JobConsHeader.SETRANGE("Job No.","Job No.");
                     l_JobConsHeader.SETRANGE(Year,Year);
                     l_JobConsHeader.SETRANGE(Month,Month);
                     //TODO Report Proof of Billing
-                    /*
-                    l_ConsultingProofImplevit.SETTABLEVIEW(l_JobConsultingInvoiceHeader);
+                    
+                    l_ConsultingProofImplevit.SETTABLEVIEW(l_JobConsHeader);
                     l_ConsultingProofImplevit.RUN;
-                    */
+                    
                 end;
             }
         }

@@ -10,6 +10,181 @@
       <rd:DataSourceID>e2b2ba28-bc6d-49bb-9b96-bf82594e4a32</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="JCIH_Month">
+          <DataField>JCIH_Month</DataField>
+        </Field>
+        <Field Name="JCIH_Year">
+          <DataField>JCIH_Year</DataField>
+        </Field>
+        <Field Name="Ressource_ProjectManager">
+          <DataField>Ressource_ProjectManager</DataField>
+        </Field>
+        <Field Name="JCIL_PostDate">
+          <DataField>JCIL_PostDate</DataField>
+        </Field>
+        <Field Name="JCIL_JobNo">
+          <DataField>JCIL_JobNo</DataField>
+        </Field>
+        <Field Name="JCIL_No">
+          <DataField>JCIL_No</DataField>
+        </Field>
+        <Field Name="JCIL_Descr">
+          <DataField>JCIL_Descr</DataField>
+        </Field>
+        <Field Name="JCIL_HrToInv">
+          <DataField>JCIL_HrToInv</DataField>
+        </Field>
+        <Field Name="JCIL_HrToInvFormat">
+          <DataField>JCIL_HrToInvFormat</DataField>
+        </Field>
+        <Field Name="JCIL_TravelTime">
+          <DataField>JCIL_TravelTime</DataField>
+        </Field>
+        <Field Name="JCIL_TravelTimeFormat">
+          <DataField>JCIL_TravelTimeFormat</DataField>
+        </Field>
+        <Field Name="JCIL_km">
+          <DataField>JCIL_km</DataField>
+        </Field>
+        <Field Name="JCIL_kmFormat">
+          <DataField>JCIL_kmFormat</DataField>
+        </Field>
+        <Field Name="JCIL_HrNotToInv">
+          <DataField>JCIL_HrNotToInv</DataField>
+        </Field>
+        <Field Name="JCIL_HrNotToInvFormat">
+          <DataField>JCIL_HrNotToInvFormat</DataField>
+        </Field>
+        <Field Name="Totfakt">
+          <DataField>Totfakt</DataField>
+        </Field>
+        <Field Name="TotfaktFormat">
+          <DataField>TotfaktFormat</DataField>
+        </Field>
+        <Field Name="TodayDate">
+          <DataField>TodayDate</DataField>
+        </Field>
+        <Field Name="UserIDDB">
+          <DataField>UserIDDB</DataField>
+        </Field>
+        <Field Name="CompInfo_Picture">
+          <DataField>CompInfo_Picture</DataField>
+        </Field>
+        <Field Name="FilterText">
+          <DataField>FilterText</DataField>
+        </Field>
+        <Field Name="CompInfo_ImplAdrText">
+          <DataField>CompInfo_ImplAdrText</DataField>
+        </Field>
+        <Field Name="Job_Descr">
+          <DataField>Job_Descr</DataField>
+        </Field>
+        <Field Name="JobTask_JobTaskNo">
+          <DataField>JobTask_JobTaskNo</DataField>
+        </Field>
+        <Field Name="JobTask_JobTaskDescr">
+          <DataField>JobTask_JobTaskDescr</DataField>
+        </Field>
+        <Field Name="Ressource_Name">
+          <DataField>Ressource_Name</DataField>
+        </Field>
+        <Field Name="Customer_No">
+          <DataField>Customer_No</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="JCIL_TicketNo">
+          <DataField>JCIL_TicketNo</DataField>
+        </Field>
+        <Field Name="JCIL_AllInclusive">
+          <DataField>JCIL_AllInclusive</DataField>
+        </Field>
+        <Field Name="CustomerLbl">
+          <DataField>CustomerLbl</DataField>
+        </Field>
+        <Field Name="ProjectLbl">
+          <DataField>ProjectLbl</DataField>
+        </Field>
+        <Field Name="PeriodLbl">
+          <DataField>PeriodLbl</DataField>
+        </Field>
+        <Field Name="EmployeeLbl">
+          <DataField>EmployeeLbl</DataField>
+        </Field>
+        <Field Name="PostDateLbl">
+          <DataField>PostDateLbl</DataField>
+        </Field>
+        <Field Name="DescrLbl">
+          <DataField>DescrLbl</DataField>
+        </Field>
+        <Field Name="HrInvLbl">
+          <DataField>HrInvLbl</DataField>
+        </Field>
+        <Field Name="TravelTimelbl">
+          <DataField>TravelTimelbl</DataField>
+        </Field>
+        <Field Name="KmLbl">
+          <DataField>KmLbl</DataField>
+        </Field>
+        <Field Name="TotalInvLbl">
+          <DataField>TotalInvLbl</DataField>
+        </Field>
+        <Field Name="GoodwillLbl">
+          <DataField>GoodwillLbl</DataField>
+        </Field>
+        <Field Name="TicketLbl">
+          <DataField>TicketLbl</DataField>
+        </Field>
+        <Field Name="SignaturLbl">
+          <DataField>SignaturLbl</DataField>
+        </Field>
+        <Field Name="TotalLbl">
+          <DataField>TotalLbl</DataField>
+        </Field>
+        <Field Name="ProjecttaskLbl">
+          <DataField>ProjecttaskLbl</DataField>
+        </Field>
+        <Field Name="ReportNameLbl">
+          <DataField>ReportNameLbl</DataField>
+        </Field>
+        <Field Name="FtrName">
+          <DataField>FtrName</DataField>
+        </Field>
+        <Field Name="FtrAddress">
+          <DataField>FtrAddress</DataField>
+        </Field>
+        <Field Name="FtrCity">
+          <DataField>FtrCity</DataField>
+        </Field>
+        <Field Name="FtrEmail">
+          <DataField>FtrEmail</DataField>
+        </Field>
+        <Field Name="FtrHomePage">
+          <DataField>FtrHomePage</DataField>
+        </Field>
+        <Field Name="FtrPhoneNo">
+          <DataField>FtrPhoneNo</DataField>
+        </Field>
+        <Field Name="FtrFaxNo">
+          <DataField>FtrFaxNo</DataField>
+        </Field>
+        <Field Name="FtrText1">
+          <DataField>FtrText1</DataField>
+        </Field>
+        <Field Name="FtrText2">
+          <DataField>FtrText2</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -21,10 +196,10 @@
                   <Width>1.03125in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.5in</Width>
+                  <Width>0.6875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.44444in</Width>
+                  <Width>2.75694in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.50347in</Width>
@@ -33,10 +208,10 @@
                   <Width>0.66319in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.65625in</Width>
+                  <Width>1.10764in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.64583in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -101,8 +276,7 @@
                           <rd:DefaultName>Textbox22</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -135,8 +309,7 @@
                           <rd:DefaultName>Textbox109</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -168,8 +341,7 @@
                           <rd:DefaultName>Textbox24</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -203,8 +375,7 @@
                           <rd:DefaultName>Textbox12</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -238,8 +409,7 @@
                           <rd:DefaultName>Textbox26</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -273,8 +443,7 @@
                           <rd:DefaultName>Textbox28</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -312,8 +481,7 @@
                           <rd:DefaultName>Textbox146</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -335,6 +503,7 @@
                                   <Value>=Fields!JobTask_JobTaskNo.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -346,8 +515,7 @@
                           <rd:DefaultName>Textbox33</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -381,8 +549,7 @@
                           <rd:DefaultName>Textbox34</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -413,8 +580,7 @@
                           <rd:DefaultName>Textbox149</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -447,8 +613,7 @@
                           <rd:DefaultName>Textbox150</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -481,8 +646,7 @@
                           <rd:DefaultName>Textbox151</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -515,8 +679,7 @@
                           <rd:DefaultName>Textbox152</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -529,7 +692,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.1875in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -543,6 +706,7 @@
                                   <Value>=Fields!JCIL_PostDate.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>d</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -554,8 +718,7 @@
                           <rd:DefaultName>Textbox93</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -588,8 +751,7 @@
                           <rd:DefaultName>Textbox94</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -622,8 +784,7 @@
                           <rd:DefaultName>Textbox39</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -654,8 +815,7 @@
                           <rd:DefaultName>Textbox87</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -677,6 +837,7 @@
                                   <Value>=Fields!JCIL_HrToInv.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -688,8 +849,7 @@
                           <rd:DefaultName>Textbox41</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -711,6 +871,7 @@
                                   <Value>=Fields!JCIL_TravelTime.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -722,8 +883,7 @@
                           <rd:DefaultName>Textbox43</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -745,6 +905,7 @@
                                   <Value>=Fields!JCIL_km.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -756,8 +917,7 @@
                           <rd:DefaultName>Textbox45</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -770,7 +930,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.1875in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -795,8 +955,7 @@
                           <rd:DefaultName>Textbox155</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -829,8 +988,7 @@
                           <rd:DefaultName>Textbox156</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -864,8 +1022,7 @@
                           <rd:DefaultName>Textbox174</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -886,7 +1043,9 @@
                                 <TextRun>
                                   <Value>=Fields!JCIL_HrNotToInv.Value</Value>
                                   <Style>
+                                    <FontStyle>Italic</FontStyle>
                                     <FontSize>8pt</FontSize>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -896,8 +1055,7 @@
                           <rd:DefaultName>Textbox158</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -930,8 +1088,7 @@
                           <rd:DefaultName>Textbox190</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -964,8 +1121,7 @@
                           <rd:DefaultName>Textbox1</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -998,8 +1154,7 @@
                           <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1012,7 +1167,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.35417in</Height>
+                  <Height>0.29167in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1037,8 +1192,7 @@
                           <rd:DefaultName>Textbox110</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1071,8 +1225,7 @@
                           <rd:DefaultName>Textbox111</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1094,6 +1247,7 @@
                                   <Value>=Fields!TotalLbl.Value &amp; " " &amp; Fields!JobTask_JobTaskDescr.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1105,8 +1259,7 @@
                           <rd:DefaultName>Textbox188</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1128,6 +1281,7 @@
                                   <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1137,8 +1291,7 @@
                           <rd:DefaultName>Textbox113</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1160,6 +1313,8 @@
                                   <Value>=Sum(Fields!JCIL_HrToInv.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1171,8 +1326,7 @@
                           <rd:DefaultName>Textbox190</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1194,6 +1348,8 @@
                                   <Value>=Sum(Fields!JCIL_TravelTime.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1205,8 +1361,7 @@
                           <rd:DefaultName>Textbox191</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1228,6 +1383,8 @@
                                   <Value>=Sum(Fields!JCIL_km.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1239,8 +1396,7 @@
                           <rd:DefaultName>Textbox192</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1253,7 +1409,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.41667in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1278,8 +1434,7 @@
                           <rd:DefaultName>Textbox181</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1312,8 +1467,7 @@
                           <rd:DefaultName>Textbox182</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1335,6 +1489,7 @@
                                   <Value>=Fields!TotalLbl.Value &amp; " " &amp; Fields!Customer_Name.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1346,8 +1501,7 @@
                           <rd:DefaultName>Textbox183</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1369,6 +1523,7 @@
                                   <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1378,8 +1533,7 @@
                           <rd:DefaultName>Textbox184</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1401,6 +1555,8 @@
                                   <Value>=Sum(Fields!JCIL_HrToInv.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1412,8 +1568,7 @@
                           <rd:DefaultName>Textbox185</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1435,6 +1590,8 @@
                                   <Value>=Sum(Fields!JCIL_TravelTime.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1446,8 +1603,7 @@
                           <rd:DefaultName>Textbox186</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1469,6 +1625,8 @@
                                   <Value>=Sum(Fields!JCIL_km.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1480,8 +1638,7 @@
                           <rd:DefaultName>Textbox187</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1547,7 +1704,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.03125in</Size>
+                        <Size>0.23958in</Size>
                         <CellContents>
                           <Textbox Name="Textbox117">
                             <CanGrow>true</CanGrow>
@@ -1624,8 +1781,7 @@
                             <rd:DefaultName>Textbox137</rd:DefaultName>
                             <Style>
                               <Border>
-                                <Color>LightGrey</Color>
-                                <Style>Solid</Style>
+                                <Style>None</Style>
                               </Border>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1638,7 +1794,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.03125in</Size>
+                            <Size>0.23958in</Size>
                             <CellContents>
                               <Textbox Name="Textbox138">
                                 <CanGrow>true</CanGrow>
@@ -1661,8 +1817,7 @@
                                 <rd:DefaultName>Textbox138</rd:DefaultName>
                                 <Style>
                                   <Border>
-                                    <Color>LightGrey</Color>
-                                    <Style>Solid</Style>
+                                    <Style>None</Style>
                                   </Border>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1700,8 +1855,7 @@
                             <rd:DefaultName>Textbox83</rd:DefaultName>
                             <Style>
                               <Border>
-                                <Color>LightGrey</Color>
-                                <Style>Solid</Style>
+                                <Style>None</Style>
                               </Border>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1715,7 +1869,7 @@
                         <TablixMember>
                           <Group Name="Group2" />
                           <TablixHeader>
-                            <Size>0.03125in</Size>
+                            <Size>0.23958in</Size>
                             <CellContents>
                               <Textbox Name="Group2">
                                 <CanGrow>true</CanGrow>
@@ -1738,8 +1892,7 @@
                                 <rd:DefaultName>Group2</rd:DefaultName>
                                 <Style>
                                   <Border>
-                                    <Color>LightGrey</Color>
-                                    <Style>Solid</Style>
+                                    <Style>None</Style>
                                   </Border>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1785,8 +1938,7 @@
                             <rd:DefaultName>Textbox108</rd:DefaultName>
                             <Style>
                               <Border>
-                                <Color>LightGrey</Color>
-                                <Style>Solid</Style>
+                                <Style>None</Style>
                               </Border>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1799,7 +1951,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.03125in</Size>
+                            <Size>0.23958in</Size>
                             <CellContents>
                               <Textbox Name="Textbox125">
                                 <CanGrow>true</CanGrow>
@@ -1822,8 +1974,7 @@
                                 <rd:DefaultName>Textbox125</rd:DefaultName>
                                 <Style>
                                   <Border>
-                                    <Color>LightGrey</Color>
-                                    <Style>Solid</Style>
+                                    <Style>None</Style>
                                   </Border>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1863,8 +2014,7 @@
                         <rd:DefaultName>Textbox179</rd:DefaultName>
                         <Style>
                           <Border>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
+                            <Style>None</Style>
                           </Border>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -1877,7 +2027,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.03125in</Size>
+                        <Size>0.23958in</Size>
                         <CellContents>
                           <Textbox Name="Textbox180">
                             <CanGrow>true</CanGrow>
@@ -1900,8 +2050,7 @@
                             <rd:DefaultName>Textbox180</rd:DefaultName>
                             <Style>
                               <Border>
-                                <Color>LightGrey</Color>
-                                <Style>Solid</Style>
+                                <Style>None</Style>
                               </Border>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1917,9 +2066,9 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <Top>1.17583in</Top>
-            <Height>1.60417in</Height>
-            <Width>6.8611in</Width>
+            <Top>1.42583in</Top>
+            <Height>1.58334in</Height>
+            <Width>7.66665in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1928,9 +2077,9 @@
           </Tablix>
           <Line Name="Line4">
             <Top>1.42583in</Top>
-            <Left>0.03125in</Left>
+            <Left>0.27083in</Left>
             <Height>0in</Height>
-            <Width>6.79861in</Width>
+            <Width>7.39582in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1938,14 +2087,200 @@
               </Border>
             </Style>
           </Line>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!ProjectLbl.Value</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.21056in</Top>
+            <Left>0.27083in</Left>
+            <Height>0.23611in</Height>
+            <Width>1.63194in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Customer_Name.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.21056in</Top>
+            <Left>1.30208in</Left>
+            <Height>0.23611in</Height>
+            <Width>3.44444in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PeriodLbl.Value</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.46056in</Top>
+            <Left>0.27083in</Left>
+            <Height>0.23611in</Height>
+            <Width>1.63194in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!JCIH_Month.Value &amp; " " &amp; Fields!JCIH_Year.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.46056in</Top>
+            <Left>1.30208in</Left>
+            <Height>0.23611in</Height>
+            <Width>3.44444in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Ressource_ProjectManager.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.71056in</Top>
+            <Left>1.30208in</Left>
+            <Height>0.23611in</Height>
+            <Width>3.44444in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!EmployeeLbl.Value</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.71056in</Top>
+            <Left>0.27083in</Left>
+            <Height>0.23611in</Height>
+            <Width>1.63194in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>4.62374in</Height>
         <Style />
       </Body>
-      <Width>10.24652in</Width>
+      <Width>7.66665in</Width>
       <Page>
         <PageHeader>
-          <Height>1in</Height>
+          <Height>1.46056in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1953,8 +2288,8 @@
               <Source>Embedded</Source>
               <Value>ASAs1</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.03819in</Top>
-              <Left>4.51041in</Left>
+              <Top>0.02431in</Top>
+              <Left>5.34721in</Left>
               <Height>0.90625in</Height>
               <Width>2.31944in</Width>
               <Style>
@@ -1963,6 +2298,39 @@
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Textbox10">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!ReportNameLbl.Value, "DataSet_Result") &amp; " " &amp; First(Fields!JCIH_Month.Value, "DataSet_Result") &amp; " " &amp; First(Fields!JCIH_Year.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>20pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox10</rd:DefaultName>
+              <Top>0.80778in</Top>
+              <Left>0.27083in</Left>
+              <Height>0.65278in</Height>
+              <Width>4.47569in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -1980,10 +2348,19 @@
             </Border>
           </Style>
         </PageFooter>
+        <LeftMargin>0.5in</LeftMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2153,179 +2530,4 @@ p4eoZi2XSASVRQCXSQaucDvLpIHPrIzPrIzPrIzPrIzPrIzMpYPBk2u1fk2jXSGXRwShWR3jzrz/////
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="JCIH_Month">
-          <DataField>JCIH_Month</DataField>
-        </Field>
-        <Field Name="JCIH_Year">
-          <DataField>JCIH_Year</DataField>
-        </Field>
-        <Field Name="Ressource_ProjectManager">
-          <DataField>Ressource_ProjectManager</DataField>
-        </Field>
-        <Field Name="JCIL_PostDate">
-          <DataField>JCIL_PostDate</DataField>
-        </Field>
-        <Field Name="JCIL_JobNo">
-          <DataField>JCIL_JobNo</DataField>
-        </Field>
-        <Field Name="JCIL_No">
-          <DataField>JCIL_No</DataField>
-        </Field>
-        <Field Name="JCIL_Descr">
-          <DataField>JCIL_Descr</DataField>
-        </Field>
-        <Field Name="JCIL_HrToInv">
-          <DataField>JCIL_HrToInv</DataField>
-        </Field>
-        <Field Name="JCIL_HrToInvFormat">
-          <DataField>JCIL_HrToInvFormat</DataField>
-        </Field>
-        <Field Name="JCIL_TravelTime">
-          <DataField>JCIL_TravelTime</DataField>
-        </Field>
-        <Field Name="JCIL_TravelTimeFormat">
-          <DataField>JCIL_TravelTimeFormat</DataField>
-        </Field>
-        <Field Name="JCIL_km">
-          <DataField>JCIL_km</DataField>
-        </Field>
-        <Field Name="JCIL_kmFormat">
-          <DataField>JCIL_kmFormat</DataField>
-        </Field>
-        <Field Name="JCIL_HrNotToInv">
-          <DataField>JCIL_HrNotToInv</DataField>
-        </Field>
-        <Field Name="JCIL_HrNotToInvFormat">
-          <DataField>JCIL_HrNotToInvFormat</DataField>
-        </Field>
-        <Field Name="Totfakt">
-          <DataField>Totfakt</DataField>
-        </Field>
-        <Field Name="TotfaktFormat">
-          <DataField>TotfaktFormat</DataField>
-        </Field>
-        <Field Name="TodayDate">
-          <DataField>TodayDate</DataField>
-        </Field>
-        <Field Name="UserIDDB">
-          <DataField>UserIDDB</DataField>
-        </Field>
-        <Field Name="CompInfo_Picture">
-          <DataField>CompInfo_Picture</DataField>
-        </Field>
-        <Field Name="FilterText">
-          <DataField>FilterText</DataField>
-        </Field>
-        <Field Name="CompInfo_ImplAdrText">
-          <DataField>CompInfo_ImplAdrText</DataField>
-        </Field>
-        <Field Name="Job_Descr">
-          <DataField>Job_Descr</DataField>
-        </Field>
-        <Field Name="JobTask_JobTaskNo">
-          <DataField>JobTask_JobTaskNo</DataField>
-        </Field>
-        <Field Name="JobTask_JobTaskDescr">
-          <DataField>JobTask_JobTaskDescr</DataField>
-        </Field>
-        <Field Name="Ressource_Name">
-          <DataField>Ressource_Name</DataField>
-        </Field>
-        <Field Name="Customer_No">
-          <DataField>Customer_No</DataField>
-        </Field>
-        <Field Name="Customer_Name">
-          <DataField>Customer_Name</DataField>
-        </Field>
-        <Field Name="JCIL_TicketNo">
-          <DataField>JCIL_TicketNo</DataField>
-        </Field>
-        <Field Name="JCIL_AllInclusive">
-          <DataField>JCIL_AllInclusive</DataField>
-        </Field>
-        <Field Name="CustomerLbl">
-          <DataField>CustomerLbl</DataField>
-        </Field>
-        <Field Name="ProjectLbl">
-          <DataField>ProjectLbl</DataField>
-        </Field>
-        <Field Name="PeriodLbl">
-          <DataField>PeriodLbl</DataField>
-        </Field>
-        <Field Name="EmployeeLbl">
-          <DataField>EmployeeLbl</DataField>
-        </Field>
-        <Field Name="PostDateLbl">
-          <DataField>PostDateLbl</DataField>
-        </Field>
-        <Field Name="DescrLbl">
-          <DataField>DescrLbl</DataField>
-        </Field>
-        <Field Name="HrInvLbl">
-          <DataField>HrInvLbl</DataField>
-        </Field>
-        <Field Name="TravelTimelbl">
-          <DataField>TravelTimelbl</DataField>
-        </Field>
-        <Field Name="KmLbl">
-          <DataField>KmLbl</DataField>
-        </Field>
-        <Field Name="TotalInvLbl">
-          <DataField>TotalInvLbl</DataField>
-        </Field>
-        <Field Name="GoodwillLbl">
-          <DataField>GoodwillLbl</DataField>
-        </Field>
-        <Field Name="TicketLbl">
-          <DataField>TicketLbl</DataField>
-        </Field>
-        <Field Name="SignaturLbl">
-          <DataField>SignaturLbl</DataField>
-        </Field>
-        <Field Name="TotalLbl">
-          <DataField>TotalLbl</DataField>
-        </Field>
-        <Field Name="ProjecttaskLbl">
-          <DataField>ProjecttaskLbl</DataField>
-        </Field>
-        <Field Name="ReportNameLbl">
-          <DataField>ReportNameLbl</DataField>
-        </Field>
-        <Field Name="FtrName">
-          <DataField>FtrName</DataField>
-        </Field>
-        <Field Name="FtrAddress">
-          <DataField>FtrAddress</DataField>
-        </Field>
-        <Field Name="FtrCity">
-          <DataField>FtrCity</DataField>
-        </Field>
-        <Field Name="FtrEmail">
-          <DataField>FtrEmail</DataField>
-        </Field>
-        <Field Name="FtrHomePage">
-          <DataField>FtrHomePage</DataField>
-        </Field>
-        <Field Name="FtrPhoneNo">
-          <DataField>FtrPhoneNo</DataField>
-        </Field>
-        <Field Name="FtrFaxNo">
-          <DataField>FtrFaxNo</DataField>
-        </Field>
-        <Field Name="FtrText1">
-          <DataField>FtrText1</DataField>
-        </Field>
-        <Field Name="FtrText2">
-          <DataField>FtrText2</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

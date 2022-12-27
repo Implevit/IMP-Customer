@@ -26,8 +26,13 @@ report 50001 "IMP Job Consulting Proof"
 
             }
             dataitem(JCIL; "IMP Job Consulting Inv. Line")
+
+
             {
-                column(JCIL_PostDate; JCIL."Posting Date")
+                DataItemLinkReference = JCIH;
+                DataItemLink = "Job No." = FIELD("Job No."), Month = FIELD(Month), Year = FIELD(Year);
+                column(JCIL_PostDate;
+                JCIL."Posting Date")
                 {
 
                 }

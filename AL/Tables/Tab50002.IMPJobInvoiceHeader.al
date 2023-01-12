@@ -37,6 +37,7 @@ table 50002 "IMP Job Consulting Inv. Header"
             OptionCaption = 'January,February,March,April,May,June,July,August,September,October,November,December';
             OptionMembers = January,February,March,April,May,June,July,August,September,October,November,December;
         }
+        
 
         field(10; "Period Code"; Code[10])
         {

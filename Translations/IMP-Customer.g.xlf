@@ -3,6 +3,346 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="IMP-Customer">
     <body>
       <group id="body">
+        <trans-unit id="Table 434711048 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer Job Accounting</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 371325265 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Accounting Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Accounting Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2965034906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bill-to Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Bill-to Customer No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2838451934 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created by User</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Created by User - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1407200743 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creation Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Creation Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 4190130733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Customer No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 995090288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Date Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Date Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 580412389 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Document Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 4004740007 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exported</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Exported - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3205679337 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exported by User</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Exported by User - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3231177756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exported Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Exported Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3030423141 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Filter Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 313202704 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Filter Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 666008299 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Filter Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 93044988 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Accounting Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Job Accounting Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 173717494 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Job Task Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1658535256 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Modified after creation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Modified after creation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3409576307 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Modified at Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Modified at Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1318813773 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Modified by User</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Modified by User - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3465500804 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>January,February,March,April,May,June,July,August,September,October,November,December</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Month - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2598133084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Period Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1467378930 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project Manager IMPL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Project Manager IMPL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1187025847 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity Km</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Quantity Km - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3280478784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2659785339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 205588234 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity Travel Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Quantity Travel Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3696662774 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Resource Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 1225278069 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sell-to Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Sell-to Customer No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 526155338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Source Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3746517900 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity Km</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Source Quantity Km - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 4289247235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Source Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 3858727256 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Source Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 670081669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity Travel Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Source Quantity Travel Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 513339096 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>created,checked,signed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Status - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 434711048 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Cons. Inv. Header - Field Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Accounting Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1820563623 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>All inclusive</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field All inclusive - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1344663656 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>All inclusive Original</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field All inclusive Original - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1417232546 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Check - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 4190130733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Customer No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1002069434 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Distance KM Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Distance KM Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1949342174 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Journal Batch</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job Journal Batch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3223415625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Journal Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job Journal Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2062345170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Journal Template</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job Journal Template - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1198453408 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job Task Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 561421623 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Job Task No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2196167343 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mark</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Mark - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3465500804 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Month - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3710982960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Posting Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3280478784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2659785339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3961767479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Resource No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 4244076693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Distance KM Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Source Distance KM Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 526155338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Source Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 4289247235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Source Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 3858727256 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Source Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1530531229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Travel Time Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Source Travel Time Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2572845453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ticket No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Ticket No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 1162676738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Travel Time Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Travel Time Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 279060582 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Cust. Job Cons. Inv. Line - Field Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3075020921 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Accounting</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -338,6 +678,101 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3567995689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Consultion Invoice Subform</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Cons. Inv. Subf. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Customer Consulting Invoice Card</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Möchten Sie die %2 markierten Abrechnungen auf den Status %1 setzen?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Abrechnungen wurden verarbeitet</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach Erstellung vorgenommen. Die Abrechnung muss erneut erzeugt und geprüft werden.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Accounting</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Action CreateAccounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Action 2208614754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Action Evaluation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Action ProofOfBilling - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Checked</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Action SetStateChecked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2391372296 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Card - Action SetStateOpen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer Project Settlements</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to set the %2 marked settlements to %1 status?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - NamedType Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements were processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - NamedType Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - NamedType Txt3_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Action 3770529055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Accounting</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action CreateAccounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Action 2208614754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action Evaluation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Action 3090866594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Proof of Billing</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action ProofOfBilling - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Action 3735633230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Checked</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action SetStateChecked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4198934831 - Action 1650868915 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set State to Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2047702192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consulting Invoice Card</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -447,6 +882,11 @@
           <source>Customers</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Customers - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 2545859321 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer Settlements</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action CustSettlements - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3813317288 - Action 1554554962 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Items</source>
@@ -702,6 +1142,41 @@
           <source>Workflows</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Customer Cons. Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Abbruch durch den Anwender!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr. %1 für %2 hat keinen gültigen Projektleiter. Bitte erfassen Sie einen gültigen Projektleiter.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3632860763 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3145547939 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Job Cons. Invoice</source>

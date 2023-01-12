@@ -61,6 +61,13 @@ page 50012 "IMP Job Project Manager RC"
                 Image = Job;
                 RunObject = Page "IMP Job Consulting Inv. Hdrs";
             }
+             action(CustSettlements)
+            {
+                ApplicationArea = All;
+                Caption = 'Customer Settlements';
+                Image = Job;
+                RunObject = Page "IMP Cust. Consulting Inv. Hdrs";
+            }
             action(Jobs)
             {
                 ApplicationArea = All;

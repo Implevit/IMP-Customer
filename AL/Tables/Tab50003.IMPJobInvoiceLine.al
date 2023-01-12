@@ -24,7 +24,7 @@ table 50003 "IMP Job Consulting Inv. Line"
             Caption = 'Month';
             DataClassification = CustomerContent;
             Editable = false;
-            OptionCaption = 'January,February,March,April,May,June,July,August,September,October,November,December';
+            OptionCaption = 'Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember';
             OptionMembers = January,February,March,April,May,June,July,August,September,October,November,December;
         }
         Field(4; "Job Journal Template"; Code[10])

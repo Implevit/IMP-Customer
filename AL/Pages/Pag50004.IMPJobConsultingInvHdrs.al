@@ -6,7 +6,7 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
     PageType = List;
     SourceTable = "IMP Job Consulting Inv. Header";
     DeleteAllowed = true;    
-
+    //TODO Multiline Delete with Status Check
     layout
     {
         area(content)
@@ -133,129 +133,120 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
     actions
     {
-        area(reporting)
+        area(Processing)
         {
             action(CreateAccounting)
             {
                 Caption = 'Create Accounting';
+                ApplicationArea = All;
                 Image = JobSalesInvoice;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;
+                PromotedIsBig = true;               
 
                 trigger OnAction()
                 var
-                    lc_Job: Record Job;
-                    lc_rptCreateJobInv: Report "Create Contract Invoices"; // "Create Job Cons. Invoice";
+                    l_Job: record job;
+                    l_rptCreateJobInv: Report "IMP Create Job Cons. Invoice";
                 begin
-                    //lc_Job.SETRANGE("No.","Job No.");
-                    if GetRes() <> '' then
-                        lc_Job.SetRange("IMP Project Manager IMPL", GetRes());
-                    //lc_rptCreateJobInv.SetPeriod(Month, Rec.Year);
-                    lc_rptCreateJobInv.SetTableView(lc_Job);
-                    lc_rptCreateJobInv.RunModal();
+                    l_Job.SETRANGE("No.","Job No.");
+                    l_rptCreateJobInv.SetPeriod(Month,Year);
+                    l_rptCreateJobInv.SETTABLEVIEW(l_Job);
+                    l_rptCreateJobInv.RUNMODAL;
+
+                end;
+            }
+            action(SetStateChecked)
+            {
+                Caption = 'Set State to Checked';
+                ApplicationArea = All;
+                Image = ChangeStatus;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;               
+
+                trigger OnAction()
+                var
+                    l_JobConsInv: Record "IMP Job Consulting Inv. Header";
+                begin
+                    CurrPage.SETSELECTIONFILTER(l_JobConsInv);
+                    l_JobConsInv.SETRANGE("Modified after creation",TRUE);
+                    IF l_JobConsInv.FINDFIRST THEN
+                        ERROR(STRSUBSTNO(Txt3_Txt,l_JobConsInv."Job No.",l_JobConsInv.Year,l_JobConsInv.Month));
+                    l_JobConsInv.SETRANGE("Modified after creation");
+                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Txt1_Txt,l_JobConsInv.Status::checked,l_JobConsInv.COUNT))) THEN BEGIN
+                        l_JobConsInv.MODIFYALL(Status,l_JobConsInv.Status::checked);
+                        MESSAGE(STRSUBSTNO(Txt2_Txt,l_JobConsInv.COUNT));
+                    END;
+
+                end;
+            }
+            action(SetStateOpen)
+            {
+                Caption = 'Set State to Open';
+                ApplicationArea = All;
+                Image = ChangeTo;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;               
+
+                trigger OnAction()
+                var
+                    l_JobConsInv: Record "IMP Job Consulting Inv. Header";
+                begin
+                    CurrPage.SETSELECTIONFILTER(l_JobConsInv);
+                    l_JobConsInv.SETRANGE(Exported,FALSE);
+                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Txt1_Txt,l_JobConsInv.Status::created,l_JobConsInv.COUNT))) THEN BEGIN
+                    l_JobConsInv.MODIFYALL(Status,l_JobConsInv.Status::created);
+                    MESSAGE(STRSUBSTNO(Txt2_Txt,l_JobConsInv.COUNT));
+                    END;
                 end;
             }
             action(Evaluation)
             {
                 Caption = 'Evaluation';
+                ApplicationArea = All;
                 Image = JobRegisters;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;
+                PromotedIsBig = true;               
 
                 trigger OnAction()
                 var
-                    lc_JobConsHeader: Record "IMP Job Consulting Inv. Header";
-                    lc_rptCreateJobEval: Report "Create Contract Invoices"; //  Report "Create Job Eval.";
+                    l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
                 begin
-
-                    lc_JobConsHeader.SetRange("Job No.", "Job No.");
-                    lc_JobConsHeader.SetRange(Month, Month);
-                    lc_JobConsHeader.SetRange(Year, Year);
-                    lc_rptCreateJobEval.SetTableView(lc_JobConsHeader);
-                    lc_rptCreateJobEval.UseRequestPage(false);
-                    lc_rptCreateJobEval.RunModal();
+                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
+                    l_JobConsHeader.SETRANGE(Month,Month);
+                    l_JobConsHeader.SETRANGE(Year,Year);
+                    //TODO Create Evaluation
+                    /*
+                    l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
+                    l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
+                    l_rptCreateJobEval.RUNMODAL;
+                    */
                 end;
             }
-            action(SetStateChecked)
+            action(ProofOfBilling)
             {
-                Caption = 'Set settlements to checked';
-                Image = ChangeStatus;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                var
-                    lc_JobConsInv: Record "IMP Job Consulting Inv. Header";
-                begin
-                    CurrPage.SetSelectionFilter(lc_JobConsInv);
-                    lc_JobConsInv.SetRange("Modified after creation", true);
-                    if lc_JobConsInv.FindFirst() then
-                        Error(Txt3_Txt, lc_JobConsInv."Job No.", lc_JobConsInv.Year, lc_JobConsInv.Month);
-                    lc_JobConsInv.SetRange("Modified after creation");
-                    if Confirm(StrSubstNo(StrSubstNo(Txt1_Txt, lc_JobConsInv.Status::checked, lc_JobConsInv.Count))) then begin
-                        lc_JobConsInv.ModifyAll(Status, lc_JobConsInv.Status::checked);
-                        Message(StrSubstNo(Txt2_Txt, lc_JobConsInv.Count));
-                    end;
-                end;
-            }
-            action(SetStateOpen)
-            {
-                Caption = 'Setze Abrechnungen auf erstellt';
-                Image = ChangeTo;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                var
-                    lc_JobConsInv: Record "IMP Job Consulting Inv. Header";
-                begin
-                    CurrPage.SetSelectionFilter(lc_JobConsInv);
-                    lc_JobConsInv.SetRange(Exported, false);
-                    if Confirm(StrSubstNo(StrSubstNo(Txt1_Txt, lc_JobConsInv.Status::created, lc_JobConsInv.Count))) then begin
-                        lc_JobConsInv.ModifyAll(Status, lc_JobConsInv.Status::created);
-                        Message(Txt2_Txt, lc_JobConsInv.Count);
-                    end;
-                end;
-            }
-            action(SetActualPeriod)
-            {
-                Caption = 'Filter akt. Abrechsperiode';
-                Image = PeriodStatus;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                var
-                    lc_Date: Date;
-                begin
-                    lc_Date := CalcDate('<-1M>', Today());
-                    Rec.SetRange(Year, Date2DMY(lc_Date, 3));
-                    Rec.SetRange(Month, Date2DMY(lc_Date, 2) - 1);
-                end;
-            }
-            action("Abrechnungsnachweis Implevit")
-            {
-                Caption = 'Abrechnungsnachweis Implevit';
+                Caption = 'Proof of Billing';
+                ApplicationArea = All;
                 Image = Report2;
                 Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;               
 
                 trigger OnAction()
                 var
-                    lc_JobConsultingInvoiceHeader: Record "IMP Job Consulting Inv. Header";
-                    lc_ConsultingProofImplevit: Report "Create Contract Invoices"; //"Consulting proof IMPL New";
+                    l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
                 begin
-                    lc_JobConsultingInvoiceHeader.SetRange("Job No.", Rec."Job No.");
-                    lc_JobConsultingInvoiceHeader.SetRange(Year, Rec.Year);
-                    lc_JobConsultingInvoiceHeader.SetRange(Month, Rec.Month);
-                    lc_ConsultingProofImplevit.SetTableView(lc_JobConsultingInvoiceHeader);
-                    lc_ConsultingProofImplevit.Run();
+                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
+                    l_JobConsHeader.SETRANGE(Year,Year);
+                    l_JobConsHeader.SETRANGE(Month,Month);
+                    //TODO Report Proof of Billing
+                    /*
+                    l_ConsultingProofImplevit.SETTABLEVIEW(l_JobConsultingInvoiceHeader);
+                    l_ConsultingProofImplevit.RUN;
+                    */
                 end;
             }
         }

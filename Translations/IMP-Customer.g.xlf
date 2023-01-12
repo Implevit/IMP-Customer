@@ -678,6 +678,86 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2486946589 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 4030203231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Budget</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Budget - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 1198453408 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Tast Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Job Task Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 561421623 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Job Task No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 395609334 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Job Task Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 395609334 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Konto,Überschrift,Summe,Von-Summe,Bis-Summe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Job Task Type - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 3465500804 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>January,February,March,April,May,June,July,August,September,October,November,December</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Month - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 2988751784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not Inv. Qty. (act. Period)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Not Inv. Qty. (act. Period) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 695995244 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not Inv. Qty. (prev. Periods)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Not Inv. Qty. (prev. Periods) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 838550161 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity (act. Period)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Quantity (act. Period) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 1503531093 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity (prev. Periods)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Quantity (prev. Periods) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 3961767479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Resource No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 478049462 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Totaling</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Totaling - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3567995689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consultion Invoice Subform</source>
           <note from="Developer" annotates="general" priority="2"></note>

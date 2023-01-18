@@ -1293,6 +1293,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Cons. Invoice - Control Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Report 2853861004 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Eval.Acc. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Report 1202965061 - NamedType 76061626" size-unit="char" translate="yes" xml:space="preserve">
           <source>Kunde</source>
           <note from="Developer" annotates="general" priority="2"></note>

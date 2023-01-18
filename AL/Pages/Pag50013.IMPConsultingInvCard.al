@@ -244,16 +244,15 @@ page 50013 "IMP Job Consulting Inv. Card"
                 trigger OnAction()
                 var
                     l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
+                    l_rptCreateJobEval: Report "IMP Create Job Eval.Acc.";
                 begin
                     l_JobConsHeader.SETRANGE("Job No.","Job No.");
                     l_JobConsHeader.SETRANGE(Month,Month);
                     l_JobConsHeader.SETRANGE(Year,Year);
-                    //TODO Create Evaluation
-                    /*
                     l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
                     l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
                     l_rptCreateJobEval.RUNMODAL;
-                    */
+                    
                 end;
             }
             action(ProofOfBilling)

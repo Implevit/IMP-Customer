@@ -79,10 +79,16 @@ table 50012 "IMP Job Evaluation Line"
             Caption = 'Not Inv. Qty. (prev. Periods)';
             DataClassification = CustomerContent;
         }
-         Field(13; "Not Inv. Qty. (act. Period)"; Decimal)
+        Field(13; "Not Inv. Qty. (act. Period)"; Decimal)
         {
             Caption = 'Not Inv. Qty. (act. Period)';
             DataClassification = CustomerContent;
+        }
+        Field(14; "Customer No."; Code[20])
+        {
+            Caption = 'Customer No.';
+            DataClassification = CustomerContent;
+            TableRelation = Customer;
         }
 
 

@@ -246,18 +246,17 @@ page 50016 "IMP Cust. Consulting Inv. Card"
 
                 trigger OnAction()
                 var
-                    l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
+                    l_JobConsHeader: Record "IMP Cust. Cons. Inv. Header";
+                    l_rptCreateJobEval: Report "IMP Create Cust. Job Eval.Acc.";
                 begin
-                    //TODO Create Evaluation
-                    /*
-                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
+                    
+                    l_JobConsHeader.SETRANGE("Customer No.","Customer No.");
                     l_JobConsHeader.SETRANGE(Month,Month);
                     l_JobConsHeader.SETRANGE(Year,Year);
-                 
+
                     l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
                     l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
                     l_rptCreateJobEval.RUNMODAL;
-                    */
                 end;
             }
             action(ProofOfBilling)

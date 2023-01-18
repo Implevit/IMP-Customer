@@ -688,6 +688,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Budget - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2486946589 - Field 4190130733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Customer No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2486946589 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1257,6 +1262,11 @@
           <source>Year</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 54620081 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Evaluation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Job Eval.Acc. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3145547939 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Job Cons. Invoice</source>

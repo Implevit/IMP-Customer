@@ -149,8 +149,6 @@ page 50015 "IMP Cust. Consulting Inv. Hdrs"
                     l_Customer: record Customer;
                     l_rptCreateJobInv: Report "IMP Create Cust. Cons. Invoice";
                 begin
-                    //TODO Erstelle Abrechnung nach Debitor
-                    
                     l_Customer.SETRANGE("No.","Customer No.");
                     l_rptCreateJobInv.SetPeriod(Month,Year);
                     l_rptCreateJobInv.SETTABLEVIEW(l_Customer);
@@ -215,20 +213,17 @@ page 50015 "IMP Cust. Consulting Inv. Hdrs"
 
                 trigger OnAction()
                 var
-                    l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
+                    l_JobConsHeader: Record "IMP Cust. Cons. Inv. Header";
+                    l_rptCreateJobEval: Report "IMP Create Cust. Job Eval.Acc.";
                 begin
-                    //TODO Projektauswertung
-                    /*
-                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
+                    
+                    l_JobConsHeader.SETRANGE("Customer No.","Customer No.");
                     l_JobConsHeader.SETRANGE(Month,Month);
                     l_JobConsHeader.SETRANGE(Year,Year);
-                    */
-                    //TODO Create Evaluation
-                    /*
+
                     l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
                     l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
                     l_rptCreateJobEval.RUNMODAL;
-                    */
                 end;
             }
             action(ProofOfBilling)

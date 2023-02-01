@@ -668,6 +668,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field Ticket No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3594423314 - Field 3933946380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mark</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting Inv. Line - Field Travel - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3594423314 - Field 1162676738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Travel Time Quantity</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1308,6 +1313,41 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Job Eval.Acc. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Report 409602610 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export Consulting Invoices</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Keine externe Kundennummer gefunden für Debitor %1, %2; Projekt Nr. %3</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rech. %1/%2, %3</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Es existieren in der aktuellen Abrechnungsperiode %1/%2 noch %3 Abrechnungen im Status erstellt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 409602610 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Report 1202965061 - NamedType 76061626" size-unit="char" translate="yes" xml:space="preserve">
           <source>Kunde</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1782,6 +1822,16 @@
           <source>Journal Template Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab91-Ext50005 - Field Journal Template Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1077619292 - Field 144959165 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1192395785">
+          <source>Accounting Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Tab36-Ext50008IMPSalesHeader - Field IMP Accounting Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1077619292 - Field 3486050240 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1192395785">
+          <source>Job Accounting Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Tab36-Ext50008IMPSalesHeader - Field IMP Job Accounting Description - Property Caption</note>
         </trans-unit>
       </group>
     </body>

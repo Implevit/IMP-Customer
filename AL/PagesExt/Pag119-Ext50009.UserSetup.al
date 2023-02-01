@@ -16,6 +16,10 @@ pageextension 50009 "IMP Pag119-Ext50009" extends "User Setup"
             {
                 ApplicationArea = All;
             }
+            field("IMP Job Jnl. changes allowed"; Rec."IMP Job Jnl. changes allowed")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 

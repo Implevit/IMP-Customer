@@ -49,6 +49,8 @@ report 50005 "IMP Export Consulting Invoices"
 
                     //g_ConsExpInvHeader."No." := "Job Consulting Invoice Header"."Job No.";
                     g_ConsExpInvHeader."No." := COPYSTR(FORMAT(g_Year), 3, 2) + '-' + FORMAT(DATE2DMY(g_ValidFrom, 2)) + '-' + "Job No.";
+                    g_ConsExpInvHeader."Document Type" := g_ConsExpInvHeader."Document Type"::Quote;
+                    g_ConsExpInvHeader.INSERT;
                     g_ConsExpInvHeader."External Document No." := FORMAT(g_Year) + '/' + FORMAT(g_Month);
                     g_ConsExpInvHeader."Sell-to Customer No." := l_Customer."Our Account No.";
                     g_ConsExpInvHeader."Bill-to Customer No." := l_Customer."Our Account No.";
@@ -147,7 +149,7 @@ report 50005 "IMP Export Consulting Invoices"
                     //g_ConsExpInvHeader."Responsibility Center" :=
                     g_ConsExpInvHeader."IMP Job Accounting Description" := "Job Accounting Description";
                     g_ConsExpInvHeader."IMP Accounting Description" := "Accounting Description";
-                    g_ConsExpInvHeader.INSERT;
+                    g_ConsExpInvHeader.Modify();
 
                     Exported := TRUE;
                     "Exported by User" := USERID;
@@ -185,7 +187,7 @@ report 50005 "IMP Export Consulting Invoices"
                                             g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::Invoice;
                                             g_ConsExpInvLine."Document No." := g_ConsExpInvHeader."No.";
                                             g_ConsExpInvLine."Line No." := g_LineNo;
-                                            g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Resource;
+                                            g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Item;
                                             g_ConsExpInvLine."No." := l_Ressource."No.";
                                             g_ConsExpInvLine.Description := COPYSTR(l_RessourceName + ' - ' + l_JobTask.Description, 1, 50);
                                             //pauschales Kennzeichen

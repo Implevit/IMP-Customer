@@ -51,32 +51,44 @@ report 50000 "IMP Create Job Cons. Invoice"
 
                     l_JobInvLine.RESET;
 
-                    l_JobInvLine.INIT;
-                    l_JobInvLine."Job No." := "Job No.";
-                    l_JobInvLine."Job Journal Template" := "Journal Template Name";
-                    l_JobInvLine."Job Journal Batch" := "Journal Batch Name";
-                    l_JobInvLine."Job Journal Line No." := "Line No.";
-                    l_JobInvLine."Job Task No." := "Job Task No.";
-                    l_JobInvLine.Year := g_Year;
-                    l_JobInvLine.Month := g_Month;
-                    l_JobInvLine."Source Quantity" := Quantity;
-                    l_JobInvLine."Source Quantity to Invoice" := "Imp Hours to invoice";
-                    l_JobInvLine."Source Quantity not to Invoice" := "Imp Hours not to invoice";
-                    IF Quantity <> ("Imp Hours to invoice" + "Imp Hours not to invoice") THEN
-                        l_JobInvLine.Check := TRUE;
-                    l_JobInvLine.Quantity := Quantity;
-                    l_JobInvLine."Quantity to Invoice" := "Imp Hours to invoice";
-                    l_JobInvLine."Quantity not to Invoice" := "Imp Hours not to invoice";
-                    l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
-                    l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
-                    l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
-                    l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
-                    l_JobInvLine.Description := "JobJnlLine".Description;
-                    l_JobInvLine."Resource No." := "No.";
-                    l_JobInvLine."Posting Date" := "Posting Date";
-                    l_JobInvLine."all inclusive" := "JobJnlLine"."Imp all inclusive";
-                    l_JobInvLine.INSERT;
-                    g_i := g_i + 1;
+                    
+                        l_JobInvLine.INIT;
+                        l_JobInvLine."Job No." := "Job No.";
+                        l_JobInvLine."Job Journal Template" := "Journal Template Name";
+                        l_JobInvLine."Job Journal Batch" := "Journal Batch Name";
+                        l_JobInvLine."Job Journal Line No." := "Line No.";
+                        l_JobInvLine."Job Task No." := "Job Task No.";
+                        l_JobInvLine.Year := g_Year;
+                        l_JobInvLine.Month := g_Month;
+                        l_JobInvLine."Source Quantity" := Quantity;
+                        l_JobInvLine."Source Quantity to Invoice" := "Imp Hours to invoice";
+                        l_JobInvLine."Source Quantity not to Invoice" := "Imp Hours not to invoice";
+                        IF Quantity <> ("Imp Hours to invoice" + "Imp Hours not to invoice") THEN
+                            l_JobInvLine.Check := TRUE;
+                        l_JobInvLine.Quantity := Quantity;
+                        l_JobInvLine."Quantity to Invoice" := "Imp Hours to invoice";
+                        l_JobInvLine."Quantity not to Invoice" := "Imp Hours not to invoice";
+                        l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
+                        l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
+                        l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
+                        l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
+                        l_JobInvLine.Description := "JobJnlLine".Description;
+                        l_JobInvLine."Resource No." := "No.";
+                        l_JobInvLine."Posting Date" := "Posting Date";
+                        l_JobInvLine."all inclusive" := "JobJnlLine"."Imp all inclusive";
+                        if "Work Type Code" = 'TRAVEL' then begin
+                            l_JobInvLine.Travel := true;
+                            l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
+                            l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
+                            l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
+                            l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
+                            l_JobInvLine.Description := "JobJnlLine".Description;
+                        end;
+                        l_JobInvLine.INSERT;
+                        g_i := g_i + 1;
+                    
+                        
+                    
                 end;
 
                 trigger OnPostDataItem()

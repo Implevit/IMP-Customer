@@ -178,6 +178,12 @@ table 50003 "IMP Job Consulting Inv. Line"
             Caption = 'Mark';
             DataClassification = CustomerContent;
         }
+          Field(210; "Travel"; Boolean)
+        {
+            Caption = 'Mark';
+            DataClassification = CustomerContent;
+        }
+        
     }
 
     keys

@@ -52,6 +52,8 @@ report 50005 "IMP Export Consulting Invoices"
                     g_ConsExpInvHeader."Document Type" := g_ConsExpInvHeader."Document Type"::Quote;
                     g_ConsExpInvHeader.INSERT;
                     g_ConsExpInvHeader."External Document No." := FORMAT(g_Year) + '/' + FORMAT(g_Month);
+                    g_ConsExpInvHeader."Sell-to Customer Templ. Code" := 'CH';
+                    g_ConsExpInvHeader."Bill-to Customer Templ. Code" := 'CH';
                     g_ConsExpInvHeader."Sell-to Customer No." := l_Customer."Our Account No.";
                     g_ConsExpInvHeader."Bill-to Customer No." := l_Customer."Our Account No.";
                     g_ConsExpInvHeader."Bill-to Name" := l_Customer.Name;
@@ -136,7 +138,7 @@ report 50005 "IMP Export Consulting Invoices"
                     
                     //g_ConsExpInvHeader."Tax Area Code" := '';
                     //g_ConsExpInvHeader."Tax Liable" := '';
-                    g_ConsExpInvHeader."VAT Bus. Posting Group" := 'CH';
+                    g_ConsExpInvHeader."VAT Bus. Posting Group" := 'INLAND';
                     //g_ConsExpInvHeader."VAT Base Discount %" :=
                     //g_ConsExpInvHeader."Prepayment No. Series" :=
                     //g_ConsExpInvHeader."Prepayment" :=
@@ -184,16 +186,18 @@ report 50005 "IMP Export Consulting Invoices"
                                         IF l_JobTaskResQty > 0 THEN BEGIN
                                             g_LineNo := g_LineNo + 10000;
                                             g_ConsExpInvLine.INIT;
-                                            g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::Invoice;
+                                            g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::quote;
                                             g_ConsExpInvLine."Document No." := g_ConsExpInvHeader."No.";
                                             g_ConsExpInvLine."Line No." := g_LineNo;
                                             g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Item;
-                                            g_ConsExpInvLine."No." := l_Ressource."No.";
+                                            //g_ConsExpInvLine."No." := l_Ressource."No.";
+                                            g_ConsExpInvLine.validate("No.",l_Ressource."No.");
                                             g_ConsExpInvLine.Description := COPYSTR(l_RessourceName + ' - ' + l_JobTask.Description, 1, 50);
                                             //pauschales Kennzeichen
                                             IF l_JobTask."IMP all inclusive" THEN
                                                 g_ConsExpInvLine.Description := COPYSTR(l_RessourceName + ' - [X] ' + l_JobTask.Description, 1, 50);
-                                            g_ConsExpInvLine.Quantity := l_JobTaskResQty;
+                                            //g_ConsExpInvLine.Quantity := l_JobTaskResQty;
+                                            g_ConsExpInvLine.validate(Quantity,l_JobTaskResQty);
                                             g_ConsExpInvLine.INSERT;
                                         END;
                                         IF l_JobTaskResTravelQty > 0 THEN BEGIN

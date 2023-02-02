@@ -2,6 +2,12 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 {
     layout
     {
+        
+        modify(CurrentJnlBatchName)
+        {
+            Editable = AllowJnlChange;
+        }
+
         modify("Line Type")
         {
             Visible = false;
@@ -242,6 +248,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                 SetRange("Journal Template Name", lc_UserSetup."Journal Template Name");
                 lc_JobJnlManagement.OpenJnl(lc_CurrentJnlBatchName, Rec);
             end;
+            AllowJnlChange := lc_userSetup."IMP Job Jnl. changes allowed";
         end;
     end;
 
@@ -412,4 +419,5 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         TotalDay: Text[50];
         NoOfOverlapps: Text[50];
         DiffToBudget: Text[50];
+        AllowJnlChange: Boolean;
 }

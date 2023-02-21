@@ -10,181 +10,6 @@
       <rd:DataSourceID>e2b2ba28-bc6d-49bb-9b96-bf82594e4a32</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="JCIH_Month">
-          <DataField>JCIH_Month</DataField>
-        </Field>
-        <Field Name="JCIH_Year">
-          <DataField>JCIH_Year</DataField>
-        </Field>
-        <Field Name="Ressource_ProjectManager">
-          <DataField>Ressource_ProjectManager</DataField>
-        </Field>
-        <Field Name="JCIL_PostDate">
-          <DataField>JCIL_PostDate</DataField>
-        </Field>
-        <Field Name="JCIL_JobNo">
-          <DataField>JCIL_JobNo</DataField>
-        </Field>
-        <Field Name="JCIL_No">
-          <DataField>JCIL_No</DataField>
-        </Field>
-        <Field Name="JCIL_Descr">
-          <DataField>JCIL_Descr</DataField>
-        </Field>
-        <Field Name="JCIL_HrToInv">
-          <DataField>JCIL_HrToInv</DataField>
-        </Field>
-        <Field Name="JCIL_HrToInvFormat">
-          <DataField>JCIL_HrToInvFormat</DataField>
-        </Field>
-        <Field Name="JCIL_TravelTime">
-          <DataField>JCIL_TravelTime</DataField>
-        </Field>
-        <Field Name="JCIL_TravelTimeFormat">
-          <DataField>JCIL_TravelTimeFormat</DataField>
-        </Field>
-        <Field Name="JCIL_km">
-          <DataField>JCIL_km</DataField>
-        </Field>
-        <Field Name="JCIL_kmFormat">
-          <DataField>JCIL_kmFormat</DataField>
-        </Field>
-        <Field Name="JCIL_HrNotToInv">
-          <DataField>JCIL_HrNotToInv</DataField>
-        </Field>
-        <Field Name="JCIL_HrNotToInvFormat">
-          <DataField>JCIL_HrNotToInvFormat</DataField>
-        </Field>
-        <Field Name="Totfakt">
-          <DataField>Totfakt</DataField>
-        </Field>
-        <Field Name="TotfaktFormat">
-          <DataField>TotfaktFormat</DataField>
-        </Field>
-        <Field Name="TodayDate">
-          <DataField>TodayDate</DataField>
-        </Field>
-        <Field Name="UserIDDB">
-          <DataField>UserIDDB</DataField>
-        </Field>
-        <Field Name="CompInfo_Picture">
-          <DataField>CompInfo_Picture</DataField>
-        </Field>
-        <Field Name="FilterText">
-          <DataField>FilterText</DataField>
-        </Field>
-        <Field Name="CompInfo_ImplAdrText">
-          <DataField>CompInfo_ImplAdrText</DataField>
-        </Field>
-        <Field Name="Job_Descr">
-          <DataField>Job_Descr</DataField>
-        </Field>
-        <Field Name="JobTask_JobTaskNo">
-          <DataField>JobTask_JobTaskNo</DataField>
-        </Field>
-        <Field Name="JobTask_JobTaskDescr">
-          <DataField>JobTask_JobTaskDescr</DataField>
-        </Field>
-        <Field Name="Ressource_Name">
-          <DataField>Ressource_Name</DataField>
-        </Field>
-        <Field Name="Customer_No">
-          <DataField>Customer_No</DataField>
-        </Field>
-        <Field Name="Customer_Name">
-          <DataField>Customer_Name</DataField>
-        </Field>
-        <Field Name="JCIL_TicketNo">
-          <DataField>JCIL_TicketNo</DataField>
-        </Field>
-        <Field Name="JCIL_AllInclusive">
-          <DataField>JCIL_AllInclusive</DataField>
-        </Field>
-        <Field Name="CustomerLbl">
-          <DataField>CustomerLbl</DataField>
-        </Field>
-        <Field Name="ProjectLbl">
-          <DataField>ProjectLbl</DataField>
-        </Field>
-        <Field Name="PeriodLbl">
-          <DataField>PeriodLbl</DataField>
-        </Field>
-        <Field Name="EmployeeLbl">
-          <DataField>EmployeeLbl</DataField>
-        </Field>
-        <Field Name="PostDateLbl">
-          <DataField>PostDateLbl</DataField>
-        </Field>
-        <Field Name="DescrLbl">
-          <DataField>DescrLbl</DataField>
-        </Field>
-        <Field Name="HrInvLbl">
-          <DataField>HrInvLbl</DataField>
-        </Field>
-        <Field Name="TravelTimelbl">
-          <DataField>TravelTimelbl</DataField>
-        </Field>
-        <Field Name="KmLbl">
-          <DataField>KmLbl</DataField>
-        </Field>
-        <Field Name="TotalInvLbl">
-          <DataField>TotalInvLbl</DataField>
-        </Field>
-        <Field Name="GoodwillLbl">
-          <DataField>GoodwillLbl</DataField>
-        </Field>
-        <Field Name="TicketLbl">
-          <DataField>TicketLbl</DataField>
-        </Field>
-        <Field Name="SignaturLbl">
-          <DataField>SignaturLbl</DataField>
-        </Field>
-        <Field Name="TotalLbl">
-          <DataField>TotalLbl</DataField>
-        </Field>
-        <Field Name="ProjecttaskLbl">
-          <DataField>ProjecttaskLbl</DataField>
-        </Field>
-        <Field Name="ReportNameLbl">
-          <DataField>ReportNameLbl</DataField>
-        </Field>
-        <Field Name="FtrName">
-          <DataField>FtrName</DataField>
-        </Field>
-        <Field Name="FtrAddress">
-          <DataField>FtrAddress</DataField>
-        </Field>
-        <Field Name="FtrCity">
-          <DataField>FtrCity</DataField>
-        </Field>
-        <Field Name="FtrEmail">
-          <DataField>FtrEmail</DataField>
-        </Field>
-        <Field Name="FtrHomePage">
-          <DataField>FtrHomePage</DataField>
-        </Field>
-        <Field Name="FtrPhoneNo">
-          <DataField>FtrPhoneNo</DataField>
-        </Field>
-        <Field Name="FtrFaxNo">
-          <DataField>FtrFaxNo</DataField>
-        </Field>
-        <Field Name="FtrText1">
-          <DataField>FtrText1</DataField>
-        </Field>
-        <Field Name="FtrText2">
-          <DataField>FtrText2</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1030,7 +855,6 @@
                           </Style>
                         </Textbox>
                         <ColSpan>2</ColSpan>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -2497,7 +2321,7 @@
             </Style>
           </Line>
         </ReportItems>
-        <Height>4.62374in</Height>
+        <Height>3.75916in</Height>
         <Style />
       </Body>
       <Width>7.66665in</Width>
@@ -2542,7 +2366,7 @@
               <Top>0.80778in</Top>
               <Left>0.27083in</Left>
               <Height>0.65278in</Height>
-              <Width>4.47569in</Width>
+              <Width>7.25694in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -2562,9 +2386,52 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1in</Height>
+          <Height>1.67708in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox15">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!JCIH_CreationDate.Value, "DataSet_Result") &amp; ", " &amp; First(Fields!Ressource_ProjectManager.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox15</rd:DefaultName>
+              <Top>0.56028in</Top>
+              <Left>5.24999in</Left>
+              <Height>0.25in</Height>
+              <Width>2.41666in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line1">
+              <Top>0.81028in</Top>
+              <Left>5.24999in</Left>
+              <Height>0in</Height>
+              <Width>2.41666in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
+          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2578,12 +2445,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2753,4 +2614,182 @@ p4eoZi2XSASVRQCXSQaucDvLpIHPrIzPrIzPrIzPrIzPrIzMpYPBk2u1fk2jXSGXRwShWR3jzrz/////
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="JCIH_Month">
+          <DataField>JCIH_Month</DataField>
+        </Field>
+        <Field Name="JCIH_Year">
+          <DataField>JCIH_Year</DataField>
+        </Field>
+        <Field Name="JCIH_CreationDate">
+          <DataField>JCIH_CreationDate</DataField>
+        </Field>
+        <Field Name="Ressource_ProjectManager">
+          <DataField>Ressource_ProjectManager</DataField>
+        </Field>
+        <Field Name="JCIL_PostDate">
+          <DataField>JCIL_PostDate</DataField>
+        </Field>
+        <Field Name="JCIL_JobNo">
+          <DataField>JCIL_JobNo</DataField>
+        </Field>
+        <Field Name="JCIL_No">
+          <DataField>JCIL_No</DataField>
+        </Field>
+        <Field Name="JCIL_Descr">
+          <DataField>JCIL_Descr</DataField>
+        </Field>
+        <Field Name="JCIL_HrToInv">
+          <DataField>JCIL_HrToInv</DataField>
+        </Field>
+        <Field Name="JCIL_HrToInvFormat">
+          <DataField>JCIL_HrToInvFormat</DataField>
+        </Field>
+        <Field Name="JCIL_TravelTime">
+          <DataField>JCIL_TravelTime</DataField>
+        </Field>
+        <Field Name="JCIL_TravelTimeFormat">
+          <DataField>JCIL_TravelTimeFormat</DataField>
+        </Field>
+        <Field Name="JCIL_km">
+          <DataField>JCIL_km</DataField>
+        </Field>
+        <Field Name="JCIL_kmFormat">
+          <DataField>JCIL_kmFormat</DataField>
+        </Field>
+        <Field Name="JCIL_HrNotToInv">
+          <DataField>JCIL_HrNotToInv</DataField>
+        </Field>
+        <Field Name="JCIL_HrNotToInvFormat">
+          <DataField>JCIL_HrNotToInvFormat</DataField>
+        </Field>
+        <Field Name="Totfakt">
+          <DataField>Totfakt</DataField>
+        </Field>
+        <Field Name="TotfaktFormat">
+          <DataField>TotfaktFormat</DataField>
+        </Field>
+        <Field Name="TodayDate">
+          <DataField>TodayDate</DataField>
+        </Field>
+        <Field Name="UserIDDB">
+          <DataField>UserIDDB</DataField>
+        </Field>
+        <Field Name="CompInfo_Picture">
+          <DataField>CompInfo_Picture</DataField>
+        </Field>
+        <Field Name="FilterText">
+          <DataField>FilterText</DataField>
+        </Field>
+        <Field Name="CompInfo_ImplAdrText">
+          <DataField>CompInfo_ImplAdrText</DataField>
+        </Field>
+        <Field Name="Job_Descr">
+          <DataField>Job_Descr</DataField>
+        </Field>
+        <Field Name="JobTask_JobTaskNo">
+          <DataField>JobTask_JobTaskNo</DataField>
+        </Field>
+        <Field Name="JobTask_JobTaskDescr">
+          <DataField>JobTask_JobTaskDescr</DataField>
+        </Field>
+        <Field Name="Ressource_Name">
+          <DataField>Ressource_Name</DataField>
+        </Field>
+        <Field Name="Customer_No">
+          <DataField>Customer_No</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="JCIL_TicketNo">
+          <DataField>JCIL_TicketNo</DataField>
+        </Field>
+        <Field Name="JCIL_AllInclusive">
+          <DataField>JCIL_AllInclusive</DataField>
+        </Field>
+        <Field Name="CustomerLbl">
+          <DataField>CustomerLbl</DataField>
+        </Field>
+        <Field Name="ProjectLbl">
+          <DataField>ProjectLbl</DataField>
+        </Field>
+        <Field Name="PeriodLbl">
+          <DataField>PeriodLbl</DataField>
+        </Field>
+        <Field Name="EmployeeLbl">
+          <DataField>EmployeeLbl</DataField>
+        </Field>
+        <Field Name="PostDateLbl">
+          <DataField>PostDateLbl</DataField>
+        </Field>
+        <Field Name="DescrLbl">
+          <DataField>DescrLbl</DataField>
+        </Field>
+        <Field Name="HrInvLbl">
+          <DataField>HrInvLbl</DataField>
+        </Field>
+        <Field Name="TravelTimelbl">
+          <DataField>TravelTimelbl</DataField>
+        </Field>
+        <Field Name="KmLbl">
+          <DataField>KmLbl</DataField>
+        </Field>
+        <Field Name="TotalInvLbl">
+          <DataField>TotalInvLbl</DataField>
+        </Field>
+        <Field Name="GoodwillLbl">
+          <DataField>GoodwillLbl</DataField>
+        </Field>
+        <Field Name="TicketLbl">
+          <DataField>TicketLbl</DataField>
+        </Field>
+        <Field Name="SignaturLbl">
+          <DataField>SignaturLbl</DataField>
+        </Field>
+        <Field Name="TotalLbl">
+          <DataField>TotalLbl</DataField>
+        </Field>
+        <Field Name="ProjecttaskLbl">
+          <DataField>ProjecttaskLbl</DataField>
+        </Field>
+        <Field Name="ReportNameLbl">
+          <DataField>ReportNameLbl</DataField>
+        </Field>
+        <Field Name="FtrName">
+          <DataField>FtrName</DataField>
+        </Field>
+        <Field Name="FtrAddress">
+          <DataField>FtrAddress</DataField>
+        </Field>
+        <Field Name="FtrCity">
+          <DataField>FtrCity</DataField>
+        </Field>
+        <Field Name="FtrEmail">
+          <DataField>FtrEmail</DataField>
+        </Field>
+        <Field Name="FtrHomePage">
+          <DataField>FtrHomePage</DataField>
+        </Field>
+        <Field Name="FtrPhoneNo">
+          <DataField>FtrPhoneNo</DataField>
+        </Field>
+        <Field Name="FtrFaxNo">
+          <DataField>FtrFaxNo</DataField>
+        </Field>
+        <Field Name="FtrText1">
+          <DataField>FtrText1</DataField>
+        </Field>
+        <Field Name="FtrText2">
+          <DataField>FtrText2</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

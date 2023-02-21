@@ -17,7 +17,7 @@ report 50000 "IMP Create Job Cons. Invoice"
                 DataItemLink = "Job No." = FIELD("No.");
                 trigger OnPreDataItem()
                 begin
-                    SETRANGE("Posting Date", DMY2Date(1, 1, 2022), g_ValidTo);
+                    SETRANGE("Posting Date", DMY2Date(1, 1, 2023), g_ValidTo);
                 end;
 
                 trigger OnAfterGetRecord()

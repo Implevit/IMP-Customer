@@ -768,6 +768,201 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1536694483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Res. Work. Hrs. Month"</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 1893021230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Job Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 254383649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month End</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Month End - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 265475188 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month Start</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Month Start - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 3280478784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2659785339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 513339096 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open,Fixed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Status - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 4285612108 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Filter Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 4285612108 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Intern,Projekt Nr. Filter,Sollzeit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Filter Type - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 827715857 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Internal Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Internal Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 2434828228 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job No. Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job No. Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 1893021230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 3324201203 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job Type Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 682928251 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acquisition</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Acquisition - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 632334177 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Admin</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Admin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 629510381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 680844732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Hours</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment Hours - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 92009326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Vacation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment Vacation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 1778072510 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Closed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Closed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 791614854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Education</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Education - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2859526439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 104789764 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 650940500 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job Total</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job Total - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 1805551014 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Illness</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Illness - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2038982556 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Internal Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Internal Job - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 254383649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month End</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Month End - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 265475188 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month Start</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Month Start - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 3925446560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Target Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Target Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 245426702 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Total - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 3824106707 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vacation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Vacation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 4115724468 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vacation YTD</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Vacation YTD - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3567995689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consultion Invoice Subform</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1502,6 +1697,21 @@
           <source>Fahrzeit</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - NamedType TravelTimelbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 1399707476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 1253471164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>From Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_MonthStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 3266836456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressourcenfilter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_ResFilter - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1722173463 - Control 725737015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2077750279">
           <source>Total Usage in journal</source>

@@ -147,7 +147,7 @@ page 50015 "IMP Cust. Consulting Inv. Hdrs"
                 trigger OnAction()
                 var
                     l_Customer: record Customer;
-                    l_rptCreateJobInv: Report "IMP Create Cust. Cons. Invoice";
+                    l_rptCreateJobInv: Report "IMP Create Cust. Cons. Inv.";
                 begin
                     l_Customer.SETRANGE("No.","Customer No.");
                     l_rptCreateJobInv.SetPeriod(Month,Year);

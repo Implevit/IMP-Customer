@@ -2,7 +2,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 {
     layout
     {
-        
+
         modify(CurrentJnlBatchName)
         {
             Editable = AllowJnlChange;
@@ -231,6 +231,33 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         }
     }
 
+    actions
+    {
+        addafter(Dimensions)
+        {
+            action(CreateAccounting)
+            {
+                Caption = 'Employye Working Hours';
+                ApplicationArea = All;
+                Image = Timesheet;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    //l_rptGetResHours: Report GET Res;
+                    
+                begin
+                    
+                    //l_rptGetResHours.SetRes(CurrentJnlBatchName);
+                    //l_rptGetResHours.RUN;
+                end;
+            }
+            
+        }
+    }
+
     #region Trigger
 
     trigger OnOpenPage()
@@ -266,7 +293,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
     end;
 
     #endregion Triggers
-
+    
     #region Methodes
 
     procedure CalcDay(_Rec: Record "Job Journal Line"): Decimal

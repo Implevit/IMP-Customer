@@ -1,4 +1,4 @@
-report 50002 "IMP Create Cust. Cons. Invoice"
+report 50002 "IMP Create Cust. Cons. Inv."
 {
     Caption = 'Create Customer Cons. Invoice';
     UsageCategory = Tasks;

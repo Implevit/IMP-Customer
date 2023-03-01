@@ -20,6 +20,10 @@ report 50001 "IMP Job Consulting Proof"
             {
 
             }
+            Column(JCIH_CreationDate; JCIH."Creation Date")
+            {
+
+            }
 
             Column(Ressource_ProjectManager; RessourceProjectRec.Name)
             {

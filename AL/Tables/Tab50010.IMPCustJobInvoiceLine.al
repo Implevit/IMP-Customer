@@ -1,4 +1,4 @@
-table 50003 "IMP Job Consulting Inv. Line"
+table 50010 "IMP Cust. Job Cons. Inv. Line"
 {
     Caption = 'Job Accounting Line';
     DrillDownPageID = "IMP Job Consulting Inv. Lines";
@@ -6,12 +6,12 @@ table 50003 "IMP Job Consulting Inv. Line"
 
     Fields
     {
-        Field(1; "Job No."; Code[20])
+        Field(1; "Customer No."; Code[20])
         {
-            Caption = 'Job No.';
+            Caption = 'Customer No.';
             DataClassification = CustomerContent;
             Editable = false;
-            TableRelation = Job;
+            TableRelation = Customer;
         }
         Field(2; Year; Integer)
         {
@@ -178,12 +178,13 @@ table 50003 "IMP Job Consulting Inv. Line"
             Caption = 'Mark';
             DataClassification = CustomerContent;
         }
-          Field(210; "Travel"; Boolean)
+         Field(210; "Job No."; Code[20])
         {
-            Caption = 'Mark';
+            Caption = 'Job No.';
             DataClassification = CustomerContent;
+            Editable = false;
+            TableRelation = Job;
         }
-        
     }
 
     keys

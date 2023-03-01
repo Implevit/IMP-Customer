@@ -1,10 +1,10 @@
-page 50013 "IMP Job Consulting Inv. Card"
+page 50016 "IMP Cust. Consulting Inv. Card"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "IMP Job Consulting Inv. Header";
-    Caption = 'Job Consulting Invoice Card';
+    SourceTable = "IMP Cust. Cons. Inv. Header";
+    Caption = 'Job Customer Consulting Invoice Card';
     ShowFilter = true;
 
     layout
@@ -14,7 +14,7 @@ page 50013 "IMP Job Consulting Inv. Card"
             group(General)
             {
 
-                field("Job No."; "Job No.")
+                field("Customer No."; "Customer No.")
                 {
                     ApplicationArea = All;
 
@@ -152,9 +152,9 @@ page 50013 "IMP Job Consulting Inv. Card"
                
 
             }
-             part(Lines; "IMP Job Consulting Inv. Subf.")
+             part(Lines; "IMP Cust. Cons. Inv. Subf.")
                 {
-                    SubPageLink = "Job No." = FIELD("Job No."), Month = FIELD(Month), Year = FIELD(Year);
+                    SubPageLink = "Customer No." = FIELD("Customer No."), Month = FIELD(Month), Year = FIELD(Year);
                     ApplicationArea = All;
                     UpdatePropagation = Both;
                 }
@@ -179,10 +179,13 @@ page 50013 "IMP Job Consulting Inv. Card"
                     l_Job: record job;
                     l_rptCreateJobInv: Report "IMP Create Job Cons. Invoice";
                 begin
+                    //TODO Erstelle Abrechnung
+                    /*
                     l_Job.SETRANGE("No.","Job No.");
                     l_rptCreateJobInv.SetPeriod(Month,Year);
                     l_rptCreateJobInv.SETTABLEVIEW(l_Job);
                     l_rptCreateJobInv.RUNMODAL;
+                    */
 
                 end;
             }
@@ -243,16 +246,17 @@ page 50013 "IMP Job Consulting Inv. Card"
 
                 trigger OnAction()
                 var
-                    l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
-                    l_rptCreateJobEval: Report "IMP Create Job Eval.Acc.";
+                    l_JobConsHeader: Record "IMP Cust. Cons. Inv. Header";
+                    l_rptCreateJobEval: Report "IMP Create Cust. Job Eval.Acc.";
                 begin
-                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
+                    
+                    l_JobConsHeader.SETRANGE("Customer No.","Customer No.");
                     l_JobConsHeader.SETRANGE(Month,Month);
                     l_JobConsHeader.SETRANGE(Year,Year);
+
                     l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
                     l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
                     l_rptCreateJobEval.RUNMODAL;
-                    
                 end;
             }
             action(ProofOfBilling)
@@ -270,11 +274,14 @@ page 50013 "IMP Job Consulting Inv. Card"
                     l_ConsultingProofImplevit: Report "IMP Job Consulting Proof";
 
                 begin
+                    //TODO Report Proof of Billing
+                    /*
                     l_JobConsHeader.SETRANGE("Job No.","Job No.");
                     l_JobConsHeader.SETRANGE(Year,Year);
-                    l_JobConsHeader.SETRANGE(Month,Month);                    
+                    l_JobConsHeader.SETRANGE(Month,Month);
                     l_ConsultingProofImplevit.SETTABLEVIEW(l_JobConsHeader);
                     l_ConsultingProofImplevit.RUN;
+                    */
                     
                 end;
             }

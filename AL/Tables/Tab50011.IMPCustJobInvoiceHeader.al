@@ -1,25 +1,30 @@
-table 50002 "IMP Job Consulting Inv. Header"
+table 50011 "IMP Cust. Cons. Inv. Header"
 {
-    Caption = 'Job Accounting';
+    Caption = 'Customer Job Accounting';
     DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
     LookupPageID = "IMP Job Consulting Inv. Hdrs";
 
     fields
     {
-        field(1; "Job No."; Code[20])
+        field(1; "Customer No."; Code[20])
         {
-            Caption = 'Job No.';
+            Caption = 'Customer No.';
             DataClassification = CustomerContent;
-            TableRelation = Job;
+            TableRelation = Customer;
 
             trigger OnValidate()
             var
-                lc_Job: Record Job;
+                lc_Customer: Record Customer;
             begin
-                if lc_Job.Get("Job No.") then
-                    //Validate("Sell-to Customer No.", lc_Job."Sell-to Customer No.");
-                    Validate("Bill-to Customer No.", lc_Job."Bill-to Customer No.")
-                else begin
+                if lc_Customer.Get("Customer No.") then begin
+                    Validate("Sell-to Customer No.",lc_Customer."No.");
+                    if lc_Customer."Bill-to Customer No." <> lc_Customer."No." then
+                        validate("Bill-to Customer No.",lc_Customer."Bill-to Customer No.")
+                    else
+                        Validate("Bill-to Customer No.",lc_Customer."No.");
+
+                    
+                end else begin
                     Validate("Sell-to Customer No.", '');
                     Validate("Bill-to Customer No.", '');
                 end;
@@ -37,7 +42,6 @@ table 50002 "IMP Job Consulting Inv. Header"
             OptionCaption = 'January,February,March,April,May,June,July,August,September,October,November,December';
             OptionMembers = January,February,March,April,May,June,July,August,September,October,November,December;
         }
-        
 
         field(10; "Period Code"; Code[10])
         {
@@ -87,7 +91,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Quantity';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line".Quantity WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line".Quantity WHERE("Customer No." = FIELD("Customer No."),
                                                                             Month = FIELD(Month),
                                                                             Year = FIELD(Year),
                                                                             "Posting Date" = FIELD("Date Filter"),
@@ -98,7 +102,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Quantity to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Quantity to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Quantity to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                          Month = FIELD(Month),
                                                                                          Year = FIELD(Year),
                                                                                          "Posting Date" = FIELD("Date Filter"),
@@ -109,7 +113,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Quantity not to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Quantity not to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Quantity not to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                                     Month = FIELD(Month),
                                                                                                     Year = FIELD(Year),
                                                                                                     "Posting Date" = FIELD("Date Filter"),
@@ -120,7 +124,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Source Quantity';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Quantity" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Quantity" WHERE("Customer No." = FIELD("Customer No."),
                                                                                      Month = FIELD(Month),
                                                                                      Year = FIELD(Year),
                                                                                      "Posting Date" = FIELD("Date Filter"),
@@ -131,7 +135,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Source Quantity to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Quantity to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Quantity to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                                 Month = FIELD(Month),
                                                                                                 Year = FIELD(Year),
                                                                                                 "Posting Date" = FIELD("Date Filter"),
@@ -142,7 +146,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Source Quantity not to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Quantity not to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Quantity not to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                                     Month = FIELD(Month),
                                                                                                     Year = FIELD(Year),
                                                                                                     "Posting Date" = FIELD("Date Filter"),
@@ -153,7 +157,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Project Manager IMPL';
             FieldClass = FlowField;
-            CalcFormula = Lookup(Job."IMP Project Manager IMPL" WHERE("No." = FIELD("Job No.")));
+            CalcFormula = Lookup(Customer."Salesperson Code" WHERE("No." = FIELD("Customer No.")));
         }
         field(160; "Resource Filter"; Code[20])
         {
@@ -176,7 +180,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Filter Quantity';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line".Quantity WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line".Quantity WHERE("Customer No." = FIELD("Customer No."),
                                                                             Month = FIELD(Month),
                                                                             Year = FIELD(Year),
                                                                             "Posting Date" = FIELD("Date Filter"),
@@ -187,7 +191,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Filter Quantity to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Quantity to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Quantity to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                          Month = FIELD(Month),
                                                                                          Year = FIELD(Year),
                                                                                          "Resource No." = FIELD("Resource Filter"),
@@ -198,7 +202,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Filter Quantity not to Invoice';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Quantity not to Invoice" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Quantity not to Invoice" WHERE("Customer No." = FIELD("Customer No."),
                                                                                              Month = FIELD(Month),
                                                                                              Year = FIELD(Year),
                                                                                              "Resource No." = FIELD("Resource Filter"),
@@ -209,7 +213,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Source Quantity Travel Time';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Travel Time Quantity" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Travel Time Quantity" WHERE("Customer No." = FIELD("Customer No."),
                                                                                                  Month = FIELD(Month),
                                                                                                  Year = FIELD(Year),
                                                                                                  "Posting Date" = FIELD("Date Filter"),
@@ -220,7 +224,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Source Quantity Km';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Source Distance KM Quantity" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Source Distance KM Quantity" WHERE("Customer No." = FIELD("Customer No."),
                                                                                                  Month = FIELD(Month),
                                                                                                  Year = FIELD(Year),
                                                                                                  "Posting Date" = FIELD("Date Filter"),
@@ -231,7 +235,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Quantity Travel Time';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Travel Time Quantity" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Travel Time Quantity" WHERE("Customer No." = FIELD("Customer No."),
                                                                                           Month = FIELD(Month),
                                                                                           Year = FIELD(Year),
                                                                                           "Posting Date" = FIELD("Date Filter"),
@@ -242,7 +246,7 @@ table 50002 "IMP Job Consulting Inv. Header"
         {
             Caption = 'Quantity Km';
             FieldClass = FlowField;
-            CalcFormula = Sum("IMP Job Consulting Inv. Line"."Distance KM Quantity" WHERE("Job No." = FIELD("Job No."),
+            CalcFormula = Sum("IMP Cust. Job Cons. Inv. Line"."Distance KM Quantity" WHERE("Customer No." = FIELD("Customer No."),
                                                                                           Month = FIELD(Month),
                                                                                           Year = FIELD(Year),
                                                                                           "Posting Date" = FIELD("Date Filter"),
@@ -294,7 +298,7 @@ table 50002 "IMP Job Consulting Inv. Header"
 
     keys
     {
-        key(Key1; "Job No.", Year, Month)
+        key(Key1; "Customer No.", Year, Month)
         {
         }
     }
@@ -303,9 +307,9 @@ table 50002 "IMP Job Consulting Inv. Header"
 
     trigger OnDelete()
     var
-        lc_JobInvLine: Record "IMP Job Consulting Inv. Line";
+        lc_JobInvLine: Record "IMP Cust. Job Cons. Inv. Line";
     begin
-        lc_JobInvLine.SetRange("Job No.", Rec."Job No.");
+        lc_JobInvLine.SetRange("Customer No.", Rec."Customer No.");
         lc_JobInvLine.SetRange(Month, Rec.Month);
         lc_JobInvLine.SetRange(Year, Rec.Year);
         lc_JobInvLine.DeleteAll(true);

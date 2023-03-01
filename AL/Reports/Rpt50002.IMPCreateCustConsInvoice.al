@@ -1,58 +1,63 @@
-report 50000 "IMP Create Job Cons. Invoice"
+report 50002 "IMP Create Cust. Cons. Inv."
 {
-    Caption = 'Create Job Cons. Invoice';
+    Caption = 'Create Customer Cons. Invoice';
     UsageCategory = Tasks;
     ApplicationArea = All;
     ProcessingOnly = true;
 
     dataset
     {
-        dataitem(Job; Job)
+        dataitem(Customer; Customer)
         {
-            RequestFilterFields = "No.", "Status", "IMP Project Manager IMPL";
-
-            dataitem(JobJnlLine; "Job Journal Line")
+            RequestFilterFields = "No.", "Salesperson Code";
+            dataitem(Job; Job)
             {
-                DataItemLinkReference = Job;
-                DataItemLink = "Job No." = FIELD("No.");
-                trigger OnPreDataItem()
-                begin
-                    SETRANGE("Posting Date", DMY2Date(1, 1, 2023), g_ValidTo);
-                end;
+                DataItemLink = "Bill-to Customer no." = field("No.");
+                RequestFilterFields = "No.", "Status", "IMP Project Manager IMPL";
 
-                trigger OnAfterGetRecord()
-                var
-                    l_JobInvLine: Record "IMP Job Consulting Inv. Line";
-                    l_JobInvHeader: Record "IMP Job Consulting Inv. Header";
+                dataitem(JobJnlLine; "Job Journal Line")
+                {
+                    DataItemLinkReference = Job;
+                    DataItemLink = "Job No." = FIELD("No.");
+                    trigger OnPreDataItem()
+                    begin
+                        SETRANGE("Posting Date", DMY2Date(1, 1, 2022), g_ValidTo);
 
-                begin
-                    IF NOT l_JobInvHeader.GET(Job."No.", g_Year, g_Month) THEN BEGIN
-                        l_JobInvHeader.INIT;
-                        l_JobInvHeader.VALIDATE("Job No.", "Job No.");
-                        l_JobInvHeader.VALIDATE(Year, g_Year);
-                        l_JobInvHeader.VALIDATE(Month, g_Month);
-                        l_JobInvHeader.Description := STRSUBSTNO('Abrechnung %1/%2', g_Month, g_Year);
-                        l_JobInvHeader."Job Accounting Description" := Job."imp Accounting Description";
-                        l_JobInvHeader."Created by User" := USERID;
-                        l_JobInvHeader."Creation Date" := WORKDATE;
-                        l_JobInvHeader.INSERT(TRUE);
-                    END;
+                    end;
+
+                    trigger OnAfterGetRecord()
+                    var
+                        l_JobInvLine: Record "IMP Cust. Job Cons. Inv. Line";
+                        l_JobInvHeader: Record "IMP Cust. Cons. Inv. Header";
+
+                    begin
+                        IF NOT l_JobInvHeader.GET(Customer."No.", g_Year, g_Month) THEN BEGIN
+                            l_JobInvHeader.INIT;
+                            l_JobInvHeader.VALIDATE("Customer No.", customer."No.");
+                            l_JobInvHeader.VALIDATE(Year, g_Year);
+                            l_JobInvHeader.VALIDATE(Month, g_Month);
+                            l_JobInvHeader.Description := STRSUBSTNO('Abrechnung %1/%2', g_Month, g_Year);
+                            l_JobInvHeader."Job Accounting Description" := Job."imp Accounting Description";
+                            l_JobInvHeader."Created by User" := USERID;
+                            l_JobInvHeader."Creation Date" := WORKDATE;
+                            l_JobInvHeader.INSERT(TRUE);
+                        END;
 
 
+                        l_JobInvLine.SETRANGE("Customer No.", Customer."No.");
+                        l_JobInvLine.SETRANGE("Job No.", "Job No.");
+                        l_JobInvLine.SETRANGE("Job Journal Template", "Journal Template Name");
+                        l_JobInvLine.SETRANGE("Job Journal Batch", "Journal Batch Name");
+                        l_JobInvLine.SETRANGE("Job Journal Line No.", "Line No.");
+                        IF l_JobInvLine.FINDSET THEN
+                            CurrReport.SKIP;
 
-                    l_JobInvLine.SETRANGE("Job No.", "Job No.");
-                    l_JobInvLine.SETRANGE("Job Journal Template", "Journal Template Name");
-                    l_JobInvLine.SETRANGE("Job Journal Batch", "Journal Batch Name");
-                    l_JobInvLine.SETRANGE("Job Journal Line No.", "Line No.");
-                    IF l_JobInvLine.FINDSET THEN
-                        CurrReport.SKIP;
+                        l_JobInvHeader.GET(Customer."No.", g_Year, g_Month);
 
-                    l_JobInvHeader.GET(Job."No.", g_Year, g_Month);
+                        l_JobInvLine.RESET;
 
-                    l_JobInvLine.RESET;
-
-                    
                         l_JobInvLine.INIT;
+                        l_JobInvLine."Customer No." := Customer."No.";
                         l_JobInvLine."Job No." := "Job No.";
                         l_JobInvLine."Job Journal Template" := "Journal Template Name";
                         l_JobInvLine."Job Journal Batch" := "Journal Batch Name";
@@ -76,62 +81,53 @@ report 50000 "IMP Create Job Cons. Invoice"
                         l_JobInvLine."Resource No." := "No.";
                         l_JobInvLine."Posting Date" := "Posting Date";
                         l_JobInvLine."all inclusive" := "JobJnlLine"."Imp all inclusive";
-                        if "Work Type Code" = 'TRAVEL' then begin
-                            l_JobInvLine.Travel := true;
-                            l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
-                            l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
-                            l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
-                            l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
-                            l_JobInvLine.Description := "JobJnlLine".Description;
-                        end;
                         l_JobInvLine.INSERT;
                         g_i := g_i + 1;
-                    
-                        
-                    
+                    end;
+
+                    trigger OnPostDataItem()
+                    begin
+
+                    end;
+
+                }
+                trigger OnPreDataItem()
+                var
+                    l_Job: Record job;
+
+                begin
+                    l_Job.SETRANGE("imp Internal Job", l_Job."imp Internal Job"::" ");
+                    l_Job.SETFILTER(Status, '%1|%2|%3', l_Job.Status::Open, l_Job.Status::Planning, l_Job.Status::Quote);
+                    l_Job.SETFILTER("Bill-to Customer No.", '<>%1', '');
+                    l_Job.FINDSET;
+
+                    REPEAT
+                        IF NOT (l_Job."IMP Project Manager IMPL" IN ['JHE', 'YMA', 'DED', 'FST', 'RWI']) THEN
+                            ERROR(STRSUBSTNO(Text50002, l_Job."No.", l_Job."Bill-to Name"));
+                    UNTIL l_Job.NEXT = 0;
+
+                    SETRANGE("imp Internal Job", "Imp Internal Job"::" ");
+
                 end;
 
-                trigger OnPostDataItem()
+                trigger OnAfterGetRecord()
                 begin
 
                 end;
 
+                trigger OnPostDataItem()
+                begin
+                    IF NOT CONFIRM(STRSUBSTNO(Text50000, g_i)) THEN
+                        ERROR(Text50001)
+
+                end;
+
+
             }
-            trigger OnPreDataItem()
-            var
-                l_Job: Record job;
 
-            begin
-                l_Job.SETRANGE("imp Internal Job", l_Job."imp Internal Job"::" ");
-                l_Job.SETFILTER(Status, '%1|%2|%3', l_Job.Status::Open, l_Job.Status::Planning, l_Job.Status::Quote);
-                l_Job.SETFILTER("Bill-to Customer No.", '<>%1', '');
-                l_Job.FINDSET;
-                REPEAT
-                    IF NOT (l_Job."IMP Project Manager IMPL" IN ['JHE', 'YMA', 'DED', 'FST', 'RWI']) THEN
-                        ERROR(STRSUBSTNO(Text50002, l_Job."No.", l_Job."Bill-to Name"));
-                UNTIL l_Job.NEXT = 0;
-
-                SETRANGE("imp Internal Job", "Imp Internal Job"::" ");
-
-            end;
-
-            trigger OnAfterGetRecord()
-            begin
-
-            end;
-
-            trigger OnPostDataItem()
-            begin
-                IF NOT CONFIRM(STRSUBSTNO(Text50000, g_i)) THEN
-                    ERROR(Text50001)
-
-            end;
 
 
         }
-
-
-
     }
 
 

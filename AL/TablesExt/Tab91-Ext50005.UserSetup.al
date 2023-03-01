@@ -20,5 +20,12 @@ tableextension 50005 "IMP Tab91-Ext50005" extends "User Setup"
             DataClassification = CustomerContent;
             TableRelation = "Job Journal Batch".Name where("Journal Template Name" = field("Journal Template Name"));
         }
+        field(50030; "IMP Job Jnl. changes allowed"; Boolean)
+        {
+            Caption = 'Job Journal changes allowed';
+            DataClassification = CustomerContent;
+            
+        }
+        
     }
 }

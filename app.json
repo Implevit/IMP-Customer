@@ -2,7 +2,7 @@
   "id": "91c8bdad-fb52-4ba1-b873-a75664439e08",
   "name": "IMP-Customer",
   "publisher": "Implevit",
-  "version": "19.1.0.1",
+  "version": "21.0.0.1",
   "brief": "",
   "description": "Implevit Customer App for Microsoft Business Central.",
   "privacyStatement": "",
@@ -11,8 +11,8 @@
   "url": "http://www.implevit.ch",  
   "dependencies": [],
   "screenshots": [],
-  "platform": "19.0.0.0",
-  "application": "19.0.0.0",
+  "platform": "21.0.0.0",
+  "application": "21.0.0.0",
   "idRanges": [
     {
       "from": 50000,
@@ -21,7 +21,7 @@
   ],
   "contextSensitiveHelpUrl": "http://www.implevit.ch/support/",  
   "resourceExposurePolicy": {"allowDebugging": true,"allowDownloadingSource": true,"includeSourceInSymbolFile": true},
-  "runtime": "8.0",
+  "runtime": "10.0",
   "features": ["TranslationFile"],
   "target": "OnPrem" 
 }

@@ -1058,6 +1058,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3637914476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Job Check Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Check Time - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2047702192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consulting Invoice Card</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1428,40 +1433,60 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3107813803 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressource Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to set the %2 marked settlements to %1 status?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements were processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt3_Txt</note>
+        </trans-unit>
+        <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Customer Cons. Invoice</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50000</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50000</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
           <source>Abbruch durch den Anwender!</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50001</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50001</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projektnr. %1 für %2 hat keinen gültigen Projektleiter. Bitte erfassen Sie einen gültigen Projektleiter.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50002</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50002</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Options - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Options - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Month</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Month - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Month - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Year - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 54620081 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Evaluation</source>
@@ -1567,6 +1592,211 @@
           <source>Year</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get Job Working Hours View</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month to</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 2395096812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month from</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control MonthStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Hour Account - Date From To</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1639376207" size-unit="char" translate="yes" xml:space="preserve">
+          <source>MA Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel EmployeeCodeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3031036424" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gesamt Total</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel FaktNfaktLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3893426799" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Fakt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel FaktTotLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 322232539" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. fakt.bar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel HrBillableLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 457005752" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. N-fakt.bar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel HrNotBillableLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1992726245" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total N-fakt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel NFaktNetLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1314000525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>MA</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel NoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3679530999" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ueber Fakt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel OverInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1912914804" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ueber N-fakt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel OverNotInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buchungsdatum</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1945551586" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel ProjektnoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stundenabrechnung - Nach Datum von/bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3936220828" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 1 von</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time1fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 2941286135" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 1 bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time1ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1515320093" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 2 von</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time2fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 2607580682" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 2 bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time2ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1208403230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 3 von</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time3fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3647580409" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 3 bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time3ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 186308239" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total von/bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TotalfromtoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1580398584" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total für</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TotalfuerLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 555921673" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fahrzeit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TravelTimeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Project check time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 3184947576" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project no.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JobNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1742294907" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JobTaskNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1930602345" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JourNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 992017645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JourTempNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1314000525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel NoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Plausibility check hr journal</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 4203406219" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time from</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel TimefromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 243367128" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time to</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel TimetoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Control 1350470392 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Control Allgemein - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Control 2283876352 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Control EmployeeCodeOpt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1202965061 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Consulting proof</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1202965061 - NamedType 76061626" size-unit="char" translate="yes" xml:space="preserve">
           <source>Kunde</source>
@@ -1713,10 +1943,135 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_ResFilter - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Report 4080958628 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Consulting proof IMPL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - NamedType 3721534664" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Telefon</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - NamedType Text1</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - NamedType 701960602" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This report can't start without a resource (No.").</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - NamedType Text3</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportDataItem 649181103 - Method 3245603402 - NamedType 1630202143" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 - %2 %3-%4 %5 %6 %7 %8</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportDataItem JobJournLine - Method OnAfterGetRecord - NamedType SubStr1_Lbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 76061626" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel CustomerLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3877179604" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mitarbeiter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel EmployeeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 1319478921" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nicht fakturierte Leistungen / in Kulanz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel GoodwillLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3103460891" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. fakt.bar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel HrInvLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3493750224" size-unit="char" translate="yes" xml:space="preserve">
+          <source>km</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel KmLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 894566561" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeitraum</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel PeriodLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Datum</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 341724697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ProjectLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 331710078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektaufgabe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ProjecttaskLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beratungsnachweis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 1942046125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unterschrift des Beraters</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel SignaturLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 438759258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ticket</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TicketLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 2247255785" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ticket Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TicketNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3536121099" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Fakt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalInvLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 2410138484" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 497825551" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total hr / km</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalStdKmLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 550820841" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fahrzeit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TravelTimelbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - Control 3091504300 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pauschale Projektaufgaben anzeigen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - Control AllInclusiveBoolOpt - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1722173463 - Control 725737015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2077750279">
           <source>Total Usage in journal</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1001-Ext50006 - Control IMPTotalUsageInJournal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Method 940930960 - NamedType 1646898571" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 423844735">
+          <source>No employee recorded.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Method JobCheckTime - NamedType NoEmployeesMsg</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Action 3105559294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
+          <source>Job Check Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action JobCheckTimeAction - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 423844735 - Control 3423612205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
           <source>Hours invoicable</source>

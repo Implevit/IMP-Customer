@@ -78,8 +78,6 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             Visible = false;
         }
 
-
-
         addbefore(Description)
         {
             field("IMP Job Task Description"; "IMP Job Task Description")
@@ -233,8 +231,10 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 
     actions
     {
+
         addafter(Dimensions)
         {
+            /*
             action(CreateAccounting)
             {
                 Caption = 'Employye Working Hours';
@@ -254,7 +254,22 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                     //l_rptGetResHours.RUN;
                 end;
             }
-            
+            */
+            action(JobCheckTimeAction)
+            {
+                ApplicationArea = All;
+                Caption = 'Job Check Time';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CheckDuplicates;
+
+                trigger OnAction()
+                var
+                begin
+                    JobCheckTime(Rec, false);
+                end;
+            }
         }
     }
 
@@ -263,16 +278,16 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
     trigger OnOpenPage()
     var
         lc_userSetup: Record "User Setup";
-        lc_CurrentJnlBatchName: Code[10];
         lc_JobJnlManagement: Codeunit JobJnlManagement;
+        lc_CurrentJnlBatchName: Code[10];
     begin
 
-        if not lc_userSetup.get(UserId) then begin
-            lc_userSetup.Init();
-        end else begin
+        if not lc_userSetup.get(UserId) then
+            lc_userSetup.Init()
+        else begin
             if (lc_UserSetup."Journal Batch Name" <> '') and (lc_UserSetup."Journal Template Name" <> '') then begin
                 lc_CurrentJnlBatchName := lc_UserSetup."Journal Batch Name";
-                SetRange("Journal Template Name", lc_UserSetup."Journal Template Name");
+                Rec.SetRange("Journal Template Name", lc_UserSetup."Journal Template Name");
                 lc_JobJnlManagement.OpenJnl(lc_CurrentJnlBatchName, Rec);
             end;
             AllowJnlChange := lc_userSetup."IMP Job Jnl. changes allowed";
@@ -290,10 +305,12 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         TotalDay := Format(CalcDay(Rec), 0, '<Precision,2:3><Standard Format,0>');
         NoOfOverlapps := Format(CalcOverlappings(Rec));
         DiffToBudget := Format(CalcDiffToBudget(Rec), 0, '<Precision,2:3><Standard Format,0>');
+
+        JobCheckTime(Rec, true)
     end;
 
     #endregion Triggers
-    
+
     #region Methodes
 
     procedure CalcDay(_Rec: Record "Job Journal Line"): Decimal
@@ -435,6 +452,109 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         RetValue := (Round(lc_JJL."IMP Time on Job" / (lc_JT."IMP Schedule (Total hours)" / 100), 0.01, '='));
     end;
 
+    local procedure JobCheckTime(_JobJournalLine: Record "Job Journal Line"; _SetPostingDate: Boolean): Boolean
+    var
+        JobJourLineRec: Record "Job Journal Line";
+        TempJobJourLineRec: Record "Job Journal Line" temporary;
+        LineNoInt: Integer;
+        Nummer1Code: Code[20];
+        Datum1Date: Date;
+        Zeitvon1Dec: Decimal;
+        Zeitbis1Dec: Decimal;
+        FirstBool: Boolean;
+        NoEmployeesMsg: Label 'No employee recorded.';
+    begin
+        if _JobJournalLine.Quantity = 0 then
+            exit(true);
+
+        if _JobJournalLine."No." = '' then begin
+            Message(NoEmployeesMsg);
+            exit(true);
+        end;
+
+        Nummer1Code := '';
+        Datum1Date := _JobJournalLine."Posting Date";
+        Zeitvon1Dec := 0;
+        Zeitbis1Dec := 0;
+
+        TempJobJourLineRec.DeleteAll();
+        JobJourLineRec.Reset();
+        JobJourLineRec.SetCurrentKey("No.", "Posting Date", "IMP Time 1 from", "IMP Time 1 to");
+        if _SetPostingDate then
+            JobJourLineRec.SetRange("Posting Date", _JobJournalLine."Posting Date");
+        JobJourLineRec.SetRange("No.", _JobJournalLine."No.");
+
+        if JobJourLineRec.FindSet() then begin
+
+            LineNoInt := 10000;
+            repeat
+                if (JobJourLineRec."IMP Time 1 from" <> 0) and (JobJourLineRec."IMP Time 1 to" <> 0) then begin
+                    LineNoInt += 10000;
+                    TempJobJourLineRec.Init();
+                    TempJobJourLineRec.TransferFields(JobJourLineRec);
+                    TempJobJourLineRec."Posting Date" := JobJourLineRec."Posting Date";
+                    TempJobJourLineRec."Applies-to Entry" := JobJourLineRec."Line No.";
+                    TempJobJourLineRec."Line No." := LineNoInt;
+                    TempJobJourLineRec.Insert();
+                end;
+
+                if (JobJourLineRec."IMP Time 2 from" <> 0) and (JobJourLineRec."IMP Time 2 to" <> 0) then begin
+                    LineNoInt += 10000;
+                    TempJobJourLineRec.Init();
+                    TempJobJourLineRec.TransferFields(JobJourLineRec);
+                    TempJobJourLineRec."Applies-to Entry" := JobJourLineRec."Line No.";
+                    TempJobJourLineRec."Line No." := LineNoInt;
+                    TempJobJourLineRec."IMP Time 1 from" := JobJourLineRec."IMP Time 2 from";
+                    TempJobJourLineRec."IMP Time 1 to" := JobJourLineRec."IMP Time 2 to";
+                    TempJobJourLineRec.Insert();
+                end;
+
+                if (JobJourLineRec."IMP Time 3 from" <> 0) and (JobJourLineRec."IMP Time 3 to" <> 0) then begin
+                    LineNoInt += 10000;
+                    TempJobJourLineRec.Init();
+                    TempJobJourLineRec.TransferFields(JobJourLineRec);
+                    TempJobJourLineRec."Applies-to Entry" := JobJourLineRec."Line No.";
+                    TempJobJourLineRec."Line No." := LineNoInt;
+                    TempJobJourLineRec."IMP Time 1 from" := JobJourLineRec."IMP Time 3 from";
+                    TempJobJourLineRec."IMP Time 1 to" := JobJourLineRec."IMP Time 3 to";
+                    TempJobJourLineRec.Insert();
+                end;
+
+            until JobJourLineRec.Next() = 0;
+        end;
+
+
+        TempJobJourLineRec.SetCurrentKey("No.", "Posting Date", "IMP Time 1 from", "IMP Time 1 to");
+        if TempJobJourLineRec.FindSet() then begin
+            FirstBool := true;
+            TempJobJourLineRec.Delete();
+
+            repeat
+                if ((TempJobJourLineRec."No." = Nummer1Code) and
+                   (TempJobJourLineRec."Posting Date" = Datum1Date) and
+                   (TempJobJourLineRec."IMP Time 1 from" < Zeitbis1Dec)) then begin
+                    Nummer1Code := TempJobJourLineRec."No.";
+                    Datum1Date := TempJobJourLineRec."Posting Date";
+                    Zeitvon1Dec := TempJobJourLineRec."IMP Time 1 from";
+                    Zeitbis1Dec := TempJobJourLineRec."IMP Time 1 to";
+                end else begin
+                    Nummer1Code := TempJobJourLineRec."No.";
+                    Datum1Date := TempJobJourLineRec."Posting Date";
+                    Zeitvon1Dec := TempJobJourLineRec."IMP Time 1 from";
+                    Zeitbis1Dec := TempJobJourLineRec."IMP Time 1 to";
+                    if not FirstBool then
+                        TempJobJourLineRec.Delete();
+                end;
+                FirstBool := false;
+            until TempJobJourLineRec.Next() = 0;
+
+            TempJobJourLineRec.Reset();
+            if TempJobJourLineRec.FindSet() then
+                RunModal(Page::"IMP Job Check Time", TempJobJourLineRec);
+        end;
+
+        exit(true);
+    end;
     #endregion Methodes
 
     var

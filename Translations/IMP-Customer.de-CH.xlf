@@ -921,6 +921,279 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1536694483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Res. Work. Hrs. Month"</source>
+          <target>Job Res. Work. Hrs. Month</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 1893021230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Code</source>
+          <target>Projekt Typ Code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Job Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 254383649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month End</source>
+          <target>Monatsende</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Month End - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 265475188 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month Start</source>
+          <target>Monatsstart</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Month Start - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <target>Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <target>Menge</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 3280478784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <target>Zu fakturierende Menge</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2659785339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <target>Zu fakturierende Menge</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <target>Zu fakturierende Menge</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 513339096 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open,Fixed</source>
+          <target>Open,Fixed</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Status - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 1536694483 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <target>Jahr</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type</source>
+          <target>Job Type</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 4285612108 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Type</source>
+          <target>Filtertyp</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Filter Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 4285612108 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Intern,Projekt Nr. Filter,Sollzeit</source>
+          <target>Intern,Projekt Nr. Filter,Sollzeit</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Filter Type - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 827715857 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Internal Filter</source>
+          <target>Interner Filter</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Internal Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 2434828228 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job No. Filter</source>
+          <target>Projektnr.-Filter</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job No. Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 1893021230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Code</source>
+          <target>Job Type Code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3186355380 - Field 3324201203 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Description</source>
+          <target>Job Type Beschreibung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Types - Field Job Type Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Job Working Hours Month</source>
+          <target>IMP Job Arbeitsstunden Monat</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 682928251 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acquisition</source>
+          <target>Bezug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Acquisition - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 632334177 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Admin</source>
+          <target>Admin</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Admin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 629510381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment</source>
+          <target>Assignment</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 680844732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Hours</source>
+          <target>Zuweisung Stunden</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment Hours - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 92009326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Vacation</source>
+          <target>Zuweisung Ferien</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Assignment Vacation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 1778072510 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Closed</source>
+          <target>Geschlossen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Closed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 791614854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Education</source>
+          <target>Ausbildung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Education - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2859526439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job to Invoice</source>
+          <target>Externer Projekt an Rechnung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 104789764 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job to Invoice</source>
+          <target>Externer Projekt an Rechnung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 650940500 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Job Total</source>
+          <target>External Projekt Total</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field External Job Total - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 1805551014 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Illness</source>
+          <target>Krankheit</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Illness - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2038982556 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Internal Job</source>
+          <target>Interner Job</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Internal Job - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 254383649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month End</source>
+          <target>Monatsende</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Month End - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 265475188 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month Start</source>
+          <target>Monatsstart</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Month Start - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <target>Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 3925446560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Target Time</source>
+          <target>Zielzeit</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Target Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 245426702 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <target>Total</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Total - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 3824106707 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vacation</source>
+          <target>Ferien</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Vacation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 4115724468 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vacation YTD</source>
+          <target>Ferien YTD</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Vacation YTD - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <target>Jahr</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3567995689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consultion Invoice Subform</source>
           <target>Projekt Abrechnung Zeilen</target>
@@ -1034,6 +1307,13 @@
           <target>Setze Status erstellt</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3637914476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Job Check Time</source>
+          <target>IMP Projekt Prüfung Zeiterfassung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Check Time - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2047702192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Consulting Invoice Card</source>
@@ -1479,47 +1759,82 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3107813803 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressource Job Working Hours Month</source>
+          <target>Ressource Projet Arbeitsstunden Monat</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to set the %2 marked settlements to %1 status?</source>
+          <target>Möchten Sie die mit %2 gekennzeichneten Abrechnungen auf den Status %1 setzen?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements were processed.</source>
+          <target>%1 Abrechnungen wurden verarbeitet.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
+          <target>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach der Erstellung vorgenommen. Die Abrechnung muss neu erstellt und geprüft werden.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt3_Txt</note>
+        </trans-unit>
+        <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Customer Cons. Invoice</source>
           <target>Erstelle Kunden-Projekt Abrechnungen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Property Caption</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?</source>
           <target>Sie haben %1 Projektabrechnungszeilen angelegt. Möchten Sie die Änderungen anwenden?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50000</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50000</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
           <source>Abbruch durch den Anwender!</source>
           <target>Abbruch durch den Anwender!</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50001</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50001</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projektnr. %1 für %2 hat keinen gültigen Projektleiter. Bitte erfassen Sie einen gültigen Projektleiter.</source>
           <target>Projektnr. %1 für %2 hat keinen gültigen Projektleiter. Bitte erfassen Sie einen gültigen Projektleiter.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - NamedType Text50002</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - NamedType Text50002</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <target>Optionen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Options - Property Caption</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Options - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Month</source>
           <target>Monat</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Month - Property Caption</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Month - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3632860763 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1807454529 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
           <target>Jahr</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Invoice - Control Year - Property Caption</note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Create Cust. Cons. Inv. - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 54620081 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Evaluation</source>
@@ -1585,14 +1900,12 @@
           <source>%1 Quotes will be deleted. Do you wnat to continue?</source>
           <target>Es werden %1 Projekt Offerten gelöscht. Möchten Sie fortfahren?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Delete Job Quotes - NamedType g_Label01</note>
         </trans-unit>
         <trans-unit id="Report 1090583261 - NamedType 1678322520" size-unit="char" translate="yes" xml:space="preserve">
           <source>Aborted!</source>
           <target>Abbruch!</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Delete Job Quotes - NamedType g_Label02</note>
         </trans-unit>
         <trans-unit id="Report 1090583261 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1605,7 +1918,6 @@
           <source>Year</source>
           <target>Jahr</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Source has been modified.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Delete Job Quotes - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 409602610 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1650,6 +1962,293 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Report 3281988714 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get Job Working Hours View</source>
+          <target>Projekt Arbeitszeiten Ansicht</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month to</source>
+          <target>Monat bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 2395096812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month from</source>
+          <target>Monat von</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control MonthStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3281988714 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <target>Jahr</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month V. - Control Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Hour Account - Date From To</source>
+          <target>IMP Std.-Abrechnung - Datum Von Bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <target>Beschreibung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1639376207" size-unit="char" translate="yes" xml:space="preserve">
+          <source>MA Code</source>
+          <target>MA Code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel EmployeeCodeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3031036424" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gesamt Total</source>
+          <target>Gesamt Total</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel FaktNfaktLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3893426799" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Fakt.</source>
+          <target>Total Fakt.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel FaktTotLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 322232539" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. fakt.bar</source>
+          <target>Std. fakt.bar</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel HrBillableLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 457005752" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. N-fakt.bar</source>
+          <target>Std. N-fakt.bar</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel HrNotBillableLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1992726245" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total N-fakt.</source>
+          <target>Total N-fakt.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel NFaktNetLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1314000525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>MA</source>
+          <target>MA</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel NoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3679530999" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ueber Fakt.</source>
+          <target>Ueber Fakt.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel OverInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1912914804" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ueber N-fakt.</source>
+          <target>Ueber N-fakt.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel OverNotInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buchungsdatum</source>
+          <target>Buchungsdatum</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1945551586" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr.</source>
+          <target>Projektnr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel ProjektnoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stundenabrechnung - Nach Datum von/bis</source>
+          <target>Stundenabrechnung - Nach Datum von/bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3936220828" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 1 von</source>
+          <target>Zeit 1 von</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time1fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 2941286135" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 1 bis</source>
+          <target>Zeit 1 bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time1ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1515320093" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 2 von</source>
+          <target>Zeit 2 von</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time2fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 2607580682" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 2 bis</source>
+          <target>Zeit 2 bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time2ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1208403230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 3 von</source>
+          <target>Zeit 3 von</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time3fromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 3647580409" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeit 3 bis</source>
+          <target>Zeit 3 bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel Time3ToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 186308239" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total von/bis</source>
+          <target>Gesamt von/bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TotalfromtoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 1580398584" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total für</source>
+          <target>Total für</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TotalfuerLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3104011237 - ReportLabel 555921673" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fahrzeit</source>
+          <target>Fahrzeit</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Account - Date From-To - ReportLabel TravelTimeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Project check time</source>
+          <target>IMP Projekt Prüfung Zeiterfassung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target>Beschreibung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 3184947576" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project no.</source>
+          <target>Projekt Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JobNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1742294907" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Task No.</source>
+          <target>Projektaufgabe Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JobTaskNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1930602345" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Name</source>
+          <target>Journal Name</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JourNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 992017645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name </source>
+          <target>Journal Template Name</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel JourTempNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 1314000525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <target>Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel NoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <target>Buchungsdatum</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Plausibility check hr journal</source>
+          <target>Plausibilitätsprüfung HR-Journal</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 4203406219" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time from</source>
+          <target>Zeit von</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel TimefromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - ReportLabel 243367128" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time to</source>
+          <target>Zeit bis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - ReportLabel TimetoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Control 1350470392 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <target>Optionen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Control Allgemein - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3637914476 - Control 2283876352 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee</source>
+          <target>Mitarbeiter</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Check Time - Control EmployeeCodeOpt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1202965061 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Consulting proof</source>
+          <target>IMP Beraternachweis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Report 1202965061 - NamedType 76061626" size-unit="char" translate="yes" xml:space="preserve">
           <source>Kunde</source>
           <target>Kunde</target>
@@ -1682,7 +2281,7 @@
         </trans-unit>
         <trans-unit id="Report 1202965061 - NamedType 403215872" size-unit="char" translate="yes" xml:space="preserve">
           <source></source>
-          <target> </target>
+          <target></target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Source contains only white-space, consider using 'Locked = true' to avoid translation of unnecessary texts. This note can be toggled with the setting 'NAB.PreferLockedTranslations'.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - NamedType FtrText01</note>
@@ -1808,11 +2407,207 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - NamedType TravelTimelbl</note>
         </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 1399707476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To Month</source>
+          <target>Bis Monat</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 1253471164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>From Month</source>
+          <target>Von Monat</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_MonthStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3428992855 - Control 3266836456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressourcenfilter</source>
+          <target>Ressourcenfilter</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Set Year Work. Hours Month - Control g_ResFilter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Consulting proof IMPL</source>
+          <target>IMP Beraternachweis IMPL</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - NamedType 3721534664" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Telefon</source>
+          <target>Telefon</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - NamedType Text1</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - NamedType 701960602" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This report can't start without a resource (No.").</source>
+          <target>Dieser Bericht kann nicht ohne eine Ressource gestartet werden (Nr.).</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - NamedType Text3</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportDataItem 649181103 - Method 3245603402 - NamedType 1630202143" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 - %2 %3-%4 %5 %6 %7 %8</source>
+          <target>%1 - %2 %3-%4 %5 %6 %7 %8</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportDataItem JobJournLine - Method OnAfterGetRecord - NamedType SubStr1_Lbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 76061626" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer</source>
+          <target>Debitor</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel CustomerLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 41875363" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <target>Beschreibung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel DescrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3877179604" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mitarbeiter</source>
+          <target>Mitarbeiter</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel EmployeeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 1319478921" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nicht fakturierte Leistungen / in Kulanz</source>
+          <target>Nicht fakturierte Leistungen / in Kulanz</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel GoodwillLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3103460891" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Std. fakt.bar</source>
+          <target>Std. fakt.bar</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel HrInvLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3493750224" size-unit="char" translate="yes" xml:space="preserve">
+          <source>km</source>
+          <target>km</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel KmLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 894566561" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeitraum</source>
+          <target>Zeitraum</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel PeriodLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 663449546" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Datum</source>
+          <target>Datum</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel PostDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 341724697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt</source>
+          <target>Projekt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ProjectLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 331710078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektaufgabe</source>
+          <target>Projektaufgabe</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ProjecttaskLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 617781293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beratungsnachweis</source>
+          <target>Beratungsnachweis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel ReportNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 1942046125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unterschrift des Beraters</source>
+          <target>Unterschrift des Beraters</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel SignaturLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 438759258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ticket</source>
+          <target>Ticket</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TicketLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 2247255785" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ticket Nr.</source>
+          <target>Ticket Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TicketNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 3536121099" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Fakt.</source>
+          <target>Total Fakt.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalInvLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 2410138484" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <target>Total</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 497825551" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total hr / km</source>
+          <target>Total std. / km</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TotalStdKmLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - ReportLabel 550820841" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fahrzeit</source>
+          <target>Fahrzeit</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - ReportLabel TravelTimelbl</note>
+        </trans-unit>
+        <trans-unit id="Report 4080958628 - Control 3091504300 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pauschale Projektaufgaben anzeigen</source>
+          <target>Pauschale Projektaufgaben anzeigen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMPL Consulting proof IMPL - Control AllInclusiveBoolOpt - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1722173463 - Control 725737015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2077750279">
           <source>Total Usage in journal</source>
           <target>Gesamtverwendung im Journal</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag1001-Ext50006 - Control IMPTotalUsageInJournal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Method 940930960 - NamedType 1646898571" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 423844735">
+          <source>No employee recorded.</source>
+          <target>Kein Mitarbeiter erfasst!</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Method JobCheckTime - NamedType NoEmployeesMsg</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Action 3105559294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
+          <source>Job Check Time</source>
+          <target>Prüfung Zeiterfassung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action JobCheckTimeAction - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 423844735 - Control 3423612205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
           <source>Hours invoicable</source>

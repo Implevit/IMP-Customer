@@ -4,6 +4,7 @@ report 50001 "IMP Job Consulting Proof"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     RDLCLayout = './src/ReportLayout/Rep50001.IMPJobConsultingProof.rdlc';
+    Caption = 'IMP Consulting proof';
     //DefaultRenderingLayout = LayoutName;
 
     dataset

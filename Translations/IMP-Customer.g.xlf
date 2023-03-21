@@ -823,6 +823,61 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Work. Hrs. Month - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2863873245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Res. Working Hours</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 1893021230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Job Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 3280478784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity not to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Quantity not to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 2659785339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity to Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Quantity to Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 513339096 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open,Fixed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Status - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 2457806013 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Week End</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Week End - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 1137679448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Week Start</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Week Start - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2863873245 - Field 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Res. Working Hours - Field Year - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3186355380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Type</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1348,6 +1403,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action93 - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 72746206 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manage your resources' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ResJobWork - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 72746206 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Res. Job Work. Hrs. Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ResJobWork - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3813317288 - Action 2275139634 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Organize resources in groups, such as Consultants, for easier assignment of common values and to analyze financial figures by groups.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1433,10 +1498,50 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Workflows - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2107696462 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressource Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2107696462 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be closed?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 2107696462 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be opened?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Page 2107696462 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to set the %2 marked settlements to %1 status?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 2107696462 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements were processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 2107696462 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt3_Txt</note>
+        </trans-unit>
         <trans-unit id="Page 3107813803 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ressource Job Working Hours Month</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be closed?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be opened?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50001</note>
         </trans-unit>
         <trans-unit id="Page 3107813803 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to set the %2 marked settlements to %1 status?</source>
@@ -1452,6 +1557,16 @@
           <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Txt3_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - Action 3002814613 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action GetJobWorkingHoursMonth - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - Action 2270455521 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action SetJobWorkingHoursMonth - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Customer Cons. Invoice</source>
@@ -1592,6 +1707,31 @@
           <source>Year</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Export Consulting Invoices - Control Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 535669482 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Get Job Working Hours View</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 535669482 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month to</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 535669482 - Control 2395096812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month from</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control MonthStart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 535669482 - Control 1131595448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month to</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control ResFilter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 535669482 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3281988714 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Get Job Working Hours View</source>
@@ -2073,6 +2213,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action JobCheckTimeAction - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Action 2901616930 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
+          <source>Ressource Working Hours</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action ResWorkingHours - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 423844735 - Control 3423612205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
           <source>Hours invoicable</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2302,6 +2447,11 @@
           <source>IN Accounting</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP In Accounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 938585830 - Field 366019488 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
+          <source>Internal Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Internal Job - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2793885276 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Job Task Description</source>

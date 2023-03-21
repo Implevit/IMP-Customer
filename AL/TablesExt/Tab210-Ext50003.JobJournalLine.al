@@ -335,10 +335,17 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             Caption = 'Belongs to line no.';
             DataClassification = CustomerContent;
         }
-         field(50170; "IMP Overlap"; Boolean)
+        field(50170; "IMP Overlap"; Boolean)
         {
             Caption = 'Overlap';
             DataClassification = CustomerContent;
+        }
+        field(50180; "IMP Internal Job"; Option)
+        {
+            Caption = 'Internal Job';
+            OptionMembers= " ",Ferien,Kompensation,Privat,Krankheit,Militär,Unfall,Ausbildung,"Int.Projekte",Jubiläumsferien,Sonstiges,"Administr.",Akquisition;
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Job."IMP Internal Job" WHERE ("No."=FIELD("Job No.")));
         }
     }
 

@@ -1,4 +1,4 @@
-page 50019 "IMP Res. Job Work. Hrs. Month"
+page 50021 "IMP R. Job Wrk. Hrs. Mth. View"
 {
     Caption = 'Ressource Job Working Hours Month';
     //CardPageID = "IMP Cust. Consulting Inv. Card";
@@ -121,50 +121,8 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
     {
         area(Processing)
         {
-            action(SetJobWorkingHoursMonth)
-            {
-                ApplicationArea = All;
-                Caption = 'Set Job Working Hours Month';
-                RunObject = Report "IMP Set Year Work. Hours Month";
-                Image = CreateWorkflow;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                
-
-            }
-            action(GetJobWorkingHoursMonth)
-            {
-                ApplicationArea = All;
-                Caption = 'Get Job Working Hours Month';
-                RunObject = Report "IMP Get Job Wor. Hrs. Month";
-                Image = RefreshPlanningLine;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                
-
-            }
-            action(SetStatusOpen)
-            {
-                ApplicationArea = All;
-                
-                trigger OnAction()
-                begin
-                    SetStateOpen();
-                    
-                end;
-            }
-            action(SetStatusFixed)
-            {
-                ApplicationArea = All;
-                
-                trigger OnAction()
-                begin
-                    SetStateFixed();
-                    
-                end;
-            }
+           
+            
         }
     }
     var
@@ -178,51 +136,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
         END;
     end;
 
-    procedure SetStateFixed()
-    var
-        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
-        l_JobResWorkingHoursMonth: Record "IMP Job Res. Work. Hrs. Month";
-        g_i: Integer;
-
-    begin
-        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursMonth);
-        IF l_JobWorkingHoursMonth.FINDSET THEN
-            IF CONFIRM(STRSUBSTNO(Text50000)) THEN BEGIN
-                REPEAT
-                    l_JobResWorkingHoursMonth.SETRANGE("No.", l_JobWorkingHoursMonth."No.");
-                    l_JobResWorkingHoursMonth.SETRANGE(Year, l_JobWorkingHoursMonth.Year);
-                    l_JobResWorkingHoursMonth.SETRANGE("Month Start", l_JobWorkingHoursMonth."Month Start");
-                    //l_JobResWorkingHoursMonth.SETFILTER("Job Type Code",'<>%1','SOLL');
-                    l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Fixed);
-                    g_i := g_i + 1;
-                UNTIL l_JobWorkingHoursMonth.NEXT = 0;
-                MESSAGE(STRSUBSTNO(Text50001, g_i));
-            END;
-    end;
-
-    procedure SetStateOpen()
-    var
-        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
-        l_JobResWorkingHoursMonth: Record "IMP Job Res. Work. Hrs. Month";
-        g_i: Integer;
-
-    begin
-        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursMonth);
-        IF l_JobWorkingHoursMonth.FINDSET THEN
-        IF CONFIRM(STRSUBSTNO(Text50000)) THEN
-            BEGIN
-                REPEAT
-                    l_JobResWorkingHoursMonth.SETRANGE("No.", l_JobWorkingHoursMonth."No.");
-                    l_JobResWorkingHoursMonth.SETRANGE(Year, l_JobWorkingHoursMonth.Year);
-                    l_JobResWorkingHoursMonth.SETRANGE("Month Start", l_JobWorkingHoursMonth."Month Start");
-                    //l_JobResWorkingHoursMonth.SETFILTER("Job Type Code",'<>%1','SOLL');
-                    l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Open);
-                    g_i := g_i + 1;
-                UNTIL l_JobWorkingHoursMonth.NEXT = 0;
-                MESSAGE(STRSUBSTNO(Text50001, g_i));
-            END;
-        end;
-
+    
 
 
 

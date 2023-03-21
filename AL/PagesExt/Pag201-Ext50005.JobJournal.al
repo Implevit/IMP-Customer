@@ -270,6 +270,24 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                     JobCheckTime(Rec, false);
                 end;
             }
+             action(ResWorkingHours)
+            {
+                ApplicationArea = All;
+                Caption = 'Ressource Working Hours';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CheckDuplicates;
+
+                trigger OnAction()
+                var
+                    l_rptGetResHours: Report "IMP Get Job Wor. Hrs. Month V.";
+                begin
+                    l_rptGetResHours.SetRes(lc_userSetup."IMP Job Resource No.");
+                    l_rptGetResHours.RUN;
+                end;
+            }
+            
         }
     }
 
@@ -277,7 +295,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 
     trigger OnOpenPage()
     var
-        lc_userSetup: Record "User Setup";
+        
         lc_JobJnlManagement: Codeunit JobJnlManagement;
         lc_CurrentJnlBatchName: Code[10];
     begin
@@ -567,4 +585,5 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         NoOfOverlapps: Text[50];
         DiffToBudget: Text[50];
         AllowJnlChange: Boolean;
+        lc_userSetup: Record "User Setup";
 }

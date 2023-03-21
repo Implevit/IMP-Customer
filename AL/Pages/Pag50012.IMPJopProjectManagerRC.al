@@ -242,6 +242,16 @@ page 50012 "IMP Job Project Manager RC"
                     RunObject = Page "Resource List";
                     ToolTip = 'Manage your resources'' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.';
                 }
+                 action(ResJobWork)
+                {
+                    ApplicationArea = Jobs;
+                    Caption = 'Res. Job Work. Hrs. Month';
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "IMP Res. Job Work. Hrs. Month";
+                    ToolTip = 'Manage your resources'' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.';
+                }
+                
                 action("Resource Groups")
                 {
                     ApplicationArea = Suite;

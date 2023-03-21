@@ -117,8 +117,8 @@ report 50008 "IMP Get Job Wor. Hrs. Month V."
     trigger OnPostReport()
     begin
         //TODO Seite zum Anzeigen
-        //IF g_JobWorkingHoursTemp.FINDFIRST THEN
-            //PAGE.RUN(PAGE::"IMP Res. Job Work. Hrs. Month V.", g_JobWorkingHoursTemp);
+        IF g_JobWorkingHoursTemp.FINDFIRST THEN;
+            PAGE.RUN(PAGE::"IMP R. Job Wrk. Hrs. Mth. View", g_JobWorkingHoursTemp);
     end;
 
 

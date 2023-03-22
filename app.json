@@ -9,7 +9,20 @@
   "EULA": "",
   "help": "http://www.implevit.ch/support/",
   "url": "http://www.implevit.ch",  
-  "dependencies": [],
+  "dependencies": [    
+    {
+      "id": "07c2d9d3-8381-487c-b998-b889440193bf",
+      "publisher": "Implevit",
+      "name": "IMP-Basic",
+      "version": "20.1.0.0"
+    },
+    {
+      "id": "73f58c1e-7bfe-4d38-9914-d2ffc4fa2c2b",
+      "name": "IMP-Interface",
+      "publisher": "Implevit",
+      "version": "20.1.0.0"    
+    }
+  ],
   "screenshots": [],
   "platform": "21.0.0.0",
   "application": "21.0.0.0",

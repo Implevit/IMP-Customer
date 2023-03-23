@@ -1687,14 +1687,12 @@
           <source>Manage your resources' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.</source>
           <target>Projektaktivitäten Ihrer Ressourcen durch Einrichten von Kosten und Preisen verwalten. Die projektbezogenen Preise, Rabatte und Kostenfaktorregeln werden auf der entsprechenden Projektkarte eingerichtet. Die Kosten und Preise können für einzelne Ressourcen, für Ressourcengruppen oder für alle verfügbaren Ressourcen des Unternehmens angegeben werden. Wenn Ressourcen in einem Projekt verwendet oder verkauft werden, werden die festgelegten Preise und Kosten für das Projekt erfasst.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ResJobWork - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3813317288 - Action 72746206 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Res. Job Work. Hrs. Month</source>
           <target>Mitarbeiter Arbeitsstunden Monat</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ResJobWork - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3813317288 - Action 2275139634 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1803,42 +1801,36 @@
           <source>Ressource Job Working Hours Month</source>
           <target>Mitarbeiter Projekt Arbeitsstunden Monat</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2107696462 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Should the Period be closed?</source>
           <target>Soll die Periode geschlossen werden?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Text50000</note>
         </trans-unit>
         <trans-unit id="Page 2107696462 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
           <source>Should the Period be opened?</source>
           <target>Soll die Periode geöffnet werden?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Text50001</note>
         </trans-unit>
         <trans-unit id="Page 2107696462 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to set the %2 marked settlements to %1 status?</source>
           <target>Möchten Sie die mit %2 gekennzeichneten Abrechnungen auf den Status %1 setzen?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt1_Txt</note>
         </trans-unit>
         <trans-unit id="Page 2107696462 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1 settlements were processed.</source>
           <target>%1 Abrechnungen wurden verarbeitet.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt2_Txt</note>
         </trans-unit>
         <trans-unit id="Page 2107696462 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
           <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
           <target>Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach der Erstellung vorgenommen. Die Abrechnung muss neu erstellt und geprüft werden.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP R. Job Wrk. Hrs. Mth. View - NamedType Txt3_Txt</note>
         </trans-unit>
         <trans-unit id="Page 3107813803 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1851,14 +1843,12 @@
           <source>Should the Period be closed?</source>
           <target>Soll die Periode geschlossen werden?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50000</note>
         </trans-unit>
         <trans-unit id="Page 3107813803 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
           <source>Should the Period be opened?</source>
           <target>Soll die Periode geöffnet werden?</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50001</note>
         </trans-unit>
         <trans-unit id="Page 3107813803 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
@@ -1883,14 +1873,12 @@
           <source>Get Job Working Hours Month</source>
           <target>Ermittle Motantsstunden</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action GetJobWorkingHoursMonth - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3107813803 - Action 2270455521 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Job Working Hours Month</source>
           <target>Eröffne Periode</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action SetJobWorkingHoursMonth - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2065,35 +2053,30 @@
           <source>Get Job Working Hours View</source>
           <target>Projekt Arbeitszeiten Ansicht</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 535669482 - Control 3465500804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Month to</source>
           <target>Monat bis</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control Month - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 535669482 - Control 2395096812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Month from</source>
           <target>Monat von</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control MonthStart - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 535669482 - Control 1131595448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Month to</source>
           <target>Monat bis</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control ResFilter - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 535669482 - Control 2832340769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
           <target>Jahr</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Get Job Wor. Hrs. Month - Control Year - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3281988714 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2678,7 +2661,6 @@
           <source>Ressource Working Hours</source>
           <target>Mitarbeiter Stunden</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action ResWorkingHours - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 423844735 - Control 3423612205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
@@ -2734,6 +2716,20 @@
           <target>IMP-Customer</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control IMP-Customer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1655222170 - Control 1244118152 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2556642749">
+          <source>Check Journal Overlap</source>
+          <target>Prüfe auf Proj.-Journal- Überlappungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control Check Journal Overlap - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1655222170 - Control 2773828793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2556642749">
+          <source>Mark Journal Overlap</source>
+          <target>Markiere auf Proj.-Journal- Überlappungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control Mark Journal Overlap - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 3218178748 - Action 1826872365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Job Tasks Overview</source>
@@ -2961,7 +2957,6 @@
           <source>Internal Job</source>
           <target>Internes Projekt</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Internal Job - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2793885276 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
@@ -3072,11 +3067,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab237-Ext50004 - Field IMP Line Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 2420322566 - Field 991433364 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
+          <source>Check Job Journal Overlap</source>
+          <target>Prüfe auf Proj.-Journal- Überlappungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Check Journal Overlap - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 2420322566 - Field 842510697 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
           <source>Job Travel Work Type Code</source>
-          <target>Job Travel Work Type Code</target>
+          <target>Projekt Reisezeit Arbeitstyp Code</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Job Travel Work Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2420322566 - Field 4246592517 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
+          <source>Mark Job Journal Overlap</source>
+          <target>Prüfe auf Proj.-Journal- Überlappungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Mark Journal Overlap - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 1745355001 - Field 36467164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
           <source>Job Journal changes allowed</source>

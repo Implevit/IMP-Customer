@@ -13,6 +13,18 @@ pageextension 50004 "IMP Pag463-Ext50004" extends "Jobs Setup"
                 {
                     ApplicationArea = All;
                 }
+                 field("Check Journal Overlap"; Rec."IMP Check Journal Overlap")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Check Journal Overlap';
+
+                }
+                field("Mark Journal Overlap"; Rec."IMP Mark Journal Overlap")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Mark Journal Overlap';
+
+                }
             }
 
         }

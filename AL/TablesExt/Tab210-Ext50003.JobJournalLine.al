@@ -343,9 +343,9 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         field(50180; "IMP Internal Job"; Option)
         {
             Caption = 'Internal Job';
-            OptionMembers= " ",Ferien,Kompensation,Privat,Krankheit,Militär,Unfall,Ausbildung,"Int.Projekte",Jubiläumsferien,Sonstiges,"Administr.",Akquisition;
+            OptionMembers = " ",Ferien,Kompensation,Privat,Krankheit,Militär,Unfall,Ausbildung,"Int.Projekte",Jubiläumsferien,Sonstiges,"Administr.",Akquisition;
             FieldClass = FlowField;
-            CalcFormula = Lookup(Job."IMP Internal Job" WHERE ("No."=FIELD("Job No.")));
+            CalcFormula = Lookup(Job."IMP Internal Job" WHERE("No." = FIELD("Job No.")));
         }
     }
 
@@ -585,6 +585,19 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             lc_JJL.Delete();
             Rec."IMP Belongs to Line No." := 0;
         end;
+    end;
+
+    procedure SetStyle() Style: Text
+    var
+        IsHandled: Boolean;
+    begin
+
+
+        if "IMP Overlap" then
+            exit('Attention')
+        else
+           exit('')
+;
     end;
 
     #endregion Methodes

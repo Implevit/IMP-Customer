@@ -8,5 +8,17 @@ tableextension 50007 "IMP Tab315-Ext50007" extends "Jobs Setup"
             DataClassification = CustomerContent;
             TableRelation = "Work Type";
         }
+        field(50010; "IMP Check Journal Overlap"; Boolean)
+        {
+            Caption = 'Check Job Journal Overlap';
+            DataClassification = CustomerContent;
+            
+        }
+        field(50020; "IMP Mark Journal Overlap"; Boolean)
+        {
+            Caption = 'Mark Job Journal Overlap';
+            DataClassification = CustomerContent;
+            
+        }
     }
 }

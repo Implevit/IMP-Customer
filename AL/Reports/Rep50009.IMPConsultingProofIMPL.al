@@ -90,7 +90,7 @@ report 50009 "IMPL Consulting proof IMPL"
 
                 if UserSetup.Get(UserId) then
                     if not UserSetup."IMP Job Jnl. changes allowed" then
-                        JobJournLine.SetRange("No.", UserId);
+                        JobJournLine.SetRange("No.", UserSetup."IMP Job Resource No.");
             end;
 
             trigger OnAfterGetRecord()

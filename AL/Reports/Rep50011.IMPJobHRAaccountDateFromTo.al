@@ -81,7 +81,7 @@ report 50011 "IMP Job Account - Date From-To"
             begin
                 if UserSetup.Get(UserId) then
                     if not UserSetup."IMP Job Jnl. changes allowed" then
-                        JobJournLine.SetRange("No.", UserId);
+                        JobJournLine.SetRange("No.", UserSetup."IMP Job Resource No.");
 
                 FaktNetGT := 0;
                 FaktTotGT := 0;

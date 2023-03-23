@@ -49,7 +49,7 @@ report 50005 "IMP Export Consulting Invoices"
 
                     //g_ConsExpInvHeader."No." := "Job Consulting Invoice Header"."Job No.";
                     g_ConsExpInvHeader."No." := COPYSTR(FORMAT(g_Year), 3, 2) + '-' + FORMAT(DATE2DMY(g_ValidFrom, 2)) + '-' + "Job No.";
-                    g_ConsExpInvHeader."Document Type" := g_ConsExpInvHeader."Document Type"::Quote;
+                    g_ConsExpInvHeader."Document Type" := g_ConsExpInvHeader."Document Type"::Invoice;
                     g_ConsExpInvHeader.INSERT;
                     g_ConsExpInvHeader."External Document No." := FORMAT(g_Year) + '/' + FORMAT(g_Month);
                     g_ConsExpInvHeader."Sell-to Customer Templ. Code" := 'CH';
@@ -186,7 +186,7 @@ report 50005 "IMP Export Consulting Invoices"
                                         IF l_JobTaskResQty > 0 THEN BEGIN
                                             g_LineNo := g_LineNo + 10000;
                                             g_ConsExpInvLine.INIT;
-                                            g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::quote;
+                                            g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::Invoice;
                                             g_ConsExpInvLine."Document No." := g_ConsExpInvHeader."No.";
                                             g_ConsExpInvLine."Line No." := g_LineNo;
                                             g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Item;

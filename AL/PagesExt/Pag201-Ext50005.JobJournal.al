@@ -609,8 +609,8 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                 until TempJobJourLineRec.next = 0;
             end;
 
-            //if TempJobJourLineRec.FindSet() then
-            //    RunModal(Page::"IMP Job Check Time",TempJobJourLineRec);
+            if TempJobJourLineRec.FindSet() then
+                RunModal(Page::"IMP Job Check Time",TempJobJourLineRec);
             
             
             

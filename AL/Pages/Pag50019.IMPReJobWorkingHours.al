@@ -104,7 +104,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                 {
                     ApplicationArea = All;
                 }
-                field(Closed; Rec.Closed)
+                field(Closed; Rec."Period Closed")
                 {
                     ApplicationArea = All;
                 }
@@ -148,6 +148,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
             action(SetStatusOpen)
             {
                 ApplicationArea = All;
+                Caption= 'Set Status Open';
                 
                 trigger OnAction()
                 begin
@@ -158,6 +159,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
             action(SetStatusFixed)
             {
                 ApplicationArea = All;
+                Caption= 'Set Status Fixed';
                 
                 trigger OnAction()
                 begin

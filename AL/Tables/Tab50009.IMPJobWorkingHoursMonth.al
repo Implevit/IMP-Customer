@@ -133,6 +133,16 @@ table 50009 "IMP Job Working Hours Month"
         {
             Caption = 'Closed';
             FieldClass = Normal;
+            
+
+
+        }
+        field(21; "Period Closed"; Boolean)
+        {
+            Caption = 'Closed';
+            FieldClass = FlowField;
+            CalcFormula = -Exist("IMP Job Res. Work. Hrs. Month" WHERE (Year=FIELD(Year),"Month Start"=FIELD("Month Start"),"No."=FIELD("No."),Status=FILTER(Open)));
+
 
         }
     }

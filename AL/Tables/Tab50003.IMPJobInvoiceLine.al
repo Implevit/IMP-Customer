@@ -102,7 +102,7 @@ table 50003 "IMP Job Consulting Inv. Line"
                 "Quantity to Invoice" := Quantity - "Quantity not to Invoice";
             end;
         }
-        Field(80; Description; Text[80])
+        Field(80; Description; Text[100])
         {
             Caption = 'Description';
             DataClassification = CustomerContent;

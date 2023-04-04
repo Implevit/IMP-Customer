@@ -83,7 +83,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             field("IMP Job Task Description"; "IMP Job Task Description")
             {
                 ApplicationArea = All;
-                
+
                 StyleExpr = g_StyleText;
 
             }
@@ -95,42 +95,42 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             field("IMP Time 1 from"; Rec."IMP Time 1 from")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Time 1 to"; Rec."IMP Time 1 to")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Time 2 from"; Rec."IMP Time 2 from")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Time 2 to"; Rec."IMP Time 2 to")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Time 3 from"; Rec."IMP Time 3 from")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Time 3 to"; Rec."IMP Time 3 to")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Total from/to"; Rec."IMP Total from/to")
             {
                 ApplicationArea = All;
-                    StyleExpr = g_StyleText;
+                StyleExpr = g_StyleText;
             }
             field("IMP Travel Time"; Rec."IMP Travel Time")
             {
                 ApplicationArea = All;
-                    
+
             }
             field("IMP km"; Rec."IMP km")
             {
@@ -298,7 +298,33 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                     l_rptGetResHours.RUN;
                 end;
             }
+            action(ChangeList)
+            {
+                ApplicationArea = All;
+                Caption = 'Object Change List';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = ChangeLog;
 
+                trigger OnAction()
+                var
+                    lc_Job: Record Job;
+                    lc_Msg1: Label 'Please insert %1 first!';
+                    lc_ChangeEntry: Record "IMP Job Impl. Change Entry";
+                begin
+                    IF lc_Job.GET("Job No.") THEN BEGIN
+                        IF lc_Job."IMP New Cust Short Mark" = '' THEN BEGIN
+                            MESSAGE(STRSUBSTNO(lc_Msg1, lc_Job.FIELDCAPTION("IMP New Cust Short Mark")));
+                        END ELSE BEGIN
+                            lc_ChangeEntry.RESET;
+                            lc_ChangeEntry.SETRANGE("Job No.", "Job No.");
+                            PAGE.RUNMODAL(PAGE::"IMP Job Change Entry List", lc_ChangeEntry);
+                        END;
+                    END;
+                end;
+
+            }
         }
     }
 
@@ -341,9 +367,10 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 
 
     end;
+
     trigger OnAfterGetRecord()
     begin
-        if g_JobSetup."IMP Mark Journal Overlap" then 
+        if g_JobSetup."IMP Mark Journal Overlap" then
             g_StyleText := SetStyle();
     end;
 
@@ -385,7 +412,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         lc_JJL.SetRange("Posting Date", _Rec."Posting Date");
         lc_JJL.SetRange("Journal Template Name", _Rec."Journal Template Name");
         lc_JJL.SetRange("Journal Batch Name", _Rec."Journal Batch Name");
-        
+
         if lc_JJL.Find('-') then begin
             lc_LineNo := 10000;
             // Store the lines temporary
@@ -504,9 +531,9 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         NoEmployeesMsg: Label 'No employee recorded.';
         l_JJL: Record "Job Journal Line";
     begin
-        
-        
-        
+
+
+
         if _JobJournalLine.Quantity = 0 then
             exit(true);
 
@@ -600,20 +627,21 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             //
             if g_JobSetup."IMP Mark Journal Overlap" and _Modify then begin
                 l_JJL.copyFilters(rec);
-                l_JJL.ModifyAll("IMP Overlap",false);
+                l_JJL.ModifyAll("IMP Overlap", false);
                 if TempJobJourLineRec.FindSet() then
-                repeat
-                    l_JJL.get(TempJobJourLineRec."Journal Template Name",TempJobJourLineRec."Journal Batch Name",TempJobJourLineRec."IMP km");
-                    l_JJL."IMP Overlap" := true;
-                    l_JJL.Modify;
-                until TempJobJourLineRec.next = 0;
+                    repeat
+                        l_JJL.get(TempJobJourLineRec."Journal Template Name", TempJobJourLineRec."Journal Batch Name", TempJobJourLineRec."IMP km");
+                        l_JJL."IMP Overlap" := true;
+                        l_JJL.Modify;                        
+                    until TempJobJourLineRec.next = 0;
+                Commit();
             end;
 
             if TempJobJourLineRec.FindSet() then
-                RunModal(Page::"IMP Job Check Time",TempJobJourLineRec);
-            
-            
-            
+                RunModal(Page::"IMP Job Check Time", TempJobJourLineRec);
+
+
+
 
         end;
 

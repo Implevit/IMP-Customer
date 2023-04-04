@@ -347,6 +347,12 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             FieldClass = FlowField;
             CalcFormula = Lookup(Job."IMP Internal Job" WHERE("No." = FIELD("Job No.")));
         }
+        field(50190; "IMP Contact No."; Boolean)
+        {
+            Caption = 'Contact';
+            DataClassification = CustomerContent;
+            TableRelation = Contact;
+        }
     }
 
     #region Triggers
@@ -355,6 +361,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
     var
         lc_JobConsInvLine: Record "IMP Job Consulting Inv. Line";
         lc_JobConsInvHead: Record "IMP Job Consulting Inv. Header";
+        l_JobTask: Record "Job Task";
     begin
         Rec.CalcFields("IMP In Accounting");
         if (Rec."IMP In Accounting") then begin
@@ -369,6 +376,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                     lc_JobConsInvHead."Modified at Time" := CreateDateTime(Today, Time);
                     lc_JobConsInvHead.Modify(true);
                 end;
+        end;
+        if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
+            if l_JobTask.get("Job No.","Job Task No.") then begin
+                    "IMP All Inclusive" := l_JobTask."IMP All inclusive";
+            end;
         end;
     end;
 
@@ -570,6 +582,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         // Update line
         lc_JJL.Validate(Quantity, lc_Job."IMP Travel Time (100er units)");
         lc_JJL.Validate("IMP Travel Time", lc_Job."IMP Travel Time (100er units)");
+        lc_JJL.Validate("IMP Total from/to", lc_Job."IMP Travel Time (100er units)");
         lc_JJL.Validate("IMP km", lc_Job."IMP Distance km");
         lc_JJL.Modify(true);
 

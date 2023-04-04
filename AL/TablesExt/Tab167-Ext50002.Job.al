@@ -2,7 +2,7 @@ tableextension 50002 "IMP Tab167-Ext50002" extends Job
 {
     fields
     {
-        field(50010; "IMP New Cust Short Mark"; Code[3])
+        field(50010; "IMP New Cust Short Mark"; Code[4])
         {
             Caption = 'Implevit New Cust Short Mark';
             DataClassification = CustomerContent;

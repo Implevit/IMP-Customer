@@ -149,15 +149,15 @@ page 50013 "IMP Job Consulting Inv. Card"
                     ApplicationArea = All;
 
                 }
-               
+
 
             }
-             part(Lines; "IMP Job Consulting Inv. Subf.")
-                {
-                    SubPageLink = "Job No." = FIELD("Job No."), Month = FIELD(Month), Year = FIELD(Year);
-                    ApplicationArea = All;
-                    UpdatePropagation = Both;
-                }
+            part(Lines; "IMP Job Consulting Inv. Subf.")
+            {
+                SubPageLink = "Job No." = FIELD("Job No."), Month = FIELD(Month), Year = FIELD(Year);
+                ApplicationArea = All;
+                UpdatePropagation = Both;
+            }
         }
     }
 
@@ -172,15 +172,15 @@ page 50013 "IMP Job Consulting Inv. Card"
                 Image = JobSalesInvoice;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;               
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
                     l_Job: record job;
                     l_rptCreateJobInv: Report "IMP Create Job Cons. Invoice";
                 begin
-                    l_Job.SETRANGE("No.","Job No.");
-                    l_rptCreateJobInv.SetPeriod(Month,Year);
+                    l_Job.SETRANGE("No.", "Job No.");
+                    l_rptCreateJobInv.SetPeriod(Month, Year);
                     l_rptCreateJobInv.SETTABLEVIEW(l_Job);
                     l_rptCreateJobInv.RUNMODAL;
 
@@ -193,20 +193,20 @@ page 50013 "IMP Job Consulting Inv. Card"
                 Image = ChangeStatus;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;               
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
                     l_JobConsInv: Record "IMP Job Consulting Inv. Header";
                 begin
                     CurrPage.SETSELECTIONFILTER(l_JobConsInv);
-                    l_JobConsInv.SETRANGE("Modified after creation",TRUE);
+                    l_JobConsInv.SETRANGE("Modified after creation", TRUE);
                     IF l_JobConsInv.FINDFIRST THEN
-                        ERROR(STRSUBSTNO(Text50002,l_JobConsInv."Job No.",l_JobConsInv.Year,l_JobConsInv.Month));
+                        ERROR(STRSUBSTNO(Text50002, l_JobConsInv."Job No.", l_JobConsInv.Year, l_JobConsInv.Month));
                     l_JobConsInv.SETRANGE("Modified after creation");
-                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Text50000,l_JobConsInv.Status::checked,l_JobConsInv.COUNT))) THEN BEGIN
-                        l_JobConsInv.MODIFYALL(Status,l_JobConsInv.Status::checked);
-                        MESSAGE(STRSUBSTNO(Text50001,l_JobConsInv.COUNT));
+                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Text50000, l_JobConsInv.Status::checked, l_JobConsInv.COUNT))) THEN BEGIN
+                        l_JobConsInv.MODIFYALL(Status, l_JobConsInv.Status::checked);
+                        MESSAGE(STRSUBSTNO(Text50001, l_JobConsInv.COUNT));
                     END;
 
                 end;
@@ -218,17 +218,17 @@ page 50013 "IMP Job Consulting Inv. Card"
                 Image = ChangeTo;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;               
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
                     l_JobConsInv: Record "IMP Job Consulting Inv. Header";
                 begin
                     CurrPage.SETSELECTIONFILTER(l_JobConsInv);
-                    l_JobConsInv.SETRANGE(Exported,FALSE);
-                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Text50000,l_JobConsInv.Status::created,l_JobConsInv.COUNT))) THEN BEGIN
-                    l_JobConsInv.MODIFYALL(Status,l_JobConsInv.Status::created);
-                    MESSAGE(STRSUBSTNO(Text50001,l_JobConsInv.COUNT));
+                    //l_JobConsInv.SETRANGE(Exported, FALSE);
+                    IF CONFIRM(STRSUBSTNO(STRSUBSTNO(Text50000, l_JobConsInv.Status::created, l_JobConsInv.COUNT))) THEN BEGIN
+                        l_JobConsInv.MODIFYALL(Status, l_JobConsInv.Status::created);
+                        MESSAGE(STRSUBSTNO(Text50001, l_JobConsInv.COUNT));
                     END;
                 end;
             }
@@ -239,20 +239,20 @@ page 50013 "IMP Job Consulting Inv. Card"
                 Image = JobRegisters;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;               
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
                     l_JobConsHeader: Record "IMP Job Consulting Inv. Header";
                     l_rptCreateJobEval: Report "IMP Create Job Eval.Acc.";
                 begin
-                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
-                    l_JobConsHeader.SETRANGE(Month,Month);
-                    l_JobConsHeader.SETRANGE(Year,Year);
+                    l_JobConsHeader.SETRANGE("Job No.", "Job No.");
+                    l_JobConsHeader.SETRANGE(Month, Month);
+                    l_JobConsHeader.SETRANGE(Year, Year);
                     l_rptCreateJobEval.SETTABLEVIEW(l_JobConsHeader);
                     l_rptCreateJobEval.USEREQUESTPAGE(FALSE);
                     l_rptCreateJobEval.RUNMODAL;
-                    
+
                 end;
             }
             action(ProofOfBilling)
@@ -262,7 +262,7 @@ page 50013 "IMP Job Consulting Inv. Card"
                 Image = Report2;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;               
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
@@ -270,19 +270,19 @@ page 50013 "IMP Job Consulting Inv. Card"
                     l_ConsultingProofImplevit: Report "IMP Job Consulting Proof";
 
                 begin
-                    l_JobConsHeader.SETRANGE("Job No.","Job No.");
-                    l_JobConsHeader.SETRANGE(Year,Year);
-                    l_JobConsHeader.SETRANGE(Month,Month);                    
+                    l_JobConsHeader.SETRANGE("Job No.", "Job No.");
+                    l_JobConsHeader.SETRANGE(Year, Year);
+                    l_JobConsHeader.SETRANGE(Month, Month);
                     l_ConsultingProofImplevit.SETTABLEVIEW(l_JobConsHeader);
                     l_ConsultingProofImplevit.RUN;
-                    
+
                 end;
             }
         }
     }
 
     var
-        
+
         Text50000: Label 'Möchten Sie die %2 markierten Abrechnungen auf den Status %1 setzen?';
         Text50001: Label '%1 Abrechnungen wurden verarbeitet';
         Text50002: Label 'Es wurden Änderungen an den Projekterfassungsjournalzeilen für die Abrechnung für %1 Monat %2 Jahr %3 nach Erstellung vorgenommen. Die Abrechnung muss erneut erzeugt und geprüft werden.';

@@ -95,6 +95,8 @@ page 50014 "IMP Job Consulting Inv. Subf."
                     ApplicationArea = All;
 
                 }
+                
+                
                 field(Quantity;Quantity)
                 {
                     ApplicationArea = All;
@@ -111,6 +113,11 @@ page 50014 "IMP Job Consulting Inv. Subf."
 
                 }
                 field("Travel Time Quantity";"Travel Time Quantity")
+                {
+                    ApplicationArea = All;
+
+                }
+                field("Distance KM Quantity";"Distance KM Quantity")
                 {
                     ApplicationArea = All;
 

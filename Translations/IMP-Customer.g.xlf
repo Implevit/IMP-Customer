@@ -768,6 +768,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Evaluation Line - Field Year - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1709939057 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Impl. Change Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Method 2451657066 - NamedType 1578558600" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Es muss eine Implevitkürzel ausgewählt werden!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Method OnInsert - NamedType lc_Err1</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 3354832851 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field Change No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 1407200743 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creation Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field Creation Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 1025307196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Implevit Cust Short Mark</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field Implevit Cust Short Mark - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1709939057 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Impl. Change Entry - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1536694483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job Res. Work. Hrs. Month"</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -993,6 +1033,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2219995123 - Field 2332754761 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Closed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Working Hours Month - Field Period Closed - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2219995123 - Field 3925446560 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Target Time</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1112,6 +1157,36 @@
           <source>Set State to Open</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Cust. Consulting Inv. Hdrs - Action SetStateOpen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressource Job Working Hours Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be closed?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - NamedType Text50000</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - NamedType 14768227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Should the Period be opened?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - NamedType Text50001</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to set the %2 marked settlements to %1 status?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - NamedType Txt1_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - NamedType 3207509543" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements were processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - NamedType Txt2_Txt</note>
+        </trans-unit>
+        <trans-unit id="Page 3177390869 - NamedType 500582976" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Change Entry List - NamedType Txt3_Txt</note>
         </trans-unit>
         <trans-unit id="Page 3637914476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>IMP Job Check Time</source>
@@ -1567,6 +1642,16 @@
           <source>Set Job Working Hours Month</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action SetJobWorkingHoursMonth - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - Action 1825000708 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Status Fixed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action SetStatusFixed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - Action 2626404222 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Status Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - Action SetStatusOpen - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Customer Cons. Invoice</source>
@@ -2208,6 +2293,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Method JobCheckTime - NamedType NoEmployeesMsg</note>
         </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Action 1963841408 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
+          <source>Object Change List</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action ChangeList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 423844735 - Action 1963841408 - Method 1377591017 - NamedType 1766089324" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 423844735">
+          <source>Please insert %1 first!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag201-Ext50005 - Action ChangeList - Method OnAction - NamedType lc_Msg1</note>
+        </trans-unit>
         <trans-unit id="PageExtension 423844735 - Action 3105559294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1703860994">
           <source>Job Check Time</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2262,6 +2357,16 @@
           <source>IMP-Customer</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control IMP-Customer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1655222170 - Control 1244118152 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2556642749">
+          <source>Check Journal Overlap</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control Check Journal Overlap - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1655222170 - Control 2773828793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2556642749">
+          <source>Mark Journal Overlap</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension IMP Pag463-Ext50004 - Control Mark Journal Overlap - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 3218178748 - Action 1826872365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Job Tasks Overview</source>
@@ -2428,6 +2533,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Belongs To Line No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 938585830 - Field 3169924589 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
+          <source>Contact</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Contact No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 3375497713 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Expenses</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2543,10 +2653,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab237-Ext50004 - Field IMP Line Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 2420322566 - Field 991433364 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
+          <source>Check Job Journal Overlap</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Check Journal Overlap - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 2420322566 - Field 842510697 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
           <source>Job Travel Work Type Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Job Travel Work Type Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2420322566 - Field 4246592517 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2556642749">
+          <source>Mark Job Journal Overlap</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Mark Journal Overlap - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 1745355001 - Field 36467164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
           <source>Job Journal changes allowed</source>

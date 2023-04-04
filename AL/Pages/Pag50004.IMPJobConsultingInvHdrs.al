@@ -248,6 +248,60 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
 
                 end;
             }
+            action(ProofOfBillingPDF)
+            {
+                Caption = 'PDF Export Proof of Billing';
+                ApplicationArea = All;
+                Image = SendAsPDF;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    
+                    lc_Setup: Record "Jobs Setup";
+                    lc_Rec: Record "IMP Job Consulting Inv. Header";
+                    lc_Rec2: Record "IMP Job Consulting Inv. Header";                    
+                    lc_Report: Report "IMP Job Consulting Proof";
+                    lc_Counter: Integer;
+                    lc_FullFileName: Text;
+                begin
+                    IF NOT CONFIRM('Sollen die ausgewählten Abrechnungen als PDF gespeichert werden?') THEN BEGIN
+                        EXIT;
+                    END;
+
+                    lc_Setup.GET;
+                    lc_Setup.TESTFIELD(lc_Setup."IMP Job Consulting Invoice PDF");
+                    IF COPYSTR(lc_Setup."IMP Job Consulting Invoice PDF", STRLEN(lc_Setup."IMP Job Consulting Invoice PDF"), 1) <> '\' THEN BEGIN
+                        lc_Setup."IMP Job Consulting Invoice PDF" += '\';
+                        lc_Setup.MODIFY;
+                    END;
+
+                    lc_Counter := 0;
+
+                    CurrPage.SETSELECTIONFILTER(lc_Rec);
+                    IF lc_Rec.FIND('-') THEN BEGIN
+                        REPEAT
+                            lc_Rec2.SETRANGE("Job No.", lc_Rec."Job No.");
+                            lc_Rec2.SETRANGE(Year, lc_Rec.Year);
+                            lc_Rec2.SETRANGE(Month, lc_Rec.Month);
+                            IF lc_Rec2.FINDSET THEN BEGIN
+                                CLEAR(lc_Report);
+                                lc_FullFileName := lc_Setup."IMP Job Consulting Invoice PDF" + lc_Rec2."Job No." + '-' + FORMAT(lc_Rec.Year) + '-' + FORMAT(lc_Rec.Month) + '.pdf';
+                                lc_Report.SETTABLEVIEW(lc_Rec2);
+                                IF lc_Report.SAVEASPDF(lc_FullFileName) THEN BEGIN
+                                    lc_Counter += 1;
+                                END;
+                            END;
+                        UNTIL lc_Rec.NEXT = 0;
+                    END;
+
+                    MESSAGE('%1 Abrechnungen wurden als PDF gespeichert', lc_Counter);
+
+                end;
+            }
+
         }
     }
 

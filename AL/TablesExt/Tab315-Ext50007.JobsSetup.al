@@ -20,5 +20,12 @@ tableextension 50007 "IMP Tab315-Ext50007" extends "Jobs Setup"
             DataClassification = CustomerContent;
             
         }
+        field(50030; "IMP Job Consulting Invoice PDF"; Text[250])
+        {
+            Caption = 'Job Consulting Invoice PDF';
+            DataClassification = CustomerContent;
+            
+        }
+        
     }
 }

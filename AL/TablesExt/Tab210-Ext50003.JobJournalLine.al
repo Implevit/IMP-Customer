@@ -362,6 +362,8 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         lc_JobConsInvLine: Record "IMP Job Consulting Inv. Line";
         lc_JobConsInvHead: Record "IMP Job Consulting Inv. Header";
         l_JobTask: Record "Job Task";
+        l_MonthStart: Date;
+        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
     begin
         Rec.CalcFields("IMP In Accounting");
         if (Rec."IMP In Accounting") then begin
@@ -376,13 +378,33 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                     lc_JobConsInvHead."Modified at Time" := CreateDateTime(Today, Time);
                     lc_JobConsInvHead.Modify(true);
                 end;
-        end;
-        if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
-            if l_JobTask.get("Job No.","Job Task No.") then begin
+        end else begin
+
+            //IMPLJHE++
+
+            IF "Posting Date" <> 0D THEN BEGIN
+                l_MonthStart := DMY2DATE(1, DATE2DMY("Posting Date", 2), DATE2DMY("Posting Date", 3));
+                l_JobWorkingHoursMonth.SETRANGE("Month Start", l_MonthStart);
+                l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
+                IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
+                    l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");                    
+                    l_JobWorkingHoursMonth.TESTFIELD(Closed, FALSE);
+                END;
+            END;
+        END;
+    
+
+            //TESTFIELD("In Accounting",FALSE);
+            //IMPLJHE--
+
+
+
+            if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
+                if l_JobTask.get("Job No.", "Job Task No.") then begin
                     "IMP All Inclusive" := l_JobTask."IMP All inclusive";
+                end;
             end;
         end;
-    end;
 
     trigger OnAfterDelete()
     var
@@ -609,8 +631,8 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         if "IMP Overlap" then
             exit('Attention')
         else
-           exit('')
-;
+            exit('')
+ ;
     end;
 
     #endregion Methodes

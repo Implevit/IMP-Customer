@@ -25,6 +25,14 @@ pageextension 50004 "IMP Pag463-Ext50004" extends "Jobs Setup"
                     Caption = 'Mark Journal Overlap';
 
                 }
+                 field("IMP Job Consulting Invoice PDF"; Rec."IMP Job Consulting Invoice PDF")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Job Consulting Invoice PDF';
+
+                }
+                
+
             }
 
         }

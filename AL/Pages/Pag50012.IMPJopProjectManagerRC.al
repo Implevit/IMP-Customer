@@ -5,11 +5,16 @@ page 50012 "IMP Job Project Manager RC"
 {
     Caption = 'IMP Project Manager';
     PageType = RoleCenter;
+    RefreshOnActivate = true;
 
     layout
     {
         area(rolecenter)
         {
+            part("IMP Job ConsInvHdr Activities"; "IMP Job ConsInvHdr Activities")
+            {
+                ApplicationArea = All;
+            }
             part(Control102; "Headline RC Project Manager")
             {
                 ApplicationArea = Jobs;
@@ -63,11 +68,12 @@ page 50012 "IMP Job Project Manager RC"
             }
              action(CustSettlements)
             {
-                ApplicationArea = All;
-                Caption = 'Customer Settlements';
-                Image = Job;
-                RunObject = Page "IMP Cust. Consulting Inv. Hdrs";
+                 ApplicationArea = All;
+                 Caption = 'Customer Settlements';
+                 Image = Job;
+                 RunObject = Page "IMP Cust. Consulting Inv. Hdrs";
             }
+            /*
             action(Jobs)
             {
                 ApplicationArea = All;
@@ -114,6 +120,7 @@ page 50012 "IMP Job Project Manager RC"
                 Image = Customer;
                 RunObject = Page "Customer List";
             }
+            */
             action(Items)
             {
                 ApplicationArea = Jobs;
@@ -121,13 +128,20 @@ page 50012 "IMP Job Project Manager RC"
                 Image = Item;
                 RunObject = Page "Item List";
             }
+            /*
             action(Resources)
             {
                 ApplicationArea = Jobs;
                 Caption = 'Resources';
                 RunObject = Page "Resource List";
             }
-
+            */
+            action(JobJournal)
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Job Journal';
+                RunObject = Page "Job Journal";
+            }
         }
         area(sections)
         {
@@ -160,8 +174,6 @@ page 50012 "IMP Job Project Manager RC"
                     ApplicationArea = Jobs;
                     Caption = 'Jobs';
                     Image = Job;
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Job List";
                     ToolTip = 'Define a project activity by creating a job card with integrated job tasks and job planning lines, structured in two layers. The job task enables you to set up job planning lines and to post consumption to the job. The job planning lines specify the detailed use of resources, items, and various general ledger expenses.';
                 }
@@ -201,8 +213,6 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Suite;
                     Caption = 'Job Tasks';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Job Task List";
                     ToolTip = 'Open the list of ongoing job tasks. Job tasks represent the actual work that is performed in a job, and they enable you to set up job planning lines and to post consumption to the job.';
                 }
@@ -210,8 +220,6 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Jobs;
                     Caption = 'Job Planning Lines';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Job Planning Lines";
                     ToolTip = 'Open the list of ongoing job planning lines for the job. You use this window to plan what items, resources, and general ledger expenses that you expect to use on a job (budget) or you can specify what you actually agreed with your customer that he should pay for the job (billable).';
                 }
@@ -219,8 +227,6 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Jobs;
                     Caption = 'Job Journals';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Job Journal Batches";
                     RunPageView = WHERE(Recurring = CONST(false));
                     ToolTip = 'Record job expenses or usage in the job ledger, either by reusing job planning lines or by manual entry.';
@@ -237,17 +243,13 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Jobs;
                     Caption = 'Resources';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Resource List";
                     ToolTip = 'Manage your resources'' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.';
                 }
                  action(ResJobWork)
                 {
                     ApplicationArea = Jobs;
-                    Caption = 'Res. Job Work. Hrs. Month';
-                    Promoted = true;
-                    PromotedCategory = Process;
+                     Caption = 'Res. Job Work. Hrs. Month';
                     RunObject = Page "IMP Res. Job Work. Hrs. Month";
                     ToolTip = 'Manage your resources'' job activities by setting up their costs and prices. The job-related prices, discounts, and cost factor rules are set up on the respective job card. You can specify the costs and prices for individual resources, resource groups, or all available resources of the company. When resources are used or sold in a job, the specified prices and costs are recorded for the project.';
                 }
@@ -256,12 +258,29 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Suite;
                     Caption = 'Resource Groups';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page "Resource Groups";
                     ToolTip = 'Organize resources in groups, such as Consultants, for easier assignment of common values and to analyze financial figures by groups.';
                 }
             }
+            group(ReportAndAnalyse)
+            {
+                Caption = 'Report';
+                Image = Sales;
+
+                action(ReportIMPJobConsultingProof)
+                {
+                    ApplicationArea = Jobs;
+                    Caption = 'IMP Job Consulting Proof ';
+                    RunObject = Report "IMP Job Consulting Proof";
+                }
+                action(ReportJobAccountDateFromTo)
+                {
+                    ApplicationArea = Jobs;
+                    Caption = 'IMP Hour Account - Date From To';
+                    RunObject = Report "IMP Job Account - Date From-To";
+                }
+            }
+
             group(SetupAndExtensions)
             {
                 Caption = 'Setup & Extensions';
@@ -318,8 +337,6 @@ page 50012 "IMP Job Project Manager RC"
                 {
                     ApplicationArea = Suite;
                     Caption = 'Workflows';
-                    Promoted = true;
-                    PromotedCategory = Process;
                     RunObject = Page Workflows;
                     ToolTip = 'Set up or enable workflows that connect business-process tasks performed by different users. System tasks, such as automatic posting, can be included as steps in workflows, preceded or followed by user tasks. Requesting and granting approval to create new records are typical workflow steps.';
                     ObsoleteState = Pending;
@@ -330,4 +347,3 @@ page 50012 "IMP Job Project Manager RC"
         }
     }
 }
-

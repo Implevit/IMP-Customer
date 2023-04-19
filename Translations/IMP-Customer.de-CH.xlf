@@ -1770,7 +1770,7 @@
         </trans-unit>
         <trans-unit id="Page 3813317288 - Action 598289752 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Resources</source>
-          <target>]Ressourcen</target>
+          <target>Ressourcen</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action Action93 - Property Caption</note>
         </trans-unit>

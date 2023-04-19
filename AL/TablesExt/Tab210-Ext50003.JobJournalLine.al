@@ -353,6 +353,25 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             DataClassification = CustomerContent;
             TableRelation = Contact;
         }
+        field(50191; "IMP Job Contact No."; Code[20])
+        {
+            Caption = 'Contact';
+            DataClassification = CustomerContent;
+            TableRelation = Contact;
+                                                      
+        }
+        field(50200; "IMP Job Customer No."; Code[20])
+        {
+            Caption = 'Job Customer No.';            
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Job."Bill-to Customer No." WHERE("No." = FIELD("Job No.")));
+        }
+        field(50210; "IMP Contact Name"; Text[100])
+        {
+            Caption = 'Contact Name';            
+            FieldClass = FlowField;
+            CalcFormula = Lookup(Contact."Name" WHERE("No." = FIELD("IMP Job Contact No.")));
+        }
     }
 
     #region Triggers
@@ -388,7 +407,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
                 IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
                     l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");                    
-                    l_JobWorkingHoursMonth.TESTFIELD(Closed, FALSE);
+                    l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
                 END;
             END;
         END;

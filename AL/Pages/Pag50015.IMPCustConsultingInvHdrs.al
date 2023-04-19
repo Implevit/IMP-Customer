@@ -253,6 +253,19 @@ page 50015 "IMP Cust. Consulting Inv. Hdrs"
         }
     }
 
+    trigger OnOpenPage()
+    var
+        UserSetup: Record "User Setup";
+        NoAauthorizationErr: Label 'No authorization!';
+    begin
+        if UserSetup.Get(UserId) then
+            if not UserSetup."IMP Job Jnl. changes allowed" then begin
+                Rec.SetRange(Year, 0000);
+                CurrPage.Close();
+                Message(NoAauthorizationErr);
+            end;
+    end;
+
     var
         Txt1_Txt: Label 'Do you want to set the %2 marked settlements to %1 status?';
         Txt2_Txt: Label '%1 settlements were processed.';

@@ -59,12 +59,6 @@ table 50007 "IMP Job Res. Work. Hrs. Month"
             OptionMembers = Open,Fixed;
             OptionCaption = 'Open,Fixed';
         }
-	
-
-
-	
-
-
     }
     
     keys

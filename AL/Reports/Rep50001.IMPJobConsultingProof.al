@@ -12,27 +12,24 @@ report 50001 "IMP Job Consulting Proof"
 
         dataitem(JCIH; "IMP Job Consulting Inv. Header")
         {
+            RequestFilterFields = "Job No.";
 
-            Column(JCIH_Month; JCIH.Month)
+            column(JCIH_JobNo; JCIH."Job No.")
             {
-
             }
-            Column(JCIH_Year; JCIH.Year)
+            column(JCIH_Month; JCIH.Month)
             {
-
             }
-            Column(JCIH_CreationDate; JCIH."Creation Date")
+            column(JCIH_Year; JCIH.Year)
             {
-
             }
-
-            Column(Ressource_ProjectManager; RessourceProjectRec.Name)
+            column(JCIH_CreationDate; JCIH."Creation Date")
             {
-
+            }
+            column(Ressource_ProjectManager; RessourceProjectRec.Name)
+            {
             }
             dataitem(JCIL; "IMP Job Consulting Inv. Line")
-
-
             {
                 DataItemLinkReference = JCIH;
                 DataItemLink = "Job No." = FIELD("Job No."), Month = FIELD(Month), Year = FIELD(Year);

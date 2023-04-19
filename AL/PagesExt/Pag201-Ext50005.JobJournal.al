@@ -160,6 +160,28 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             {
                 ApplicationArea = All;
             }
+            field("IMP Job Contact No."; Rec."IMP Job Contact No.")
+            {
+                ApplicationArea = All;
+                trigger OnLookup(var Text: Text): Boolean
+                var
+                    l_Contact: Record Contact;
+                    l_Customer: Record Customer;
+
+
+
+                begin
+                    CalcFields("IMP Job Customer No.");
+                    if l_Customer.get("IMP Job Customer No.") THEN
+                        LookupContact("IMP Job Customer No.",'', l_Contact);
+                        if page.RunModal(PAGE::"Contact List",l_Contact) = Action::LookupOK then
+                            validate("IMP job Contact No.",l_Contact."No.");
+                    end;
+            }
+            field("IMP Contact Name"; Rec."IMP Contact Name")
+            {
+                ApplicationArea = All;
+            }
 
         }
         addafter("Account Name")
@@ -647,6 +669,28 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
 
         exit(true);
     end;
+
+
+
+    procedure LookupContact(CustomerNo: Code[20]; ContactNo: Code[20]; var Contact: Record Contact)
+    var
+        ContactBusinessRelation: Record "Contact Business Relation";
+        FilterByContactCompany: Boolean;
+        IsHandled: Boolean;
+    begin
+
+
+
+        if ContactBusinessRelation.FindByRelation(ContactBusinessRelation."Link to Table"::Customer, CustomerNo) then
+            Contact.SetRange("Company No.", ContactBusinessRelation."Contact No.")
+        else
+            Contact.SetRange("Company No.", '');
+        if ContactNo <> '' then
+            if Contact.Get(ContactNo) then
+                if FilterByContactCompany then
+                    Contact.SetRange("Company No.", Contact."Company No.");
+    end;
+
     #endregion Methodes
 
     var

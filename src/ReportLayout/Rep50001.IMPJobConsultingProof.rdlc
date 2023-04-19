@@ -3303,6 +3303,9 @@ p4eoZi2XSASVRQCXSQaucDvLpIHPrIzPrIzPrIzPrIzPrIzMpYPBk2u1fk2jXSGXRwShWR3jzrz/////
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
+        <Field Name="JCIH_JobNo">
+          <DataField>JCIH_JobNo</DataField>
+        </Field>
         <Field Name="JCIH_Month">
           <DataField>JCIH_Month</DataField>
         </Field>

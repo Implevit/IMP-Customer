@@ -130,7 +130,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                
+
 
             }
             action(GetJobWorkingHoursMonth)
@@ -142,29 +142,29 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                
+
 
             }
             action(SetStatusOpen)
             {
                 ApplicationArea = All;
-                Caption= 'Set Status Open';
-                
+                Caption = 'Set Status Open';
+
                 trigger OnAction()
                 begin
                     SetStateOpen();
-                    
+
                 end;
             }
             action(SetStatusFixed)
             {
                 ApplicationArea = All;
-                Caption= 'Set Status Fixed';
-                
+                Caption = 'Set Status Fixed';
+
                 trigger OnAction()
                 begin
                     SetStateFixed();
-                    
+
                 end;
             }
         }
@@ -198,7 +198,7 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                     l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Fixed);
                     g_i := g_i + 1;
                 UNTIL l_JobWorkingHoursMonth.NEXT = 0;
-                MESSAGE(STRSUBSTNO(Text50001, g_i));
+                MESSAGE(STRSUBSTNO(Text50003, g_i));
             END;
     end;
 
@@ -207,12 +207,18 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
         l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
         l_JobResWorkingHoursMonth: Record "IMP Job Res. Work. Hrs. Month";
         g_i: Integer;
+        l_UserSetup: Record "User Setup";
 
     begin
+        if not l_userSetup.get(UserId) then
+            l_userSetup.Init();
+        
+        if not l_userSetup."IMP Job Jnl. changes allowed" then
+            Error(STRSUBSTNO(Text50002,UserId));
+
         CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursMonth);
         IF l_JobWorkingHoursMonth.FINDSET THEN
-        IF CONFIRM(STRSUBSTNO(Text50000)) THEN
-            BEGIN
+            IF CONFIRM(STRSUBSTNO(Text50001)) THEN BEGIN
                 REPEAT
                     l_JobResWorkingHoursMonth.SETRANGE("No.", l_JobWorkingHoursMonth."No.");
                     l_JobResWorkingHoursMonth.SETRANGE(Year, l_JobWorkingHoursMonth.Year);
@@ -221,9 +227,9 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                     l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Open);
                     g_i := g_i + 1;
                 UNTIL l_JobWorkingHoursMonth.NEXT = 0;
-                MESSAGE(STRSUBSTNO(Text50001, g_i));
+                MESSAGE(STRSUBSTNO(Text50004, g_i));
             END;
-        end;
+    end;
 
 
 
@@ -235,8 +241,11 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
         Txt3_Txt: Label 'Changes have been made to the project capture journal lines for billing for %1 month %2 year %3 after creation. The settlement must be created and checked again.';
         Text50000: Label 'Should the Period be closed?';
         Text50001: Label 'Should the Period be opened?';
+        Text50002: Label 'Open Period is not allowed by %1!';
+        Text50003: Label '%1 Periods were closed.';
+        Text50004: Label '%1 Periods were opened.';
 
-        
-        
+
+
 }
 

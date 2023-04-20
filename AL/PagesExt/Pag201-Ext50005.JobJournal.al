@@ -369,6 +369,8 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             end;
             AllowJnlChange := lc_userSetup."IMP Job Jnl. changes allowed";
         end;
+        if lc_userSetup."IMP Filter Job Jnl." then
+            GetOpenPeriodDateFilter;
 
     end;
 
@@ -411,6 +413,29 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         lc_JJL.SetRange("No.", _Rec."No.");
         lc_JJL.CalcSums("IMP Total from/to");
         exit(lc_JJL."IMP Total from/to");
+    end;
+     procedure GetOpenPeriodDateFilter()
+    var
+        l_UserSetup: Record "User Setup";
+        l_Res: Record Resource;
+        l_JobWorkingHrsMonth: Record "IMP Job Working Hours Month";
+        l_DateFrom: Date;
+    begin
+        if not l_UserSetup.get(UserId) then
+            l_UserSetup.Init;
+        if l_Res.Get(l_UserSetup."IMP Job Resource No.") then begin
+            l_JobWorkingHrsMonth.SetRange(l_JobWorkingHrsMonth."No.",l_Res."No.");
+            l_JobWorkingHrsMonth.SetRange("Period Closed",true);
+            if l_JobWorkingHrsMonth.FindLast() then begin
+                if date2dmy(l_JobWorkingHrsMonth."Month Start",2) <> 12 then
+                    l_DateFrom := dmy2date(1,date2dmy(l_JobWorkingHrsMonth."Month Start",2)+1,l_JobWorkingHrsMonth.Year)
+                else
+                    l_DateFrom := dmy2date(1,1,l_JobWorkingHrsMonth.Year+1);
+                setfilter("Posting Date",'%1..',l_DateFrom)
+            end;
+
+        end;
+        
     end;
 
     procedure CalcOverlappings(_Rec: Record "Job Journal Line") RetValue: Integer
@@ -659,7 +684,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                 Commit();
             end;
 
-            if TempJobJourLineRec.FindSet() then
+            if TempJobJourLineRec.FindSet() and g_JobSetup."IMP Check Journal Overlap" then
                 RunModal(Page::"IMP Job Check Time", TempJobJourLineRec);
 
 

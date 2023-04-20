@@ -1733,6 +1733,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50001</note>
         </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 1927858078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Period is not allowed by %1!</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50002</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 1290161461" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Periods were closed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50003</note>
+        </trans-unit>
+        <trans-unit id="Page 3107813803 - NamedType 2396645672" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Periods were opened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Res. Job Work. Hrs. Month - NamedType Text50004</note>
+        </trans-unit>
         <trans-unit id="Page 3107813803 - NamedType 3529542258" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to set the %2 marked settlements to %1 status?</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2807,6 +2822,11 @@
           <source>Mark Job Journal Overlap</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab315-Ext50007 - Field IMP Mark Journal Overlap - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1745355001 - Field 3893797983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
+          <source>Filter Job Jnl by open Period</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab91-Ext50005 - Field IMP Filter Job Jnl. - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 1745355001 - Field 36467164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 337631938">
           <source>Job Journal changes allowed</source>

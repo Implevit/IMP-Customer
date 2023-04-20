@@ -26,6 +26,12 @@ tableextension 50005 "IMP Tab91-Ext50005" extends "User Setup"
             DataClassification = CustomerContent;
             
         }
+        field(50040; "IMP Filter Job Jnl."; Boolean)
+        {
+            Caption = 'Filter Job Jnl by open Period';
+            DataClassification = CustomerContent;
+            
+        }
         
     }
 }

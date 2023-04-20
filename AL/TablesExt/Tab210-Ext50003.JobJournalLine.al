@@ -358,17 +358,17 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             Caption = 'Contact';
             DataClassification = CustomerContent;
             TableRelation = Contact;
-                                                      
+
         }
         field(50200; "IMP Job Customer No."; Code[20])
         {
-            Caption = 'Job Customer No.';            
+            Caption = 'Job Customer No.';
             FieldClass = FlowField;
             CalcFormula = Lookup(Job."Bill-to Customer No." WHERE("No." = FIELD("Job No.")));
         }
         field(50210; "IMP Contact Name"; Text[100])
         {
-            Caption = 'Contact Name';            
+            Caption = 'Contact Name';
             FieldClass = FlowField;
             CalcFormula = Lookup(Contact."Name" WHERE("No." = FIELD("IMP Job Contact No.")));
         }
@@ -384,6 +384,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         l_MonthStart: Date;
         l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
     begin
+        CheckCLosedPeriodMonth;
         Rec.CalcFields("IMP In Accounting");
         if (Rec."IMP In Accounting") then begin
             lc_JobConsInvLine.SetRange("Job Journal Template", Rec."Journal Template Name");
@@ -397,39 +398,33 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                     lc_JobConsInvHead."Modified at Time" := CreateDateTime(Today, Time);
                     lc_JobConsInvHead.Modify(true);
                 end;
-        end else begin
+        end;
 
-            //IMPLJHE++
-
-            IF "Posting Date" <> 0D THEN BEGIN
-                l_MonthStart := DMY2DATE(1, DATE2DMY("Posting Date", 2), DATE2DMY("Posting Date", 3));
-                l_JobWorkingHoursMonth.SETRANGE("Month Start", l_MonthStart);
-                l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
-                IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
-                    l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");                    
-                    l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
-                END;
-            END;
-        END;
-    
-
-            //TESTFIELD("In Accounting",FALSE);
-            //IMPLJHE--
+        //IMPLJHE++
 
 
 
-            if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
-                if l_JobTask.get("Job No.", "Job Task No.") then begin
-                    "IMP All Inclusive" := l_JobTask."IMP All inclusive";
-                end;
+
+
+        //TESTFIELD("In Accounting",FALSE);
+        //IMPLJHE--
+
+
+
+        if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
+            if l_JobTask.get("Job No.", "Job Task No.") then begin
+                "IMP All Inclusive" := l_JobTask."IMP All inclusive";
             end;
         end;
+        
+    end;
 
     trigger OnAfterDelete()
     var
     begin
         Rec.CalcFields("IMP In Accounting");
         Rec.TestField("IMP In Accounting", false);
+        CheckCLosedPeriodMonth;
     end;
 
     trigger OnAfterRename()
@@ -437,6 +432,12 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
     begin
         Rec.CalcFields("IMP In Accounting");
         Rec.TestField("IMP In Accounting", false);
+        CheckCLosedPeriodMonth;
+    end;
+    
+    trigger OnAfterInsert()
+    begin
+        CheckCLosedPeriodMonth;
     end;
 
     #endregion Triggers
@@ -654,6 +655,22 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
  ;
     end;
 
+    procedure CheckCLosedPeriodMonth()
+    var
+        l_MonthStart: Date;
+        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
+    begin
+
+        IF "Posting Date" <> 0D THEN BEGIN
+            l_MonthStart := DMY2DATE(1, DATE2DMY("Posting Date", 2), DATE2DMY("Posting Date", 3));
+            l_JobWorkingHoursMonth.SETRANGE("Month Start", l_MonthStart);
+            l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
+            IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
+                l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");
+                l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
+            END;
+        END;
+    end;
     #endregion Methodes
 
     var

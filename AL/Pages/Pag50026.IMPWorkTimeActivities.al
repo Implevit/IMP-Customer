@@ -1,6 +1,6 @@
-page 50023 "IMP Job ConsInvHdr Activities"
+page 50026 "IMP Work Time Activities"
 {
-    Caption = 'Job Consulting Invoice Activities';
+    Caption = 'Work Time Activities';
     PageType = CardPart;
     RefreshOnActivate = true;
     SourceTable = "IMP Job Consulting InvHdr Cue";
@@ -10,117 +10,60 @@ page 50023 "IMP Job ConsInvHdr Activities"
         area(content)
         {
             
-            field(ActualPeriod; ActualPeriod)
+            
+            cuegroup("Work Time")
             {
-                Caption = 'Actual Period';
-                Editable = false;
-                ApplicationArea = All;
-            }
-
-            cuegroup("My Job Consulting Inv. Actual Period")
-            {
-                Caption = 'My - Actual Period';
+                Caption = 'Last Month';
                 ShowCaption = true;
 
-                field("Created My Actul Period"; Rec."Created My Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("Checked My All Actul Period"; Rec."Checked My All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("All My Actul Period"; Rec."All My Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-            }
-                cuegroup("Job Consulting Inv. Actual Period")
-            {
-                Caption = 'All - Actual Period';
-                ShowCaption = true;
-                field("Created All Actul Period"; Rec."Created All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("Checked All Actul Period"; Rec."Checked All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("All Actul Period"; Rec."All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-            }
-            cuegroup("Job Consulting Inv. All")
-            {
-                Caption = 'All YTD';
-                ShowCaption = true;
-
-                field("Created All"; Rec."Created All")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("Checked All"; Rec."Checked All")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("All"; Rec."All")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
                
-            }
-            /*
-             cuegroup("Work Time")
-            {
-                Caption = 'Work Time';
-                ShowCaption = true;
-
                 field("Last Period Month Hours"; Rec."Last Period Month Hours")
                 {
                     ApplicationArea = All;
                     
-                    ToolTip = '';
+
                 }
-                
                 field("Last Period Month Target"; Rec."Last Period Month Target")
                 {
                     ApplicationArea = All;
                     
-                    ToolTip = '';
+                    
                 }
-                
-                field("Last Period Month Balance"; Rec."Last Period Month Target"-Rec."Last Period Month Hours")
+                field("Last Period Month Balance"; Rec."Last Period Month Hours" - Rec."Last Period Month Target")
                 {
                     ApplicationArea = All;
-                    Caption = 'Balance';
+                    Style = Attention; 
                     
-                    ToolTip = '';
+                    
                 }
-                
-                
-
             }
-            */
+            cuegroup("Work Time Week")
+            {
+                Caption = 'Last Week';
+                ShowCaption = true;
+
+               
+                field("Last Period Week Hours"; Rec."Last Period Week Hours")
+                {
+                    ApplicationArea = All;
+                    
+
+                }
+                field("Last Period Week Target"; Rec."Last Period Week Target")
+                {
+                    ApplicationArea = All;
+                    
+                    
+                }
+                field("Last Period Week Balance"; Rec."Last Period Week Hours" - Rec."Last Period Week Target")
+                {
+                    ApplicationArea = All;
+                    Style = Attention; 
+                    
+                    
+                }
+            }
+           
         }
     }
 
@@ -166,8 +109,10 @@ page 50023 "IMP Job ConsInvHdr Activities"
 
         FromDate := CalcDate('<-CM-1M>', WorkDate()); // erster Tag des Vormonats
         ToDate := CalcDate('<-1M+CM>', WorkDate());   // letzter Tag des Vormonats
-        FromDateYTD := DMY2Date(1,1,date2dmy(workdate,3));
+        //FromDateYTD := DMY2Date(1,1,date2dmy(workdate,3));
         ActualPeriod := FromLbl + Format(FromDate) + ToLbl + Format(ToDate);
+        FromDateLastWeek := CalcDate('<-7D>',DWY2Date(1,Date2DWY(Workdate,2)));
+        ToDateLastWeek := CalcDate('<-1D>',DWY2Date(1,Date2DWY(Workdate,2)));
 
         if not l_userSetup.get(UserId) then
             l_userSetup.Init();
@@ -176,6 +121,7 @@ page 50023 "IMP Job ConsInvHdr Activities"
         Rec.SetRange("Created by User", l_userSetup."IMP Job Resource No.");
         Rec.SetRange("Date Filter", FromDate, ToDate);
         Rec.SetRange("Date Filter YTD",FromDateYTD,ToDate);
+        Rec.SetRange("Date Filter Last Week",FromDateLastWeek,ToDateLastWeek);
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -191,6 +137,8 @@ page 50023 "IMP Job ConsInvHdr Activities"
         FromDate := CalcDate('<-CM-1M>', WorkDate()); // erster Tag des Vormonats
         ToDate := CalcDate('<-1M+CM>', WorkDate());   // letzter Tag des Vormonats
         FromDateYTD := DMY2Date(1,1,date2dmy(workdate,3));
+        FromDateLastWeek := CalcDate('<-7D>',DWY2Date(1,Date2DWY(Workdate,2)));
+        ToDateLastWeek := CalcDate('<-1D>',DWY2Date(1,Date2DWY(Workdate,2)));
         ActualPeriod := FromLbl + Format(FromDate) + ToLbl + Format(ToDate);
 
         if not l_userSetup.get(UserId) then
@@ -200,6 +148,7 @@ page 50023 "IMP Job ConsInvHdr Activities"
         Rec.SetRange("Created by User", l_userSetup."IMP Job Resource No.");
         Rec.SetRange("Date Filter", FromDate, ToDate);
         Rec.SetRange("Date Filter YTD",FromDateYTD,ToDate);
+        Rec.SetRange("Date Filter Last Week",FromDateLastWeek,ToDateLastWeek);
         Rec.FindSet();
         CurrPage.Update();
     end;
@@ -208,6 +157,8 @@ page 50023 "IMP Job ConsInvHdr Activities"
         FromDate: Date;
         ToDate: Date;
         FromDateYTD: date;
+        FromDateLastWeek: date;
+        ToDateLastWeek: date;
         ActualPeriod: Text[30];
         FromLbl: Label 'From: ';
         ToLbl: Label ' To ';

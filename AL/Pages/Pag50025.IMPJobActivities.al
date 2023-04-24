@@ -1,6 +1,6 @@
-page 50023 "IMP Job ConsInvHdr Activities"
+page 50025 "IMP Job Activities"
 {
-    Caption = 'Job Consulting Invoice Activities';
+    Caption = 'Job Activities';
     PageType = CardPart;
     RefreshOnActivate = true;
     SourceTable = "IMP Job Consulting InvHdr Cue";
@@ -10,117 +10,83 @@ page 50023 "IMP Job ConsInvHdr Activities"
         area(content)
         {
             
-            field(ActualPeriod; ActualPeriod)
-            {
-                Caption = 'Actual Period';
-                Editable = false;
-                ApplicationArea = All;
-            }
+           
 
-            cuegroup("My Job Consulting Inv. Actual Period")
+            cuegroup("MyJobs")
             {
-                Caption = 'My - Actual Period';
+                Caption = 'My - Jobs';
                 ShowCaption = true;
 
-                field("Created My Actul Period"; Rec."Created My Actul Period")
+                field("My Jobs"; Rec."My Jobs")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
-                field("Checked My All Actul Period"; Rec."Checked My All Actul Period")
+                field("My Jobs - Planning"; Rec."My Jobs - Planning")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
-                field("All My Actul Period"; Rec."All My Actul Period")
+                field("My Jobs - Quote"; Rec."My Jobs - Quote")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
+                field("My Jobs - Open"; Rec."My Jobs - Open")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageID = "Job List";
+                    
+                }
+                field("My Jobs - Completed"; Rec."My Jobs - Completed")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageID = "Job List";
+                    
+                }
+                
             }
-                cuegroup("Job Consulting Inv. Actual Period")
+            cuegroup("AllJobs")
             {
-                Caption = 'All - Actual Period';
-                ShowCaption = true;
-                field("Created All Actul Period"; Rec."Created All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("Checked All Actul Period"; Rec."Checked All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-                field("All Actul Period"; Rec."All Actul Period")
-                {
-                    ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
-                    
-                }
-            }
-            cuegroup("Job Consulting Inv. All")
-            {
-                Caption = 'All YTD';
+                Caption = 'All - Jobs';
                 ShowCaption = true;
 
-                field("Created All"; Rec."Created All")
+                field("All Jobs"; Rec."All Jobs")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
-                field("Checked All"; Rec."Checked All")
+                field("All Jobs - Planning"; Rec."All Jobs - Planning")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
-                field("All"; Rec."All")
+                field("All Jobs - Quote"; Rec."All Jobs - Quote")
                 {
                     ApplicationArea = All;
-                    DrillDownPageID = "IMP Job Consulting Inv. Hdrs";
+                    DrillDownPageID = "Job List";
                     
                 }
+                field("All Jobs - Open"; Rec."All Jobs - Open")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageID = "Job List";
+                    
+                }
+                field("All Jobs - Completed"; Rec."All Jobs - Completed")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageID = "Job List";
+                    
+                }
+                
+            }
                
-            }
-            /*
-             cuegroup("Work Time")
-            {
-                Caption = 'Work Time';
-                ShowCaption = true;
-
-                field("Last Period Month Hours"; Rec."Last Period Month Hours")
-                {
-                    ApplicationArea = All;
-                    
-                    ToolTip = '';
-                }
-                
-                field("Last Period Month Target"; Rec."Last Period Month Target")
-                {
-                    ApplicationArea = All;
-                    
-                    ToolTip = '';
-                }
-                
-                field("Last Period Month Balance"; Rec."Last Period Month Target"-Rec."Last Period Month Hours")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Balance';
-                    
-                    ToolTip = '';
-                }
-                
-                
-
-            }
-            */
         }
     }
 
@@ -156,7 +122,7 @@ page 50023 "IMP Job ConsInvHdr Activities"
 
     trigger OnOpenPage()
     var
-    l_UserSetup: Record "User Setup";
+        l_userSetup:Record "User Setup";
     begin
         Rec.Reset();
         if not Rec.Get() then begin
@@ -180,7 +146,7 @@ page 50023 "IMP Job ConsInvHdr Activities"
 
     trigger OnAfterGetCurrRecord()
     var
-    l_UserSetup: Record "User Setup";
+    l_userSetup:Record "User Setup";
     begin
         Rec.Reset();
         if not Rec.Get() then begin

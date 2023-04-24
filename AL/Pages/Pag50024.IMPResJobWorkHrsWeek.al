@@ -1,10 +1,10 @@
-page 50019 "IMP Res. Job Work. Hrs. Month"
+page 50024 "IMP Res. Job Work. Hrs. Week"
 {
     Caption = 'Ressource Job Working Hours Month';
     //CardPageID = "IMP Cust. Consulting Inv. Card";
     Editable = false;
     PageType = List;
-    SourceTable = "IMP Job Working Hours Month";
+    SourceTable = "IMP Job Working Hours Week";
     DeleteAllowed = true;
     //TODO Multiline Delete with Status Check
     layout
@@ -17,17 +17,26 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                 {
                     ApplicationArea = All;
                 }
-                field("Month"; DATE2DMY("Month Start", 2))
+                field(Week; DATE2DWY("Week Start", 2))
                 {
                     ApplicationArea = All;
-                    Caption = 'Month';
+                    Caption = 'Week';
                 }
 
-                field("Month Start"; Rec."Month Start")
+                field(WeekStart; Rec."Week Start")
                 {
                     ApplicationArea = All;
                 }
-                
+                field(WeekEnd; Rec."Week Start" + 6)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Week End';
+                }
+                field("Week End"; Rec."Week End")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Week End';
+                }
                 field(No; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -41,12 +50,10 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
                 field(ExternalJobtoInvoice; Rec."External Job to Invoice")
                 {
                     ApplicationArea = All;
-                    Caption = 'External Job to Invoice';
                 }
                 field(ExternalJobNot2Invoice; "External Job Total" - "External Job to Invoice")
                 {
                     ApplicationArea = All;
-                    Caption = 'External Job not to Invoice';
                 }
                 field(ExternalJobTotal; "External Job Total")
                 {
@@ -126,8 +133,9 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
             action(SetJobWorkingHoursMonth)
             {
                 ApplicationArea = All;
-                Caption = 'Set Job Working Hours Month';
-                RunObject = Report "IMP Set Year Work. Hours Month";
+                Caption = 'Set Job Working Hours Week';
+                RunObject = Report "IMP Set Year Work. Hours Week";
+                
                 Image = CreateWorkflow;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -138,8 +146,8 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
             action(GetJobWorkingHoursMonth)
             {
                 ApplicationArea = All;
-                Caption = 'Get Job Working Hours Month';
-                RunObject = Report "IMP Get Job Wor. Hrs. Month";
+                Caption = 'Get Job Working Hours Week';
+                RunObject = Report "IMP Get Job Wor. Hrs. Week";
                 Image = RefreshPlanningLine;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -169,6 +177,19 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
 
                 end;
             }
+             action(ActDeleteSelected)
+            {
+                ApplicationArea = All;
+                Caption = 'Delete Selected';
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+                    DeleteSelected();
+
+
+                end;
+            }
         }
     }
     var
@@ -194,30 +215,30 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
 
     procedure SetStateFixed()
     var
-        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
-        l_JobResWorkingHoursMonth: Record "IMP Job Res. Work. Hrs. Month";
+        l_JobWorkingHoursWeek: Record "IMP Job Working Hours Week";
+        l_JobResWorkingHoursWeek: Record "IMP Job Res. Working Hours";
         g_i: Integer;
 
     begin
-        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursMonth);
-        IF l_JobWorkingHoursMonth.FINDSET THEN
+        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursWeek);
+        IF l_JobWorkingHoursWeek.FINDSET THEN
             IF CONFIRM(STRSUBSTNO(Text50000)) THEN BEGIN
                 REPEAT
-                    l_JobResWorkingHoursMonth.SETRANGE("No.", l_JobWorkingHoursMonth."No.");
-                    l_JobResWorkingHoursMonth.SETRANGE(Year, l_JobWorkingHoursMonth.Year);
-                    l_JobResWorkingHoursMonth.SETRANGE("Month Start", l_JobWorkingHoursMonth."Month Start");
+                    l_JobResWorkingHoursWeek.SETRANGE("No.", l_JobWorkingHoursWeek."No.");
+                    l_JobResWorkingHoursWeek.SETRANGE(Year, l_JobWorkingHoursWeek.Year);
+                    l_JobResWorkingHoursWeek.SETRANGE("Week Start", l_JobWorkingHoursWeek."Week Start");
                     //l_JobResWorkingHoursMonth.SETFILTER("Job Type Code",'<>%1','SOLL');
-                    l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Fixed);
+                    l_JobResWorkingHoursWeek.MODIFYALL(Status, l_JobResWorkingHoursWeek.Status::Fixed);
                     g_i := g_i + 1;
-                UNTIL l_JobWorkingHoursMonth.NEXT = 0;
+                UNTIL l_JobWorkingHoursWeek.NEXT = 0;
                 MESSAGE(STRSUBSTNO(Text50003, g_i));
             END;
     end;
 
     procedure SetStateOpen()
     var
-        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
-        l_JobResWorkingHoursMonth: Record "IMP Job Res. Work. Hrs. Month";
+        l_JobWorkingHoursWeek: Record "IMP Job Working Hours Week";
+        l_JobResWorkingHoursWeek: Record "IMP Job Res. Working Hours";
         g_i: Integer;
         l_UserSetup: Record "User Setup";
 
@@ -228,19 +249,30 @@ page 50019 "IMP Res. Job Work. Hrs. Month"
         if not l_userSetup."Time Sheet Admin." then
             Error(STRSUBSTNO(Text50002,UserId));
 
-        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursMonth);
-        IF l_JobWorkingHoursMonth.FINDSET THEN
+        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursWeek);
+        IF l_JobWorkingHoursWeek.FINDSET THEN
             IF CONFIRM(STRSUBSTNO(Text50001)) THEN BEGIN
                 REPEAT
-                    l_JobResWorkingHoursMonth.SETRANGE("No.", l_JobWorkingHoursMonth."No.");
-                    l_JobResWorkingHoursMonth.SETRANGE(Year, l_JobWorkingHoursMonth.Year);
-                    l_JobResWorkingHoursMonth.SETRANGE("Month Start", l_JobWorkingHoursMonth."Month Start");
+                    l_JobResWorkingHoursWeek.SETRANGE("No.", l_JobWorkingHoursWeek."No.");
+                    l_JobResWorkingHoursWeek.SETRANGE(Year, l_JobWorkingHoursWeek.Year);
+                    l_JobResWorkingHoursWeek.SETRANGE("Week Start", l_JobWorkingHoursWeek."Week Start");
                     //l_JobResWorkingHoursMonth.SETFILTER("Job Type Code",'<>%1','SOLL');
-                    l_JobResWorkingHoursMonth.MODIFYALL(Status, l_JobResWorkingHoursMonth.Status::Open);
+                    l_JobResWorkingHoursWeek.MODIFYALL(Status, l_JobResWorkingHoursWeek.Status::Open);
                     g_i := g_i + 1;
-                UNTIL l_JobWorkingHoursMonth.NEXT = 0;
+                UNTIL l_JobWorkingHoursWeek.NEXT = 0;
                 MESSAGE(STRSUBSTNO(Text50004, g_i));
             END;
+    end;
+    procedure DeleteSelected()
+    var
+        l_JobWorkingHoursWeek: Record "IMP Job Working Hours Week";
+    begin
+        CurrPage.SETSELECTIONFILTER(l_JobWorkingHoursWeek);
+        if Confirm('Alle löschen?') then begin
+            l_JobWorkingHoursWeek.DeleteAll();
+        end;
+        
+
     end;
 
 

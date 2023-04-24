@@ -385,6 +385,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
     begin
         CheckCLosedPeriodMonth;
+        CheckCLosedPeriodWeek;
         Rec.CalcFields("IMP In Accounting");
         if (Rec."IMP In Accounting") then begin
             lc_JobConsInvLine.SetRange("Job Journal Template", Rec."Journal Template Name");
@@ -664,6 +665,23 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         IF "Posting Date" <> 0D THEN BEGIN
             l_MonthStart := DMY2DATE(1, DATE2DMY("Posting Date", 2), DATE2DMY("Posting Date", 3));
             l_JobWorkingHoursMonth.SETRANGE("Month Start", l_MonthStart);
+            l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
+            IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
+                l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");
+                l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
+            END;
+        END;
+    end;
+     procedure CheckCLosedPeriodWeek()
+    var
+        l_WeekStart: Date;
+        l_JobWorkingHoursMonth: Record "IMP Job Working Hours Week";
+    begin
+
+        IF "Posting Date" <> 0D THEN BEGIN
+            l_WeekStart := dwy2date(1,date2dwy("Posting Date",2),date2dmy("Posting Date",3));
+            //l_WeekStart := DMY2DATE(1, DATE2DWY("Posting Date", 2), DATE2DMY("Posting Date", 3));
+            l_JobWorkingHoursMonth.SETRANGE("Week Start", l_WeekStart);
             l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
             IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
                 l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");

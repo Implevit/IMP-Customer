@@ -17,19 +17,17 @@ page 50021 "IMP R. Job Wrk. Hrs. Mth. View"
                 {
                     ApplicationArea = All;
                 }
-                field("Customer No."; DATE2DMY("Month Start", 2))
+                field("Month"; DATE2DMY("Month Start", 2))
                 {
                     ApplicationArea = All;
+                    Caption = 'Month';
                 }
 
-                field(MonthStart; Rec."Month Start")
+                field("Month Start"; Rec."Month Start")
                 {
                     ApplicationArea = All;
                 }
-                field(MonthEnd; Rec."Month Start" + 6)
-                {
-                    ApplicationArea = All;
-                }
+                
                 field(No; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -47,6 +45,7 @@ page 50021 "IMP R. Job Wrk. Hrs. Mth. View"
                 field(ExternalJobNot2Invoice; "External Job Total" - "External Job to Invoice")
                 {
                     ApplicationArea = All;
+                    Caption = 'External Job not to invoice';
                 }
                 field(ExternalJobTotal; "External Job Total")
                 {
@@ -91,19 +90,13 @@ page 50021 "IMP R. Job Wrk. Hrs. Mth. View"
                 field(Balance; Rec.Total - "Target Time")
                 {
                     ApplicationArea = All;
+                    Caption = 'Balance';
                 }
                 field(g_ToInvoicePerc; g_ToInvoicePerc)
                 {
                     ApplicationArea = All;
                 }
-                field(AssignmentHours; Rec."Assignment Hours")
-                {
-                    ApplicationArea = All;
-                }
-                field(AssignmentVacation; Rec."Assignment Vacation")
-                {
-                    ApplicationArea = All;
-                }
+                
                 field(Closed; Rec.Closed)
                 {
                     ApplicationArea = All;

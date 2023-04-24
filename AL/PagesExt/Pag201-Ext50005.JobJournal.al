@@ -173,10 +173,10 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                 begin
                     CalcFields("IMP Job Customer No.");
                     if l_Customer.get("IMP Job Customer No.") THEN
-                        LookupContact("IMP Job Customer No.",'', l_Contact);
-                        if page.RunModal(PAGE::"Contact List",l_Contact) = Action::LookupOK then
-                            validate("IMP job Contact No.",l_Contact."No.");
-                    end;
+                        LookupContact("IMP Job Customer No.", '', l_Contact);
+                    if page.RunModal(PAGE::"Contact List", l_Contact) = Action::LookupOK then
+                        validate("IMP job Contact No.", l_Contact."No.");
+                end;
             }
             field("IMP Contact Name"; Rec."IMP Contact Name")
             {
@@ -414,28 +414,49 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
         lc_JJL.CalcSums("IMP Total from/to");
         exit(lc_JJL."IMP Total from/to");
     end;
-     procedure GetOpenPeriodDateFilter()
+
+    procedure GetOpenPeriodDateFilter()
     var
         l_UserSetup: Record "User Setup";
         l_Res: Record Resource;
         l_JobWorkingHrsMonth: Record "IMP Job Working Hours Month";
+        l_JobWorkingHrsWeek: Record "IMP Job Working Hours Week";
         l_DateFrom: Date;
+        l_DateFromWeek: Date;
+        l_DateEmpty: Date;
     begin
+        Clear(l_DateEmpty);
+
         if not l_UserSetup.get(UserId) then
             l_UserSetup.Init;
         if l_Res.Get(l_UserSetup."IMP Job Resource No.") then begin
-            l_JobWorkingHrsMonth.SetRange(l_JobWorkingHrsMonth."No.",l_Res."No.");
-            l_JobWorkingHrsMonth.SetRange("Period Closed",true);
+            l_JobWorkingHrsMonth.SetRange(l_JobWorkingHrsMonth."No.", l_Res."No.");
+            l_JobWorkingHrsMonth.SetRange("Period Closed", true);
             if l_JobWorkingHrsMonth.FindLast() then begin
-                if date2dmy(l_JobWorkingHrsMonth."Month Start",2) <> 12 then
-                    l_DateFrom := dmy2date(1,date2dmy(l_JobWorkingHrsMonth."Month Start",2)+1,l_JobWorkingHrsMonth.Year)
+                if date2dmy(l_JobWorkingHrsMonth."Month Start", 2) <> 12 then
+                    l_DateFrom := dmy2date(1, date2dmy(l_JobWorkingHrsMonth."Month Start", 2) + 1, l_JobWorkingHrsMonth.Year)
                 else
-                    l_DateFrom := dmy2date(1,1,l_JobWorkingHrsMonth.Year+1);
-                setfilter("Posting Date",'%1..',l_DateFrom)
+                    l_DateFrom := dmy2date(1, 1, l_JobWorkingHrsMonth.Year + 1);
+                l_JobWorkingHrsWeek.SetRange(l_JobWorkingHrsWeek."No.", l_Res."No.");
+                l_JobWorkingHrsWeek.SetRange("Period Closed", true);
+                if l_JobWorkingHrsWeek.FindLast() then begin
+                    if date2dwy(l_JobWorkingHrsMonth."Month Start", 2) <> 53 then
+                        l_DateFromWeek := dwy2date(1, date2dwy(l_JobWorkingHrsWeek."Week Start", 2) + 1, l_JobWorkingHrsMonth.Year)
+                    else
+                        l_DateFromWeek := dwy2date(1, 1, l_JobWorkingHrsMonth.Year + 1);
+                end;
+
+                if (l_DateFromWeek <> l_DateEmpty) then begin
+                    if l_DateFromWeek > l_DateFrom then
+                        l_DateFrom := l_DateFromWeek;
+                end;
+                if l_DateFrom <> l_DateEmpty then
+                    //FilterGroup(2);
+                    setfilter("Posting Date", '%1..', l_DateFrom)
+
             end;
 
         end;
-        
     end;
 
     procedure CalcOverlappings(_Rec: Record "Job Journal Line") RetValue: Integer
@@ -679,7 +700,7 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
                     repeat
                         l_JJL.get(TempJobJourLineRec."Journal Template Name", TempJobJourLineRec."Journal Batch Name", TempJobJourLineRec."IMP km");
                         l_JJL."IMP Overlap" := true;
-                        l_JJL.Modify;                        
+                        l_JJL.Modify;
                     until TempJobJourLineRec.next = 0;
                 Commit();
             end;

@@ -1,4 +1,4 @@
-report 50007 "IMP Set Year Work. Hours Month"
+report 50013 "IMP Set Year Work. Hours Week"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
@@ -10,8 +10,8 @@ report 50007 "IMP Set Year Work. Hours Month"
         {
             trigger OnPreDataItem()
             begin
-                SETRANGE(Number, g_MonthStart, g_Month);
-                g_StartingDate := dmy2date(1, 1, 2023);
+                SETRANGE(Number, g_WeekStart, g_Week);
+                g_StartingDate := dmy2date(2, 1, 2023);
                 //g_ResFilter := 'JHE|FST|RWI|DED|YMA|RME';
                 g_ResFilter := 'JHE|FST|RWI|DED|YMA|SKA';
                 g_NextDate := g_StartingDate;
@@ -19,7 +19,7 @@ report 50007 "IMP Set Year Work. Hours Month"
 
             trigger OnAfterGetRecord()
             var 
-                l_ResJobWorkingHoursMonth: Record "IMP Job Working Hours Month";
+                l_ResJobWorkingHoursMonth: Record "IMP Job Working Hours Week";
                 l_Resource: Record Resource;
 
             begin
@@ -30,12 +30,12 @@ report 50007 "IMP Set Year Work. Hours Month"
                         IF NOT l_ResJobWorkingHoursMonth.GET(g_Year, g_NextDate, l_Resource."No.") THEN BEGIN
                             l_ResJobWorkingHoursMonth.INIT;
                             l_ResJobWorkingHoursMonth.Year := g_Year;
-                            l_ResJobWorkingHoursMonth."Month Start" := g_NextDate;
+                            l_ResJobWorkingHoursMonth."Week Start" := g_NextDate;
                             l_ResJobWorkingHoursMonth."No." := l_Resource."No.";
                             l_ResJobWorkingHoursMonth.INSERT;
                         END;
                     UNTIL l_Resource.NEXT = 0;
-                g_NextDate := CALCDATE('<1M>', g_NextDate);
+                g_NextDate := CALCDATE('<1W>', g_NextDate);
             end;
         }
     }
@@ -48,15 +48,15 @@ report 50007 "IMP Set Year Work. Hours Month"
             {
                 group(Options)
                 {
-                    field(g_MonthStart; g_MonthStart)
+                    field(g_WeekStart; g_WeekStart)
                     {
                         ApplicationArea = All;
-                        Caption = 'From Month';
+                        Caption = 'From Week';
                     }
-                    field(g_Month; g_Month)
+                    field(g_Week; g_Week)
                     {
                         ApplicationArea = All;
-                        Caption = 'To Month';
+                        Caption = 'To Week';
                     }
                     field(g_ResFilter; g_ResFilter)
                     {
@@ -82,8 +82,8 @@ report 50007 "IMP Set Year Work. Hours Month"
         }
         trigger OnOpenPage()
         begin
-            g_Month := DATE2DMY(WORKDATE, 2) - 1;
-            g_MonthStart := 1;
+            g_Week := DATE2DwY(WORKDATE, 2) - 1;
+            g_WeekStart := 1;
             g_ResFilter := 'JHE|FST|RWI|DED|YMA|SKA';
 
         end;
@@ -96,6 +96,6 @@ report 50007 "IMP Set Year Work. Hours Month"
         g_NextDate: Date;
         g_Year: Integer;
         g_ResFilter: Code[50];
-        g_Month: Integer;
-        g_MonthStart: Integer;
+        g_Week: Integer;
+        g_WeekStart: Integer;
 }

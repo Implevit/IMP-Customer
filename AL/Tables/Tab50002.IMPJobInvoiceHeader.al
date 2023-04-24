@@ -36,6 +36,13 @@ table 50002 "IMP Job Consulting Inv. Header"
             DataClassification = CustomerContent;
             OptionCaption = 'January,February,March,April,May,June,July,August,September,October,November,December';
             OptionMembers = January,February,March,April,May,June,July,August,September,October,November,December;
+            trigger OnValidate()
+            begin
+                if Year <> 0 then
+                    "Period Start Date" := DMY2Date(1,Month+1,Year)
+                else
+                    "Period Start Date" := DMY2Date(1,Month+1,date2dmy(WorkDate,3));
+            end;
         }
         
 
@@ -288,6 +295,11 @@ table 50002 "IMP Job Consulting Inv. Header"
         field(330; "Accounting Description"; Text[80])
         {
             Caption = 'Accounting Description';
+            DataClassification = CustomerContent;
+        }
+        field(340; "Period Start Date"; Date)
+        {
+            Caption = 'Period Start Date';
             DataClassification = CustomerContent;
         }
     }

@@ -336,11 +336,13 @@ report 50001 "IMP Job Consulting Proof"
                     field(CustomerWithoutAccProof; ConsultingProofBool)
                     {
                         ApplicationArea = All;
+                        Caption = 'Show Customers without Acc. Proof';
 
                     }
                     field(AddAllInclTasks; AllInclusiveBool)
                     {
                         ApplicationArea = All;
+                        Caption = 'Show All Inclive';
 
                     }
                 }

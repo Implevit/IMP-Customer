@@ -415,6 +415,9 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
             if l_JobTask.get("Job No.", "Job Task No.") then begin
                 "IMP All Inclusive" := l_JobTask."IMP All inclusive";
+            if rec."job task no." <> xRec."Job Task No." then
+                if l_JobTask."IMP Closed" then
+                    Error(strsubstno(txt4_txt,l_JobTask."Job Task No."+' - ' +l_JobTask.Description));
             end;
         end;
         
@@ -697,5 +700,6 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         Txt1_Txt: Label 'No hourly allocation can be made when expenses are recorded.';
         Txt2_Txt: Label 'For internal projects, the from/to time or quantity must be changed';
         Txt3_Txt: Label 'Wrong Time - Valid e.g. 7.15, 12.30, 17.45';
+        Txt4_Txt: Label 'Job Task must not be closed: %1!';
 
 }

@@ -33,6 +33,7 @@ page 50026 "IMP Work Time Activities"
                 {
                     ApplicationArea = All;
                     Style = Attention; 
+                    Caption = 'Balance Month';
                     
                     
                 }
@@ -59,6 +60,7 @@ page 50026 "IMP Work Time Activities"
                 {
                     ApplicationArea = All;
                     Style = Attention; 
+                    Caption = 'Balance Week';
                     
                     
                 }

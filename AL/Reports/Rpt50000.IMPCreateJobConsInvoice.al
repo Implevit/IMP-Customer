@@ -17,7 +17,7 @@ report 50000 "IMP Create Job Cons. Invoice"
                 DataItemLink = "Job No." = FIELD("No.");
                 trigger OnPreDataItem()
                 begin
-                    SETRANGE("Posting Date", DMY2Date(1, 1, 2023), g_ValidTo);
+                    SETRANGE("Posting Date", DMY2Date(1, 3, 2023), g_ValidTo);
                 end;
 
                 trigger OnAfterGetRecord()
@@ -51,44 +51,44 @@ report 50000 "IMP Create Job Cons. Invoice"
 
                     l_JobInvLine.RESET;
 
-                    
-                        l_JobInvLine.INIT;
-                        l_JobInvLine."Job No." := "Job No.";
-                        l_JobInvLine."Job Journal Template" := "Journal Template Name";
-                        l_JobInvLine."Job Journal Batch" := "Journal Batch Name";
-                        l_JobInvLine."Job Journal Line No." := "Line No.";
-                        l_JobInvLine."Job Task No." := "Job Task No.";
-                        l_JobInvLine.Year := g_Year;
-                        l_JobInvLine.Month := g_Month;
-                        l_JobInvLine."Source Quantity" := Quantity;
-                        l_JobInvLine."Source Quantity to Invoice" := "Imp Hours to invoice";
-                        l_JobInvLine."Source Quantity not to Invoice" := "Imp Hours not to invoice";
-                        IF Quantity <> ("Imp Hours to invoice" + "Imp Hours not to invoice") THEN
-                            l_JobInvLine.Check := TRUE;
-                        l_JobInvLine.Quantity := Quantity;
-                        l_JobInvLine."Quantity to Invoice" := "Imp Hours to invoice";
-                        l_JobInvLine."Quantity not to Invoice" := "Imp Hours not to invoice";
+
+                    l_JobInvLine.INIT;
+                    l_JobInvLine."Job No." := "Job No.";
+                    l_JobInvLine."Job Journal Template" := "Journal Template Name";
+                    l_JobInvLine."Job Journal Batch" := "Journal Batch Name";
+                    l_JobInvLine."Job Journal Line No." := "Line No.";
+                    l_JobInvLine."Job Task No." := "Job Task No.";
+                    l_JobInvLine.Year := g_Year;
+                    l_JobInvLine.Month := g_Month;
+                    l_JobInvLine."Source Quantity" := Quantity;
+                    l_JobInvLine."Source Quantity to Invoice" := "Imp Hours to invoice";
+                    l_JobInvLine."Source Quantity not to Invoice" := "Imp Hours not to invoice";
+                    IF Quantity <> ("Imp Hours to invoice" + "Imp Hours not to invoice") THEN
+                        l_JobInvLine.Check := TRUE;
+                    l_JobInvLine.Quantity := Quantity;
+                    l_JobInvLine."Quantity to Invoice" := "Imp Hours to invoice";
+                    l_JobInvLine."Quantity not to Invoice" := "Imp Hours not to invoice";
+                    l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
+                    l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
+                    l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
+                    l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
+                    l_JobInvLine.Description := "JobJnlLine".Description;
+                    l_JobInvLine."Resource No." := "No.";
+                    l_JobInvLine."Posting Date" := "Posting Date";
+                    l_JobInvLine."all inclusive" := "JobJnlLine"."Imp all inclusive";
+                    if "Work Type Code" = 'TRAVEL' then begin
+                        l_JobInvLine.Travel := true;
                         l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
                         l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
                         l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
                         l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
                         l_JobInvLine.Description := "JobJnlLine".Description;
-                        l_JobInvLine."Resource No." := "No.";
-                        l_JobInvLine."Posting Date" := "Posting Date";
-                        l_JobInvLine."all inclusive" := "JobJnlLine"."Imp all inclusive";
-                        if "Work Type Code" = 'TRAVEL' then begin
-                            l_JobInvLine.Travel := true;
-                            l_JobInvLine."Source Travel Time Quantity" := "JobJnlLine"."imp Travel Time";
-                            l_JobInvLine."Source Distance KM Quantity" := "JobJnlLine"."imp km";
-                            l_JobInvLine."Travel Time Quantity" := "JobJnlLine"."Imp Travel Time";
-                            l_JobInvLine."Distance KM Quantity" := "JobJnlLine"."Imp km";
-                            l_JobInvLine.Description := "JobJnlLine".Description;
-                        end;
-                        l_JobInvLine.INSERT;
-                        g_i := g_i + 1;
-                    
-                        
-                    
+                    end;
+                    l_JobInvLine.INSERT;
+                    g_i := g_i + 1;
+
+
+
                 end;
 
                 trigger OnPostDataItem()
@@ -100,6 +100,7 @@ report 50000 "IMP Create Job Cons. Invoice"
             trigger OnPreDataItem()
             var
                 l_Job: Record job;
+                l_JobInvHeader: Record "IMP Job Consulting Inv. Header";
 
             begin
                 l_Job.SETRANGE("imp Internal Job", l_Job."imp Internal Job"::" ");
@@ -109,6 +110,18 @@ report 50000 "IMP Create Job Cons. Invoice"
                 REPEAT
                     IF NOT (l_Job."IMP Project Manager IMPL" IN ['JHE', 'YMA', 'DED', 'FST', 'RWI']) THEN
                         ERROR(STRSUBSTNO(Text50002, l_Job."No.", l_Job."Bill-to Name"));
+                    IF NOT l_JobInvHeader.GET(Job."No.", g_Year, g_Month) THEN BEGIN
+                        l_JobInvHeader.INIT;
+                        l_JobInvHeader.VALIDATE("Job No.", "No.");
+                        l_JobInvHeader.VALIDATE(Year, g_Year);
+                        l_JobInvHeader.VALIDATE(Month, g_Month);
+                        l_JobInvHeader.Description := STRSUBSTNO('Abrechnung %1/%2', g_Month, g_Year);
+                        l_JobInvHeader."Job Accounting Description" := Job."imp Accounting Description";
+                        l_JobInvHeader."Created by User" := USERID;
+                        l_JobInvHeader."Creation Date" := WORKDATE;
+                        l_JobInvHeader.INSERT(TRUE);
+                    END;
+
                 UNTIL l_Job.NEXT = 0;
 
                 SETRANGE("imp Internal Job", "Imp Internal Job"::" ");

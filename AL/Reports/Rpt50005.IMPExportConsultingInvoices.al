@@ -34,6 +34,7 @@ report 50005 "IMP Export Consulting Invoices"
             l_JobTaskResTravelQty: Decimal;
             l_JobTaskResTravelKM: Decimal;
             l_RessourceName: Text[50];
+            l_MonthCode: Code[2];
         begin
             IF l_Job.GET("Job No.") THEN BEGIN
 
@@ -44,11 +45,14 @@ report 50005 "IMP Export Consulting Invoices"
                             ERROR(STRSUBSTNO(Text50000, l_Customer."No.", l_Customer.Name, l_Job."No."));
                         END;
                     END;
+                    l_MonthCode := FORMAT(DATE2DMY(g_ValidFrom, 2));
+                    if StrLen(l_MonthCode) = 1 then
+                        l_MonthCode := '0';
 
                     l_Job.GET("Job No.");
 
                     //g_ConsExpInvHeader."No." := "Job Consulting Invoice Header"."Job No.";
-                    g_ConsExpInvHeader."No." := COPYSTR(FORMAT(g_Year), 3, 2) + '-' + FORMAT(DATE2DMY(g_ValidFrom, 2)) + '-' + "Job No.";
+                    g_ConsExpInvHeader."No." := COPYSTR(FORMAT(g_Year), 3, 2) + '-' + l_MonthCode + '-' + "Job No.";
                     g_ConsExpInvHeader."Document Type" := g_ConsExpInvHeader."Document Type"::Quote;
                     g_ConsExpInvHeader.INSERT;
                     g_ConsExpInvHeader."External Document No." := FORMAT(g_Year) + '/' + FORMAT(g_Month);
@@ -174,6 +178,10 @@ report 50005 "IMP Export Consulting Invoices"
                                     l_JobConsInvLine.SETRANGE(Month, Month);
                                     l_JobConsInvLine.SETRANGE("Resource No.", l_Ressource."No.");
                                     l_JobConsInvLine.SETRANGE("Job Task No.", l_JobTask."Job Task No.");
+                                    //JHE++
+                                    //l_JobConsInvLine.SETRANGE("Travel Time Quantity", 0);
+                                    //l_JobConsInvLine.SETRANGE("Distance KM Quantity", 0);
+                                    //JHE--
                                     IF l_JobConsInvLine.FINDSET THEN BEGIN
                                         l_JobTaskResQty := 0;
                                         l_JobTaskResTravelQty := 0;
@@ -218,7 +226,7 @@ report 50005 "IMP Export Consulting Invoices"
                                             g_ConsExpInvLine."Document Type" := g_ConsExpInvLine."Document Type"::Quote;
                                             g_ConsExpInvLine."Document No." := g_ConsExpInvHeader."No.";
                                             g_ConsExpInvLine."Line No." := g_LineNo;
-                                            g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Item;
+                                            g_ConsExpInvLine.Type := g_ConsExpInvLine.Type::Resource;
                                             g_ConsExpInvLine."No." := 'DL-REIS-KM';
                                             g_ConsExpInvLine.Description := COPYSTR('Reisespesen km - ' + l_RessourceName, 1, 50);
                                             g_ConsExpInvLine.Quantity := l_JobTaskResTravelKM;

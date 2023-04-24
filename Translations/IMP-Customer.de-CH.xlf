@@ -965,7 +965,7 @@
         </trans-unit>
         <trans-unit id="Table 3669394229 - Field 3340242132 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>My Jobs</source>
-          <target>Meine</target>
+          <target>Meine - Alle</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table IMP Job Consulting InvHdr Cue - Field My Jobs - Property Caption</note>
         </trans-unit>
@@ -2559,11 +2559,37 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Work Time Activities - Control Work Time - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3518091237 - Control 912432827 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Balance Month</source>
+          <target>Saldo Monat</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Work Time Activities - Control Last Period Month Balance - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3518091237 - Control 2347519204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Last Week</source>
           <target>Letzte Woche</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Work Time Activities - Control Work Time Week - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3518091237 - Control 2632176631 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Balance Week</source>
+          <target>Saldo Woche</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Work Time Activities - Control Last Period Week Balance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 532344595 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Archive Sales Document</source>
+          <target>Archiviere Verkaufsbelege</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Archive Sales Document - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 532344595 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter needed!</source>
+          <target>Bitte FIlter angeben!</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report IMP Archive Sales Document - NamedType Text50000</note>
         </trans-unit>
         <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Customer Cons. Invoice</source>
@@ -3201,14 +3227,12 @@
           <source>Show All Inclive</source>
           <target>Pauschale Projektaufgaben zeigen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - Control AddAllInclTasks - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1202965061 - Control 1236760751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Show Customers without Acc. Proof</source>
           <target>Kunden ohne Abr.-Nachweis zeigen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Job Consulting Proof - Control CustomerWithoutAccProof - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3428992855 - Control 1399707476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -3678,6 +3702,13 @@
           <target>Ungültige Zeit - Gültig z.B. 7.15, 12.30, 17.45</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - NamedType Txt3_Txt</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 938585830 - NamedType 664954749" size-unit="char" translate="yes" xml:space="preserve" al-object-target="TableExtension 938585830">
+          <source>Job Task must not be closed: %1!</source>
+          <target>Projektaufgabe darf nicht abgeschlossen sein: %1!</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - NamedType Txt4_Txt</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2502242067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>All inclusive</source>

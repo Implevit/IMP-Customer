@@ -4,10 +4,14 @@ report 50000 "IMP Create Job Cons. Invoice"
     UsageCategory = Tasks;
     ApplicationArea = All;
     ProcessingOnly = true;
+    
+    
 
     dataset
     {
+        
         dataitem(Job; Job)
+        
         {
             RequestFilterFields = "No.", "Status", "IMP Project Manager IMPL";
 
@@ -126,6 +130,7 @@ report 50000 "IMP Create Job Cons. Invoice"
 
                 SETRANGE("imp Internal Job", "Imp Internal Job"::" ");
 
+
             end;
 
             trigger OnAfterGetRecord()
@@ -151,6 +156,7 @@ report 50000 "IMP Create Job Cons. Invoice"
 
     requestpage
     {
+        SaveValues = true;
         layout
         {
             area(Content)

@@ -149,6 +149,9 @@ page 50004 "IMP Job Consulting Inv. Hdrs"
                     l_Job: record job;
                     l_rptCreateJobInv: Report "IMP Create Job Cons. Invoice";
                 begin
+                    iF GetRes <> '' THEN
+                    l_Job.SETRANGE("IMP Project Manager IMPL",GetRes);
+   
                     l_Job.SETRANGE("No.", "Job No.");
                     l_rptCreateJobInv.SetPeriod(Month, Year);
                     l_rptCreateJobInv.SETTABLEVIEW(l_Job);

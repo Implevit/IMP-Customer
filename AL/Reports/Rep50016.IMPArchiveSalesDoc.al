@@ -13,13 +13,15 @@ report 50016 "IMP Archive Sales Document"
             RequestFilterFields = "No.";
             trigger OnPreDataItem()
             begin
-                if "Sales Header".GetFilters = '' then
-                    Error(Text50000);
+                
+                SetFilter("no.",'*NAVI*');
+                SetRange("Document Type","Document Type"::Quote);
             end;
 
             trigger OnAfterGetRecord()
             begin
                 ArchiveManagement.ArchiveSalesDocument("Sales Header");
+                Delete(true);                
             end;
         }
     }

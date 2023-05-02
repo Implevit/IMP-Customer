@@ -132,7 +132,7 @@ report 50001 "IMP Job Consulting Proof"
 
 
                 }
-                column(JCIL_TicketNo; JCIL."Ticket No.")
+                column(JCIL_TicketNo; g_TicketDesc)
                 {
 
 
@@ -273,6 +273,8 @@ report 50001 "IMP Job Consulting Proof"
                 end;
 
                 trigger OnAfterGetRecord()
+                var
+                    l_JobJnlLine: Record "Job Journal Line";
                 begin
                     IF ((NOT AllInclusiveBool) AND ("all inclusive")) THEN
                         CurrReport.SKIP;
@@ -289,6 +291,21 @@ report 50001 "IMP Job Consulting Proof"
                     ImplAdrText := STRSUBSTNO('%1 - %2 %3-%4 %5 %6 %7 %8', CompInfoRec.Name, CompInfoRec.Address, CompInfoRec."Country/Region Code",
                           CompInfoRec.City, Text1, CompInfoRec."Phone No.", '', '');
                     Totfakt := JCIL."Quantity to Invoice" + JCIL."Travel Time Quantity";
+
+                    l_JobJnlLine.get("Job Journal Template","Job Journal Batch","Job Journal Line No.");
+                    l_JobJnlLine.CalcFields("IMP Contact Name");
+                    JCIL.CalcFields(JCIL."Ticket No.");
+                    g_TicketDesc:= '';
+                    if (JCIL."Ticket No." <> '') and (l_JobJnlLine."IMP Contact Name" <> '') then
+                        g_TicketDesc := JCIL."Ticket No." +' - '+l_JobJnlLine."IMP Contact Name"
+                    else if (JCIL."Ticket No." <> '') then
+                        g_TicketDesc := JCIL."Ticket No."
+                    else if l_JobJnlLine."IMP Contact Name" <> '' then
+                        g_TicketDesc := l_JobJnlLine."IMP Contact Name";
+
+
+                    
+                    
                 end;
 
 
@@ -399,6 +416,7 @@ report 50001 "IMP Job Consulting Proof"
         GoodwillLbl: Label 'Nicht fakturierte Leistungen';
         PeriodLbl: Label 'Zeitraum';
         TicketLbl: Label 'Ticket';
+        g_TicketDesc: Text [150];
         FaxLbl: Label 'Fax:';
         PhoneLbl: Label 'Tel:';
         FtrText01: Label '';

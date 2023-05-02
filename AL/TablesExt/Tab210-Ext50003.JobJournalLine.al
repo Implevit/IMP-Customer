@@ -14,6 +14,25 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
                 TimeJob();
             end;
         }
+        modify("Job Task No.")
+        {
+            trigger OnAfterValidate()
+            var
+                l_JobTask: Record "Job Task";
+            begin
+                if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
+                    if l_JobTask.get("Job No.", "Job Task No.") then begin
+                        "IMP All Inclusive" := l_JobTask."IMP All inclusive";
+                        if rec."job task no." <> xRec."Job Task No." then
+                            if l_JobTask."IMP Closed" then
+                                Error(strsubstno(txt4_txt, l_JobTask."Job Task No." + ' - ' + l_JobTask.Description));
+                    end;
+                end;
+            end;
+
+        }
+
+
         field(50010; "IMP km"; Decimal)
         {
             Caption = 'km';
@@ -372,6 +391,11 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             FieldClass = FlowField;
             CalcFormula = Lookup(Contact."Name" WHERE("No." = FIELD("IMP Job Contact No.")));
         }
+        field(50220; "IMP Internal Description"; Text[100])
+        {
+            Caption = 'Internal Description';
+            FieldClass = Normal;            
+        }
     }
 
     #region Triggers
@@ -380,7 +404,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
     var
         lc_JobConsInvLine: Record "IMP Job Consulting Inv. Line";
         lc_JobConsInvHead: Record "IMP Job Consulting Inv. Header";
-        l_JobTask: Record "Job Task";
+
         l_MonthStart: Date;
         l_JobWorkingHoursMonth: Record "IMP Job Working Hours Month";
     begin
@@ -412,15 +436,8 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
 
 
 
-        if (rec."Job Task No." <> xRec."Job Task No.") and (rec."Job Task No." <> '') then begin
-            if l_JobTask.get("Job No.", "Job Task No.") then begin
-                "IMP All Inclusive" := l_JobTask."IMP All inclusive";
-            if rec."job task no." <> xRec."Job Task No." then
-                if l_JobTask."IMP Closed" then
-                    Error(strsubstno(txt4_txt,l_JobTask."Job Task No."+' - ' +l_JobTask.Description));
-            end;
-        end;
-        
+
+
     end;
 
     trigger OnAfterDelete()
@@ -429,6 +446,7 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         Rec.CalcFields("IMP In Accounting");
         Rec.TestField("IMP In Accounting", false);
         CheckCLosedPeriodMonth;
+        CheckCLosedPeriodWeek;
     end;
 
     trigger OnAfterRename()
@@ -437,11 +455,24 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
         Rec.CalcFields("IMP In Accounting");
         Rec.TestField("IMP In Accounting", false);
         CheckCLosedPeriodMonth;
+        CheckCLosedPeriodWeek;
     end;
-    
+
     trigger OnAfterInsert()
+    var
+        l_JobTask: Record "Job Task";
     begin
         CheckCLosedPeriodMonth;
+        CheckCLosedPeriodWeek;
+
+        if l_JobTask.get("Job No.", "Job Task No.") then begin
+            "IMP All Inclusive" := l_JobTask."IMP All inclusive";
+            if modify then;
+            if l_JobTask."IMP Closed" then
+                Error(strsubstno(txt4_txt, l_JobTask."Job Task No." + ' - ' + l_JobTask.Description));
+        end;
+
+
     end;
 
     #endregion Triggers
@@ -670,23 +701,32 @@ tableextension 50003 "IMP Tab210-Ext50003" extends "Job Journal Line"
             l_JobWorkingHoursMonth.SETRANGE("Month Start", l_MonthStart);
             l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
             IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
+                
                 l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");
                 l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
             END;
         END;
     end;
-     procedure CheckCLosedPeriodWeek()
+
+    procedure CheckCLosedPeriodWeek()
     var
         l_WeekStart: Date;
         l_JobWorkingHoursMonth: Record "IMP Job Working Hours Week";
     begin
 
         IF "Posting Date" <> 0D THEN BEGIN
-            l_WeekStart := dwy2date(1,date2dwy("Posting Date",2),date2dmy("Posting Date",3));
+            l_WeekStart := dwy2date(1, date2dwy("Posting Date", 2), date2dmy("Posting Date", 3));
             //l_WeekStart := DMY2DATE(1, DATE2DWY("Posting Date", 2), DATE2DMY("Posting Date", 3));
             l_JobWorkingHoursMonth.SETRANGE("Week Start", l_WeekStart);
             l_JobWorkingHoursMonth.SETRANGE("No.", "No.");
             IF l_JobWorkingHoursMonth.FINDSET THEN BEGIN
+                if rec.Description <> xRec.Description then
+                    exit;
+                if rec."IMP Job Contact No." <> xRec."IMP Job Contact No." then
+                    exit;
+                if rec."IMP Ticket No." <> xRec."IMP Ticket No." then
+                    exit;
+                
                 l_JobWorkingHoursMonth.CALCFIELDS("Period Closed");
                 l_JobWorkingHoursMonth.TESTFIELD("Period Closed", FALSE);
             END;

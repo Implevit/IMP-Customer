@@ -182,6 +182,10 @@ pageextension 50005 "IMP Pag201-Ext50005" extends "Job Journal"
             {
                 ApplicationArea = All;
             }
+            field("IMP Internal Description"; Rec."IMP Internal Description")
+            {
+                ApplicationArea = All;
+            }
 
         }
         addafter("Account Name")

@@ -1803,6 +1803,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ReportIMPJobConsultingProof - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 644490779 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Res. Consulting Proof</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ReportIMPJobConsultingProofIMP - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3813317288 - Action 3939546355 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>IMP Hour Account - Date From To</source>
           <note from="Developer" annotates="general" priority="2"></note>

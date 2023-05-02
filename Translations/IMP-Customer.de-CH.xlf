@@ -2163,6 +2163,13 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ReportIMPJobConsultingProof - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3813317288 - Action 644490779 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IMP Res. Consulting Proof</source>
+          <target>Beraternachweis</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page IMP Job Project Manager RC - Action ReportIMPJobConsultingProofIMP - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3813317288 - Action 3939546355 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>IMP Hour Account - Date From To</source>
           <target>Std.-Abrechnung - Datum Von Bis</target>
@@ -2581,14 +2588,12 @@
           <source>Archive Sales Document</source>
           <target>Archiviere Verkaufsbelege</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Archive Sales Document - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 532344595 - NamedType 652464844" size-unit="char" translate="yes" xml:space="preserve">
           <source>Filter needed!</source>
           <target>Bitte FIlter angeben!</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report IMP Archive Sales Document - NamedType Text50000</note>
         </trans-unit>
         <trans-unit id="Report 1807454529 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -3707,7 +3712,6 @@
           <source>Job Task must not be closed: %1!</source>
           <target>Projektaufgabe darf nicht abgeschlossen sein: %1!</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - NamedType Txt4_Txt</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 2502242067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
@@ -3757,6 +3761,13 @@
           <target>IN Buchhaltung</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP In Accounting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 938585830 - Field 1669043359 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
+          <source>Internal Description</source>
+          <target>Interne Beschreibung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">New translation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension IMP Tab210-Ext50003 - Field IMP Internal Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 938585830 - Field 366019488 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 938095748">
           <source>Internal Job</source>

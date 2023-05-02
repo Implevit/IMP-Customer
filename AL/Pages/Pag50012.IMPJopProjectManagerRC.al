@@ -293,6 +293,12 @@ page 50012 "IMP Job Project Manager RC"
                     Caption = 'IMP Job Consulting Proof ';
                     RunObject = Report "IMP Job Consulting Proof";
                 }
+                action(ReportIMPJobConsultingProofIMP)
+                {
+                    ApplicationArea = Jobs;
+                    Caption = 'IMP Res. Consulting Proof';
+                    RunObject = Report "IMPL Consulting proof IMPL";
+                }
                 action(ReportJobAccountDateFromTo)
                 {
                     ApplicationArea = Jobs;
